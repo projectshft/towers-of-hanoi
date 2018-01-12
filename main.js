@@ -9,17 +9,9 @@ var messages = {
   player1_next: "Player One's turn again!",
   player2_next: "Player Two's turn again!"
 }
-
-// var message1 = "Player One goes first! You are 'X'. Choose an unoccupied position from the board!";
-// var message2 = "Player Two goes next! You are 'O' Choose an unoccupied position from the board!";
-// var message3 = "Player One's turn again!";
-// var message4 = "Player Two's turn again!";
-// var message5 = "Welcome to Tic Tac Toe!";
 var message = "";
 var player = "";
 var moves = 0;
-playerOneState="";
-playerTwoState="";
 
 var printBoard = function(board) {
   var line = [];

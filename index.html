@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Arima+Madurai:200|Josefin+Sans:300|Lemon" rel="stylesheet">
   <meta charset="utf-8">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,11 +13,44 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="main.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
   <title></title>
 </head>
 
-<body>
-hi there will be a tic tac toe game here
+<body style="padding-top: 80px">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <h1 class="text-center" style="font-family: Lemon; font-size:80px;">Tic Tac Toe</h1>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6 well well-lg" style="background-color:#FFDAB9">
+        <table class="board">
+          <tr>
+            <td><p style="font-size:100px;" class="text-center">X</p></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+          </tr>
+          <tr>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td><p style="font-size:100px;" class="text-center">O</p></td>
+          </tr>
+          <tr>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+  </div>
 </body>
 
 </html>
