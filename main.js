@@ -1,26 +1,3 @@
-/*
-Here are the requirements:
-
-First of all it will need a board. We'll utilize a 2D array to do this:
-[["1", "2", "3"],
-["4", "5", "6"],
-["7", "8", "9"]]
-
-We'll want to be able to print the board. The empty board will log the 2D array to the console like this (warning, this part is difficult):
-  123
-  456
-  789
-
-Our game will take two players, each player should have a name and their respective character - one will be 'X', and the other, 'O'. As they play, they will replace the numbers on the board with their characters. For example:
-[["O", "O", "X"],
-["0", "X", "6"],
-["X", "8", "9"]]
-There should be some kind of function for play that takes the position the player wants to play. For each play, it should switch which player is currently playing (so no player can go two times in a row).
-
-There needs to be some kind of function to checkWinner to see if anyone has won. This part is pretty hard as you have to check if a player has won vertically, horizontally or diagonally, OR if there's a tie.
-
-Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
-*/
 var start = {
   board: [
     ["1", "2", "3"],
