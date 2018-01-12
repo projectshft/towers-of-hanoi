@@ -48,7 +48,7 @@ function checkWinner() {
   } else if (gameBoard[2][0] == gameBoard[1][1] && gameBoard[2][0] == gameBoard[0][2]) {
     console.log(gameBoard[2][0] + " wins!");
     newGame();
-  } else if (moveCount > 7) {
+  } else if (moveCount > 8) {
     console.log("Tie game!")
     newGame();
   } else {
