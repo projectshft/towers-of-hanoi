@@ -148,7 +148,7 @@ window.onload = function() {
       }
     }
     if (moves == 9) {
-      return "It's a Tie!"
+      return ["It's a Tie!",0]
     }
   };
 }
