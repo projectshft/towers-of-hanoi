@@ -16,8 +16,7 @@ function printBoard(board) {
     boardDisplay += line.join('') + '\n'
   });
   boardDisplay = boardDisplay.trim();
-  console.log(boardDisplay);
-  return boardDisplay; //added return value to make this testable in Jasmine.
+  return boardDisplay; //changed from console.log statement to return value to make this testable in Jasmine
 }
 
 function play(position, state) {
@@ -130,7 +129,7 @@ function checkGameOver(state) {
 
 function playGame(state) {
   while (!checkGameOver(state)) {
-    printBoard(state.board);
+    console.log(printBoard(state.board));
     var nextPlayer = state.playerIsX ? 'X' : 'O';
     var position = prompt(`${nextPlayer}, please enter a position.`)
     if (position === null){
