@@ -6,19 +6,12 @@
   <meta charset="utf-8">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="main.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
   <title></title>
 </head>
 
-<body style="padding-top: 80px">
+<body style="padding-top: 50px">
   <div class="container">
     <div class="row">
       <div class="col-sm-3"></div>
@@ -28,27 +21,50 @@
       <div class="col-sm-3"></div>
     </div>
     <div class="row">
-      <div class="col-sm-3"></div>
+      <div class="col-sm-3 text-center">
+        <p style="font-family: Lemon; font-size:24px; margin-top:55%" id="player-message">Welcome to Tic Tac Toe!</p>
+        <button onclick="startGame()" id="newGame" class="btn btn-primary">New Game</button>
+      </div>
       <div class="col-sm-6 well well-lg" style="background-color:#FFDAB9">
         <table class="board">
           <tr>
-            <td><p style="font-size:100px;" class="text-center">X</p></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
+            <td onclick="play('1')">
+              <p id="1" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('2')">
+              <p id="2" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('3')">
+              <p id="3" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
           </tr>
           <tr>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td><p style="font-size:100px;" class="text-center">O</p></td>
+            <td onclick="play('4')">
+              <p id="4" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('5')">
+              <p id="5" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('6')">
+              <p id="6" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
           </tr>
           <tr>
-            <td class="empty"></td>
-            <td class="empty"></td>
-            <td class="empty"></td>
+            <td onclick="play('7')">
+              <p id="7" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('8')">
+              <p id="8" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('9')">
+              <p id="9" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
           </tr>
         </table>
       </div>
-      <div class="col-sm-3"></div>
+      <div class="col-sm-3">
+        <p style="font-family: Lemon; font-size:24px; margin-top:55%" id="player-message-2"></p>
+      </div>
     </div>
   </div>
 </body>

@@ -2,14 +2,10 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
+
 td {
   width: 33.333%;
   border: 6px solid #222;
-}
-
-td:hover {
-  content: "X";
-  background-color: #BBE6E6;
 }
 
 td:first-of-type {
@@ -20,16 +16,16 @@ td:first-of-type {
 td:nth-of-type(2) {
   border-top-color: transparent;
 }
+
 td:nth-of-type(3) {
   border-right-color: transparent;
   border-top-color: transparent;
 }
+
 tr:nth-of-type(3) td {
   border-bottom-color: transparent;
 }
 
-td.empty:after {
-  content: '';
-  display: block;
-  margin-top: 100%;
+p.empty {
+  color: #FFDAB9;
 }
