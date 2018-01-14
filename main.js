@@ -48,6 +48,7 @@ window.onload = function() {
     document.getElementById("player-message").innerHTML = message;
     gameOn = true
     num = 0
+    document.getElementById("player-message-2").innerHTML = "";
     // console.log("");
     // console.log(printBoard(board))
     // position1 = prompt(message + '\n' + printBoard(board));
