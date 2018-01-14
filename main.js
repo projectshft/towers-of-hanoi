@@ -1,3 +1,5 @@
+console.log("Input move with \'play(" + "%cinput move here" + ")\'", "font-style: italic");
+
 var ticTacToe = [
   [1, 2, 3],
   [4, 5, 6],
@@ -5,12 +7,10 @@ var ticTacToe = [
 ];
 
 var player1 = {
-  name: 'Player 1',
   type: "X",
   turn: true
 }
 var player2 = {
-  name: 'Player 2',
   type: "O",
   turn: !player1.turn
 }
@@ -36,8 +36,12 @@ var checkWinner = function() {
   || ticTacToe[0][2] == nPlayer.type && ticTacToe[1][2] == nPlayer.type && ticTacToe[2][2] == nPlayer.type
   || ticTacToe[0][0] == nPlayer.type && ticTacToe[1][1] == nPlayer.type && ticTacToe[2][2] == nPlayer.type
   || ticTacToe[0][2] == nPlayer.type && ticTacToe[1][1] == nPlayer.type && ticTacToe[2][0] == nPlayer.type) {
-    console.log("Game over!")
-    console.log(nPlayer.name + " wins!");
+    console.log("%cGame over!", "font-size: 40px")
+    if (nPlayer == player1) {
+      console.log("%cPLAYER 1 WINS!", "font-size: 50px");
+    } else if (nPlayer == player2) {
+      console.log("%cPLAYER 2 WINS!", "font-size: 50px");
+    };
     var setTicTacToe = function() {
       ticTacToe = [
         [1,2,3],
@@ -46,12 +50,17 @@ var checkWinner = function() {
       ];
       for (i = 0; i < ticTacToe.length; i++) {
         console.log("" + ticTacToe[0][0] + " " + ticTacToe[0][1] + " " + ticTacToe[0][2] + "\n" + ticTacToe[1][0] + " " + ticTacToe[1][1] + " " + ticTacToe[1][2] + "\n" + ticTacToe[2][0] + " " + ticTacToe[2][1] + " " + ticTacToe[2][2]);
+      }
+      if (player == player1) {
+        console.log("%cPLAYER 1, it is your turn.", "font-weight: bold");
+      } else if (player == player2) {
+        console.log("%cPLAYER 2, it is your turn.", "font-weight: bold");
       };
     }
     return setTicTacToe();
   } else if (ticTacToe[0][0] != 1 && ticTacToe[0][1] != 2 && ticTacToe[0][2] != 3 && ticTacToe[1][0] != 4 && ticTacToe[1][1] != 5 && ticTacToe[1][2] != 6 && ticTacToe[2][0] != 7 && ticTacToe[2][1] != 8 && ticTacToe[2][2] != 9) {
-    console.log("Game over!");
-    console.log("It's a tie!");
+    console.log("%cGame over!", "font-size: 40px");
+    console.log("%cIt's a tie...", "font-size: 50px");
     var setTicTacToe = function() {
       ticTacToe = [
         [1,2,3],
@@ -60,11 +69,20 @@ var checkWinner = function() {
       ];
       for (i = 0; i < ticTacToe.length; i++) {
         console.log("" + ticTacToe[0][0] + " " + ticTacToe[0][1] + " " + ticTacToe[0][2] + "\n" + ticTacToe[1][0] + " " + ticTacToe[1][1] + " " + ticTacToe[1][2] + "\n" + ticTacToe[2][0] + " " + ticTacToe[2][1] + " " + ticTacToe[2][2]);
+      }
+      if (player == player1) {
+        console.log("%cPLAYER 1, it is your turn.", "font-weight: bold");
+      } else if (player == player2) {
+        console.log("%cPLAYER 2, it is your turn.", "font-weight: bold");
       };
     }
     return setTicTacToe();
   } else {
-    console.log(player.name + ", it is your turn.")
+    if (player == player1) {
+      console.log("%cPLAYER 1, it is your turn.", "font-weight: bold");
+    } else if (player == player2) {
+      console.log("%cPLAYER 2, it is your turn.", "font-weight: bold");
+    };
   };
 };
 
@@ -79,10 +97,10 @@ showTicTacToe();
 
 var play = function(num) {
   var errMsg = function() {
-    console.log("Space " + num + " is already taken.");
+    console.warn("Space " + num + " is already taken.");
   }
   var errMsg1 = function() {
-    console.log(num + " does not exist.");
+    console.warn(num + " does not exist.");
   }
   if (player1.turn) {
     var player = player1;
