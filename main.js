@@ -8,13 +8,16 @@ var start = {
 };
 
 //can add optional function to change who goes first
+//would be nice to add way to cancel out of game.
 
 function printBoard(board) {
   var boardDisplay = '';
   board.forEach(function(line) {
     boardDisplay += line.join('') + '\n'
-  })
-  console.log(boardDisplay.trim());
+  });
+  boardDisplay = boardDisplay.trim();
+  console.log(boardDisplay);
+  return boardDisplay; //added return value to make this testable in Jasmine.
 }
 
 function play(position, state) {
@@ -130,6 +133,9 @@ function playGame(state) {
     printBoard(state.board);
     var nextPlayer = state.playerIsX ? 'X' : 'O';
     var position = prompt(`${nextPlayer}, please enter a position.`)
+    if (position === null){
+      break; // player can exit game by hitting "cancel" at prompt
+    }
     state = play(position, state);
   }
 }
