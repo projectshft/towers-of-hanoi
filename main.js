@@ -7,9 +7,6 @@ var start = {
   playerIsX: true
 };
 
-//can add optional function to change who goes first
-//would be nice to add way to cancel out of game.
-
 function printBoard(board) {
   var boardDisplay = '';
   board.forEach(function(line) {
@@ -128,12 +125,15 @@ function checkGameOver(state) {
 }
 
 function playGame(state) {
+  var randomBoolean = Math.random() >= 0.5;
+  state = Object.assign({},state);
+  state.playerIsX = randomBoolean;
   while (!checkGameOver(state)) {
     console.log(printBoard(state.board));
     var nextPlayer = state.playerIsX ? 'X' : 'O';
     var position = prompt(`${nextPlayer}, please enter a position.`)
     if (position === null){
-      break; // player can exit game by hitting "cancel" at prompt
+      break; // players can exit game by hitting "cancel" at prompt
     }
     state = play(position, state);
   }
