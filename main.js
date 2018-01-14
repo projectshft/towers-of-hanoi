@@ -76,6 +76,8 @@ window.onload = function() {
       board[spot2][spot[spot2]] = "X";
       document.getElementById(position).innerHTML = "X";
       document.getElementById(position).classList.remove("empty")
+      moves += 1;
+      playerControl();
     } else if (spot2 > -1 && player == player2) {
       // console.log("Player Two chose position " + position);
       // console.log(printBoard(board));
@@ -83,15 +85,15 @@ window.onload = function() {
       board[spot2][spot[spot2]] = "O";
       document.getElementById(position).innerHTML = "O";
       document.getElementById(position).classList.remove("empty")
+      moves += 1;
+      playerControl();
     } else {
       message = messages.wrongMove;
       document.getElementById("player-message").innerHTML = message;
       // play(prompt(message + '\n' + printBoard(board)));
     }
-    moves += 1;
     // printBoard(board);
     // console.log();
-    playerControl();
   };
 
   playerControl = function() {
