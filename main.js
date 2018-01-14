@@ -12,8 +12,8 @@ window.onload = function() {
     welcome: "Welcome to Tic Tac Toe!",
     player1First: "Player One goes first! You are 'X'.",
     player2First: "Player Two goes next! You are 'O'.",
-    player1Next: "Player One's turn again!",
-    player2Next: "Player Two's turn again!",
+    player1Next: "Player One's turn!",
+    player2Next: "Player Two's turn!",
     wrongMove: "That move is not allowed, try again."
   }
   var message = messages.welcome;
