@@ -1,6 +1,6 @@
 window.onload = function() {
 
-  var startBoard = [
+  var beginBoard = [
     [1, 2, 3],
     [4, 5, 6],
     [7, 8, 9]
@@ -31,14 +31,15 @@ window.onload = function() {
   };
 
   startGame = function() {
-    startBoard = [
+    var startBoard = [
       [1, 2, 3],
       [4, 5, 6],
       [7, 8, 9]
     ]
     for (i = 1; i < 10; i++) {
       document.getElementById(i).innerHTML = ".";
-      document.getElementById(i).classList.add("empty")
+      document.getElementById(i).classList.add("empty");
+      document.getElementById(i).classList.remove("winCell")
     }
     board = startBoard.slice(0);
     player = player1;
@@ -109,7 +110,10 @@ window.onload = function() {
       else message = messages.player1Next;
     }
     if (checkWin()) {
-      document.getElementById("player-message").innerHTML = checkWin();
+      document.getElementById("player-message").innerHTML = checkWin()[0];
+      document.getElementById(checkWin()[1][0]).classList.add("winCell");
+      document.getElementById(checkWin()[1][1]).classList.add("winCell");
+      document.getElementById(checkWin()[1][2]).classList.add("winCell");
       gameOn = false
       // if (confirm(checkWin() + '\n' + printBoard(board) + '\n' + "Would you like to play again?")) {
       //   console.log(checkWin())
@@ -138,9 +142,9 @@ window.onload = function() {
     for (var i = 0; i < winStates.length; i++) {
       checkStr = boardArr[winStates[i][0] - 1] + boardArr[winStates[i][1] - 1] + boardArr[winStates[i][2] - 1];
       if (checkStr == "XXX") {
-        return "Player One Wins!!";
+        return ["Player One Wins!!",winStates[i]];
       } else if (checkStr == "OOO") {
-        return "Player Two Wins!!";
+        return ["Player Two Wins!!",winStates[i]];
       }
     }
     if (moves == 9) {

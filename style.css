@@ -29,3 +29,7 @@ tr:nth-of-type(3) td {
 p.empty {
   color: #FFDAB9;
 }
+
+.winCell {
+  color: #ff0000;
+}
