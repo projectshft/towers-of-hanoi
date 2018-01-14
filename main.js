@@ -89,7 +89,7 @@ window.onload = function() {
       playerControl();
     } else {
       message = messages.wrongMove;
-      document.getElementById("player-message").innerHTML = message;
+      document.getElementById("player-message-2").innerHTML = message;
       // play(prompt(message + '\n' + printBoard(board)));
     }
     // printBoard(board);
