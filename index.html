@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Arima+Madurai:200|Josefin+Sans:300|Lemon" rel="stylesheet">
+  <meta charset="utf-8">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="main.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <title></title>
+</head>
+
+<body style="padding-top: 50px">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <h1 class="text-center" style="font-family: Lemon; font-size:80px;">Tic Tac Toe</h1>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 text-center">
+        <p style="font-family: Arima Madurai; font-size:40px; margin-top:55%" id="player-message">Welcome to Tic Tac Toe!</p>
+        <button onclick="startGame()" id="newGame" class="btn btn-primary" style="margin-bottom:5%">New Game</button>
+        <button onclick="startComputerGame()" id="newComputerGame" class="btn btn-primary">New Game vs. Computer</button>
+      </div>
+      <div class="col-sm-6 well well-lg" style="background-color:#FFDAB9">
+        <table class="board">
+          <tr>
+            <td onclick="play('1')">
+              <p id="1" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('2')">
+              <p id="2" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('3')">
+              <p id="3" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+          </tr>
+          <tr>
+            <td onclick="play('4')">
+              <p id="4" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('5')">
+              <p id="5" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('6')">
+              <p id="6" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+          </tr>
+          <tr>
+            <td onclick="play('7')">
+              <p id="7" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('8')">
+              <p id="8" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+            <td onclick="play('9')">
+              <p id="9" style="font-size:100px;" class="cell text-center empty">.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-sm-3 text-center">
+        <p style="font-family: Arima Madurai; font-size:40px; margin-top:55%" id="player-message-2"></p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
