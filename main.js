@@ -14,13 +14,16 @@ window.onload = function() {
     player2First: "Player Two goes next! You are 'O'.",
     player1Next: "Player One's turn!",
     player2Next: "Player Two's turn!",
-    wrongMove: "That move is not allowed, try again."
-  }
+    wrongMove: "That move is not allowed, try again.",
+    singlePlayerFirst: "You play first! You are 'X'.",
+    singlePlayerNext: "Your turn again!"
+  };
+
   var message = messages.welcome;
   var player = "";
   var moves = 0;
   var gameOn = false;
-  var num = 0
+  var computer = false;
 
   printBoard = function(board) {
     var line = [];
@@ -50,6 +53,7 @@ window.onload = function() {
     gameOn = true
     num = 0
     document.getElementById("player-message-2").innerHTML = "";
+    computer = false
     // console.log("");
     // console.log(printBoard(board))
     // position1 = prompt(message + '\n' + printBoard(board));
@@ -58,7 +62,7 @@ window.onload = function() {
 
   play = function(position) {
     if (!gameOn) {
-      document.getElementById("player-message-2").innerHTML = "Press the 'New Game' button to start a new game!";
+      document.getElementById("player-message-2").innerHTML = "Press one of the 'New Game' buttons to start a new game!";
       return;
     }
     document.getElementById("player-message-2").innerHTML = ""
@@ -72,18 +76,12 @@ window.onload = function() {
       return element > -1;
     });
     if (spot2 > -1 && player == player1) {
-      // console.log("Player One chose position " + position);
-      // console.log(printBoard(board));
-      // console.log("");
       board[spot2][spot[spot2]] = "X";
       document.getElementById(position).innerHTML = "X";
       document.getElementById(position).classList.remove("empty")
       moves += 1;
       playerControl();
     } else if (spot2 > -1 && player == player2) {
-      // console.log("Player Two chose position " + position);
-      // console.log(printBoard(board));
-      // console.log("");
       board[spot2][spot[spot2]] = "O";
       document.getElementById(position).innerHTML = "O";
       document.getElementById(position).classList.remove("empty")
@@ -92,22 +90,30 @@ window.onload = function() {
     } else {
       message = messages.wrongMove;
       document.getElementById("player-message-2").innerHTML = message;
-      // play(prompt(message + '\n' + printBoard(board)));
     }
-    // printBoard(board);
-    // console.log();
   };
 
   playerControl = function() {
-    if (player == player1) {
-      player = player2;
-      if (moves < 2) {
-        message = messages.player2First;
-      } else message = messages.player2Next;
+    if (!computer) {
+      if (player == player1) {
+        player = player2;
+        if (moves < 2) {
+          message = messages.player2First;
+        } else message = messages.player2Next;
+      } else {
+        player = player1;
+        if (moves < 1) message = messages.player1First;
+        else message = messages.player1Next;
+      }
     } else {
-      player = player1;
-      if (moves < 1) message = messages.player1First;
-      else message = messages.player1Next;
+      if (player == player1) {
+        player = player2
+        if (moves < 2) {
+          message = messages.singlePlayerFirst
+        } else message = messages.singlePlayerNext
+      } else {
+        player = player1
+      }
     }
     if (checkWin()) {
       document.getElementById("player-message").innerHTML = checkWin()[0];
@@ -115,15 +121,9 @@ window.onload = function() {
       document.getElementById(checkWin()[1][1]).classList.add("winCell");
       document.getElementById(checkWin()[1][2]).classList.add("winCell");
       gameOn = false
-      // if (confirm(checkWin() + '\n' + printBoard(board) + '\n' + "Would you like to play again?")) {
-      //   console.log(checkWin())
-      //   startGame()
-      // } else return
     } else {
       document.getElementById("player-message").innerHTML = message;
     }
-
-    // else play(prompt(message + '\n' + printBoard(board)));
   };
 
   checkWin = function() {
@@ -142,13 +142,43 @@ window.onload = function() {
     for (var i = 0; i < winStates.length; i++) {
       checkStr = boardArr[winStates[i][0] - 1] + boardArr[winStates[i][1] - 1] + boardArr[winStates[i][2] - 1];
       if (checkStr == "XXX") {
-        return ["Player One Wins!!",winStates[i]];
+        if (!computer) return ["Player One Wins!!", winStates[i]];
+        else return ["Player Wins!!", winStates[i]]
       } else if (checkStr == "OOO") {
-        return ["Player Two Wins!!",winStates[i]];
+        if (!computer) return ["Player Two Wins!!", winStates[i]];
+        else return ["Computer Wins!!", winStates[i]];
       }
     }
     if (moves == 9) {
-      return ["It's a Tie!",0]
+      return ["It's a Tie!", 0]
     }
+    if (computer && player == player2) {
+      var boardArrReduced = printBoard(board).replace(/\n/g, "")
+      boardArrReduced = boardArrReduced.replace(/X/g, "")
+      boardArrReduced = boardArrReduced.replace(/O/g, "")
+      play(boardArrReduced[Math.floor(Math.random() * boardArrReduced.length)])
+    }
+  }
+
+  startComputerGame = function() {
+    var startBoard = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9]
+    ]
+    for (i = 1; i < 10; i++) {
+      document.getElementById(i).innerHTML = ".";
+      document.getElementById(i).classList.add("empty");
+      document.getElementById(i).classList.remove("winCell")
+    }
+    board = startBoard.slice(0);
+    player = player1;
+    moves = 0;
+    message = messages.singlePlayerFirst;
+    // console.log(message);
+    document.getElementById("player-message").innerHTML = message;
+    gameOn = true
+    document.getElementById("player-message-2").innerHTML = "";
+    computer = true
   };
 }
