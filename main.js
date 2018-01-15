@@ -24,6 +24,7 @@ window.onload = function() {
   var moves = 0;
   var gameOn = false;
   var computer = false;
+  var winState
 
   printBoard = function(board) {
     var line = [];
@@ -54,10 +55,7 @@ window.onload = function() {
     num = 0
     document.getElementById("player-message-2").innerHTML = "";
     computer = false
-    // console.log("");
-    // console.log(printBoard(board))
-    // position1 = prompt(message + '\n' + printBoard(board));
-    // play(position1);
+    winState = undefined
   };
 
   play = function(position) {
@@ -115,16 +113,17 @@ window.onload = function() {
         player = player1
       }
     }
-    var winState = checkWin().slice(0)
+    checkWin()
     if (winState) {
       document.getElementById("player-message").innerHTML = winState[0];
-      console.log(winState[0]);
+      console.log(winState)
       document.getElementById(winState[1][0]).classList.add("winCell");
       document.getElementById(winState[1][1]).classList.add("winCell");
       document.getElementById(winState[1][2]).classList.add("winCell");
       gameOn = false
       return
     } else {
+      console.log(message)
       document.getElementById("player-message").innerHTML = message;
     }
   };
@@ -144,21 +143,28 @@ window.onload = function() {
     ];
     for (var i = 0; i < winStates.length; i++) {
       checkStr = boardArr[winStates[i][0] - 1] + boardArr[winStates[i][1] - 1] + boardArr[winStates[i][2] - 1];
-      console.log(checkStr)
       if (checkStr == "XXX") {
-        if (!computer) return ["Player One Wins!!", winStates[i]];
-        else return ["Player Wins!!", winStates[i]]
+        if (!computer) {
+          winState = ["Player One Wins!!", winStates[i]]
+          return winState
+        } else {
+          winState = ["Player Wins!!", winStates[i]]
+          return winState
+        }
       } else if (checkStr == "OOO") {
-        if (!computer) return ["Player Two Wins!!", winStates[i]];
-        else {
-          return ["Computer Wins!!", winStates[i]];
+        if (!computer) {
+          winState = ["Player Two Wins!!", winStates[i]]
+          return winState
+        } else {
+          winState = ["Computer Wins!!", winStates[i]]
+          return winState
         }
       }
     }
     if (moves == 9) {
-      return ["It's a Tie!", 0]
-    }
-    else if (computer && player == player2) {
+      winState = ["It's a Tie!", 0]
+      return winState
+    } else if (computer && player == player2) {
       var boardArrReduced = printBoard(board).replace(/\n/g, "")
       boardArrReduced = boardArrReduced.replace(/X/g, "")
       boardArrReduced = boardArrReduced.replace(/O/g, "")
@@ -181,10 +187,10 @@ window.onload = function() {
     player = player1;
     moves = 0;
     message = messages.singlePlayerFirst;
-    // console.log(message);
     document.getElementById("player-message").innerHTML = message;
     gameOn = true
     document.getElementById("player-message-2").innerHTML = "";
     computer = true
+    winState = undefined
   };
 }
