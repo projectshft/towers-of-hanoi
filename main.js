@@ -64,14 +64,7 @@ class Player {
       this.winner = winner;
     }
 
-  addChoice(choice) {
-    console.log(choice);
-  }
-
 }
-// There should be some kind of function for play that takes the position the player wants to play. For each play, it should switch which player is currently playing (so no player can go two times in a row).
-// There needs to be some kind of function to checkWinner to see if anyone has won. This part is pretty hard as you have to check if a player has won vertically, horizontally or diagonally, OR if there's a tie.
-// Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
 
 class Game {
   // player 1 and two are objects...?...
