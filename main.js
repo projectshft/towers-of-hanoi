@@ -8,8 +8,12 @@
   Each player has a name, character of X or O, and a status to indicate
   whether he/she is able to play
 */
-var TicTacToe = function () {
-  var board =  [["1", "2", "3"],["4", "5", "6"],["7", "8", "9"]];
+var TicTacToe = function() {
+  var board = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"]
+  ];
   var currentPlayer = player1;
   var gridSize = 3;
   var moveCount = 0; // Tracking the number of turns taken.
@@ -28,12 +32,12 @@ var TicTacToe = function () {
     Function to test if a player has won or a tie has occurred after each move.
     The game ends if a win or tie occurs, and the result is logged to the console.
   */
-  var checkWinner = function () {
+  var checkWinner = function() {
     var winChar = currentPlayer.character;
     var winString = '';
     var win1 = 'XXX';
     var win2 = 'OOO';
-    var winCheck = function () {
+    var winCheck = function() {
       if (winString == win1 || winString == win2) {
         console.log(currentPlayer.name + ' wins!\nUse game.setup() to play again!');
         reset();
@@ -96,8 +100,8 @@ var TicTacToe = function () {
     Finder function to locate the element in board specified by play().
     This will replace the corresponding board element with a player's character.
   */
-  var findAndReplace = function (position) {
-    board.forEach( function (row) {
+  var findAndReplace = function(position) {
+    board.forEach(function(row) {
       if (row.indexOf(position) != -1) {
         // Once the position is found, replace it with currentPlayer's character.
         row[row.indexOf(position)] = currentPlayer.character;
@@ -109,7 +113,7 @@ var TicTacToe = function () {
     Play function checks which player has 'play' status for valid moves.
     Each move replaces a digit with either 'X' or 'O' and switches a user's status
   */
-  var play = function (position) {
+  var play = function(position) {
     // Test if a position is open to play, the game is "set up," and you're not passing in a filthy object
     if (nameSet && typeof position !== 'object' && board.join('').includes(position)) {
       findAndReplace(position.toString());
@@ -130,9 +134,9 @@ var TicTacToe = function () {
   /*
     Print the current game board.
   */
-  var print = function () {
+  var print = function() {
     var printBoard = '';
-    board.forEach( function (element) {
+    board.forEach(function(element) {
       // Log each row as a string without the commas.
       printBoard += element.join('') + '\n';
     });
@@ -143,16 +147,16 @@ var TicTacToe = function () {
     Setup function for gameplay that outputs instructions and assigns each player's
     name and the player order (first name goes first, second name goes second).
   */
-  var setup = function (name1, name2) {
+  var setup = function(name1, name2) {
     var player1Trimmed = name1.trim();
     var player2Trimmed = name2.trim();
 
     // Check if setup has been completed already.
     if (nameSet) {
       console.log('Setup complete - play on!');
-    // Check for non-string names
+      // Check for non-string names
     } else if (typeof name1 != 'string' || typeof name2 != 'string' ||
-              player1Trimmed.length == 0 || player2Trimmed.length == 0) {
+      player1Trimmed.length == 0 || player2Trimmed.length == 0) {
       console.log('Invalid name(s). Please setup again.')
     } else {
       //Assign names, players.nameSet becomes true, and player1 is set as currentPlayer.
@@ -161,8 +165,8 @@ var TicTacToe = function () {
       nameSet = true;
       currentPlayer = player1; // By default, player1 starts.
       console.log('\nWelcome to Tic-Tac-Toe, ' + player1Trimmed + ' and ' + player2Trimmed + '!\n' +
-      player1Trimmed + ' will play first. Take turns using \'game.play(number of position)\'\n' +
-      'Have fun, y\'all!\n' );
+        player1Trimmed + ' will play first. Take turns using \'game.play(number of position)\'\n' +
+        'Have fun, y\'all!\n');
       print();
     }
   };
@@ -171,9 +175,13 @@ var TicTacToe = function () {
     Resetting function will restore the board and players objects to their initial
     states, setting up a new game
   */
-  var reset = function () {
+  var reset = function() {
     var value = 0;
-    board = [["1", "2", "3"],["4", "5", "6"],["7", "8", "9"]];
+    board = [
+      ["1", "2", "3"],
+      ["4", "5", "6"],
+      ["7", "8", "9"]
+    ];
     player1.name = '';
     player2.name = '';
     currentPlayer = player1;
@@ -188,20 +196,8 @@ var TicTacToe = function () {
 };
 
 /*
-  Testing zone
+  Initialization
 */
 var game = TicTacToe();
 console.log('Use game.setup(\'name1\', \'name2\') to add names for Player 1 and' +
-            ' Player 2 and setup the game.');
-// game.setup('Willy', 'Sheryl');
-// game.play(7);
-// game.reset();
-// game.print();
-// game.play(1);
-// game.play(3);
-// game.play(2);
-// game.play(6);
-// game.play(4);
-// game.play(5);
-//game.print();
-// game.setup('joe', 'ellen');
+  ' Player 2 and setup the game.');
