@@ -45,25 +45,22 @@ var board = function(){
 
 var reset = function () {
   count = 1;
-  array[0][0] = 1;
-  array[0][1] = 2;
-  array[0][2] = 3;
-  array[1][0] = 4;
-  array[1][1] = 5;
-  array[1][2] = 6;
-  array[2][0] = 7;
-  array[2][1] = 8;
-  array[2][2] = 9;
+  one.SetVar("array[0][0]", "1");
+  two.SetVar("array[0][1]", "2");
+  thr.SetVar("array[0][2]", "3");
+  four.SetVar("array[1][0]", "4");
+  fiv.SetVar("array[1][1]", "5");
+  six.SetVar("array[1][2]", "6");
+  svn.SetVar("array[2][0]", "7");
+  eig.SetVar("array[2][1]", "8");
+  nin.SetVar("array[2][2]", "9");
 
   var newG = prompt("Would you like to play again? y or n?");
     if (newG == 'y') {
       greeting();
       addX();
-    }else if (newG == 'n') {
-      alert("Thank you for playing Tic-Tac-Toe!");
-      console.log("Thank you for playing Tic-Tac-Toe!");
-      break;
-    }else {
+    }else if (newG !== y) {
+      return "Thank you for playing Tic-Tac-Toe!";
       reset();
     }
 };
@@ -117,7 +114,7 @@ var checkWinner = function () {
     } else if(svn == 'o' && fiv == 'o' && thr == 'o'){
       alert ("Player O WINS on turn " + count + "!!");
       reset();
-    } else if (count = 10) {
+    } else if (count >= 10) {
       alert ("Cat's Game! \nNeither X, nor O wins! \nBetter luck next game!");
       reset();
     }
