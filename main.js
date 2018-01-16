@@ -35,7 +35,7 @@ var TicTacToe = function () {
     var win2 = 'OOO';
     var winCheck = function () {
       if (winString == win1 || winString == win2) {
-        console.log(currentPlayer.name + ' wins!');
+        console.log(currentPlayer.name + ' wins!\nUse game.setup() to play again!');
         reset();
         return true;
       }
@@ -85,7 +85,8 @@ var TicTacToe = function () {
 
     // Check for tie
     if (moveCount == (Math.pow(gridSize, 2) - 1)) {
-      console.log('Cat\'s Game - it\'s a tie!');
+      console.log('Cat\'s Game - it\'s a tie!\nUse game.setup() to play again!');
+      reset();
       return true;
     }
     return false;
@@ -113,8 +114,13 @@ var TicTacToe = function () {
     if (nameSet && typeof position !== 'object' && board.join('').includes(position)) {
       findAndReplace(position.toString());
       moveCount++;
+      print();
       checkWinner();
       currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
+      // Log the next player as long as the game hasn't been reset.
+      if (nameSet) {
+        console.log('It\'s your move, ' + currentPlayer.name + '!');
+      }
     } else {
       // Error message if position is already taken or game has not been setup.
       console.log('Invalid play!');
@@ -155,8 +161,9 @@ var TicTacToe = function () {
       nameSet = true;
       currentPlayer = player1; // By default, player1 starts.
       console.log('\nWelcome to Tic-Tac-Toe, ' + player1Trimmed + ' and ' + player2Trimmed + '!\n' +
-      player1Trimmed + ' will play first. Take turns using \'play(number of position)\'\n' +
+      player1Trimmed + ' will play first. Take turns using \'game.play(number of position)\'\n' +
       'Have fun, y\'all!\n' );
+      print();
     }
   };
 
@@ -166,7 +173,7 @@ var TicTacToe = function () {
   */
   var reset = function () {
     var value = 0;
-    board = board.map( element => (value++).toString());
+    board = [["1", "2", "3"],["4", "5", "6"],["7", "8", "9"]];
     player1.name = '';
     player2.name = '';
     currentPlayer = player1;
@@ -176,20 +183,25 @@ var TicTacToe = function () {
 
   return {
     play: play,
-    //print: print,
-    setup: setup
+    setup: setup,
   };
 };
-var game = TicTacToe();
-//game.setup('      b  ', 'Bob');
-game.setup('Willy', 'Rob');
 
-game.play(7);
-game.play(1);
-game.play(3);
-game.play(2);
-game.play(6);
-game.play(4);
-game.play(5);
+/*
+  Testing zone
+*/
+var game = TicTacToe();
+console.log('Use game.setup(\'name1\', \'name2\') to add names for Player 1 and' +
+            ' Player 2 and setup the game.');
+// game.setup('Willy', 'Sheryl');
+// game.play(7);
+// game.reset();
+// game.print();
+// game.play(1);
+// game.play(3);
+// game.play(2);
+// game.play(6);
+// game.play(4);
+// game.play(5);
 //game.print();
-game.setup('joe', 'ellen');
+// game.setup('joe', 'ellen');
