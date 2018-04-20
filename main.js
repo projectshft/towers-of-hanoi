@@ -85,107 +85,128 @@ class Game {
 class Player {
   constructor(symbol) {
     this.symbol = symbol;
+    // NOT WORKING
+    // this.array = [];
   }
 
-  playPosition1() {
+  play1() {
     if (checkPositions().position1 != "X" && checkPositions().position1 != "O") {
       game.board[0][0] = this.symbol;
       counter++;
+      // this.array.push(1);
+      // if (checkWin(combo1, this.array)) {
+      //   console.log("Winner");
+      // }
       game.checkWinner(game.board);
-
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition2() {
+  play2() {
     if (checkPositions().position2 != "X" && checkPositions().position2 != "O") {
       game.board[0][1] = this.symbol;
       counter++;
+      // this.array.push(2);
       game.checkWinner(game.board);
 
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+    gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition3() {
+  play3() {
     if (checkPositions().position3 != "X" && checkPositions().position3 != "O") {
       game.board[0][2] = this.symbol;
       counter++;
+      // this.array.push(3);
       game.checkWinner(game.board);
 
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition4() {
+  play4() {
     if (checkPositions().position4 != "X" && checkPositions().position4 != "O") {
       game.board[1][0] = this.symbol;
       counter++;
+      // this.array.push(4);
       game.checkWinner(game.board);
 
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition5() {
+  play5() {
     if (checkPositions().position5 != "X" && checkPositions().position5 != "O") {
       game.board[1][1] = this.symbol;
       counter++;
+      // this.array.push(5);
       game.checkWinner(game.board);
 
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition6() {
+  play6() {
     if (checkPositions().position6 != "X" && checkPositions().position6 != "O") {
       game.board[1][2] = this.symbol;
       counter++;
+      // this.array.push(6);
       game.checkWinner(game.board);
 
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition7() {
+  play7() {
     if (checkPositions().position7 != "X" && checkPositions().position7 != "O") {
       game.board[2][0] = this.symbol;
       counter++;
+      // this.array.push(7);
       game.checkWinner(game.board);
 
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition8() {
+  play8() {
     if (checkPositions().position8 != "X" && checkPositions().position8 != "O") {
       game.board[2][1] = this.symbol;
       counter++;
+      // this.array.push(8);
       game.checkWinner(game.board);
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
-  playPosition9() {
+  play9() {
     if (checkPositions().position9 != "X" && checkPositions().position9 != "O") {
       game.board[2][2] = this.symbol;
       counter++;
+      // this.array.push(9);
       game.checkWinner(game.board);
-      console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+      gameState();
     } else {
-      console.log("That move is already taken!")
+      moveTaken();
     }
   }
 
 };
+
+var gameState = function() {
+    console.log("This is the current game board: " + "\n" + game.board[0] + "\n" + game.board[1] + "\n" + game.board[2]);
+};
+
+var moveTaken = function(){
+  console.log("That move is already taken!")
+}
 
 var checkPositions = function() {
   var position1 = game.board[0][0];
@@ -210,9 +231,22 @@ var checkPositions = function() {
     position9: position9
   }
 }
+// win checker not working.
+// var checkWin = function(winner, array) {
+//   return array.some(val => winner.indexOf(val) === -1)};
 
 var counter = 0;
 
+
+// var combo1 = [1, 2, 3];
+// var combo2 = [4, 5, 6];
+// var combo3 = [7, 8, 9];
+// var combo4 = [1, 4, 7];
+// var combo5 = [2, 5, 8];
+// var combo6 = [3, 6, 9];
+// var combo7 = [1, 5, 9];
+// var combo8 = [7, 5, 3];
+
 var game = new Game;
-var player1 = new Player("X");
-var player2 = new Player("O");
+var playerX = new Player("X");
+var playerO = new Player("O");
