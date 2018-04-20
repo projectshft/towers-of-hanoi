@@ -85,13 +85,13 @@ class Board {
       this.print();
       this.available =this.available.filter(num => num !=n);
       //console.log(this.available);
-      if(player1.turn){
-        player1.setTurn(false);
-        player2.setTurn(true);
+      if(this.player1.turn){
+        this.player1.setTurn(false);
+        this.player2.setTurn(true);
       }
       else{
-        player1.setTurn(true);
-        player2.setTurn(false);
+        this.player1.setTurn(true);
+        this.player2.setTurn(false);
       }
     }
   }
@@ -107,8 +107,11 @@ class Board {
   }
   print(){
     for(var i=0;i<3;i++){
-      debugger
-      console.log(this.board[i]);
+      var row ="";
+      for(var j=0;j<3;j++){
+        row+=this.board[i][j];
+      }
+      console.log(row);
     }
     console.log("");
   }
@@ -140,6 +143,17 @@ class Player {
     else{
       console.log("Wait your turn!");
     }
+  }
+}
+
+class RandomComputer extends Player{
+  constructor(name, symbol, board){
+    super(name, symbol, board);
+  }
+  move(){
+    var pos = Math.floor(Math.random()*this.board.available.length);
+    //console.log(pos);
+    super.move(this.board.available[pos]);
   }
 }
 
