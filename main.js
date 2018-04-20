@@ -101,9 +101,9 @@ class Board {
       [4,5,6],
       [7,8,9]];
     this.available=[1,2,3,4,5,6,7,8,9];
-    this.ready = false;
-    this.player1 = undefined;
-    this.player2 = undefined;
+    this.ready=true;
+    this.player1.turn=true;
+    this.player2.turn=false;
   }
   print(){
     for(var i=0;i<3;i++){
@@ -133,11 +133,11 @@ class Player {
       //console.log(this.board.checkWin);
       if(this.board.checkWin=="tie"){
         console.log("This game was a tie!");
-        this.board.reset();
+        this.board.ready=false;
       }
       else if(this.board.checkWin){
         console.log("Congratulations "+this.name+"! You are the winner");
-        this.board.reset();
+        this.board.ready=false;
       }
     }
     else{
@@ -157,5 +157,4 @@ class RandomComputer extends Player{
   }
 }
 
-var myBoard = new Board();
-myBoard.print();
+//////////////////////////////////////////////////////
