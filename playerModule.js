@@ -27,7 +27,7 @@ var PlayerModule = function() {
     if(attributes.hasOwnProperty(attribute)){
       if(attribute == "moved") {
         attributes[attribute].push(value);
-      } else if (attributes.hasOwnProperty(attribute)) {
+      } else {
         attributes[attribute] = value;
       }
     }
