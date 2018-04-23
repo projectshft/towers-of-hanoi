@@ -231,13 +231,13 @@ var checkPositions = function() {
     position9: position9
   }
 }
-// win checker not working.
+// Shortened win checker not working.
 // var checkWin = function(winner, array) {
 //   return array.some(val => winner.indexOf(val) === -1)};
 
 var counter = 0;
 
-
+// Winning combos
 // var combo1 = [1, 2, 3];
 // var combo2 = [4, 5, 6];
 // var combo3 = [7, 8, 9];
