@@ -157,7 +157,7 @@ var GameModule = function(){
     var displayRow = [];
     var tempRow = [];
 
-    for (var x = 1; x < 11; x++){
+    for (var x = 1; x < 10; x++){
 
       if(x == 4 || x == 7 || x == 10){
         displayRow.push(tempRow);
@@ -170,6 +170,10 @@ var GameModule = function(){
         tempRow.push(player1.get('symbol'));
       } else if(player2.get('moved').includes(x)){
         tempRow.push(player2.get('symbol'));
+      }
+      if(x == 3 || x == 6 || x == 9){
+        displayRow.push(tempRow);
+        tempRow = [];
       }
     }
 
