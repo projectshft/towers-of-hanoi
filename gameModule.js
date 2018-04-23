@@ -28,7 +28,7 @@ var GameModule = function(){
     if(playerCount == 2){
       player2.set('name', prompt("Player 2,Please enter your name.", "Player 2"));
     } else {
-      //if player count == 1, player2 will be assigned to Autotic
+      //if player count == 1, player2 will be assigned to AI
       player2.set('name', 'Agent Smith');
     }
 
@@ -44,8 +44,11 @@ var GameModule = function(){
 
     //can be changed to 'if' or 'while' statement for synchronous or asynchronous
     while(end === false && gameBoard.length !== 0){
+
+      //function that decides who's turn it is.
       currentPlayerDecider();
 
+      // Decides if player2 is AI or not.
       if(playerCount == 1 && currentPlayer == player2){
         choice = currentPlayer.auto(player1.get('moved'), gameBoard);
       } else {
@@ -58,7 +61,7 @@ var GameModule = function(){
       //Call endTurn function if there's a result;
       endTurn(currentPlayer);
     }
-
+    
     alert("Thank you for playing.");
   };
 
@@ -78,9 +81,11 @@ var GameModule = function(){
     do{
       input = parseInt(prompt("What's the move? " + currentPlayer.get('name') + ", 1-9 whole number only."));
 
+      // added 999 backdoor to end the game earlier.
       if (input == "999") {
         alert('Lame');
-        return true;
+        end = true;
+        return 1;
       }
 
     }while(!gameBoard.includes(input));
