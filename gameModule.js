@@ -61,7 +61,7 @@ var GameModule = function(){
       //Call endTurn function if there's a result;
       endTurn(currentPlayer);
     }
-    
+
     alert("Thank you for playing.");
   };
 
@@ -141,7 +141,7 @@ var GameModule = function(){
       end = true;
     } else {
       moveCount++;
-      return console.log("Game Continues.");
+      console.log("Game Continues.");
     }
   };
 
