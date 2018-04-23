@@ -159,11 +159,6 @@ var GameModule = function(){
 
     for (var x = 1; x < 10; x++){
 
-      if(x == 4 || x == 7 || x == 10){
-        displayRow.push(tempRow);
-        tempRow = [];
-      }
-
       if (gameBoard.includes(x)){
         tempRow.push(x);
       } else if(player1.get('moved').includes(x)){
