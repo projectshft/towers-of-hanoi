@@ -165,7 +165,8 @@ var GameModule = function(){
         tempRow.push(player1.get('symbol'));
       } else if(player2.get('moved').includes(x)){
         tempRow.push(player2.get('symbol'));
-      }
+      };
+
       if(x == 3 || x == 6 || x == 9){
         displayRow.push(tempRow);
         tempRow = [];
