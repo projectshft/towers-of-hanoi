@@ -46,9 +46,7 @@ var GameModule = function(){
     while(end === false && gameBoard.length !== 0){
 
       // temporary ugly method to display board.
-      console.log(displayBoard()[0]);
-      console.log(displayBoard()[1]);
-      console.log(displayBoard()[2]);
+      displayBoard();
 
       //function that decides who's turn it is.
       currentPlayerDecider();
@@ -142,9 +140,7 @@ var GameModule = function(){
     if(checkWinner(currentPlayer.get('moved'))) {
       alert(currentPlayer.get('name') + " is the winner!");
       // temporary ugly method to display board.
-      console.log(displayBoard()[0]);
-      console.log(displayBoard()[1]);
-      console.log(displayBoard()[2]);
+      displayBoard();
 
       end = true;
     } else if (moveCount == 9){
@@ -177,7 +173,9 @@ var GameModule = function(){
       }
     }
 
-    return(displayRow);
+    console.log(displayRow[0]);
+    console.log(displayRow[1]);
+    console.log(displayRow[2]);
   };
 
 
