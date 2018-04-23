@@ -85,8 +85,12 @@ var PlayerModule = function() {
         }
       }
     }
-    // return choice+1 to force player to block AI if there aren't any winning combo, or indecisive blocking
-    return choiceArray[1];
+    // return choice to force player to block AI if there aren't any winning combo, or indecisive blocking
+    if(choiceArray.includes(2)){
+      return 2;
+    } else {
+      return 8;
+    }
 
   };
 

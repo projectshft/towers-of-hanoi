@@ -45,6 +45,11 @@ var GameModule = function(){
     //can be changed to 'if' or 'while' statement for synchronous or asynchronous
     while(end === false && gameBoard.length !== 0){
 
+      // temporary ugly method to display board.
+      console.log(displayBoard()[0]);
+      console.log(displayBoard()[1]);
+      console.log(displayBoard()[2]);
+
       //function that decides who's turn it is.
       currentPlayerDecider();
 
@@ -73,6 +78,7 @@ var GameModule = function(){
     } else {
       currentPlayer = player2;
     }
+    console.log(currentPlayer.get("name") + "'s' turn");
   };
 
 
@@ -111,7 +117,7 @@ var GameModule = function(){
     currentPlayer.set('moved', choice);
 
     // logging stats, so it can be playable through console.
-    console.log(currentPlayer.get('name')+' '+ currentPlayer.get('moved'));
+    // console.log(currentPlayer.get('name')+' '+ currentPlayer.get('moved'));
     console.log(currentPlayer.get('symbol'));
   };
 
@@ -135,6 +141,11 @@ var GameModule = function(){
   var endTurn = function(currentPlayer) {
     if(checkWinner(currentPlayer.get('moved'))) {
       alert(currentPlayer.get('name') + " is the winner!");
+      // temporary ugly method to display board.
+      console.log(displayBoard()[0]);
+      console.log(displayBoard()[1]);
+      console.log(displayBoard()[2]);
+
       end = true;
     } else if (moveCount == 9){
       alert("Tie!");
@@ -143,6 +154,30 @@ var GameModule = function(){
       moveCount++;
       console.log("Game Continues.");
     }
+  };
+
+// added display function to display board on console, can be removed when GUI added to HTML
+  var displayBoard = function() {
+    var displayRow = [];
+    var tempRow = [];
+
+    for (var x = 1; x < 11; x++){
+
+      if(x == 4 || x == 7 || x == 10){
+        displayRow.push(tempRow);
+        tempRow = [];
+      }
+
+      if (gameBoard.includes(x)){
+        tempRow.push(x);
+      } else if(player1.get('moved').includes(x)){
+        tempRow.push(player1.get('symbol'));
+      } else if(player2.get('moved').includes(x)){
+        tempRow.push(player2.get('symbol'));
+      }
+    }
+
+    return(displayRow);
   };
 
 
