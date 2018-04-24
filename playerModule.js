@@ -12,7 +12,7 @@ var PlayerModule = function() {
 
   //Prevents user from tricking AI into playing default move.
   const blockArray = [[1,8,7],[1,6,3],[3,4,1],[3,8,9],[7,2,1],[7,6,9],[9,2,3],[9,4,7],
-                      [4,2,1],[6,8,9,],[4,8,7],[2,6,3],[5,9,6]];
+                      [4,2,1],[6,8,9,],[4,8,7],[2,6,3],[5,9,3]];
 
   var attributes = {
     name: "default",
