@@ -20,13 +20,6 @@ var board = [
   ["7", "8", "9"]
 ];
 
-//this function will convert and console log the board array to the desired output style using methods and RegEx
-function boardDisplay(array) {
-  console.log("Here's the current board:")
-  console.log(array.join("\n").replace(/,/g, ""));
-  console.log("");
-}
-
 //create a player object
 const Player = function (name) {
   return {
@@ -35,20 +28,18 @@ const Player = function (name) {
 }
 
 //create a move Object
-const Move = function (moveNumber) {
-  return {
-    moveNumber: moveNumber
-  }
+// const Move = function (moveNumber) {
+//   return {
+//     moveNumber: moveNumber
+//   }
+// }
+
+//this function will convert and console log the board array to the desired output style using methods and RegEx
+function boardDisplay(array) {
+  console.log("Here's the current board:")
+  console.log(array.join("\n").replace(/,/g, ""));
+  console.log("");
 }
-
-//the next section runs with readline (requiring node.js) to accept user input:
-const readline = require('readline');
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
-});
 
 //define game functions
 function createPlayer(number, callback){
@@ -63,32 +54,42 @@ function makeMove(number, callback){
 console.clear();
   boardDisplay(board);
   rl.question("Player " + number + ", make your move: \n", function(answer) {
-    var moving = new Move(answer);
-    callback(moving);
+    var move = (answer);
+    callback(number);
     // moveAction(moving);
   });
 }
-//
+
+
 // function game(moveNumber, callback){
 //   boardDisplay(board);
 //   rl.question("Take turns making moves by entering a move number: \n", function(answer) {
-//     var move = new Move(answer);
+//     var move = (answer);
 //     callback(move);
 //   })
 // }
 
-function moveAction(moving){
-  var updatedBoard = _.clone(board);
-    for (moving in updatedBoard) {
+function moveAction(move){
+  // var updatedBoard = _.clone(board);
+    for (move in board) {
       for (i=0; i<10; i++) {
-        if (updatedBoard[i] === moving) {
-          updatedBoard.replace([i]);
+        if (board[i] === move) {
+          board.replace([i], "O");
       }
     }
   }
 }
 
-//The game
+//the next section invokes readline (requiring node.js) to accept user input:
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  terminal: false
+});
+
+//The game, referencing functions above
 createPlayer(1, function(player1){
   createPlayer(2, function(player2){
     console.log("Okay " + player1.name + ", you're X and take the odd moves.\n");
