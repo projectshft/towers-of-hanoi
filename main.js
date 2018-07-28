@@ -4,6 +4,8 @@
 //node.js needs lodash installed:  npm install lodash --save
 //maybe i don't need lodash?
 
+//REARRANGE THIS GARBAGE
+
 //import lodash
 var _ = require('lodash');
 
@@ -59,6 +61,7 @@ console.clear();
   rl.question("Player " + number + ", make your move: \n", function(answer) {
     var moving = new Move(answer);
     callback(moving);
+    // moveAction(moving);
   });
 }
 //
@@ -70,11 +73,11 @@ console.clear();
 //   })
 // }
 
-function moveAction(position){
+function moveAction(moving){
   var updatedBoard = _.clone(board);
-    for (position in updatedBoard) {
+    for (moving in updatedBoard) {
       for (i=0; i<10; i++) {
-        if (updatedBoard[i] === position) {
+        if (updatedBoard[i] === moving) {
           updatedBoard.replace([i]);
       }
     }
@@ -88,7 +91,7 @@ createPlayer(1, function(player1){
       console.log("And " + player2.name + ", you're O and take the even moves.\n");
         makeMove(1, function(move1){
           makeMove(2, function(move2){
-        });
+          });
       });
   });
 });
