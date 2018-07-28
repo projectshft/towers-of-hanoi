@@ -6,6 +6,10 @@
 
 //REARRANGE THIS GARBAGE
 
+//The game should refer to the players by their $answer not by their number
+
+//need win logic
+
 //import lodash
 var _ = require('lodash');
 
