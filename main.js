@@ -3,6 +3,8 @@ var board = [[1, 2, 3],
              [7, 8, 9]];
 var player1Array = new Array ();
 var player2Array = new Array ();
+var player1 = [];
+var player2 = [];
 var move = 0;
 var winningConditions = [[1, 2, 3],
                          [4, 5, 6],
@@ -37,21 +39,21 @@ function markBoard(position, mark) {
 function clearBoard(){
   move = 0;
   player1Array = new Array();
-  player2Array = new Array():
+  player2Array = new Array();
 }
 
 function nextMove (){
-    var move = 0
-    if (move = 0) {
+    if (move === 0) {
       console.log("Game start. Player 1 make a move");
       this.printBoard();
 }
     else if (move % 2 === 0) {
-        player1 = "X";
-        move++;
+        this.player1 = "X";
+        player1Array.push(value);
 }
     else {
-        player2 = "O";
+        this.player2 = "O";
+        player2Array.push(value);
         move++;
       }
 }
