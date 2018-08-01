@@ -17,6 +17,24 @@
 // Todo: make sure neither player can go two times in a row. 
 // Todo: make sure to win, a player must have three characters in a row (vertically, horizontally, diagonally)
 
+let player1 = {
+  firstName: "FirstPlayerName",
+  character: "x"
+};
+    
+
+let player2 = {
+  firstName: "secondPlayerName",
+  character: "o"
+};
+
+
+player1.firstName= prompt("Player One Name?");
+player2.firstName= prompt("Player Two Name?");
+
+
+console.log(player1.firstName);
+console.log(player2.firstName);
 
 var myArray1 = new Array(3);
 
@@ -56,25 +74,6 @@ for (var i = 0; i < 3; i++) {
     winningCombo[i][j] = winner;
   }
 }
-
-let player1 = {
-  firstName: "FirstPlayerName",
-  character: "x"
-};
-    
-
-let player2 = {
-  firstName: "secondPlayerName",
-  character: "o"
-};
-
-
-player1.firstName= prompt("Player One Name?");
-player2.firstName= prompt("Player Two Name?");
-
-
-console.log(player1.firstName);
-console.log(player2.firstName);
 
 
 let play = { 
