@@ -80,3 +80,15 @@ let play = {
 player1.play= prompt("Player 1, Choose a number 1-9");
 player2.play= prompt("Player 2, Choose a number 1-9");
 
+
+var winningCombo = [
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [1, 5, 9],
+    [3, 5, 7]
+];
+
