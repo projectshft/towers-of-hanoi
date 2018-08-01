@@ -37,20 +37,25 @@ for (var i = 0; i < 3; i++) {
   for (var j = 0; j < 3; j++) { 
     document.write(myArray1[i][j] + "&emsp;");
   }
-  document.write("<br/>")  
-}
+    document.write("<br/>")  
+ }
+
+var winningCombo = [
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [1, 5, 9],
+    [3, 5, 7]
+];
+
 for (var i = 0; i < 3; i++) { 
   for (var j = 0; j < 3; j++) {
-    myArray1[i][j] = start; 
-    start = start + 1;
+    winningCombo[i][j] = winner;
   }
 }
-// for (int i = 0; i < 3; i++) {
-//    for (int j = 0; j < 3; j++) {
-//        console.log(myArray1);// put code that you want to run on all items in array here
-//        // use myArray[i][j] to reference the current item
-//    }
-// }
 
 let player1 = {
   firstName: "FirstPlayerName",
@@ -73,22 +78,14 @@ console.log(player2.firstName);
 
 
 let play = { 
-  
-
+ 
 }
+player1.play= prompt("Player 1, Choose a number 1-9");
+
+
 
 player1.play= prompt("Player 1, Choose a number 1-9");
 player2.play= prompt("Player 2, Choose a number 1-9");
 
 
-var winningCombo = [
-    [1, 4, 7],
-    [2, 5, 8],
-    [3, 6, 9],
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [1, 5, 9],
-    [3, 5, 7]
-];
 
