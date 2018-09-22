@@ -1,88 +1,145 @@
-var board = [[1, 2, 3],
-             [4, 5, 6],
-             [7, 8, 9]];
-var player1Array = new Array ();
-var player2Array = new Array ();
-var player1 = [];
-var player2 = [];
-var move = 0;
-var winningConditions = [[1, 2, 3],
-                         [4, 5, 6],
-                         [7, 8, 9],
-                         [1, 4, 7],
-                         [2, 5, 8],
-                         [3, 6, 9],
-                         [1, 5, 9],
-                         [3, 5, 7]];
+var player1Name="" , player2Name="", turn = "";
+var grid =  [[0,0,0],[0,0,0],[0,0,0]];
+var hasWinner = 0, moveCount=0;
+//the above variable sets empty variables essential for game logic.
 
-function printBoard(){
-  for(i=0; i < board.length; i++) {
-    console.log(board[i] + "\n");
-  }
+$(document).ready(function () {
+function boardMsg(x){
+    return $("#board").text(x);
 }
 
-function isNumber(value) {
-    var x;
-    if (isNaN(value)) {
-        return false;
+function setTurn(){
+    var r = Math.floor((Math.random() * 2) + 1);
+    hasWinner=0;
+    if(r==1){
+        turn = player1Name;
+        boardMsg(player1Name+"'s turn now!");
     }
-    x = parseFloat(value);
-    return (x | 0) === x;
+    else{
+        turn = player2Name;
+        boardMsg(player2Name+"'s turn now!");
+    }
 }
+//the above function randomized which player goes first, which goes second.
 
-function markBoard(position, mark) {
-    board[position] = mark.splice(0,1, player1 || player2);
-    console.log(board);
+function init(){
+    turn = "";
+    grid =  [[0,0,0],[0,0,0],[0,0,0]];
+    boardMsg("");
+    $(".col").map(function() {
+        $(this).text("");
+    }).get();
+    hasWinner = 0;
+    moveCount=0;
 }
+//this function maps out the inital board.
 
+$("#playButton").click(function (){
+    if(hasWinner==1){
+        init();
+    }
+    player1Name = $("#player-1-inp").val();
+    player2Name = $("#player-2-inp").val();
 
-function clearBoard(){
-  move = 0;
-  player1Array = new Array();
-  player2Array = new Array();
-}
+    if(player1Name=="" || player2Name==""){
+        alert("Please set player all the names.");
+        return;
+    }
+    setTurn();
+});
+//the above function ensures players enter their names before staring the game.
 
-function nextMove (){
-    if (move === 0) {
-      console.log("Game start. Player 1 make a move");
-      this.printBoard();
-}
-    else if (move % 2 === 0) {
-        this.player1 = "X";
-        player1Array.push(value);
-}
-    else {
-        this.player2 = "O";
-        player2Array.push(value);
-        move++;
-      }
-}
+$(".col").click(function (){
 
-function checkWinner(player) {
-    for (var j = 0; j < winCombinations.length; j++) {
-        var markCount = 0;
-        for (var k = 0; k < winCombinations[j].length; k++) {
-            if (board[winCombinations[j][k]] === player1Array || player2Array) {
-                markCount++;
+    if(player1Name=="" || player2Name==""){
+        alert("Please set player all the names.");
+        return;
+    }
+
+    var row = $(this).parent().index();
+    var col = $(this).index();
+
+    if(grid[row][col]!==0){
+        alert("This position is taken. Please try other position.");
+        return;
+    }
+    if(hasWinner==1){
+        alert("Please click play again");
+        return;
+    }
+//again, safe-guards to make sure users always click empty spaces.
+
+    if(turn==player1Name){
+        moveCount++;
+        $(this).text("O");
+        grid[row][col] = 1;
+        var ifWon = winnerCheck(1,player1Name);
+        if(!ifWon){
+            if(moveCount>=9){
+                boardMsg("Match Drawn!");
+                moveCount=0;
+                $("#playButton").text("Play again");
+                hasWinner=1;
+                return;
+            }else{
+                turn = player2Name;
+                boardMsg(player2Name+"'s turn now!");
             }
-            if (markCount === 3) {
-                return true;
-            }
+            return;    
         }
+        else{
+            return;
+        }        
     }
-    return false ;
-}
+    //logic if there is a tie and logic for ordering next play to play.
 
-function winAlert (player){
-  if(checkWinner() === true){
-    alert("congrats!");
+    else if(turn==player2Name){
+        moveCount++;
+        $(this).text("X");
+        grid[row][col] = 2;
+        var ifWon = winnerCheck(2,player2Name);
+        if(!ifWon){
+            if(moveCount>=9){
+                boardMsg("Match Drawn!");
+                moveCount=0;
+                $("#playButton").text("Play again");
+                hasWinner=1;
+                return;
+            } else{
+                turn = player1Name;
+                boardMsg(player1Name+"'s turn now!");
+            }
+            return;    
+        }
+        else{
+            return;
+        }        
+    }
+});
 
-  }
-}
+function winnerCheck(n,playerName){
+    if(
 
-function checkDraw (){
-  if(player1Array.length + player2Array.length == 9){
-    console.log('Tie! Start over!');
-    clearBoard();
-  }
+        (grid[0][0]==n && grid[0][1]==n && grid[0][2]==n) ||
+        (grid[1][0]==n && grid[1][1]==n && grid[1][2]==n) ||
+        (grid[2][0]==n && grid[2][1]==n && grid[2][2]==n) ||
+
+        (grid[0][0]==n && grid[1][0]==n && grid[2][0]==n) ||
+        (grid[0][1]==n && grid[1][1]==n && grid[2][1]==n) ||
+        (grid[0][2]==n && grid[1][2]==n && grid[2][2]==n) ||
+
+        (grid[0][0]==n && grid[1][1]==n && grid[2][2]==n)||
+        (grid[0][2]==n && grid[1][1]==n && grid[2][0]==n)
+
+
+        ){
+        boardMsg(playerName+" won the game!");
+        hasWinner = 1;
+        moveCount=0;
+        $("#playButton").text("Play again");
+        return true;
+    }
+    return false;
+    //winning conditions and results if a player meets these conditions.
 }
+});
