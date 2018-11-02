@@ -6,19 +6,22 @@ var playTowersOfHanoi = function () {
 }
 
 var board = function () {
-  var theBoard = [];
-  var initBoard = function () {
-    theBoard = [[5,4,3,2,1],[],[]];
-  }
+
+  var theBoard = [[5,4,3,2,1],[],[]];
+
   var viewBoard = function () {
-    console.log("--- ", theBoard[0].values());
+    var buildPeg = function (array) {
+      var pegStr = "";
+      array.forEach(function (number){
+        pegStr += number + " ";
+      });
+      return pegStr;
+    }
+    console.log("--- ", buildPeg(theBoard[0]), "\n--- ", buildPeg(theBoard[1]), "\n--- ", buildPeg(theBoard[2]));
   }
   return {
-    initBoard: initBoard,
     viewBoard: viewBoard
-
   }
 }
 var game1 = board();
-game1.initBoard();
 game1.viewBoard();
