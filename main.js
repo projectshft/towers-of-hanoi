@@ -22,7 +22,31 @@ var board = function () {
   }
 
   var moveDisc = function (pegOrig, pegDest) {
-    theBoard[pegDest-1].push(theBoard[pegOrig-1].pop());
+    var validStr = "That move was successful. Board is now: \n";
+    var invalidStr = "You cannot move a larger disc on top of a smaller one, board is still: \n";
+    var pegArrayOrig = theBoard[pegOrig - 1];
+    var pegArrayDest = theBoard[pegDest - 1];
+    if (pegArrayOrig.length === 0){
+        var discOrigSize = 6;
+      } else {
+        var discOrigSize = pegArrayOrig[pegArrayOrig.length - 1];
+      }
+    if (pegArrayDest.length === 0){
+      var discDestSize = 6;
+      } else {
+        var discDestSize = pegArrayDest[pegArrayDest.length - 1];
+      }
+
+      console.log(discOrigSize);
+      console.log(discDestSize);
+    if (discOrigSize < discDestSize) {
+      console.log(validStr);
+      theBoard[pegDest-1].push(theBoard[pegOrig-1].pop());
+      this.printBoard();
+    } else {
+      console.log(invalidStr);
+      this.printBoard();
+    }
   }
 
   return {
@@ -33,4 +57,3 @@ var board = function () {
 var game1 = board();
 game1.printBoard();
 game1.moveDisc(1,2);
-game1.printBoard();
