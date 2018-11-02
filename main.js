@@ -37,15 +37,16 @@ var board = function () {
         var discDestSize = pegArrayDest[pegArrayDest.length - 1];
       }
 
-      console.log(discOrigSize);
-      console.log(discDestSize);
     if (discOrigSize < discDestSize) {
       console.log(validStr);
       theBoard[pegDest-1].push(theBoard[pegOrig-1].pop());
+      numberOfMoves += 1;
       this.printBoard();
+      console.log("Moves: ", numberOfMoves);
     } else {
       console.log(invalidStr);
       this.printBoard();
+      console.log("Moves: ", numberOfMoves);
     }
   }
 
@@ -57,3 +58,5 @@ var board = function () {
 var game1 = board();
 game1.printBoard();
 game1.moveDisc(1,2);
+game1.moveDisc(2,3);
+game1.moveDisc(1,3);
