@@ -1,9 +1,3 @@
-var playTowersOfHanoi = function () {
-  console.log("Welcome to Towers of Hanoi!");
-  console.log("To win, stack all discs (represented by numbers 1 to 5) on to another peg.");
-  console.log("You cannot place a bigger disc (size represented by it's number) onto a smaller disc.")
-
-}
 
 var board = function () {
 
@@ -26,11 +20,8 @@ var board = function () {
     var invalidStr = "You cannot move a larger disc on top of a smaller one, board is still: \n";
     var pegArrayOrig = theBoard[pegOrig - 1];
     var pegArrayDest = theBoard[pegDest - 1];
-    if (pegArrayOrig.length === 0){
-        var discOrigSize = 6;
-      } else {
-        var discOrigSize = pegArrayOrig[pegArrayOrig.length - 1];
-      }
+    var discOrigSize = pegArrayOrig[pegArrayOrig.length - 1];
+      
     if (pegArrayDest.length === 0){
       var discDestSize = 6;
       } else {
@@ -41,15 +32,22 @@ var board = function () {
       console.log(validStr);
       theBoard[pegDest-1].push(theBoard[pegOrig-1].pop());
       numberOfMoves += 1;
-      this.printBoard();
+      printBoard();
     } else {
       console.log(invalidStr);
-      this.printBoard();
+      printBoard();
+    }
+    if (checkWinner()) {
+        console.log("Congrats! You won the game in " + numberOfMoves + " moves.");
+        theBoard = [[5,4,3,2,1], [], []];
+        numberOfMoves = 0;
+        console.log("Play again. The board is reset to:");
+        printBoard();
     }
   }
 
   var help = function (givenPeg) {
-    
+
     var givenPegValue = theBoard[givenPeg-1];
     var outputPegStr = '';
 
@@ -75,16 +73,53 @@ var board = function () {
 
   }
 
+  var checkWinner = function () {
+    var pegTwoCount = theBoard[1].reduce(function(sum, number){
+      return sum + number;
+    }, 0);
+    var pegThreeCount = theBoard[2].reduce(function(sum, number){
+      return sum + number;
+    }, 0);
+    return (pegTwoCount === 15 || pegThreeCount === 15);
+  }
+
   return {
     printBoard: printBoard,
     moveDisc: moveDisc,
     help: help
   }
 }
-var game1 = board();
-game1.printBoard();
-game1.moveDisc(1,2);
-game1.moveDisc(1,3);
-game1.help(2);
-game1.help(3);
-game1.help(1);
+
+var game = board();
+game.printBoard();
+game.moveDisc(1,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(2,1);
+game.moveDisc(3,1);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(2,3);
+game.moveDisc(2,1);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,2);
