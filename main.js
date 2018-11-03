@@ -42,21 +42,49 @@ var board = function () {
       theBoard[pegDest-1].push(theBoard[pegOrig-1].pop());
       numberOfMoves += 1;
       this.printBoard();
-      console.log("Moves: ", numberOfMoves);
     } else {
       console.log(invalidStr);
       this.printBoard();
-      console.log("Moves: ", numberOfMoves);
     }
+  }
+
+  var help = function (givenPeg) {
+    
+    var givenPegValue = theBoard[givenPeg-1];
+    var outputPegStr = '';
+
+    if (givenPegValue === undefined){
+      console.log("There is no disc on the chosen peg.");
+    } else {
+      var validPegs = theBoard.filter(function(boardPeg){
+        return (boardPeg === undefined || (givenPegValue < boardPeg[boardPeg.length - 1]))
+      });
+      for (var i = 0; i < theBoard.length; i++){
+        for (var j = 0; j < validPegs.length; j++){
+          if (theBoard[i] === validPegs[j]){
+            outputPegStr += ((i+1) + " ");
+          }
+        }
+      }
+      if (outputPegStr == "") {
+        console.log("There are no allowed moves from the chosen peg.");
+      } else {
+      console.log("Valid moves are to peg(s) " + outputPegStr);
+      }
+    }
+
   }
 
   return {
     printBoard: printBoard,
-    moveDisc: moveDisc
+    moveDisc: moveDisc,
+    help: help
   }
 }
 var game1 = board();
 game1.printBoard();
 game1.moveDisc(1,2);
-game1.moveDisc(2,3);
 game1.moveDisc(1,3);
+game1.help(2);
+game1.help(3);
+game1.help(1);
