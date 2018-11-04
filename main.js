@@ -47,10 +47,12 @@ var Towers = function() {
     }
 
   var moveBlock = function(origin, final){
+    if (board[origin].length){
     var opts = (validPegs(origin))
     var valid = opts.find(function(x){
       return x == final;
     });
+  }
     if (valid){
       move(origin,final);
       checkWinner();
@@ -70,16 +72,17 @@ var Towers = function() {
 
     var checkWinner = function() {
     for (var i in board) {
+      if (i != 1){
       var winCheck = 0;
 
       if (board[i].length > 0) {
-        console.log("wincheck " + winCheck)
+        //console.log("wincheck " + winCheck)
         winCheck = board[i].reduce(function(bag, values) {
           return bag = bag += values;
         }, 0);
 
         if (winCheck == winningSum) {
-          console.log("You won in " + moveCount + " moves!");
+          alert("You won in " + moveCount + " moves!");
           return true
           // board = [];
           // moveCount = 0;
@@ -89,11 +92,18 @@ var Towers = function() {
         }
       }
     }
+  }
   };
 
-  var solve = function() {
-    //while(4)
-  }
+  var solve = function(pegs) {
+do {
+      console.clear();
+       // console.log((Math.floor(Math.random()*pegs))+1)
+       moveBlock((Math.floor(Math.random()*pegs))+1,(Math.floor(Math.random()*pegs))+1)
+
+} while(!checkWinner())
+    }
+
 
   return {
     newGame: newGame,
@@ -104,7 +114,6 @@ var Towers = function() {
   };
 }
 var game = Towers();
-game.newGame(9, 6);
 
 
 
