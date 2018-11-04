@@ -9,6 +9,7 @@ var board = function () {
   game board, theBoard.
   */
   var printBoard = function () {
+/*
     var buildPeg = function (array) {
       var pegStr = "";
       array.forEach(function (number){
@@ -16,6 +17,15 @@ var board = function () {
       });
       return pegStr;
     }
+*/
+    var buildPeg = function (array) {
+      var pegStr = "";
+      array.map(function (number){
+        pegStr += number + " ";
+      });
+      return pegStr;
+    }   
+
     console.log("--- ", buildPeg(theBoard[0]), "\n--- ", buildPeg(theBoard[1]), "\n--- ", buildPeg(theBoard[2]));
   }
 
