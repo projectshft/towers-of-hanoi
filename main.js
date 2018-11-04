@@ -1,15 +1,17 @@
 const Board = () => {
-
+  //set up the initial positions of the discs
   let setUp = [
     ['5', '4', '3', '2', '1'],
     [],
     []
   ];
 
+  //set object to assign a value that increments with each move
   let moveCounter = {
     moves: 0
   }
 
+  //function to display current positions of discs
   const printBoard = () => {
     let result = setUp.map(peg => {
       console.log('--- ' + peg.join(' '));
@@ -17,6 +19,7 @@ const Board = () => {
     return result;
   }
 
+  //function to move discs to other pegs
   const moveDisc = (startingPeg, endingPeg) => {
     startingPeg = startingPeg - 1;
     endingPeg = endingPeg - 1;
@@ -32,6 +35,7 @@ const Board = () => {
     return printBoard()
   };
 
+  //function to check which pegs a disc may move to
   const checkMoves = (peg) => {
     let result = [];
     peg = peg - 1;
@@ -52,6 +56,7 @@ const Board = () => {
     }
   };
 
+  //function that allows the game to check if conditions have been met for winning and resets the board accordingly
   const checkWinner = () => {
     let numberOfDiscs = setUp.reduce((sum, instance) => {
       sum += instance.length;
@@ -76,5 +81,6 @@ const Board = () => {
   };
 };
 
+//creates a new game in the console. Player may invoke functions to play
 
 let board = Board();
