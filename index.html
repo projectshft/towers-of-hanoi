@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Towers of Hanoi</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+    <h1>Towers of Hanoi</h1>
+    <h2>3-D Display</h2>
+    <h4>Built for full screen browsers that support WebGL. If your browser doesn't support this, scroll down and play in 2-D.</h4>
+    <div id="scene-holder">
+    </div>
+      <hr>
+      <h5>Pegs are numbered left to right starting at 1</h5>
+      <p id="move-counter">Moves: 0</p>
+      <p id="alert-label"></p>
+      <label for "startpeg">Starting Peg: </label>
+      <input class = "peg-input" placeholder = "#" id = "startpeg" autofocus type = "text"></input>
+      <label for "endpeg">Ending Peg: </label>
+      <input class = "peg-input" placeholder = "#" id = "endpeg" type = "text"></input>
+      <button type="button" name="button" id="mover" class = "btn btn-primary btn-sm">Move</button>
+      <br>
+      <button type="button" name="button" id="newgame" class = "btn btn-secondary btn-sm">New Game</button>
+      <hr>
+      <h2>2-D Display</h2>
+      <div class="row">
+        <div class = "peg-width">
+          <div class = "peg">
+          </div>
+        </div>
+        <div class = "peg-width">
+          <div class = "peg">
+        </div>
+        </div>
+        <div class = "peg-width">
+          <div class = "peg"></div>
+        </div>
+      </div>
+    </div>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="lib/three.js" charset="utf-8"></script>
+  <script src="main.js" charset="utf-8"></script>
+  </body>
+</html>
