@@ -2,7 +2,7 @@ const Board = () => {
   const playGame = (pegs, discs) => {
 
     // ********** INITIALIZE GAME ********** //
-  
+
     // Setup empty board, move counter, and if the game has been won or not
     let gameWon = false;
     const board = [];
@@ -64,6 +64,7 @@ const Board = () => {
   
       // Check if move is allowed
       let moveAllowed = checkMove(startPegArr, endPegArr);
+      // If so, move disc and increment number of moves taken
       if(moveAllowed) {
         console.log(`That move was successful, board is now:`);
         startPegArr.pop();
@@ -73,6 +74,7 @@ const Board = () => {
         console.log(`You can't move a larger disc on top of a smaller one, board is still:`);
       }
       
+      // Redraw board and check for winner
       drawBoard(board);
       console.log(`Moves: ${numMoves}`);
       checkWinner(endPegArr); 
@@ -80,12 +82,13 @@ const Board = () => {
   
     // Check to see if the game has been won
     const checkWinner = (endPeg) => {
-      //Calc val of endPeg discs to compare against winning val
+      // Calc val of endPeg discs to compare against winning val
       let endPegVal = endPeg.reduce((acc, disc) => {
         acc += disc;
         return acc;
       }, 0);
   
+      // Winning conditions
       if(endPeg !== firstPeg && endPegVal === winningPegVal) {
         gameWon = true;
       }
@@ -94,7 +97,7 @@ const Board = () => {
     };
   
   
-    // ***************** PLAY THE GAME ********************* //
+    // ***************** PLAY GAME ********************* //
     while (!gameWon) {
       let startPeg = parseInt(prompt(`Which peg would you like to remove a disc from?`));
       let endPeg = parseInt(prompt(`Which peg would you like to move the disc to?`))
