@@ -7,9 +7,7 @@ const Board = () => {
   ];
 
   //set object to assign a value that increments with each move
-  let moveCounter = {
-    moves: 0
-  }
+  let moves = 0;
 
   //function to display current positions of discs
   const printBoard = () => {
@@ -26,7 +24,7 @@ const Board = () => {
     if (Number(setUp[startingPeg][setUp[startingPeg].length - 1]) < Number(setUp[endingPeg][setUp[endingPeg].length - 1]) || setUp[endingPeg].length === 0) {
       setUp[endingPeg].push(setUp[startingPeg][setUp[startingPeg].length - 1]);
       setUp[startingPeg].pop();
-      moveCounter['moves']++;
+      moves++;
       console.log(`That move was successful, board is now:`);
       checkWinner();
     } else {
@@ -63,13 +61,13 @@ const Board = () => {
       return sum;
     }, 0);
     if (setUp[setUp.length - 1].length === numberOfDiscs) {
-      console.log(`Congratulations, it took you ${moveCounter['moves']} moves to win! Board is reset if you'd like to play again.`);
+      console.log(`Congratulations, it took you ${moves} moves to win! Board is reset if you'd like to play again.`);
       setUp = [
         ['5', '4', '3', '2', '1'],
         [],
         []
       ];
-      moveCounter['moves'] = 0;
+      moves = 0;
     }
   };
 
