@@ -44,7 +44,7 @@ var availPeg = function (toPeg) {
 
 var moveCount = function () {
     var count = 0;
-    count = +;
+    count += 1;
     return count;
 }
 console.log("Moves: " + count);
@@ -52,8 +52,8 @@ console.log("Moves: " + count);
 // Repeat steps
 /*Win when all 5 discs are in order on a different peg than they started. Check if they won after every move.  If yes, end the game by announcing the winner (console.log) and reset the board.*/
 var checkWinner = function () {
-    for (var i = 0, i < board.length; i++) {
-        if (board[].length == 5) {
+    for (var i = 0; i < board.length; i++) {
+        if (board[i].length == 5) {
             //check order or not, since would not let move unless in order
             console.log("YOU DID IT!");
             board = [
