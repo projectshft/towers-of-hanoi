@@ -1,63 +1,13 @@
-// A board representing 3 pegs, and 5 discs on the first peg in ascending order.  This is a normal starting position for the game. 
-//BOARD MODULE
-var Set = function (moves, currentState) {
-    var board = [
-        ["5", "4", "3", "2", "1"],
-        [],
-        []
-    ];
-    var Board = {
-        moves: function () {
-            var counter = 0;
-            counter += 1;
-            return counter;
-        },
-        state: board.map(function () {
-            return moveDisc();
-        })
-    };
-};
+/*There is a board with 3 pegs.  1 peg is holding 5 discs decreasing in size up the peg.*/
+var board = [
+    ["5", "4", "3", "2", "1"],
+    [],
+    []
+];
 
-
-
-
-
-//MOVES MODULE 
-var Moves = function (fromPeg, toPeg) {
-    //generic board
-    var pegs = {
-        fromPeg: fromPeg,
-        toPeg: toPeg
-    };
-
-    //1. which pegs are not the fromPeg
-    var availPeg = Board.state.filter(function (pegs) {
-        return Board[state][i] !== fromPeg;
-    });
-
-    //2. Which availPegs can take the fromDisc?
-    var checkPeg = function () {
-        if (Board.state[fromPeg - 1].length == 0) {
-            console.log("This peg does not have a disc. Try again.  The board is still:" + Board.state);
-        } else if (toPeg == availPeg && Board[state][fromPeg - 1][Board[state][fromPeg - 1].length - 1] < Board[state][toPeg - 1][toPeg - 1].length - 1) {
-            moveDisc();
-        } else {
-            console.log("Remember that you can only move a disc onto a larger disc." + "The board is still :" + Board.state);
-
-        }
-    };
-
-    //3. move the discs
-    var moveDisc = function () {
-        Board.state[fromPeg - 1].pop();
-        Board.state[toPeg - 1].push();
-        Board.moves();
-
-    }
-    return moveDisc;
-};
-
-var setUpBoard = Set();
-
-var guess1 = Moves(1, 2);
+//User submits to move the disc from 1 peg to another
+/*Check to see if the fromPeg has a disc to move. If Yes, check to toPeg.  If no, ask the user to choose again and show them the board.*/
+/*Check to see if the toPeg can take that disc.  You can only put the disc on a smaller disc. If yes,  move the peg and add to the move count. If no, ask user to choose the pegs again and show them the board.*/
+// Repeat steps
+/*Win when all 5 discs are in order on a different peg than they started. Check if they won after every move.  If yes, end the game by announcing the winner (console.log) and reset the board.*/
 
