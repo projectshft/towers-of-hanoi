@@ -5,9 +5,7 @@ var game = function () {
   var numberOfMoves = 0;
 
   /*
-  setBoard should initialize/reset the game board to a user defined number of pegs
-  and discs. The board will always be initialized/reset where all the discs are
-  stacked on the first peg, which is index 0 of theBoard.
+  setBoard should initialize the game board to a user defined number of pegs and discs. The board will always be initialized where all the discs are stacked on the first peg, which is index 0 of theBoard.
   */
   var setBoard = function (numberOfPegs, numberOfDiscs) {
     for (var peg = 0; peg < numberOfPegs; peg++){
@@ -18,6 +16,18 @@ var game = function () {
         }
       }
     }
+  }
+
+  /*
+  resetBoard should reset the game board to the orginal state of the board when the game was initialized, utilizing the same number of pegs and discs chosen by the user. Also, the total number of moves being tracked for the game is reset to zero.
+  */
+  var resetBoard = function () {
+    numberOfMoves = 0;
+    var discCount = 0;
+    for (var i=0; i<theBoard.length; i++){
+      discCount += theBoard[i].length;
+    }
+    setBoard(theBoard.length, discCount);
   }
 
   /*
@@ -71,8 +81,7 @@ var game = function () {
     }
     if (checkWinner()) {
         console.log("Congrats! You won the game in " + numberOfMoves + " moves.");
-        theBoard = [[5,4,3,2,1], [], []];
-        numberOfMoves = 0;
+        resetBoard();
         console.log("Play again. The board is reset to:");
         printBoard();
     }
@@ -132,7 +141,8 @@ been solved. checkWinner() is not accessible by the user.
     printBoard: printBoard,
     moveDisc: moveDisc,
     help: help,
-    setBoard: setBoard
+    setBoard: setBoard,
+    resetBoard: resetBoard
   }
 }
 
