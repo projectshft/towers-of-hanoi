@@ -19,19 +19,22 @@ var game = function () {
       }
     }
   }
+
   /*
   printBoard() is a user accessible method to print the current state of the
   game board, theBoard.
   */
   var printBoard = function () {
-    var buildPeg = function (array) {
-      var pegStr = "";
-      array.map(function (number){
-        pegStr += number + " ";
+    for (var i = 0; i < theBoard.length; i++){
+      var pegAsString = theBoard[i].map(function(element){
+        return element.toString();
       });
-      return pegStr;
+      var outputString = '--- ';
+      for(var j=0; j < pegAsString.length; j++){
+        outputString += pegAsString[j] + " ";
+      }
+      console.log(outputString);
     }
-    console.log("--- ", buildPeg(theBoard[0]), "\n--- ", buildPeg(theBoard[1]), "\n--- ", buildPeg(theBoard[2]));
   }
 
   /*
