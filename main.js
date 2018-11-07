@@ -1,31 +1,36 @@
 
-var board = function () {
+var game = function () {
 
-  var theBoard = [[5,4,3,2,1],[],[]];
+  var theBoard = [];
   var numberOfMoves = 0;
 
+  /*
+  setBoard should initialize/reset the game board to a user defined number of pegs
+  and discs. The board will always be initialized/reset where all the discs are
+  stacked on the first peg, which is index 0 of theBoard.
+  */
+  var setBoard = function (numberOfPegs, numberOfDiscs) {
+    for (var peg = 0; peg < numberOfPegs; peg++){
+      theBoard[peg]=[];
+      for (var disc = 1; disc <= numberOfDiscs; disc++){
+        if (peg === 0){
+        theBoard[peg].unshift(disc);
+        }
+      }
+    }
+  }
   /*
   printBoard() is a user accessible method to print the current state of the
   game board, theBoard.
   */
   var printBoard = function () {
-/*
-    var buildPeg = function (array) {
-      var pegStr = "";
-      array.forEach(function (number){
-        pegStr += number + " ";
-      });
-      return pegStr;
-    }
-*/
     var buildPeg = function (array) {
       var pegStr = "";
       array.map(function (number){
         pegStr += number + " ";
       });
       return pegStr;
-    }   
-
+    }
     console.log("--- ", buildPeg(theBoard[0]), "\n--- ", buildPeg(theBoard[1]), "\n--- ", buildPeg(theBoard[2]));
   }
 
@@ -37,15 +42,19 @@ var board = function () {
     var validStr = "That move was successful. Board is now:";
     var invalidStr = "You cannot move a larger disc on top of a smaller one, board is still:";
     var pegOrigEmptyStr = "The origin peg is empty. Choose a peg with a disc present.";
+
     var pegArrayOrig = theBoard[pegOrig - 1];
     var pegArrayDest = theBoard[pegDest - 1];
     var discOrigSize = pegArrayOrig[pegArrayOrig.length - 1];
+
+    //
     if (pegArrayDest.length === 0){
       var discDestSize = 6;
-      } else {
-        var discDestSize = pegArrayDest[pegArrayDest.length - 1];
-      }
-    if (discOrigSize < discDestSize) {
+    } else {
+      var discDestSize = pegArrayDest[pegArrayDest.length - 1];
+    }
+
+    if (discOrigSize < discDestSize ) {
       console.log(validStr);
       theBoard[pegDest-1].push(theBoard[pegOrig-1].pop());
       numberOfMoves += 1;
@@ -119,12 +128,16 @@ been solved. checkWinner() is not accessible by the user.
   return {
     printBoard: printBoard,
     moveDisc: moveDisc,
-    help: help
+    help: help,
+    setBoard: setBoard
   }
 }
 
 //initialize the game
-var game = board();
+var game = game();
+
+//setup the board with 3 pegs and 5 discs
+game.setBoard(3,5);
 
 //check printBoard() functionality
 game.printBoard();
