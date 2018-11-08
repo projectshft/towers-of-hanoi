@@ -60,6 +60,12 @@ var checkPeg = function (fromPeg) {
 //availPeg(toPeg);
 */
 
+
+var moveDisc = function (fromPeg, toPeg) {
+    board[toPeg - 1].push(board[fromPeg-1].pop());
+}
+console.log(board);
+
 var count = 0;
 var moveCount = function () {
     count += 1;
@@ -67,21 +73,11 @@ var moveCount = function () {
 }
 console.log("Moves: " + count);
 
-var moveDisc = function () {
-    //board[fromPeg - 1].pop();
-    board[toPeg - 1].push(board[fromPeg-1].pop());
-}
-console.log(board);
-
-checkPeg(fromPeg);
-
-
 // Repeat steps
 /*Win when all 5 discs are in order on a different peg than they started. Check if they won after every move.  If yes, end the game by announcing the winner (console.log) and reset the board.*/
-/*var checkWinner = function () {
+var checkWinner = function () {
     for (var i = 0; i < board.length; i++) {
         if (board[i].length == 5) {
-            //check order or not, since would not let move unless in order
             console.log("YOU DID IT!");
             board = [
                 ["5", "4", "3", "2", "1"],
@@ -93,4 +89,3 @@ checkPeg(fromPeg);
         }
     }
 }
-*/
