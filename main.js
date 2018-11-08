@@ -4,7 +4,10 @@ var board = [
     [],
     []
 ];
+
+
 //for testing purposes as create game
+//fromDisc and toDisc need these declared 1st
 var fromPeg = 1;
 var toPeg = 2;
 
@@ -32,8 +35,8 @@ var checkPeg = function (fromPeg) {
         /*Check to see if the toPeg can take that disc; the value of its top disc is < the value of the fromPeg topDisc.  You can only put the disc on a smaller disc. If yes,  move the peg and add to the move count. If no, ask user to choose the pegs again and show them the board.*/
         if (fromDisc < toDisc || toDisc == undefined) {
             console.log("You may move this disc");
-            //moveDisc();
-            //moveCount();
+            moveDisc();
+            moveCount();
         } else {
             console.log("Remember that you can only move a disc onto a larger disc. Please try again" + "The board is still :" + board)
         }
@@ -42,31 +45,36 @@ var checkPeg = function (fromPeg) {
     };
 };
 
-
-checkPeg(fromPeg);
 //INCORPORATED INTO CHECKPEG FUNCTION.  KEEPING HERE JUST IN CASE I NEED IT.
 /*Check to see if the toPeg can take that disc; the value of its top disc is < the value of the fromPeg topDisc.  You can only put the disc on a smaller disc. If yes,  move the peg and add to the move count. If no, ask user to choose the pegs again and show them the board.*/
 /*var availPeg = function () {
     if (fromDisc < toDisc || toDisc == undefined) {
         console.log("You may move this disc");
-        //moveDisc();
-        //moveCount();
+        moveDisc();
+        moveCount();
     } else {
         console.log("Remember that you can only move a disc onto a larger disc. Please try again" + "The board is still :" + board)
     }
 };
 
 //availPeg(toPeg);
+*/
 
-
-/*()
+var count = 0;
 var moveCount = function () {
-    var count = 0;
     count += 1;
     return count;
 }
 console.log("Moves: " + count);
-* /
+
+var moveDisc = function () {
+    //board[fromPeg - 1].pop();
+    board[toPeg - 1].push(board[fromPeg-1].pop());
+}
+console.log(board);
+
+checkPeg(fromPeg);
+
 
 // Repeat steps
 /*Win when all 5 discs are in order on a different peg than they started. Check if they won after every move.  If yes, end the game by announcing the winner (console.log) and reset the board.*/
@@ -86,4 +94,3 @@ console.log("Moves: " + count);
     }
 }
 */
-
