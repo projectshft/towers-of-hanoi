@@ -70,34 +70,33 @@ var game = function(numberOfPegs, numberOfDiscs) {
   peg (pegOrigin) to another peg (pegDestination). Only valid moves will increment the
   move counter, numberOfMoves.
   */
-  var moveDisc = function(pegOrigin, pegDestination) {
-    var validString = "That move was successful. Board is now:";
-    var invalidString = "You cannot move a larger disc on top of a smaller one, board is still:";
-    var pegOriginEmptyString = "The origin peg is empty. Choose a peg with a disc present.";
+  var moveDisc = function (pegOrigin, pegDestination) {
 
     var pegArrayOrigin = theBoard[pegOrigin - 1];
     var pegArrayDestination = theBoard[pegDestination - 1];
     var discOriginSize = pegArrayOrigin[pegArrayOrigin.length - 1];
+    var discDestinationSize = pegArrayDestination[pegArrayDestination.length - 1];
 
-    //
-    if (pegArrayDestination.length === 0) {
-      var discDestinationSize = 6;
-    } else {
-      var discDestinationSize = pegArrayDestination[pegArrayDestination.length - 1];
-    }
+    //Checks for a disc on the origin peg given by the user.
+    if (discOriginSize === undefined) {
+      console.log("The origin peg is empty. Choose a peg with a disc present.");
+      printBoard();
+      }
 
-    if (discOriginSize < discDestinationSize) {
-      console.log(validString);
+      //Checks for a valid move condition.
+      else if (discOriginSize < discDestinationSize || pegArrayDestination.length === 0) {
+      console.log("That move was successful. Board is now:");
       theBoard[pegDestination - 1].push(theBoard[pegOrigin - 1].pop());
       numberOfMoves += 1;
       printBoard();
-    } else if (discOriginSize === undefined) {
-      console.log(pegOriginEmptyString);
-      printBoard();
-    } else {
-      console.log(invalidString);
+      }
+
+      //This is an invalid move condition.
+      else {
+      console.log("You cannot move a larger disc on top of a smaller one, board is still:");
       printBoard();
     }
+
     if (checkWinner()) {
       console.log("Congrats! You won the game in " + numberOfMoves + " moves.");
       resetBoard();
@@ -108,17 +107,16 @@ var game = function(numberOfPegs, numberOfDiscs) {
 
   /*
   help() is a method accessible by the user to help determine valid moves from
-  a chosen peg. Handles the error of the chosen peg being empty.
+  a chosen peg (givenPeg).
   */
   var help = function(givenPeg) {
 
     var givenPegTopDiscValue = theBoard[givenPeg - 1][theBoard[givenPeg - 1].length - 1];
     var outputPegString = '';
-    var errorMessageNoDiscOnPeg = "There is no disc on peg " + givenPeg + ". Try another peg.";
 
-    //Check for no disc on the peg passed to help()
+    //Check for a disc on the peg passed to help()
     if (givenPegTopDiscValue === undefined) {
-      console.log(errorMessageNoDiscOnPeg);
+      console.log("There is no disc on peg " + givenPeg + ". Try another peg.");
     } else {
 
       //builds an array of valid peg moves called validPegs
@@ -139,7 +137,7 @@ var game = function(numberOfPegs, numberOfDiscs) {
           }
         }
       })
-    
+
       if (outputPegString == "") {
         console.log("There are no allowed moves from peg " + givenPeg + ". Try another peg.");
       } else {
@@ -181,7 +179,6 @@ var game = game(3, 5);
 //check printBoard() functionality
 game.printBoard();
 
-game.help(1);
 //Solve the game in 31 moves
 game.moveDisc(1, 2);
 game.moveDisc(1, 3);
