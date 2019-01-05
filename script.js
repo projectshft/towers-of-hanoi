@@ -8,12 +8,13 @@ function counter() {
 //Starting board for Towers of Hanoi
 var Board = {
     starting: [
-        ["5", "4", "3", "2", "1"],
+        // ["5", "4", "3", "2", "1"],
+        ["3", "2", "1"],
         [],
         []
     ],
     current: [],
-    numberOfMoves: count,
+    // numberOfMoves: count,
     moveDisc: moveDisc()
 };
 
@@ -26,7 +27,7 @@ var Board = {
 // var displayBoard = Board.current.forEach(logArrayElements);
 // console.log('Displaying Current Board ', displayBoard);
 
-
+//CHECKPEGS FUNCTION
 
 function moveDisc() {
     return function (from, to) {
@@ -45,9 +46,6 @@ function moveDisc() {
         //Define array of discs on from peg and to peg
         var fromPegDiscs = Board.current[from - 1];
         var toPegDiscs = Board.current[to - 1];
-        // console.log("fromPegDiscs: " + fromPegDiscs);
-        // console.log("toPegDiscs: " + toPegDiscs);
-
 
         var pegs = [];
         //Check if there is a disc on the chosen from peg
@@ -68,14 +66,10 @@ function moveDisc() {
                         index = index + 1
                         pegs.push(index);
                     }
-                    // } else {
-                    //     console.log("Discs can only be moved on top of a larger one or an empty space. The board is: " + Board.current);
-                    //     return
-                    // };
                 }
             });
             availPegs = pegs;
-            console.log('availPegs: ', availPegs);
+            // console.log('availPegs: ', availPegs);
         } else {
             console.log("That is not a valid peg.  Try again! The board is: ", Board.current);
             return
@@ -88,10 +82,36 @@ function moveDisc() {
                 if (to === availPegs[i]) {
                     var disc = Board.current[from - 1].pop();
                     Board.current[to - 1].push(disc);
-                    console.log("Success! The board is now: ", Board.current);
+                    console.log("Success! Moving the disc now");
                     counter();
-                    // checkWinner();
-                    return
+
+                    //AFter every move, check to see if all discs in order on a different peg that started
+
+                    //calculate the sum of each peg
+                    var allPegs = [];
+                    for (i = 0; i < Board.current.length; i++) {
+                        var sum = Board.current[i].reduce(function (total, amount) {
+                            total = parseInt(total, 10);
+                            amount = parseInt(amount, 10);
+                            return total += amount;
+                        }, 0);
+
+                        allPegs.push(sum);
+                    }
+                    // console.log(allPegs);
+
+                    //if sum on 1 peg = 15 and it is not the starting peg, Winner (6 if testing 3 pegs)
+                    allPegs.forEach(peg => {
+                        if (peg === 6) {
+                            console.log("Winner, Winner, Chicken Dinner!!  You won in ", count, "moves.")
+                            count = 0;
+                            console.log("The board is ready for another game; are you?", Board.starting);
+                            return
+                        }
+                    }
+                    );
+
+
                 }
             };
         } else {
@@ -100,30 +120,21 @@ function moveDisc() {
         }
     };
 
-
-
 }
 
 
-// };
+//Testing cases
+// Board.moveDisc(1, 2);
+// Board.moveDisc(3, 1);  //no disc to move
+// // Board.moveDisc(1, 3);   // no available pegs, game over
+// Board.moveDisc(1, 4);  //no such peg
+// Board.moveDisc(1, 2);  //disc too big
 
-// if (availPegs !== 0) {
-
-// } 
-
-
-// function checkWinner() {
-
-// };
-//5 Function to checkWinner (if all discs in order on new peg) (REDUCE)
-// if no, send message
-//6.  if yes, anounce winner and number of movers and reset board
-
-
-
+//winning moves with 3 pegs
 Board.moveDisc(1, 2);
-Board.moveDisc(3, 1);  //no disc to move
 Board.moveDisc(1, 3);
-Board.moveDisc(1, 4);  //no such peg
-Board.moveDisc(1, 2);  //disc too big
-
+Board.moveDisc(2, 3);
+Board.moveDisc(1, 2);
+Board.moveDisc(3, 1);
+Board.moveDisc(3, 2);
+Board.moveDisc(1, 2);
