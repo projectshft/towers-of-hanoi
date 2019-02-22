@@ -1,53 +1,60 @@
-let board = [["3", "2", "1"], [], []];
-let moveCounter = 0;
+var Board = function() {
+  let board = [["3", "2", "1"], [], []];
+  let moveCounter = 0;
 
-// Outputs the current state of the board to the console
- let boardState = function() {
-  board.map(function(item) {
-  let pegState = item.join(' ');
-  console.log('--- ' + pegState);
-});
-  console.log(""); // Adds a blank line to console for easier readability
-}
-
-boardState();
-
-// Moves a disk from one peg to another if valid move or print error
-function moveDisc(pegStart, pegEnd) {
-  moveCounter += 1;
-  pegStart = board[pegStart -1];
-  pegEnd = board[pegEnd -1];
-  if( pegEnd.length === 0 || (pegStart[pegStart.length - 1] < pegEnd[pegEnd.length -1])) 
-  {
-    pegEnd.push(pegStart.pop());
-  } else {
-    console.log('Invalid Move. Try Again');
-    boardState();
-    return;
+  // Outputs the current state of the board to the console
+  let boardState = function() {
+    board.map(function(item) {
+    let pegState = item.join(' ');
+    console.log('--- ' + pegState);
+  });
+    console.log(""); // Adds a blank line to console for easier readability
   }
-  checkWinner();
+
   boardState();
-}
 
-// Checks if the win condition is met
-function checkWinner() {
-  const peg2 = board[1].reduce(((sum, num) => sum + parseInt(num)), 0);
-  const peg3 = board[2].reduce(((sum, num) => sum + parseInt(num)), 0);
-  
-  if(peg2 === 6 || peg3 === 6) {
-    console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!');    
+  // Moves a disk from one peg to another if valid move or print error
+  function moveDisc(pegStart, pegEnd) {
+    moveCounter += 1;
+    pegStart = board[pegStart -1];
+    pegEnd = board[pegEnd -1];
+    if( pegEnd.length === 0 || (pegStart[pegStart.length - 1] < pegEnd[pegEnd.length -1])) 
+    {
+      pegEnd.push(pegStart.pop());
+    } else {
+      console.log('Invalid Move. Try Again');
+      boardState();
+      return;
+    }
+    checkWinner();
+    boardState();
   }
+
+  // Checks if the win condition is met
+  function checkWinner() {
+    const peg2 = board[1].reduce(((sum, num) => sum + parseInt(num)), 0);
+    const peg3 = board[2].reduce(((sum, num) => sum + parseInt(num)), 0);
+    
+    if(peg2 === 6 || peg3 === 6) {
+      console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!'); 
+    }
+  }
+    return {
+      moveDisc: moveDisc
+    }
 }
 
-moveDisc(1,2);
-moveDisc(1,2);
-moveDisc(1,3);
-moveDisc(1,3);
-moveDisc(2,3);
-moveDisc(1,2);
-moveDisc(3,1);
-moveDisc(3,2);
-moveDisc(1,2);
+const board = new Board();
+
+board.moveDisc(1,2);
+board.moveDisc(1,2);
+board.moveDisc(1,3);
+board.moveDisc(1,3);
+board.moveDisc(2,3);
+board.moveDisc(1,2);
+board.moveDisc(3,1);
+board.moveDisc(3,2);
+board.moveDisc(1,2);
 
 
 
