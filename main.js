@@ -42,10 +42,11 @@ var Board = function (array, moves) {
 
   /** function that shows the current board state to user */
   var displayBoard = function () {
-    // console.log("--- " + state.board[0]);
-    // console.log("--- " + state.board[1]);
-    // console.log("--- " + state.board[2])
-    console.log(`Starting Board\n--- ${state.board[0]}\n--- ${state.board[1]}\n--- ${state.board[2]}`);
+    state.board[2].push(" ");
+    state.board.map(function (peg, idx) {
+      console.log(`--- ${peg} \n`)
+    });
+    state.board[2].shift();
   }
 
   return {
@@ -59,31 +60,28 @@ var Board = function (array, moves) {
   }
 }
 
-function init() {
-  var board = Board([[3, 2, 1], [], []], 0);
+// function init() {
+var board = Board([[3, 2, 1], [], []], 0);
+board.displayBoard();
+// }
 
-  function showBoard() {
-    board.displayBoard();
-  }
-
-  showBoard();
-}
-
-init();
+// init();
 
 function startGame() {
   // initialize board
   // var board = Board([[3, 2, 1], [], []], 0);
   // board.setAttribute('moves', 0)
   do {
-    var gameFlag;
+    var gameFlag = true;
     var userInput = prompt('enter move: ex: ( 1, 3)');
-    console.log(userInput);
 
     var input = userInput.split(",");
     var startPeg = parseInt(input[0], 10);
     var endPeg = parseInt(input[1], 10);
 
+    if (startPeg === 1) {
+      gameFlag = false;
+    }
     // gameFlag = false;
     console.log(board.getAttribute('board'));
     // gameFlag = false;
