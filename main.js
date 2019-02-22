@@ -11,8 +11,10 @@ let moveCounter = 0;
   console.log(""); // Adds a blank line to console for easier readability
 }
 
-// Moves a disk from one peg to another
-function moveDisk(pegStart, pegEnd) {
+boardState();
+
+// Moves a disk from one peg to another if valid move or print error
+function moveDisc(pegStart, pegEnd) {
   moveCounter += 1;
   pegStart = board[pegStart -1];
   pegEnd = board[pegEnd -1];
@@ -20,11 +22,12 @@ function moveDisk(pegStart, pegEnd) {
   {
     pegEnd.push(pegStart.pop());
   } else {
-    console.log('Invalid Move');
+    console.log('Invalid Move. Try Again');
+    boardState();
     return;
   }
-  boardState();
   checkWinner();
+  boardState();
 }
 
 // Checks if the win condition is met
@@ -32,46 +35,33 @@ function checkWinner() {
   const peg2 = board[1].length;
   const peg3 = board[2].length;
   if(peg2 === initialState || peg3 === initialState){
-    console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!')
+    console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!');
+    
   }
 }
 
+moveDisc(1,2);
+moveDisc(1,2);
+moveDisc(1,3);
+moveDisc(1,3);
+moveDisc(2,3);
+moveDisc(1,2);
+moveDisc(3,1);
+moveDisc(3,2);
+moveDisc(1,2);
 
-
-
-
-
-
-
-
-
-
-
-
-
-// moveDisk(1,2);
-// moveDisk(1,2);
-// moveDisk(1,3);
-// moveDisk(1,3);
-// moveDisk(2,3);
-// moveDisk(1,2);
-// moveDisk(3,1);
-// moveDisk(3,2);
-// moveDisk(1,2);
-
-// boardState();
 
 
 
 
 // // Shortest solution to 3x3
-// moveDisk(1,2);
-// moveDisk(1,3);
-// moveDisk(2,3);
-// moveDisk(1,2);
-// moveDisk(3,1);
-// moveDisk(3,2);
-// moveDisk(1,2);
+// moveDisc(1,2);
+// moveDisc(1,3);
+// moveDisc(2,3);
+// moveDisc(1,2);
+// moveDisc(3,1);
+// moveDisc(3,2);
+// moveDisc(1,2);
 
 
 
