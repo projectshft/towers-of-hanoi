@@ -1,28 +1,27 @@
-var Board = function() {
-  let board = [["3", "2", "1"], [], []];
-  let moveCounter = 0;
+const Board = function() {
+  const board = [["3", "2", "1"], [], []]; // Sets initial board state
+  const winCondition = board[0].reduce(((sum, num) => sum + parseInt(num)), 0); //Sets win condition to total of peg1 at start of game
+  let moveCounter = 0;  // Tracks number of moves
 
   // Outputs the current state of the board to the console
-  let boardState = function() {
+  const boardState = function() {
     board.map(function(item) {
-    let pegState = item.join(' ');
+    const pegState = item.join(' ');
     console.log('--- ' + pegState);
   });
-    console.log(""); // Adds a blank line to console for easier readability
+    console.log(''); // Adds a blank line to console for easier readability
   }
-
   boardState();
 
   // Moves a disk from one peg to another if valid move or print error
-  function moveDisc(pegStart, pegEnd) {
+  const moveDisc = function(pegStart, pegEnd) {
     moveCounter += 1;
     pegStart = board[pegStart -1];
     pegEnd = board[pegEnd -1];
-    if( pegEnd.length === 0 || (pegStart[pegStart.length - 1] < pegEnd[pegEnd.length -1])) 
-    {
+    if( pegEnd.length === 0 || (pegStart[pegStart.length - 1] < pegEnd[pegEnd.length -1])) {
       pegEnd.push(pegStart.pop());
     } else {
-      console.log('Invalid Move. Try Again');
+      console.log('Invalid Move. Try Again!');
       boardState();
       return;
     }
@@ -31,11 +30,11 @@ var Board = function() {
   }
 
   // Checks if the win condition is met
-  function checkWinner() {
+  const checkWinner = function() {
     const peg2 = board[1].reduce(((sum, num) => sum + parseInt(num)), 0);
     const peg3 = board[2].reduce(((sum, num) => sum + parseInt(num)), 0);
     
-    if(peg2 === 6 || peg3 === 6) {
+    if(peg2 === winCondition || peg3 === winCondition) {
       console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!'); 
     }
   }
