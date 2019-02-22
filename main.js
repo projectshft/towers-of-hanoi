@@ -19,16 +19,32 @@ var Board = function (array, moves) {
   }
 
   /** function that moves one disc to another peg */
-  var moveDisc = function (startPeg, endPeg) {
+  var moveDisc = function (moveOne, moveTwo) {
     // move disc by calling checkTopOfPeg
-    var okPeg = checkTopOfPeg(startPeg);
-    console.log(okPeg);
+    var endPeg = state.board[moveTwo - 1];
+    var lastIndexOfEndPeg = endPeg.length - 1;
+    var topDiscOfEndPeg = endPeg[lastIndexOfEndPeg];
+
+    var startPeg = state.board[moveOne - 1];
+    var lastIndexOfStartPeg = startPeg.length - 1;
+    var topDiscOfStartPeg = startPeg[lastIndexOfStartPeg];
+
+    var okPeg = checkTopOfPeg(moveOne);
     if (okPeg === undefined || okPeg.length === 0) {
       // if not true don't move
       // return false
-      console.log('empty array bro')
+      console.log('empty array bro');
+
     }
     // if true do the shifting
+    // console.log(okPeg);
+    // console.log('start disc', topDiscOfStartPeg);
+    // console.log('end disc', topDiscOfEndPeg);
+    // console.log(startPeg, endPeg);
+    startPeg.splice(lastIndexOfStartPeg, 1)
+    endPeg.push(topDiscOfStartPeg);
+    console.log(endPeg);
+    state.moves++
 
     // return true
   }
@@ -41,9 +57,9 @@ var Board = function (array, moves) {
   }
 
   /** function that checks if the peg can be moved or not */
-  var checkTopOfPeg = function (startPeg) {
+  var checkTopOfPeg = function (moveOne) {
     // use filter here
-    var userPeg = state.board[startPeg - 1];
+    var userPeg = state.board[moveOne - 1];
     var lastIndex = userPeg.length - 1;
     var topUserDisc = userPeg[lastIndex];
     // console.log(topUserDisc);
@@ -65,8 +81,10 @@ var Board = function (array, moves) {
   var displayBoard = function () {
     console.log("Current Board")
     state.board[2].push(" ");
-    state.board.map(function (peg) {
-      console.log(`--- ${peg} \n`)
+    state.board.map(function (peg, idx) {
+      // console.log(`${peg}`);
+      console.log('---', ...peg);
+      // console.log(...peg);
     });
     state.board[2].shift();
   }
@@ -85,10 +103,8 @@ var Board = function (array, moves) {
 
 
 
-
-
 // function init() {
-var board = Board([[1, 3, 4], [2, 5], [1, 3], [2, 1, 6]], 0);
+var board = Board([[3, 2, 1], [], []], 0);
 board.displayBoard();
 // }
 
@@ -120,6 +136,9 @@ function startGame() {
     // do valid case
 
     board.moveDisc(startPeg, endPeg);
+    board.displayBoard();
+    console.log('current moves ' + board.getAttribute('moves'))
+
 
 
 
