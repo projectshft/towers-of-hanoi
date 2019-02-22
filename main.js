@@ -5,6 +5,7 @@ const Board = function() {
 
   // Outputs the current state of the board to the console
   const boardState = function() {
+    console.log('Current Board State:')
     board.map(function(item) {
     const pegState = item.join(' ');
     console.log('--- ' + pegState);
@@ -15,18 +16,27 @@ const Board = function() {
 
   // Moves a disk from one peg to another if valid move or print error
   const moveDisc = function(pegStart, pegEnd) {
-    moveCounter += 1;
-    pegStart = board[pegStart -1];
-    pegEnd = board[pegEnd -1];
-    if( pegEnd.length === 0 || (pegStart[pegStart.length - 1] < pegEnd[pegEnd.length -1])) {
-      pegEnd.push(pegStart.pop());
-    } else {
-      console.log('Invalid Move. Try Again!');
-      boardState();
-      return;
-    }
-    checkWinner();
-    boardState();
+    errorCheck(pegStart, pegEnd);
+    const discCanMoveHere = whereCanDiscMove(pegStart);
+
+    // pegStart = board[pegStart -1];
+    // pegEnd = board[pegEnd -1];
+    // if( pegEnd.length === 0 || (pegStart[pegStart.length - 1] < pegEnd[pegEnd.length -1])) {
+    //   pegEnd.push(pegStart.pop());
+    // } else {
+    //   console.log('Invalid Move. Try Again!');
+    //   boardState();
+    //   return;
+    // }
+    // moveCounter += 1;
+    // checkWinner();
+    // boardState();
+  }
+
+  const whereCanDiscMove = function(peg) {
+    return board.map((pegNum, index) => 
+    pegNum.length === 0 || (pegNum[pegNum.length - 1] < pegNum[pegNum.length - 1]) ? index : undefined)
+    .filter(pegIndex => pegIndex);
   }
 
   // Checks if the win condition is met
@@ -38,6 +48,18 @@ const Board = function() {
       console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!'); 
     }
   }
+
+  const errorCheck = function(pegStart, pegEnd) {
+    if(pegStart === pegEnd){
+      console.log('You tried to move a disc to the peg it is currently on.  Try again!');
+      boardState();
+      return;
+    } else if((pegStart < 1 || pegStart > board.length) || (pegEnd < 1 || pegEnd > board.length)) {
+      console.log('moveDisc parameters were out of bounds');
+      boardState();
+      return;
+    }
+  }
     return {
       moveDisc: moveDisc
     }
@@ -45,6 +67,7 @@ const Board = function() {
 
 const board = new Board();
 
+board.moveDisc(1,1);
 board.moveDisc(1,2);
 board.moveDisc(1,2);
 board.moveDisc(1,3);
