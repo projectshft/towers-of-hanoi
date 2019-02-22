@@ -1,5 +1,6 @@
 let board = [["3", "2", "1"], [], []];
 const initialState = board[0].length;
+let moveCounter = 0;
 
 // Outputs the current state of the board to the console
  let boardState = function() {
@@ -21,13 +22,15 @@ function moveDisk(pegStart, pegEnd) {
 
 // Checks if the win condition is met
 function checkWinner() {
+  moveCounter += 1;
   const peg2 = board[1].length;
   const peg3 = board[2].length;
   if(peg2 === initialState || peg3 === initialState){
-    console.log('You win!')
+    console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!')
   }
 }
 
+// Shortest solution to 3x3
 moveDisk(1,2);
 moveDisk(1,3);
 moveDisk(2,3);
