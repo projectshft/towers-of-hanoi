@@ -13,16 +13,22 @@ let moveCounter = 0;
 
 // Moves a disk from one peg to another
 function moveDisk(pegStart, pegEnd) {
-  boardState();
+  moveCounter += 1;
   pegStart = board[pegStart -1];
   pegEnd = board[pegEnd -1];
-  pegEnd.push(pegStart.pop());
+  if( pegEnd.length === 0 || (pegStart[pegStart.length - 1] < pegEnd[pegEnd.length -1])) 
+  {
+    pegEnd.push(pegStart.pop());
+  } else {
+    console.log('Invalid Move');
+    return;
+  }
+  boardState();
   checkWinner();
 }
 
 // Checks if the win condition is met
 function checkWinner() {
-  moveCounter += 1;
   const peg2 = board[1].length;
   const peg3 = board[2].length;
   if(peg2 === initialState || peg3 === initialState){
@@ -30,13 +36,42 @@ function checkWinner() {
   }
 }
 
-// Shortest solution to 3x3
-moveDisk(1,2);
-moveDisk(1,3);
-moveDisk(2,3);
-moveDisk(1,2);
-moveDisk(3,1);
-moveDisk(3,2);
-moveDisk(1,2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// moveDisk(1,2);
+// moveDisk(1,2);
+// moveDisk(1,3);
+// moveDisk(1,3);
+// moveDisk(2,3);
+// moveDisk(1,2);
+// moveDisk(3,1);
+// moveDisk(3,2);
+// moveDisk(1,2);
+
+// boardState();
+
+
+
+
+// // Shortest solution to 3x3
+// moveDisk(1,2);
+// moveDisk(1,3);
+// moveDisk(2,3);
+// moveDisk(1,2);
+// moveDisk(3,1);
+// moveDisk(3,2);
+// moveDisk(1,2);
+
 
 
