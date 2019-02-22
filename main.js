@@ -1,5 +1,4 @@
 let board = [["3", "2", "1"], [], []];
-const initialState = board[0].length;
 let moveCounter = 0;
 
 // Outputs the current state of the board to the console
@@ -32,11 +31,11 @@ function moveDisc(pegStart, pegEnd) {
 
 // Checks if the win condition is met
 function checkWinner() {
-  const peg2 = board[1].length;
-  const peg3 = board[2].length;
-  if(peg2 === initialState || peg3 === initialState){
-    console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!');
-    
+  const peg2 = board[1].reduce(((sum, num) => sum + parseInt(num)), 0);
+  const peg3 = board[2].reduce(((sum, num) => sum + parseInt(num)), 0);
+  
+  if(peg2 === 6 || peg3 === 6) {
+    console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!');    
   }
 }
 
