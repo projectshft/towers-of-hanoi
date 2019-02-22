@@ -20,7 +20,17 @@ var Board = function (array, moves) {
 
   /** function that moves one disc to another peg */
   var moveDisc = function (startPeg, endPeg) {
-    // move disc if valid, else don't
+    // move disc by calling checkTopOfPeg
+    var okPeg = checkTopOfPeg(startPeg);
+    console.log(okPeg);
+    if (okPeg === undefined || okPeg.length === 0) {
+      // if not true don't move
+      // return false
+      console.log('empty array bro')
+    }
+    // if true do the shifting
+
+    // return true
   }
 
   /* function that checks if the user has won the game */
@@ -31,8 +41,19 @@ var Board = function (array, moves) {
   }
 
   /** function that checks if the peg can be moved or not */
-  var checkTopOfPeg = function () {
+  var checkTopOfPeg = function (startPeg) {
     // use filter here
+    var userPeg = state.board[startPeg - 1];
+    var lastIndex = userPeg.length - 1;
+    var topUserDisc = userPeg[lastIndex];
+    // console.log(topUserDisc);
+    var filteredPegs = state.board.filter(function (peg) {
+      var len = peg.length;
+      return topUserDisc < peg[len - 1];
+    });
+
+    return filteredPegs;
+
   }
 
   var resetGame = function () {
@@ -67,7 +88,7 @@ var Board = function (array, moves) {
 
 
 // function init() {
-var board = Board([[3, 2, 1], [], []], 0);
+var board = Board([[1, 3, 4], [2, 5], [1, 3], [2, 1, 6]], 0);
 board.displayBoard();
 // }
 
@@ -76,12 +97,13 @@ function startGame() {
   var gameFlag = true;
   var userInput = prompt('enter move: ex: 1, 2)');
 
+
+
   do {
 
     try {
+      // console.log(input.length);
       var input = userInput.split(",");
-      console.log(input.length);
-
       if (input.length !== 2) {
         userInput = prompt('Please enter two numbers');
       }
@@ -94,11 +116,18 @@ function startGame() {
       gameFlag = false;
     }
 
+    // Continue with game logic
+    // do valid case
+
+    board.moveDisc(startPeg, endPeg);
+
+
+
+
+
+
     if (startPeg === 1) {
       gameFlag = false;
     }
-    // gameFlag = false;
-    console.log(input);
-    // gameFlag = false;
   } while (gameFlag)
 }
