@@ -9,10 +9,27 @@
 </head>
 <body>
   <center>
-    <h1>Welcome to Doss2k Hanoi Towers</h1><br>
+    <h1>Welcome to Doss2k Towers of Hanoi</h1><br>
     <canvas id='myCanvas' width='1000' height='250'></canvas>
-
+    <div>
+      Peg Start: <input type='text' class='peg' id='pegStart' placeholder='Peg Start'></input>
+    </div>
+    <div>
+      Peg End:  <input type='text' class='peg' id='pegEnd' placeholder='Peg End'></input>
+    </div>
+    <br>
+    <div>
+      <input type='submit' id='movePeg' value='Move Peg' onclick='board.moveDisc()'></input>
+    </div>
+    <div>
+      <p id='message'></p>
+    </div>
+    <audio id="winner">
+        <source src="winner.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
   </center>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="main.js"></script>
   <script src="boardUI.js"></script>
 </body>
