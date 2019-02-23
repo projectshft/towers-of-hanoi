@@ -24,18 +24,11 @@ var StateOfBoard = function() {
   var board = [['3', '2', '1'], [], []];
 
 
-  var moveDisc = function(element) {
-    return element +1;
-  }
-
-  board.map(moveDisc);
-
-
-  var printBoard = function() {
-    for (var i = 0; i < board.length; i += 1){
-      console.log('---' + board[i]);
-    }
+  var printBoard = function(peg) {
+    console.log('---' + peg);
   };
+  board.map(printBoard);
+
 
   return {
     moveDisc: moveDisc,
@@ -47,7 +40,6 @@ var board = StateOfBoard();
 
 board.moveDisc(8);
 board.printBoard();
-
 
 /*
 // checkMove function checks if move is valid
