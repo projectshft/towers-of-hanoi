@@ -1,6 +1,6 @@
 /** 
  * Board Module 
- * @param {array} array - The starting board 
+ * @param {Array} array - The starting board 
  * @param {Int} moves - Keeps tracks of the number of moves
  */
 var Board = function (array, moves) {
@@ -23,7 +23,7 @@ var Board = function (array, moves) {
 
   /** 
    * Getter 
-   * @param {attribute} attribute - The attribute we want to get
+   * @param {String} attribute - The attribute we want to get
    */
   var getAttribute = function (attribute) {
     if (state.hasOwnProperty(attribute)) {
@@ -32,16 +32,23 @@ var Board = function (array, moves) {
   };
 
   /** 
-   * function that moves one disc to another peg, returns a boolean 
+   * function that moves one disc to another peg, returns a number to check for errors
    * @param {Int} moveOne - The starting peg 
    * @param {Int} moveTwo - The ending peg 
    */
   var moveDisc = function (moveOne, moveTwo) {
+    var moveStatus;
+
     var startPeg = state.board[moveOne - 1];
     var lastIndexOfStartPeg = startPeg.length - 1;
     var topDiscOfStartPeg = startPeg[lastIndexOfStartPeg];
 
     var endPeg = state.board[moveTwo - 1];
+
+    if (startPeg.length === 0) {
+      moveStatus = 1;
+      return moveStatus;
+    }
 
     // boolean used to control the move status, it its valid or not
     var pegIsOk = true;
@@ -52,13 +59,14 @@ var Board = function (array, moves) {
     }
 
     if (!pegIsOk) {
-      return false
+      moveStatus = 2;
+      return moveStatus;
     }
 
     startPeg.splice(lastIndexOfStartPeg, 1)
     endPeg.push(topDiscOfStartPeg);
     state.moves++
-    return true;
+    return;
   };
 
   /** 
@@ -101,7 +109,7 @@ var Board = function (array, moves) {
     // reset board state (or just create a new board object)
   };
 
-  /** function that shows the current board state to user */
+  /** function that shows the current board state to the user */
   var displayBoard = function () {
     state.board.map(function (peg) {
       console.log('---', ...peg);
@@ -134,7 +142,7 @@ function makeMove() {
   // variable used to control the game status
   var gameStatus;
   // get user input
-  var userInput = prompt('enter move: ex: 1, 2)');
+  var userInput = prompt('enter move: (ex: 2,3)');
 
   do {
 
@@ -148,19 +156,30 @@ function makeMove() {
       var startPeg = parseInt(input[0], 10);
       var endPeg = parseInt(input[1], 10);
 
+      if (startPeg === endPeg) {
+        console.log('Please choose two different pegs, board is still');
+        board.displayBoard();
+        return;
+      }
+
     } catch {
       console.log('GAME TERMINATED')
       gameStatus = false;
+      return;
     }
 
     var moveStatus = board.moveDisc(startPeg, endPeg);
 
-    if (!moveStatus) {
+    if (moveStatus === 1) {
+      console.log("You cannot move a disc from an empty peg, please try again")
+      board.displayBoard();
+      gameStatus = false;
+    } else if (moveStatus === 2) {
       console.log("You cannot move a larger disc on top of a smaller one, board is still:")
       board.displayBoard();
       gameStatus = false;
     } else {
-      console.log('That move was successful, board is now:');
+      console.log(`That move was successful, board is now: (current moves: ${board.getAttribute('moves')})`);
       board.displayBoard();
     }
 
