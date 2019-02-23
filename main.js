@@ -79,14 +79,9 @@ var Board = function (array, moves) {
 
   /** function that shows the current board state to user */
   var displayBoard = function () {
-    // state.board[2].push(" ");
-    state.board.map(function (peg, idx) {
-      // console.log(`${peg}`);
+    state.board.map(function (peg) {
       console.log('---', ...peg);
-      // console.log(...peg);
     });
-    // state.board[2].shift();
-    // console.log('')
   }
 
   return {
@@ -110,14 +105,13 @@ board.displayBoard();
 
 
 function makeMove() {
-  var gameFlag = true;
+  var gameFlag;
   var userInput = prompt('enter move: ex: 1, 2)');
 
 
   do {
 
     try {
-      // console.log(input.length);
       var input = userInput.split(",");
       if (input.length !== 2) {
         userInput = prompt('Please enter two numbers');
@@ -131,18 +125,16 @@ function makeMove() {
       gameFlag = false;
     }
 
-    var status = board.moveDisc(startPeg, endPeg);
-    console.log('current board');
-    board.displayBoard();
-    if (!status) {
+    var moveStatus = board.moveDisc(startPeg, endPeg);
+
+    if (!moveStatus) {
       console.log("You cannot move a larger disc on top of a smaller one, board is still:")
       board.displayBoard();
+      gameFlag = false;
+    } else {
+      console.log('That move was successful, board is now:');
+      board.displayBoard();
     }
-    // board.displayBoard();
-    // console.log('current moves ' + board.getAttribute('moves'))
-
-
-
 
     gameFlag = false;
   } while (gameFlag)
