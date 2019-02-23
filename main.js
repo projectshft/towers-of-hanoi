@@ -23,15 +23,35 @@ var boardState = { //records and manipulates the state of the board, and how man
   peg3: myBoard[2], //points to the third array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
   numOfMoves: 0,
   moveDisc: function(give, receive){
-  myBoard[receive - 1].push(myBoard[give - 1].pop());
-  numOfMoves += 1;
-}, //moves the "disc" from the give peg to the receive peg
+  //  if (checkIfLegal(give, receive) === false) {
+  //    console.log("Illegal move, try again");
+  //    moveDisk();
+    } else myBoard[receive - 1].push(myBoard[give - 1].pop()); // moves the "disc" from the give peg to the receive peg.
+
+      boardState.numOfMoves += 1; // logs that a move was made.
+
+      myBoard.map(function (element) {
+      console.log("---" + element.join());
+
+      console.log("Number of moves: " + boardState.numOfMoves); // logs the number of moves
+    }); // prints the updated board to console.log. RETURNS THE SAME ARRAY THAT WAS PASSED IN.
+  },
 };
 
-var checkIfLegal = function(){
+var checkIfLegal = function(theGiver, theReceiver){
 //must have a filter function
+
+//--------------- filter example -------------------
+//var tweets = posts.filter(function (post) {
+// if (post.platform === 'twitter') {
+//   return true;
+// }
+// });
+
+
 };
 
 var checkWinner = function(){
 //must have a reduce function
+
 }
