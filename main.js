@@ -1,6 +1,6 @@
 const Board = function() {
   const board = [["3", "2", "1"], [], []]; // Sets initial board state
-  const winCondition = board[0].reduce(((sum, num) => sum + parseInt(num)), 0); //Sets win condition to total of peg1 at start of game
+  const winCondition = board[0].reduce(((sum, num) => sum + parseInt(num)), 0); // Sets win condition to total of peg1 at start of game
   let moveCounter = 0;  // Tracks number of moves
 
   // Outputs the current state of the board to the console
@@ -9,31 +9,36 @@ const Board = function() {
     board.map(function(item) {
     const pegState = item.join(' ');
     console.log('--- ' + pegState);
-  });
+    });
     console.log(''); // Adds a blank line to console for easier readability
   }
-  boardState();
+  boardState();  // Puts initial board state into the console before you start game
+  
+  // Grabs the current state of the board 
+  const getBoardState = function() {
+    return board;
+  }
 
   // Moves a disk from one peg to another if valid move or print error
   const moveDisc = function(pegStart, pegEnd) {
     if(errorCheck(pegStart, pegEnd)) {
-    const discCanMoveHere = whereCanDiscMove(pegStart);
-    console.log(discCanMoveHere);
-    pegStartVal = board[pegStart -1];
-    pegEndVal = board[pegEnd -1];
-    if(discCanMoveHere.indexOf(pegEnd - 1) !== -1) {
-      pegEndVal.push(pegStartVal.pop());
-    } else {
-      console.log('Invalid Move. Try Again!');
-      boardState();
-      return;
-    }
+      const discCanMoveHere = whereCanDiscMove(pegStart);
+      pegStartVal = board[pegStart -1];
+      pegEndVal = board[pegEnd -1];
+
+      if(discCanMoveHere.indexOf(pegEnd - 1) !== -1) {
+        pegEndVal.push(pegStartVal.pop());
+      } else {
+        console.log('You are not allowed to move a larger disc onto a smaller disc. Try Again!');
+        boardState();
+        return;
+      }
     moveCounter += 1;
     checkWinner();
     boardState();
   }
 }
-  // Given the chosen peg you want to move a disc from returns available pegs that are a valid move
+  // Given the chosen peg you want to move a disc from, returns pegs that are a valid to move to
   const whereCanDiscMove = function(pegStart) {
     const pegStartIndex = pegStart -1;
     return board.map((peg, index) => 
@@ -69,26 +74,29 @@ const Board = function() {
       return true;
     }
   }
+
     return {
-      moveDisc: moveDisc
+      moveDisc: moveDisc,
+      discsStart: board[0].length,
+      getBoardState: getBoardState
     }
 }
 
 const board = new Board();
 
-board.moveDisc(1,4);
-board.moveDisc(2,1);
-board.moveDisc(1,1);
-board.moveDisc(1,2);
-board.moveDisc(1,2);
-board.moveDisc(1,3);
-board.moveDisc(1,3);
-board.moveDisc(0,3);
-board.moveDisc(2,3);
-board.moveDisc(1,2);
-board.moveDisc(3,1);
-board.moveDisc(3,2);
-board.moveDisc(1,2);
+// board.moveDisc(1,4);
+// board.moveDisc(2,1);
+// board.moveDisc(1,1);
+// board.moveDisc(1,2);
+// board.moveDisc(1,2);
+// board.moveDisc(1,3);
+// board.moveDisc(1,3);
+// board.moveDisc(0,3);
+// board.moveDisc(2,3);
+// board.moveDisc(1,2);
+// board.moveDisc(3,1);
+// board.moveDisc(3,2);
+// board.moveDisc(1,2);
 
 
 
@@ -102,6 +110,3 @@ board.moveDisc(1,2);
 // moveDisc(3,1);
 // moveDisc(3,2);
 // moveDisc(1,2);
-
-
-
