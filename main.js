@@ -33,11 +33,20 @@ var Board = function (array, moves) {
 
   /** 
    * function that moves one disc to another peg, returns a number to check for errors
+   * on makeMove function
    * @param {Int} moveOne - The starting peg 
    * @param {Int} moveTwo - The ending peg 
    */
   var moveDisc = function (moveOne, moveTwo) {
     var moveStatus;
+    var numberOfPegs = state.board.length;
+
+    console.log(moveOne, moveTwo);
+
+    if ((moveOne < 1 || moveOne > numberOfPegs) || (moveTwo > numberOfPegs || moveTwo < 1)) {
+      moveStatus = 3;
+      return moveStatus;
+    }
 
     var startPeg = state.board[moveOne - 1];
     var lastIndexOfStartPeg = startPeg.length - 1;
@@ -149,15 +158,22 @@ function makeMove() {
     try {
       var input = userInput.split(",");
       if (input.length !== 2) {
-        userInput = prompt('Please enter two numbers');
+        console.log('Please enter two numbers only: ')
+        board.displayBoard();
+        return;
       }
 
+      if (isNaN(input[0]) || isNaN(input[1])) {
+        console.log('Please enter numbers only, board is still: (ex: 1,2)');
+        board.displayBoard();
+        return;
+      }
       // convert user input to Integers
       var startPeg = parseInt(input[0], 10);
       var endPeg = parseInt(input[1], 10);
 
       if (startPeg === endPeg) {
-        console.log('Please choose two different pegs, board is still');
+        console.log('Please choose two different pegs, board is still:');
         board.displayBoard();
         return;
       }
@@ -171,14 +187,22 @@ function makeMove() {
     var moveStatus = board.moveDisc(startPeg, endPeg);
 
     if (moveStatus === 1) {
-      console.log("You cannot move a disc from an empty peg, please try again")
+      console.log("You cannot move a disc from an empty peg, please try again, board is still")
       board.displayBoard();
       gameStatus = false;
     } else if (moveStatus === 2) {
       console.log("You cannot move a larger disc on top of a smaller one, board is still:")
       board.displayBoard();
       gameStatus = false;
-    } else {
+    } else if (moveStatus === 3) {
+      console.log(`Input out of bounds, make sure you your input is within 1 and ${board.getAttribute('board').length}`)
+      board.displayBoard();
+      gameStatus = false;
+    } else if (moveStatus === 4) {
+      console.log('Please enter numbers only, board is still: ');
+      board.displayBoard();
+    }
+    else {
       console.log(`That move was successful, board is now: (current moves: ${board.getAttribute('moves')})`);
       board.displayBoard();
     }
