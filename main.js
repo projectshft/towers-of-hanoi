@@ -36,6 +36,11 @@ const isValidMove = (selectedDisc, newPeg) => {
   // if the last element of the newPeg is > selectedDisc then "true"
   const discOnNewPeg = board[newPeg][board[newPeg].length - 1];
 
+
+  let invalid = board.filter(peg => peg[peg.length - 1] < selectedDisc || peg[peg.length - 1] !== undefined) 
+  console.log(invalid);
+  
+
   if(discOnNewPeg > selectedDisc || discOnNewPeg === undefined){
     console.log(`That move was successful, board is now:`);
     return true;
@@ -43,8 +48,6 @@ const isValidMove = (selectedDisc, newPeg) => {
     console.log(`You cannot place a larger disc onto a smaller one! Board is still:`);
     return false;
   }
-  // return true;
-  // return (board[newPeg][board[newPeg.length - 1]] < selectedDisc)
 }
 
 //*************************************************/
@@ -58,9 +61,9 @@ const checkWinner = () => {
 //*************************************************/
 
 renderBoard();
-// moveDisc(1, 2);
-// moveDisc(1, 3);
-// moveDisc(1, 3);
+moveDisc(1, 2);
+moveDisc(1, 3);
+// moveDisc(2, 3);
 // moveDisc(1, 2);
 // moveDisc(3, 1);
 
