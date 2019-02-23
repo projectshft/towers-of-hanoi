@@ -19,10 +19,10 @@ const Board = function() {
     if(errorCheck(pegStart, pegEnd)) {
     const discCanMoveHere = whereCanDiscMove(pegStart);
     console.log(discCanMoveHere);
-    pegStart = board[pegStart -1];
-    pegEnd = board[pegEnd -1];
-    if(discCanMoveHere.indexOf(pegEnd)) {
-      pegEnd.push(pegStart.pop());
+    pegStartVal = board[pegStart -1];
+    pegEndVal = board[pegEnd -1];
+    if(discCanMoveHere.indexOf(pegEnd - 1) !== -1) {
+      pegEndVal.push(pegStartVal.pop());
     } else {
       console.log('Invalid Move. Try Again!');
       boardState();
@@ -33,11 +33,12 @@ const Board = function() {
     boardState();
   }
 }
-
+  // Given the chosen peg you want to move a disc from returns available pegs that are a valid move
   const whereCanDiscMove = function(pegStart) {
-    return board.map((pegNum, index) => 
-    (pegNum.length === 0 || board[pegStart - 1][[board[pegStart -1].length -1]] < pegNum[pegNum.length - 1]) ? index : undefined)
-    .filter(pegIndex => pegIndex);
+    const pegStartIndex = pegStart -1;
+    return board.map((peg, index) => 
+    (peg.length === 0 || board[pegStartIndex][[board[pegStartIndex].length -1]] < peg[peg.length - 1]) ? index : undefined)
+    .filter(pegIndex => pegIndex >= 0);
   }
 
   // Checks if the win condition is met
@@ -49,7 +50,8 @@ const Board = function() {
       console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!'); 
     }
   }
-
+  
+  // Checks for basic errors 
   const errorCheck = function(pegStart, pegEnd) {
     if(pegStart === pegEnd){
       console.log('You tried to move a disc to the peg it is currently on.  Try again!');
