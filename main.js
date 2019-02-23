@@ -1,7 +1,4 @@
-var gameBoard = [[],[],[]];
-var top = 0;
-var middle = 1;
-var bottom = 2;
+
 
 
 // var Towers = function(){
@@ -15,30 +12,61 @@ var Board = function(numPegs, numDiscs){
     //Inputs: 
     //      numPegs - how many pegs to use (default to 3)
     //      numDiscs - how many discs to play with (default to 3)
+    
+    // var top = 0;
+    // var middle = 1;
+    // var bottom = 2;
+    var moveArray = [];             //stores the move coordinates [fromPeg, toPeg]
 
     var attributes = {
-        numPegs: numPegs || 3,
-        numDiscs: numDiscs || 3,
-        numMoves: 0                 //how many moves made thus far
+        numPegs: numPegs || 3,                        // number of pegs on the board
+        numDiscs: numDiscs || 3,                      // number of discs to use
+        numMoves: 0,                                  // how many moves made thus far
+        gameBoard = [[],[],[]] || [[3, 2, 1],[],[]]   // current state of the discs on pegs
     }; //end attributes
 //-------------------------------------------------------------------
     var initBoard = function(){
-        //initializes the board as follows:
-        //numPegs = default
-        //numDiscs = default
+        //initializes the board as follows to the original default state:
+        //numPegs = default of 3
+        //numDiscs = default of 3
         //numMoves = 0 (default)
         // Define the gameBoard array
-       
-
-
-    }; //end initBoard
+        
+        console.log("DEBUG: in initBoard");
+        
+        attributes[numPegs] = 3;
+        attributes[numDiscs] = 3;
+        attributes[numMoves] = 0;
+        attributes[gameboard] = [[3, 2, 1],[],[]];
+    
+   }; //end initBoard
 //-------------------------------------------------------------------  
-    var setState = function(attribute, value){
+    var resetBoard = function (numPegs, numDiscs){
+        // Resets the game as defined by input.
+        // NOTE: do not need to check for valid property--
+        // INPUTS: 
+        //      pegs - number of pegs for this game
+        //      discs - number of discs for this game
+        // OUTPUTS: none
+
+        console.log("DEBUG: in resetBoard");
+            // if (pegs>3 && discs>3){
+            //     attributes[numPegs] = numPegs;
+            //     attributes[numDiscs] = numDiscs;
+            //     attributes[numMoves] = 0;
+            // }; // end if
+            // else {
+            //     initBoard();
+            // }; // end else
+    }; //end Reset
+
+//-------------------------------------------------------------------
+   var setState = function(attribute, value){
         // Set the specified attribute to the value given
         //Inputs:
         //      attribute: attribute to set
         //      value: value to assign to the attribute given
-
+        console.log ("DEBUG: in setState");
 
     }; // end setState
 //-------------------------------------------------------------------
@@ -53,7 +81,7 @@ var Board = function(numPegs, numDiscs){
         //      false: if the move does not fulfill the following requirements
         //          1) the fromPeg MUST have discs
         //          2) the disc on the fromPeg MUST be SMALLER than the disc on the toPeg
-
+        console.log("DEBUG: in isMoveValid");
     };// isMoveValid
 //-------------------------------------------------------------------
    var whichPegs = function (peg) {
@@ -61,7 +89,7 @@ var Board = function(numPegs, numDiscs){
         // INPUTS: peg - the peg from which you want to move a disc
         // OUTPUTS: pegs that can be used to move the given disc to
         // *** MUST use filter function ***
-
+        console.log("DEBUG: in whichPegs");
 
     }; //end whichPegs
 
@@ -72,7 +100,7 @@ var Board = function(numPegs, numDiscs){
         //      fromPeg - the peg from which you want to take a disc
         //      toPeg   - the peg to which you want to move the disc.
         // Don't forget to validate move
-
+        console.log("DEBUG: in moveDisc");
     }; //end move disc
 //-------------------------------------------------------------------
     var checkWinner = function (){
@@ -85,17 +113,11 @@ var Board = function(numPegs, numDiscs){
         //          2) the discs on the peg are in the proper order (largest disc on 'bottom')
         //
         // *** MUST use the reduce function ***
-        
-    } // end checkWinner
+        console.log("DEBUG: in checkWinner");
+    }; // end checkWinner
 //-------------------------------------------------------------------
-    var Reset = function (){
-        // Resets the game to a default state.
-        // INPUTS: none
-        // OUTPUTS: none
-      
-    } //end Reset
-//-------------------------------------------------------------------
-    var DisplayBoard=function(){
+
+    var displayBoard=function(){
         // Display the board (horizontally) to user so they know what it looks like
         // For example:
         //          --- 3, 2, 1
@@ -105,7 +127,7 @@ var Board = function(numPegs, numDiscs){
         // INPUTS: none
         // OUTPUTS: none
         // *** MUST use 'map' function. ***
-
+        console.log("DEBUG: in displayBoard");
     }; //end DisplayBoard
 //-------------------------------------------------------------------
     var getMove = function() {
@@ -114,11 +136,20 @@ var Board = function(numPegs, numDiscs){
         //      fromPeg: the peg from which you want to move a disc
         //      toPeg: the peg to which you want to move the disc
         // 
-        // OUTPUTS: fromPeg and toPeg
-
+        // OUTPUTS: moveArray [fromPeg, toPeg]
+        console.log ("DEBUG: In getMove");
         var fromPeg = prompt("Move peg FROM: (top, middle, bottom)");
         var toPeg = prompt("Move peg TO: (top, middle, bottom");
-    } //end getMove
+
+    }; //end getMove
+
+    return {
+        getMove: getMove,
+        isMoveValid: isMoveValid,
+        moveDisc: moveDisc,
+        checkWinner: checkWinner,
+        announceWinner: announceWinner,
+    };// end return
 //-------------------------------------------------------------------
 }; //end Board
 //===================================================================
@@ -130,6 +161,9 @@ var Board = function(numPegs, numDiscs){
 //          if valid, move disc
 //          check if game won
 //              if game won
-//                  announce winner through console.log
+//                  announce the winner via console.log
 //                  reset the board
 //
+
+myBoard = Board();
+myBoard.getMove();
