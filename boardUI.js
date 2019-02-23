@@ -12,6 +12,8 @@ const BoardUI = function() {
   const discHeight = 20;
   const discWidth = 60;
 
+  
+
   const drawPegs = function() {
     ctx.beginPath();
     ctx.rect(pegMiddle2 - pegWidth / 2, y - pegHeight, pegWidth, pegHeight);
@@ -24,9 +26,9 @@ const BoardUI = function() {
 
   const drawDiscs = function(boardState) {
     for(let i = 0; i < boardState.length; i++){
-      for(let j = boardState[i].length; j > 0; j--) {
+      for(let j = 0; j <= boardState[i].length; j++) {
         ctx.beginPath();
-        ctx.rect((window[('pegMiddle' + (i + 1))]  - (discWidth / 2) * (boardState[i][j - 1])), y - discHeight * (boardState[i].length - (j - 1)), discWidth * boardState[i][j - 1], discHeight);
+        ctx.rect(window['pegMiddle' + (i + 1)] - ((discWidth / 2) * boardState[i][j]), y - discHeight * (j + 1), discWidth * boardState[i][j], discHeight);
         ctx.fillStyle = '#00FF00';
         ctx.fill();
         ctx.stroke();
