@@ -21,32 +21,31 @@ var Board = function (array, moves) {
   /** function that moves one disc to another peg */
   var moveDisc = function (moveOne, moveTwo) {
     // move disc by calling checkTopOfPeg
-    var endPeg = state.board[moveTwo - 1];
-    var lastIndexOfEndPeg = endPeg.length - 1;
-    var topDiscOfEndPeg = endPeg[lastIndexOfEndPeg];
 
     var startPeg = state.board[moveOne - 1];
     var lastIndexOfStartPeg = startPeg.length - 1;
     var topDiscOfStartPeg = startPeg[lastIndexOfStartPeg];
 
-    var okPeg = checkTopOfPeg(moveOne);
-    if (okPeg === undefined || okPeg.length === 0) {
-      // if not true don't move
-      // return false
-      console.log('empty array bro');
+    var endPeg = state.board[moveTwo - 1];
+    var lastIndexOfEndPeg = endPeg.length - 1;
+    var topDiscOfEndPeg = endPeg[lastIndexOfEndPeg];
 
+    var okPeg = true;
+    // console.log(endPeg.length);
+    if (endPeg.length !== 0) {
+      okPeg = checkTopOfPeg(moveOne);
     }
-    // if true do the shifting
-    // console.log(okPeg);
-    // console.log('start disc', topDiscOfStartPeg);
-    // console.log('end disc', topDiscOfEndPeg);
-    // console.log(startPeg, endPeg);
+
+    if (!okPeg) {
+      return false
+    }
+
+    console.log('inside okPeg')
     startPeg.splice(lastIndexOfStartPeg, 1)
     endPeg.push(topDiscOfStartPeg);
-    console.log(endPeg);
+    // console.log(endPeg);
     state.moves++
-
-    // return true
+    return true;
   }
 
   /* function that checks if the user has won the game */
@@ -67,9 +66,13 @@ var Board = function (array, moves) {
       var len = peg.length;
       return topUserDisc < peg[len - 1];
     });
+    console.log(filteredPegs);
 
-    return filteredPegs;
-
+    if (filteredPegs === undefined || filteredPegs.length === 0) {
+      return false
+    }
+    return true;
+    // return filteredPegs;
   }
 
   var resetGame = function () {
@@ -79,14 +82,14 @@ var Board = function (array, moves) {
 
   /** function that shows the current board state to user */
   var displayBoard = function () {
-    console.log("Current Board")
-    state.board[2].push(" ");
+    // state.board[2].push(" ");
     state.board.map(function (peg, idx) {
       // console.log(`${peg}`);
       console.log('---', ...peg);
       // console.log(...peg);
     });
-    state.board[2].shift();
+    // state.board[2].shift();
+    // console.log('')
   }
 
   return {
@@ -105,14 +108,14 @@ var Board = function (array, moves) {
 
 // function init() {
 var board = Board([[3, 2, 1], [], []], 0);
+console.log("Starting Board")
 board.displayBoard();
 // }
 
 
-function startGame() {
+function makeMove() {
   var gameFlag = true;
   var userInput = prompt('enter move: ex: 1, 2)');
-
 
 
   do {
@@ -132,21 +135,18 @@ function startGame() {
       gameFlag = false;
     }
 
-    // Continue with game logic
-    // do valid case
-
-    board.moveDisc(startPeg, endPeg);
+    var status = board.moveDisc(startPeg, endPeg);
+    if (!status) {
+      console.log("You cannot move a larger disc on top of a smaller one, board is still:")
+      board.displayBoard();
+    }
     board.displayBoard();
+    // board.displayBoard();
     console.log('current moves ' + board.getAttribute('moves'))
 
 
 
 
-
-
-
-    if (startPeg === 1) {
-      gameFlag = false;
-    }
+    gameFlag = false;
   } while (gameFlag)
 }
