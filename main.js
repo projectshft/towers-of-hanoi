@@ -30,7 +30,7 @@ var Board = function (array, moves) {
   };
 
   /** 
-   * function that moves one disc to another peg, return a boolean 
+   * function that moves one disc to another peg, returns a boolean 
    * @param {Int} moveOne - The starting peg 
    * @param {Int} moveTwo - The ending peg 
    */
@@ -60,23 +60,23 @@ var Board = function (array, moves) {
   };
 
   /** 
-   * function that checks if the peg can be moved or not, returns a boolean 
+   * function that checks if the disc can be moved or not, returns a boolean 
    * @param {Array} startPeg - The peg the where disc will be moved from
    * @param {Array} endPeg - The peg where the disc will be moved to
    */
-  var checkTopOfPeg = function (startPeg, endPeg) {
+  function checkTopOfPeg(startPeg, endPeg) {
     var lastIndexOfStartPeg = startPeg.length - 1;
     var topDiscOfStartPeg = startPeg[lastIndexOfStartPeg];
 
     var lastIndexOfEndPeg = endPeg.length - 1;
     var topDiscOfEndPeg = endPeg[lastIndexOfEndPeg];
 
-    var filteredPegs = state.board.filter(function (peg) {
+    var goodPegs = state.board.filter(function (peg) {
       var index = peg.length - 1;
       return topDiscOfStartPeg < peg[index];
     });
 
-    if (filteredPegs === undefined || filteredPegs.length === 0) {
+    if (goodPegs === undefined || goodPegs.length === 0) {
       return false
     }
 
