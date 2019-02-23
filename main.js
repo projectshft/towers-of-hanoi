@@ -1,3 +1,4 @@
+
 /*need board - 2d array
 need moveDisc function
     takes in whichdisk to move and which peg to move to
@@ -28,59 +29,119 @@ function checkNumber(number){
 
 }
 */
-
-BoardModule = function(){
-    var board = [
+// BoardModule = function(){
+    var board = [ // this is my board! a 2d array
         ["3","2","1"],
         [],
         []
     ];
+    var moves = 0; // this is my counter that will keep track of the 
 
-    var printBoard = function(){ //array.map will iterate through our origin board above and print a new array using the spread operator to print the discs in each peg in an aesthetically pleasing way :)
+    var printBoard = function(){ //this function prints the board to the console using the map helper method to duplicate size and uses the spread operator to print horizontally and with spaces 
         return board.map(function (peg) { 
             console.log( "---",...peg); 
         });
     };
- 
 
-    function moveDisc(whichdisc, whichpeg) {
-        var moves = 0;
-        function possibleMoves(whichdisc, whichpeg) { //use filter function at least once
+console.log(printBoard()); //will delete later, need for checking functionality
 
+var moveDisc = function(sourcepeg, targetpeg){ 
+    sourcepeg -= 1; //because array index starts at 1, we need to decrease the number so the peg numbers passed are logical for the user, but still work for array manipulation
+    targetpeg -= 1;
+    //this is likely where I will add the function that checks potential moves, and validation
+ //   var possibleMoves = function(sourcepeg, targetpeg){
+
+  //  }
+ //   if (sourcepeg === 0) {
+        var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
+        board[targetpeg].push(disc); //adds var disc to the target peg
+        moves += 1; //this is a move!
+        printBoard();
+  //  } else {
+  //      console.log("You cannot move a larger disc on top of a smaller one, board is still: "); 
+  //      console.log(printBoard());
+  //  };
+}
+
+var checkWinner = function() {
+    if (board[1].includes("1","2","3") || board[2].includes("1", "2","3")) {
+        console.log("You've won Towers of Hanoi! Play again?"); //this lets the player know when they've won
+        board = [ // this resets the game board
+            ["1", "2", "3"],
+            [],
+            []
+        ];
+        moves = 0; //this resets the counter
+        console.log(printBoard());
     }
-        forEach(board[whichpeg]) {
-            if (board[whichpeg.length - 1] > whichdisc) {
-                console.log("You cannot move a larger disk on top of a smaller one; board is still: " + printBoard);
-            } else {
-                board.pop("whichdisc");
-                board.push = whichdisc; 
-                moves += 1;
-                printBoard();
-                // printBoard
-        } // needs to loop through the peg array that the user wants to move to, looking to see if it is a possible move or not 
-    };
+}
+// if (sourcepeg.length-1 < targetpeg.length-1) { attempting to see if the last index of sourcepeg is less than the last index of targetpeg
 
-    function checkWinner() { // must use reduce function at least once
-        
-        console.log("You won in " + counter + "moves! Play again?");  //if win, this logs. and also the game resets to the starting board
-        
-        var resetBoard =function() {
-            return board.map(function (peg) {
-                ["3","2","1"];
-            });
-        }
+// var moveDisc = function(sourcepeg, targetpeg){ //these 8 lines work!
+//     sourcepeg -= 1; //because array index starts at 1, we need to decrease the number so the peg numbers passed are logical for the user, but still work for array manipulation
+//     targetpeg -= 1;
+//     //this is likely where I will add the function that checks potential moves, and validation
+//     var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
+//     board[targetpeg].push(disc); //adds var disc to the target peg
+//     moves += 1; //this is a move!
+//     printBoard();
+// }
+console.log(moveDisc(1,2));
+console.log(moves);
+console.log(moveDisc(1,3));
 
-        }
-    };
-    return {
-        printBoard: printBoard,
-        moveDisc: moveDisc
-      };
 
-};
+        // function moveDisc(chooseDisc, choosePeg) {
+        //     var moves = 0;
 
- 
-  
+        //     function possibleMoves(chooseDisc, choosePeg) { //use filter function at least once
+        //         var possibleMove = null;
 
-// var TowerOfHanoi = BoardModule();
-// TowerOfHanoi.moveDisc(2,1);
+        //         for (var i = 0; i > shoes.length; i--) { //this is using some but iterates backwards so that if the first idex in 
+        //             if (board[choosePeg] < chooseDisc) {
+        //             posssibleMove = false;
+        //             break;
+        //             } else {
+        //             possibleMove = true;
+        //             }
+        //         }
+        //     forEach(board[whichpeg]) 
+        //         if (board[whichpeg.length - 1] > whichdisc) {
+        //             console.log("You cannot move a larger disk on top of a smaller one; board is still: " + printBoard);
+        //         } else {
+        //             board.pop("whichdisc");
+        //             board.push = whichdisc; 
+        //             moves += 1;
+        //             printBoard();
+        //             // checkWinner();?
+    
+        //     } // needs to loop through the peg array that the user wants to move to, looking to see if it is a possible move or not 
+    
+        // };
+            
+    //  x
+    //         var checkWinner = board.find(function(peg){  // must use reduce function at least once
+    //             if (peg.includes("1") && peg.includes("2") && peg.includes("3")) {
+    //                  return true;
+    //             };
+    //             if (checkWinner === true) {
+    //                 console.log("You won in " + counter + "moves! Play again?");  //if win, this logs. and also the game resets to the starting board
+    //                 var resetBoard = function() {
+    //                     return board.map(function (peg) {
+    //                         ["3","2","1"];
+    //                     });
+    //             }
+    //         }
+        // });
+        // return {
+        //     printBoard: printBoard,
+        //     moveDisc: moveDisc
+        //   };
+        // };
+    
+     
+      
+    
+    // var TowerOfHanoi = BoardModule();
+    // TowerOfHanoi.moveDisc(2,1);
+
