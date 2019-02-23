@@ -66,13 +66,11 @@ var Board = function (array, moves) {
       var len = peg.length;
       return topUserDisc < peg[len - 1];
     });
-    console.log(filteredPegs);
 
     if (filteredPegs === undefined || filteredPegs.length === 0) {
       return false
     }
     return true;
-    // return filteredPegs;
   }
 
   var resetGame = function () {
@@ -136,11 +134,11 @@ function makeMove() {
     }
 
     var status = board.moveDisc(startPeg, endPeg);
+    board.displayBoard();
     if (!status) {
       console.log("You cannot move a larger disc on top of a smaller one, board is still:")
       board.displayBoard();
     }
-    board.displayBoard();
     // board.displayBoard();
     console.log('current moves ' + board.getAttribute('moves'))
 
