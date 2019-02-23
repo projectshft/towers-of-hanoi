@@ -1,5 +1,7 @@
 /** 
  * Board Module 
+ * @param {array} array - The starting board 
+ * @param {Int} moves - Keeps tracks of the number of moves
  */
 var Board = function (array, moves) {
   // state of board
