@@ -1,4 +1,4 @@
-/** Board Class */
+/** Board Module */
 var Board = function (array, moves) {
   // state of board
   var state = {
@@ -20,30 +20,23 @@ var Board = function (array, moves) {
 
   /** function that moves one disc to another peg */
   var moveDisc = function (moveOne, moveTwo) {
-    // move disc by calling checkTopOfPeg
-
     var startPeg = state.board[moveOne - 1];
     var lastIndexOfStartPeg = startPeg.length - 1;
     var topDiscOfStartPeg = startPeg[lastIndexOfStartPeg];
 
     var endPeg = state.board[moveTwo - 1];
-    var lastIndexOfEndPeg = endPeg.length - 1;
-    var topDiscOfEndPeg = endPeg[lastIndexOfEndPeg];
 
     var okPeg = true;
-    // console.log(endPeg.length);
     if (endPeg.length !== 0) {
-      okPeg = checkTopOfPeg(moveOne);
+      okPeg = checkTopOfPeg(startPeg, endPeg);
     }
 
     if (!okPeg) {
       return false
     }
 
-    console.log('inside okPeg')
     startPeg.splice(lastIndexOfStartPeg, 1)
     endPeg.push(topDiscOfStartPeg);
-    // console.log(endPeg);
     state.moves++
     return true;
   }
@@ -56,20 +49,26 @@ var Board = function (array, moves) {
   }
 
   /** function that checks if the peg can be moved or not */
-  var checkTopOfPeg = function (moveOne) {
-    // use filter here
-    var userPeg = state.board[moveOne - 1];
-    var lastIndex = userPeg.length - 1;
-    var topUserDisc = userPeg[lastIndex];
-    // console.log(topUserDisc);
+  var checkTopOfPeg = function (startPeg, endPeg) {
+    var lastIndexOfStartPeg = startPeg.length - 1;
+    var topDiscOfStartPeg = startPeg[lastIndexOfStartPeg];
+
+    var lastIndexOfEndPeg = endPeg.length - 1;
+    var topDiscOfEndPeg = endPeg[lastIndexOfEndPeg];
+
     var filteredPegs = state.board.filter(function (peg) {
-      var len = peg.length;
-      return topUserDisc < peg[len - 1];
+      var index = peg.length - 1;
+      return topDiscOfStartPeg < peg[index];
     });
 
     if (filteredPegs === undefined || filteredPegs.length === 0) {
       return false
     }
+
+    if (topDiscOfStartPeg > topDiscOfEndPeg) {
+      return false;
+    }
+
     return true;
   }
 
@@ -93,19 +92,18 @@ var Board = function (array, moves) {
   return {
     moveDisc: moveDisc,
     checkWinner: checkWinner,
-    checkTopOfPeg: checkTopOfPeg,
     resetGame: resetGame,
     displayBoard: displayBoard,
     getAttribute: getAttribute,
     setAttribute: setAttribute
   }
-}
+} // End Board Module 
 
 
-
+var startingBoards = [[3, 2, 1], [], []];
 
 // function init() {
-var board = Board([[3, 2, 1], [], []], 0);
+var board = Board(startingBoards, 0);
 console.log("Starting Board")
 board.displayBoard();
 // }
@@ -134,13 +132,14 @@ function makeMove() {
     }
 
     var status = board.moveDisc(startPeg, endPeg);
+    console.log('current board');
     board.displayBoard();
     if (!status) {
       console.log("You cannot move a larger disc on top of a smaller one, board is still:")
       board.displayBoard();
     }
     // board.displayBoard();
-    console.log('current moves ' + board.getAttribute('moves'))
+    // console.log('current moves ' + board.getAttribute('moves'))
 
 
 
