@@ -1,7 +1,13 @@
 const Board = function() {
   const board = [[], [], []]; // Creates the board
   let numOfDiscs = prompt('Please choose your number of starting discs (2-7)', '3');
-  numOfDiscs >= 2 && numOfDiscs <= 7 ? numOfDiscs : numOfDiscs = 3; // Checks if user hit cancel or input something out of range and sets to default of 3
+  let moveCounter = 0;
+  const playerMessage = 'Please select the starting peg and ending peg for your move!'; // Sets default player message 
+  
+  document.getElementById('message').innerHTML = playerMessage;
+
+  // Checks if user hit cancel or input something out of range and sets to default of 3
+  numOfDiscs >= 2 && numOfDiscs <= 7 ? numOfDiscs : numOfDiscs = 3; 
 
   // Builds initial board state based on user selected number of discs
   const buildBoard = function(numOfDiscs) {
@@ -12,11 +18,8 @@ const Board = function() {
   
   buildBoard(numOfDiscs); 
 
-  const winCondition = board[0].reduce(((sum, num) => sum + parseInt(num)), 0); // Sets win condition to total of peg1 at start of game
-  
-  let moveCounter = 0;  // Tracks number of moves
-  let playerMessage = 'Please select the starting peg and ending peg for your move!'
-  document.getElementById('message').innerHTML = playerMessage;
+  // Sets win condition to total of peg1 at start of game after board has been built
+  const winCondition = board[0].reduce(((sum, num) => sum + parseInt(num)), 0); 
   
   // Outputs the current state of the board to the console
   const boardState = function() {
@@ -27,27 +30,15 @@ const Board = function() {
     });
     console.log(''); // Adds a blank line to console for easier readability
   }
+
   boardState();  // Puts initial board state into the console before you start game
-  
-  // Grabs the current state of the board 
-  const getBoardState = function() {
-    return board;
-  }
 
-  // Grabs the current number of moves made during the game
-  const getTotalMoves = function() {
-    return moveCounter;
-  }
-
-  const getNumDiscs = function() {
-    return numOfDiscs;
-  }
-
-  // Moves a disk from one peg to another if valid move else print error
+  // Moves a disk from one peg to another if it's a valid move else prints error to screen and console
   const moveDisc = function(pegStart, pegEnd) {
-    pegStart = document.getElementById('pegStart').value;
-    pegEnd = document.getElementById('pegEnd').value;
-    if(errorCheck(pegStart, pegEnd)) {
+    pegStart = document.getElementById('pegStart').value; // Grabs start peg from user input
+    pegEnd = document.getElementById('pegEnd').value;  // Grabs end peg from user input
+    
+    if(errorCheck(pegStart, pegEnd)) { // Checks for general errors before starting a move
       const discCanMoveHere = whereCanDiscMove(pegStart);
       const pegStartVal = board[pegStart -1];
       const pegEndVal = board[pegEnd -1];
@@ -61,14 +52,16 @@ const Board = function() {
         boardState();
         return;
       }
+
     moveCounter += 1;
     checkWinner();
     boardState();
+    }
   }
-}
-  // Given the chosen peg you want to move a disc from, returns pegs that are a valid to move to
+
+  // Given the chosen peg you want to move a disc from, returns pegs that are valid to move to
   const whereCanDiscMove = function(pegStart) {
-    const pegStartIndex = pegStart -1;
+    const pegStartIndex = pegStart - 1;
     return board.map((peg, index) => 
     (peg.length === 0 || board[pegStartIndex][[board[pegStartIndex].length -1]] < peg[peg.length - 1]) ? index : undefined)
     .filter(pegIndex => pegIndex >= 0);
@@ -76,11 +69,11 @@ const Board = function() {
 
   // Checks if the win condition is met
   const checkWinner = function() {
-    const peg2 = board[1].reduce(((sum, num) => sum + parseInt(num)), 0);
-    const peg3 = board[2].reduce(((sum, num) => sum + parseInt(num)), 0);
+    const peg2 = board[1].reduce(((sum, num) => sum + parseInt(num)), 0); // Checks total of peg2 discs
+    const peg3 = board[2].reduce(((sum, num) => sum + parseInt(num)), 0); // Checks total of peg3 discs
     const winnerSound = document.getElementById('winner');
 
-    if(peg2 === winCondition || peg3 === winCondition) {
+    if(peg2 === winCondition || peg3 === winCondition) {  // Checks peg2 & peg3 against win condition 
       if(moveCounter === Math.pow(2, numOfDiscs) - 1) {
         console.log('AMAZING! You completed the puzzle in the minimum of ' + moveCounter + ' moves!'); 
         $('#message').html('AMAZING! You completed the puzzle in the minimum of ' + moveCounter + ' moves!');
@@ -111,18 +104,33 @@ const Board = function() {
       $('#message').html('You tried to move a disc from an empty peg. Try again!');
       boardState();
       return false;
-    } else{
+    } else {
       return true;
     }
   }
 
+  // Grabs the current state of the board 
+  const getBoardState = function() {
+    return board;
+  }
+
+  // Grabs the current number of moves made during the game
+  const getTotalMoves = function() {
+    return moveCounter;
+  }
+
+  // Grabs the number of discs being used in the current game
+  const getNumDiscs = function() {
+    return numOfDiscs;
+  }
+
+  //  Tells the game to reset itself and start over
   const resetGame = function() {
     document.location.reload();
   }
 
     return {
       moveDisc: moveDisc,
-      discsStart: board[0].length,
       getBoardState: getBoardState,
       getTotalMoves: getTotalMoves,
       resetGame: resetGame,
@@ -131,30 +139,3 @@ const Board = function() {
 }
 
 const board = new Board();
-
-// board.moveDisc(1,4);
-// board.moveDisc(2,1);
-// board.moveDisc(1,1);
-// board.moveDisc(1,2);
-// board.moveDisc(1,2);
-// board.moveDisc(1,3);
-// board.moveDisc(1,3);
-// board.moveDisc(0,3);
-// board.moveDisc(2,3);
-// board.moveDisc(1,2);
-// board.moveDisc(3,1);
-// board.moveDisc(3,2);
-// board.moveDisc(1,2);
-
-
-
-
-
-// // Shortest solution to 3x3
-// moveDisc(1,2);
-// moveDisc(1,3);
-// moveDisc(2,3);
-// moveDisc(1,2);
-// moveDisc(3,1);
-// moveDisc(3,2);
-// moveDisc(1,2);
