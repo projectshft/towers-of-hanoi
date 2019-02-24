@@ -72,7 +72,8 @@ const Board = function() {
         console.log('AMAZING! You completed the puzzle in the minimum of ' + moveCounter + ' moves!'); 
         $('#message').html('AMAZING! You completed the puzzle in the minimum of ' + moveCounter + ' moves!');
       } else {
-      console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!'); 
+      console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!<br>' + 
+      'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1)); 
       $('#message').html('You win!  This attempt took you a total of ' + moveCounter + ' moves!<br>' + 
         'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1));
       }
