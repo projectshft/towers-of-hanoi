@@ -1,7 +1,5 @@
 /* EVAL TO DO LIST:
--refactor moveDisc function to include possibleMoves function that passed a given peg determines which pegs are legal moves
 -refactor possibleMoves function to use FILTER
--refactor checkWinner function to use REDUCE
 -wrap game in BoardModule - Object
 -when the above is done, make sure to return the functions nested inside BoardModule so that they are public (moveDisc)
 */
@@ -13,7 +11,7 @@ var board = [ // this is my board! a 2d array
     []
 ];
 
-var moves = 0; // this is my counter that will keep track of the 
+var moves = 0; // this is my counter that will keep track of the number of moves the player takes to win
 
 var printBoard = function(){ //this function prints the board to the console using the map helper method to duplicate size and uses the spread operator to print horizontally and with spaces 
     return board.map(function (peg) { 
@@ -26,23 +24,27 @@ console.log(printBoard()); //will delete later, need for checking functionality
 var moveDisc = function(sourcepeg, targetpeg){ //function to moveDisc
     sourcepeg -= 1; //because array index starts at 1, we need to decrease the number so the peg numbers passed are logical for the user, but still work for array manipulation
     targetpeg -= 1;
-// var possibleMoves = function(){ need to make the below fit inside this function? also use FILTER
-    if (board[targetpeg].length === 0) {
+
+    function legalMove() { //refactor to use filter
+        if (board[targetpeg].length === 0) { //if the target peg is an empty array, the top disc of the source peg can legally move there
+            return true;
+        } else if (board[sourcepeg] < board[targetpeg]) { // if the target peg is not an empty array, but the disc on the source peg is smaller than the disc on the target peg, the disc can legally move there also
+            return true;
+        } else { // illegal move
+            return false;
+        };      
+    };
+    
+    if (legalMove() === true) {
         var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
         board[targetpeg].push(disc); //adds var disc to the target peg
         moves += 1; //this is a move!
         checkWinner();
         printBoard();
-  } else if (board[sourcepeg] < board[targetpeg]) {
-        var disc = board[sourcepeg].pop(); //this code is repeated from above . . . how to DRY?
-        board[targetpeg].push(disc);
-        moves += 1;
-        printBoard();
-        checkWinner();
-  } else {
-      console.log("You cannot move a larger disc on top of a smaller one, board is still: "); 
-      console.log(printBoard());
-  };
+    } else {
+        console.log("You cannot move a larger disc on top of a smaller one, board is still: "); 
+        console.log(printBoard());
+    };
 };
 
 var checkWinner = function () {
@@ -65,7 +67,7 @@ var checkWinner = function () {
   };
   
 
- //test code
+ //test code and minimum number of moves to win
 console.log(moveDisc(1,2));
 console.log(moveDisc(1,2));
 console.log(moveDisc(1,3));
