@@ -48,30 +48,34 @@ console.log(printBoard()); //will delete later, need for checking functionality
 var moveDisc = function(sourcepeg, targetpeg){ 
     sourcepeg -= 1; //because array index starts at 1, we need to decrease the number so the peg numbers passed are logical for the user, but still work for array manipulation
     targetpeg -= 1;
-    //this is likely where I will add the function that checks potential moves, and validation
- //   var possibleMoves = function(sourcepeg, targetpeg){
-
-  //  }
- //   if (sourcepeg === 0) {
+// var possibleMoves = function(){ need to make the below fit inside a function? also use FILTER
+    if (board[targetpeg].length === 0) {
         var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
         board[targetpeg].push(disc); //adds var disc to the target peg
         moves += 1; //this is a move!
+        checkWinner();
         printBoard();
-  //  } else {
-  //      console.log("You cannot move a larger disc on top of a smaller one, board is still: "); 
-  //      console.log(printBoard());
-  //  };
-}
+  } else if (board[sourcepeg] < board[targetpeg]) {
+        var disc = board[sourcepeg].pop(); //this code is repeated from above . . . how to DRY?
+        board[targetpeg].push(disc);
+        moves += 1;
+        printBoard();
+        checkWinner();
+  } else {
+      console.log("You cannot move a larger disc on top of a smaller one, board is still: "); 
+      console.log(printBoard());
+  };
+};
 
-var checkWinner = function() {
+var checkWinner = function() { //these 12 lines work!
     if (board[1].includes("1","2","3") || board[2].includes("1", "2","3")) {
-        console.log("You've won Towers of Hanoi! Play again?"); //this lets the player know when they've won
-        board = [ // this resets the game board
-            ["1", "2", "3"],
+        console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?"); //this lets the player know when they've won
+        newBoard = [ // this resets the game board . ..if I name it "moves' and "board", then the logic above will be based on it because of scope. if i make it new names, the game won't work again
+            ["3", "2", "1"],
             [],
             []
         ];
-        moves = 0; //this resets the counter
+        newMoves = 0; //this resets the counter
         console.log(printBoard());
     }
 }
@@ -86,6 +90,20 @@ var checkWinner = function() {
 //     moves += 1; //this is a move!
 //     printBoard();
 // }
+
+// var checkWinner = function() { //these 12 lines work!
+//     if (board[1].includes("1","2","3") || board[2].includes("1", "2","3")) {
+//         console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?"); //this lets the player know when they've won
+//         newBoard = [ // this resets the game board . ..if I name it "moves' and "board", then the logic above will be based on it because of scope. if i make it new names, the game won't work again
+//             ["3", "2", "1"],
+//             [],
+//             []
+//         ];
+//         newMoves = 0; //this resets the counter
+//         console.log(printBoard());
+//     }
+// }
+
 console.log(moveDisc(1,2));
 console.log(moves);
 console.log(moveDisc(1,3));
