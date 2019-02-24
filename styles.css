@@ -1,3 +1,21 @@
 canvas {
   background: #eee;
 }
+
+p {
+  color: red;
+  font-size: 20px;
+}
+
+.peg {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.button {
+  border-radius: 3px;
+  background-color: cornflowerblue;
+  width: 100px;
+  height: 30px;
+  font-weight: bold;
+}
