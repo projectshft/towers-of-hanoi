@@ -54,15 +54,20 @@ function initializeBoard(startingNumberOfDiscs) { //CHECK PARAMETERS: need more?
   numberOfMoves = 0;
   gameOver = false; 
   console.log("First move, please.");
-  return flexBoard; // return to stateOfTheBoardObject?
+  return flexBoard; // is this return necessary? return to stateOfTheBoardObject?
 }
+//______________________________________
 
-let stateOfTheBoard = { // should 
+// There should be an object responsible for maintaining the state of the board and it should control the way to manipulate the inner state of the board. The board should maintain the number of moves that the player has done and output this value when the game completes.
+let stateOfTheBoard = { // 
   peg1: peg1, // flexBoard[0] // or pegOfOrigin, destinationPeg, unusedPeg???
   peg2: peg2, // flexBoard[1] // 
   peg3: peg3, // flexBoard[2]
   numberOfMovesMade: numberOfMovesMade,
   gameStatus: gameStatus // Boolean, related to gameOver
+  //finalNumberOfMoves: function(numberofMovesMade) {
+  //   console.log("You won in " + numberOfMovesMade)
+  // }
 };
 
 //______________________________________
@@ -70,7 +75,6 @@ let stateOfTheBoard = { // should
 
 // There should be a way to move discs from one peg to another.
 //var moveDisc = 
-
 function moveDisc(selectedDisc, destinationPeg){  // need pegOfOrigin, or determine that by the selectedDisc(inherent value); also need unusedPeg???
   //if (!gameOver) {}
   //if (!checkWinner) {}
@@ -97,37 +101,85 @@ function moveDisc(selectedDisc, destinationPeg){  // need pegOfOrigin, or determ
 } 
 
 
-//setNumberOfDiscs(3); // add setNumberOfPegs later
-// stateOfTheBoard.initializeBoard(userInputedNumberOfDiscs); //initializeBoard(userInputedNumberOfPegs, userInputedNumberOfDiscs);
-// flexBoard();
-// moveDisc(x, y);
+// a function that, given a certain peg, determines which other pegs the top disc from that peg can be moved to.
+//filter OUT the pegs that are NOT available; filter should create subset of avaialable pegs.
+//In order to complete this function, you MUST use a filter function at least once.
+var legalMoves = board.filter(function (individualPegState) {
+  return (isPegEmpty(individualPegState) || topDisc >= discToBeMoved);
+});
+
+//a function to check whether peg is empty; returns Boolean
+function isPegEmpty(givenPegNumber) { // numberOfPeg === board[(numberOfPeg-1)]
+  for (i = 0; i < board.length; i++) {
+    if (board[i] != []) return false;
+  };
+    return true;
+  }
+
+//a variable thagit t invokes a function that returns the topmost disc on a peg
+var topDisc = function topmostDisc(peg) {
+  for (i = 0; i < board[(peg-1)].length; i++) {
+    if (board[peg-1][i] != 0) return  i;
+    };
+    return -1;
+  } 
+
+//topDisc first alternative version
+var topDiscOfPeg = board[(givenPegNumber.length - 1)]; // last element in each peg array
+
+//topDisc second alternative version
+var topDiscOfPeg = function () {
+if (!pegArray.prototype.last){
+  pegArray.prototype.last = function(){
+      return this[this.length - 1];
+    };
+  };
+}
 
 
+//a function to check whether an inputted peg is empty or not (NOT PART OF ASSIGNMENT; could have functionality in legalMoves and maybe checkWinner)
+// function checkIfMoveIsLegal ();
+//   function isPegEmpty(peg) {
+//     for (i = 0; i < board[peg].length; i++) {
+//     if ( board[num][i] != 0) return false;
+//     }
+//     return true;
+//     }
 
-// There should be an object responsible for maintaining the state of the board and it should control the way to manipulate the inner state of the board. The board should maintain the number of moves that the player has done and output this value when the game completes.
-// let stateOfTheBoard = {
-//   peg1: peg1,
-//   peg2: peg2,
-//   peg3: peg3,
-//   numberOfMovesMade: numberOfMovesMade,
-//   gameStatus: gameStatus // Boolean, related to gameOver
-// };
+// function moveValidation(peg){
+//   if (isPegEmpty(peg)) {  // create a "isPegEmpty(peg)" function???" SEE IMMEDIATELY ABOVE
+//     pegStatus = true;
+//   }; 
+//   else {
+//     if (discSelectedToMove <= topDiscOnPeg) {
+//       pegStatus = true;
+//     }
+//   }
+//   return (board[???][???]) // Return legal moves or ILLegal moves???
+// }
 
-//   var startingState; 
-//   var peg1;
-//   var peg2;
-//   var peg3;
-//  //SEE board above
+// var pegsAvailableForLegalMove = board.filter(function (individualPegState) {
+//   return (isPegEmpty(individualPegState) || topDisc >= discToBeMoved);
+// });
+
+//filter OUT pegs not available; filter should create subset of avaialable pegs
+
+//.filter
+// When to use: When you want to create a new array that is a subset of the original array and can be created by interrogating each element in the array.
+
+// filter is exactly what it sounds like and is used to create a new array based on some qualifications. This helper function is commonly used on the front end for sorting lists. 
+
+// filter also takes an "iterator function" as an argument - an anonymous function that will be invoked for each item in the array. However this function must return a truthy or falsey value. Only the truthy values will be added to the array.
+
+//___________________________________________
 
 //updateBoard(); // use MAP w/ board initialization.
-
 
 //maintain the number of moves
 moveCounter()
 //var numberOfMoves = 0; //set globally???
   numberOfMoves++;
   console.log(numberOfMoves);
-
 
 //from "this" lesson, cohort-5-curriculum/week-01/day-03/this.md
 
@@ -146,43 +198,7 @@ counter.updateCounter();
 
 alert(counter.count);
 
-//a function to check whether an inputted peg is empty or not (NOT PART OF ASSIGNMENT; could have functionality in legalMoves and maybe checkWinner)
-function checkIfMoveIsLegal ();
-  function isPegEmpty(peg) {
-    for (i = 0; i < board[peg].length; i++) {
-    if ( board[num][i] != 0) return false;
-    }
-    return true;
-    }
-
-// a function that, given a certain peg, determines which other pegs the top disc from that peg can be moved to. 
-//In order to complete this function, you MUST use a filter function at least once. (See comments below function definition)
-
-
-var legalMoves = function moveValidation(peg){
-  if (isPegEmpty(peg)) {  // create a "isPegEmpty(peg)" function???" SEE IMMEDIATELY ABOVE
-    pegStatus = true;
-  }; 
-  else {
-
-  }
-  return (board[???][???]) // Return legal moves or ILLegal moves???
-}
-
-// var tweets = posts.filter(function (post) {
-//   if (post.platform === 'twitter') {
-//     return true;
-//   }
-// });
-
-//.filter
-// When to use: When you want to create a new array that is a subset of the original array and can be created by interrogating each element in the array.
-
-// filter is exactly what it sounds like and is used to create a new array based on some qualifications. This helper function is commonly used on the front end for sorting lists. 
-
-// filter also takes an "iterator function" as an argument - an anonymous function that will be invoked for each item in the array. However this function must return a truthy or falsey value. Only the truthy values will be added to the array.
-
-
+//_________________________________________________
 
 // There should be a function checkWinner that checks to see if the player has won the game. You win the game by putting all the discs back in the original order but on a new peg. As a part of this function, you MUST use the reduce function at least once. As a helpful hint, we suggest that you test this function with only 3 pegs and 3 discs on the board as it will take significantly less moves to "win".
 
@@ -192,6 +208,7 @@ checkWinner()
 gameOver = true;
 
 
+//_____________________________________________________
 
 // Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
 endGame() {
