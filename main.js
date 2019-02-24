@@ -25,7 +25,7 @@ var moveDisc = function(sourcepeg, targetpeg){ //function to moveDisc
     sourcepeg -= 1; //because array index starts at 1, we need to decrease the number so the peg numbers passed are logical for the user, but still work for array manipulation
     targetpeg -= 1;
 
-    function legalMove() { //refactor to use filter
+    function isLegalMove() { //refactor to use filter
         if (board[targetpeg].length === 0) { //if the target peg is an empty array, the top disc of the source peg can legally move there
             return true;
         } else if (board[sourcepeg] < board[targetpeg]) { // if the target peg is not an empty array, but the disc on the source peg is smaller than the disc on the target peg, the disc can legally move there also
@@ -34,8 +34,8 @@ var moveDisc = function(sourcepeg, targetpeg){ //function to moveDisc
             return false;
         };      
     };
-    
-    if (legalMove() === true) {
+
+    if (isLegalMove() == true) {
         var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
         board[targetpeg].push(disc); //adds var disc to the target peg
         moves += 1; //this is a move!
