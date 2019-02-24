@@ -1,3 +1,5 @@
+//Check variable names for flexBoard, board, and Board. 
+
 //GLOBAL VARIABLES 
 //Board pieces
 
@@ -14,6 +16,8 @@ var selectedPeg; // = destinationPeg
 var numberOfMoves; //for count function
 var gameOver; // Boolean for global reference
 
+var errorMessage = ("Error!");
+
 //Set the number of Discs to set the board with. PLACEHOLDER FOR USER INPUT.
 function setNumberOfDiscs (numberOfDiscs) {
   //userInputedNumberOfDiscs = prompt("How many discs do you want to play with?");
@@ -23,7 +27,8 @@ function setNumberOfDiscs (numberOfDiscs) {
 //function to initialize the board (object???) SEE BELOW
 function initializeBoard(startingNumberOfDiscs) { //CHECK PARAMETERS: need more? less? different names? 
   //NUMBER_OF_DISCS = startingNumberOfDiscs
-  let flexBoard = []; // variable for "flexible" board (flexible number of discs that can be set by user  
+  let flexBoard = []; // variable for "flexible" board (flexible number of discs that can be set by user 
+  // use "this" here? 
 
   //Hardcoding 3 pegs; Create an initializeNumberOfPegs function (using a loop, likely a forEach) to allow user to set number of pegs
   let firstPeg = [];
@@ -49,35 +54,72 @@ function initializeBoard(startingNumberOfDiscs) { //CHECK PARAMETERS: need more?
   numberOfMoves = 0;
   gameOver = false; 
   console.log("First move, please.");
+  return flexBoard; // return to stateOfTheBoardObject?
 }
 
-//Body of executable code
-setNumberOfDiscs(8); // add setNumberOfPegs later
-initializeBoard(userInputedNumberOfDiscs); //initializeBoard(userInputedNumberOfPegs, userInputedNumberOfDiscs);
+let stateOfTheBoard = { // should 
+  peg1: peg1, // flexBoard[0] // or pegOfOrigin, destinationPeg, unusedPeg???
+  peg2: peg2, // flexBoard[1] // 
+  peg3: peg3, // flexBoard[2]
+  numberOfMovesMade: numberOfMovesMade,
+  gameStatus: gameStatus // Boolean, related to gameOver
+};
 
 //______________________________________
 
-//only the above works
-// moveDisc(x, y);
-// console.log("Next move, please.");
-
 
 // There should be a way to move discs from one peg to another.
-var moveDisc = function(selectedDisc, destinationPeg){  // need pegOfOrigin, or determine that by the selectedDisc(inherent value); also need unusedPeg???
-  if (!gameOver) {
-    
+//var moveDisc = 
+
+function moveDisc(selectedDisc, destinationPeg){  // need pegOfOrigin, or determine that by the selectedDisc(inherent value); also need unusedPeg???
+  //if (!gameOver) {}
+  //if (!checkWinner) {}
+  //if (checkIfMoveIsLegal()) {}
+  var updateBoard = function () { //use map?
+    var discToBeMoved = board.find(function(oneNumberInBoardArrayOfPegArrays)
+    { 
+      return oneNumberInBoardArrayOfPegArrays === selectedDisc;
+    });
+
+    if (discToBeMoved === undefined) {
+      console.log(errorMessage);
+    }; 
+    //board.destinationPeg.push(board.pegOfOrigin.pop); // must distinguish pegOfOrigin value here.
+    board.destinationPeg.push(discToBeMoved); //  
+  
+  //graphical depiction to console of flexBoard and pegs, with discs in starting position
+  flexBoard.forEach(function (currentInstanceOfPegArray) {
+      console.log(PEG_BASE + currentInstanceOfPegArray.join("  "))
+    });
+
+    console.log("Next move, please.");
+  };
 } 
 
 
-// There should be an object responsible for maintaining the state of the board and it should control the way to manipulate the inner state of the board. The board should maintain the number of moves that the player has done and output this value when the game completes.
-var stateOfTheBoard = {
-  var startingState; 
-  var peg1;
-  var peg2;
-  var peg3;
-}; //SEE board above
+//setNumberOfDiscs(3); // add setNumberOfPegs later
+// stateOfTheBoard.initializeBoard(userInputedNumberOfDiscs); //initializeBoard(userInputedNumberOfPegs, userInputedNumberOfDiscs);
+// flexBoard();
+// moveDisc(x, y);
 
-updateBoard(); // use MAP w/ board initialization.
+
+
+// There should be an object responsible for maintaining the state of the board and it should control the way to manipulate the inner state of the board. The board should maintain the number of moves that the player has done and output this value when the game completes.
+// let stateOfTheBoard = {
+//   peg1: peg1,
+//   peg2: peg2,
+//   peg3: peg3,
+//   numberOfMovesMade: numberOfMovesMade,
+//   gameStatus: gameStatus // Boolean, related to gameOver
+// };
+
+//   var startingState; 
+//   var peg1;
+//   var peg2;
+//   var peg3;
+//  //SEE board above
+
+//updateBoard(); // use MAP w/ board initialization.
 
 
 //maintain the number of moves
@@ -105,15 +147,17 @@ counter.updateCounter();
 alert(counter.count);
 
 //a function to check whether an inputted peg is empty or not (NOT PART OF ASSIGNMENT; could have functionality in legalMoves and maybe checkWinner)
-function isPegEmpty(peg) {
-  for (i = 0; i < board[peg].length; i++) {
-  if ( board[num][i] != 0) return false;
-  }
-  return true;
-  }
+function checkIfMoveIsLegal ();
+  function isPegEmpty(peg) {
+    for (i = 0; i < board[peg].length; i++) {
+    if ( board[num][i] != 0) return false;
+    }
+    return true;
+    }
 
 // a function that, given a certain peg, determines which other pegs the top disc from that peg can be moved to. 
 //In order to complete this function, you MUST use a filter function at least once. (See comments below function definition)
+
 
 var legalMoves = function moveValidation(peg){
   if (isPegEmpty(peg)) {  // create a "isPegEmpty(peg)" function???" SEE IMMEDIATELY ABOVE
@@ -150,7 +194,9 @@ gameOver = true;
 
 
 // Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
-endGame()
+endGame() {
+  console.log(""); // Output number of moves ( count or moveCount)
+}
 announceWinner() = console.log("Winner!");
 
 
