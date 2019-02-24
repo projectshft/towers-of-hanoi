@@ -1,7 +1,19 @@
 const Board = function() {
-  const board = [["3", "2", "1"], [], []]; // Sets initial board state
+  const board = [[], [], []]; // Creates the board
+  let numOfDiscs = prompt('Please choose your number of starting discs (2-7)', '3');
+  numOfDiscs >= 2 && numOfDiscs <= 7 ? numOfDiscs : numOfDiscs = 3; // Checks if user hit cancel or input something out of range and sets to default of 3
+
+  // Builds initial board state based on user selected number of discs
+  const buildBoard = function(numOfDiscs) {
+    for(let i = numOfDiscs; i > 0; i--) {
+      board[0].push(i);
+    }
+  }
+  
+  buildBoard(numOfDiscs); 
+
   const winCondition = board[0].reduce(((sum, num) => sum + parseInt(num)), 0); // Sets win condition to total of peg1 at start of game
-  const numOfDiscs = board[0].length;
+  
   let moveCounter = 0;  // Tracks number of moves
   let playerMessage = 'Please select the starting peg and ending peg for your move!'
   document.getElementById('message').innerHTML = playerMessage;
@@ -22,6 +34,7 @@ const Board = function() {
     return board;
   }
 
+  // Grabs the current number of moves made during the game
   const getTotalMoves = function() {
     return moveCounter;
   }
