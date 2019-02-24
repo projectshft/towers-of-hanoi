@@ -10,7 +10,7 @@ var announceMsg = function (msg){
 // var TowersGame = function(){
 
 // }; //end TowersGame
-var gameBoard = [[],[],[]];
+//var gameBoard = [[],[],[]];
  //===================================================================
 var Board = function(){
     //Board 'class' to manipulate the game board.
@@ -156,7 +156,6 @@ var Board = function(){
     
 //-------------------------------------------------------------------
     
-
    var setState = function(attribute, value){
         // Set the specified attribute to the value given
         //Inputs:
@@ -164,6 +163,10 @@ var Board = function(){
         //      value: value to assign to the attribute given
         console.log("DEBUG: =============================");
         console.log ("DEBUG: *** in setState ***");
+
+        if (attributes.hasOwnProperty(attribute)){
+            attributes[attribute] = value;
+        }
 
     }; // end setState
 //-------------------------------------------------------------------
