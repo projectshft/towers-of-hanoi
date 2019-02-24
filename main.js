@@ -18,22 +18,24 @@ var myBoard = [["3", "2", "1"],[],[]]; //each nested array myBoard[0], myBoard[1
 // --- 2
 
 var boardState = { //records and manipulates the state of the board, and how many moves have been made.
-  // peg1: myBoard[0], //points to the first array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
-  // peg2: myBoard[1], //points to the second array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
-  // peg3: myBoard[2], //points to the third array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
-  // reducerPeg2: myBoard[1].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0),
-  // reducerPeg3: myBoard[2].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0), //currently don't think any of the previous 5 lines are necessary.
   checkWinner: function(){  //must have a reduce function
       if (myBoard[1].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0) === 6
        || myBoard[2].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0) === 6) {
         console.log("Winner!");
       }
-    },
+  },
+  checkIfLegal: function(giver, receiver){
+    if (myBoard[receiver] == 0) {  // if receiving peg has not discs, the move is valid.
+      return true;
+    } else if (myBoard[receiver].filter(function(value){return value > myBoard[giver][myBoard[giver].length - 1]}, []) != 0) {
+      return true; // if the receiving peg has a disc that is larger than the top disc of the giving peg, move is legal
+    } return false; // otherwise, move is illegal
+  },
   numOfMoves: 0,
   moveDisc: function(give, receive){
-  //  if (checkIfLegal(give, receive) === false) {
-  //    console.log("Illegal move, try again");
-  //    moveDisk();
+    if (checkIfLegal(give, receive) === false) {
+      console.log("Illegal move, try again");
+      boardState.moveDisk();
     } else myBoard[receive - 1].push(myBoard[give - 1].pop()); // moves the "disc" from the give peg to the receive peg.
 
       boardState.numOfMoves += 1; // logs that a move was made.
@@ -48,18 +50,6 @@ var boardState = { //records and manipulates the state of the board, and how man
   },
 };
 
-var checkIfLegal = function(theGiver, theReceiver){
-//must have a filter function
-
-//--------------- filter example -------------------
-//var tweets = posts.filter(function (post) {
-// if (post.platform === 'twitter') {
-//   return true;
-// }
-// });
-
-
-};
 
 // var checkWinner = function(){
 // //must have a reduce function
