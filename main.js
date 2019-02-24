@@ -1,54 +1,32 @@
-
-/*need board - 2d array
-need moveDisc function
-    takes in whichdisk to move and which peg to move to
-    checks if the disk is smaller than the disk its moving to
-print board horizontally - must use map (array method) at least once for this
-
+/* EVAL TO DO LIST:
+-refactor moveDisc function to include possibleMoves function that passed a given peg determines which pegs are legal moves
+-refactor possibleMoves function to use FILTER
+-refactor checkWinner function to use REDUCE
+-wrap game in BoardModule - Object
+-when the above is done, make sure to return the functions nested inside BoardModule so that they are public (moveDisc)
 */
 
-/* maybe use this to ensure that prompts are numbers between 1 and 3?`
-function promptForDisc( text)
-{
-    if(text == '' ){
-     text = "Please enter a number from 1 to 100";   
-    }
-    var number = parseInt(window.prompt(text, ""));
-    checkNumber(number);
+// BoardModule = function(){ object to wrap game in
+var board = [ // this is my board! a 2d array
+    ["3","2","1"],
+    [],
+    []
+];
 
-}
-function checkNumber(number){
+var moves = 0; // this is my counter that will keep track of the 
 
-    if (number <= 3 && number >= 1) {
-    document.write("Your number (" + number + ")  matches requirements", "");
-} else if (isNaN(number)) {
-    promptForNumber("It is not a number. Please enter a number from 1 to 3", "");
-} else {
-    promptForNumber("Your number (" + number + ") is not between 1 and 3", "");
-}
-
-}
-*/
-// BoardModule = function(){
-    var board = [ // this is my board! a 2d array
-        ["3","2","1"],
-        [],
-        []
-    ];
-    var moves = 0; // this is my counter that will keep track of the 
-
-    var printBoard = function(){ //this function prints the board to the console using the map helper method to duplicate size and uses the spread operator to print horizontally and with spaces 
-        return board.map(function (peg) { 
-            console.log( "---",...peg); 
-        });
-    };
+var printBoard = function(){ //this function prints the board to the console using the map helper method to duplicate size and uses the spread operator to print horizontally and with spaces 
+    return board.map(function (peg) { 
+        console.log( "---",...peg); 
+    });
+};
 
 console.log(printBoard()); //will delete later, need for checking functionality
 
-var moveDisc = function(sourcepeg, targetpeg){ 
+var moveDisc = function(sourcepeg, targetpeg){ //function to moveDisc
     sourcepeg -= 1; //because array index starts at 1, we need to decrease the number so the peg numbers passed are logical for the user, but still work for array manipulation
     targetpeg -= 1;
-// var possibleMoves = function(){ need to make the below fit inside a function? also use FILTER
+// var possibleMoves = function(){ need to make the below fit inside this function? also use FILTER
     if (board[targetpeg].length === 0) {
         var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
         board[targetpeg].push(disc); //adds var disc to the target peg
@@ -67,7 +45,7 @@ var moveDisc = function(sourcepeg, targetpeg){
   };
 };
 
-var checkWinner = function() { //these 12 lines work!
+var checkWinner = function() { //refactor to use REDUCE
     if (board[1].includes("1","2","3") || board[2].includes("1", "2","3")) {
         console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?"); //this lets the player know when they've won
         newBoard = [ // this resets the game board . ..if I name it "moves' and "board", then the logic above will be based on it because of scope. if i make it new names, the game won't work again
@@ -152,7 +130,6 @@ console.log(moveDisc(1,3));
     //         }
         // });
         // return {
-        //     printBoard: printBoard,
         //     moveDisc: moveDisc
         //   };
         // };
