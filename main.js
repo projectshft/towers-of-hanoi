@@ -6,6 +6,8 @@ var boardState = { //records and manipulates the state of the board, and how man
       if (myBoard[1].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0) === 6
        || myBoard[2].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0) === 6) {
         console.log("Winner!");
+        myBoard = [["3", "2", "1"],[],[]];
+        boardState.numOfMoves = 0;
       }
   },
   checkIfLegal: function(giver, receiver){
