@@ -35,10 +35,17 @@ const moveDisc = (currentPeg, newPeg) => {
 const isValidMove = (selectedDisc, newPeg) => {
   // if the last element of the newPeg is > selectedDisc then "true"
   const discOnNewPeg = board[newPeg][board[newPeg].length - 1];
-
-
-  let invalid = board.filter(peg => peg[peg.length - 1] < selectedDisc || peg[peg.length - 1] !== undefined) 
+  // filter out the pegs in which selectedDisc >= the last element of the peg
+  const invalid = board.filter(peg => (selectedDisc >= peg[peg.length - 1]))
+       
+  console.log(selectedDisc);
   console.log(invalid);
+
+  const result = invalid.some(element => {
+    return element === board[newPeg];
+  });
+
+  console.log(result);
   
 
   if(discOnNewPeg > selectedDisc || discOnNewPeg === undefined){
@@ -61,11 +68,13 @@ const checkWinner = () => {
 //*************************************************/
 
 renderBoard();
-moveDisc(1, 2);
+
 moveDisc(1, 3);
-// moveDisc(2, 3);
-// moveDisc(1, 2);
-// moveDisc(3, 1);
+moveDisc(1, 2);
+moveDisc(3, 2);
+moveDisc(1, 3);
+moveDisc(2, 1);
+moveDisc(3, 2);
 
 
 
