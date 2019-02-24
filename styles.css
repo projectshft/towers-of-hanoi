@@ -8,13 +8,13 @@ p {
 }
 
 input {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 6px;
+  margin-bottom: 6px;
   width: 40px;
 }
 
 .button {
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: cornflowerblue;
   width: 100px;
   height: 30px;
