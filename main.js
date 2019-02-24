@@ -35,8 +35,10 @@ const Board = function() {
 
   // Moves a disk from one peg to another if it's a valid move else prints error to screen and console
   const moveDisc = function(pegStart, pegEnd) {
+    if(!(pegStart && pegEnd)) {  // Sets start and end if user input to allow for auto solving to work
     pegStart = document.getElementById('pegStart').value; // Grabs start peg from user input
     pegEnd = document.getElementById('pegEnd').value;  // Grabs end peg from user input
+    }
     
     if(errorCheck(pegStart, pegEnd)) { // Checks for general errors before starting a move
       const discCanMoveHere = whereCanDiscMove(pegStart);
@@ -54,6 +56,9 @@ const Board = function() {
       }
 
     moveCounter += 1;
+    if(moveCounter > 0) {
+      $('#solve').prop('disabled', true);
+    }
     checkWinner();
     boardState();
     }
@@ -84,6 +89,7 @@ const Board = function() {
         'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1));
       }
       winnerSound.play();
+      $('#movePeg').prop('disabled', true);
     }
   }
   
@@ -129,13 +135,25 @@ const Board = function() {
     document.location.reload();
   }
 
+  /* Will solve the puzzle from the starting state for any number of discs
+     Will not solve game from any state however :(
+  */
+  const solvePuzzle = function(numOfDiscs, sourcePeg, holdingPeg, destPeg) {    
+    if (numOfDiscs > 0) {
+      solvePuzzle(numOfDiscs - 1, sourcePeg, destPeg, holdingPeg);
+      moveDisc(sourcePeg, destPeg);
+      solvePuzzle(numOfDiscs - 1, holdingPeg, sourcePeg, destPeg);
+    }   
+  } 
+
   //  Returns object with links to necessary functions that need to be accessed outside scope
   return {
     moveDisc: moveDisc,
     getBoardState: getBoardState,
     getTotalMoves: getTotalMoves,
     resetGame: resetGame,
-    getNumDiscs: getNumDiscs
+    getNumDiscs: getNumDiscs,
+    solvePuzzle: solvePuzzle
   }
 }
 
