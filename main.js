@@ -47,7 +47,7 @@ const Board = function() {
         pegEndVal.push(pegStartVal.pop());
         $('#message').html(playerMessage);
       } else {
-        console.log('You are not allowed to move a larger disc onto a smaller disc. Try Again!');
+        console.error('You are not allowed to move a larger disc onto a smaller disc. Try Again!');
         $('#message').html('You are not allowed to move a larger disc onto a smaller disc. Try Again!');
         boardState();
         return;
@@ -90,17 +90,17 @@ const Board = function() {
   // Checks for basic errors 
   const errorCheck = function(pegStart, pegEnd) {
     if(pegStart === pegEnd){
-      console.log('You tried to move a disc to the peg it is currently on.  Try again!');
+      console.error('You tried to move a disc to the peg it is currently on.  Try again!');
       $('#message').html('You tried to move a disc to the peg it is currently on.  Try again!');
       boardState();
       return false;
     } else if((pegStart < 1 || pegStart > board.length) || (pegEnd < 1 || pegEnd > board.length)) {
-      console.log('One of the pegs you selected does not exist. Try again!');
+      console.error('One of the pegs you selected does not exist. Try again!');
       $('#message').html('One of the pegs you selected does not exist. Try again!');
       boardState();
       return false;
     } else if(board[pegStart -1].length === 0) {
-      console.log('You tried to move a disc from an empty peg. Try again!');
+      console.error('You tried to move a disc from an empty peg. Try again!');
       $('#message').html('You tried to move a disc from an empty peg. Try again!');
       boardState();
       return false;
@@ -129,13 +129,14 @@ const Board = function() {
     document.location.reload();
   }
 
-    return {
-      moveDisc: moveDisc,
-      getBoardState: getBoardState,
-      getTotalMoves: getTotalMoves,
-      resetGame: resetGame,
-      getNumDiscs: getNumDiscs
-    }
+  //  Returns object with links to necessary functions that need to be accessed outside scope
+  return {
+    moveDisc: moveDisc,
+    getBoardState: getBoardState,
+    getTotalMoves: getTotalMoves,
+    resetGame: resetGame,
+    getNumDiscs: getNumDiscs
+  }
 }
 
 const board = new Board();
