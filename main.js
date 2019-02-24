@@ -2,9 +2,9 @@
 const board = [["3", "2", "1"],
 [],
 []];
-
+const numberOfDiscs = board[0].length;
 const pegPlaceHolder = "---"
-
+let counter = 0;
 //*************************************************/
 
 const renderBoard = () => board.map(peg => console.log(`${pegPlaceHolder} ${peg.join('')}`));
@@ -25,8 +25,9 @@ const moveDisc = (currentPeg, newPeg) => {
     board[currentPeg].pop(selectedDisc); // take it off the top of currentPeg
     board[newPeg].push(selectedDisc);// and place it on the top of newPeg
   }
+  counter++;
   renderBoard();
-  console.log(isWinner(board))
+  isWinner(board);
 }
 
 //*************************************************/
@@ -39,28 +40,33 @@ const isInvalidMove = (selectedDisc, newPeg) => board.filter(peg => (selectedDis
 //There should be a function checkWinner that checks to see if the player has won the game. You win the game by putting all the discs back in the original order but on a new peg. As a part of this function, you MUST use the reduce function at least once. As a helpful hint, we suggest that you test this function with only 3 pegs and 3 discs on the board as it will take significantly less moves to "win".
 
 const isWinner = board => {
-  // if I reduce this down to only the pegs with discs on them, then a single peg will denote a win, so 'pegsWithDiscs.length' should be '1'...right? I just have to make sure that the peg with discs isn't the first peg...or they must've cheated! This won't work for any initial condition, but only that where the discs all start on the first peg. For now, I'm going to bed...
-  // const checkWin = board.filter(peg => peg.length)
-  const checkWin = board.reduce((total, peg) => {
-    if(peg.length) {
-      total.push(peg);
+  const checkWin = board.reduce((result, peg) => {
+  // make sure it's not the original peg
+    if(peg.length === numberOfDiscs && board.indexOf(peg) > 0){      
+        result.push(peg);
     }
-    return total;
-  }, []);
-  
-  !(checkWin.length > 1) === true ? console.log(`Congratulations! You won!`) : console.log(`Next move please.`);
-  
-   
+    return result;
+    }, []); 
+  // reduce down to pegs that contain all discs, if it returns a non-empty output #winning
+  if(checkWin.length === 1){
+    console.log(`Congratulations! You won in ${counter} moves! Refresh to play again.`);   
+  } else {
+    console.log(`Next move please.`)
+  }
 }
 
 //*************************************************/
 
 renderBoard();
 
+moveDisc(1, 3);
+moveDisc(3, 1);
+moveDisc(1, 3);
 moveDisc(1, 2);
-// moveDisc(1, 3);
-// moveDisc(2, 3);
-// moveDisc(1, 2);
-// moveDisc(3, 1);
-// moveDisc(3, 2);
-// moveDisc(1, 2);
+moveDisc(3, 2);
+moveDisc(1, 3);
+moveDisc(2, 1);
+moveDisc(2, 3);
+moveDisc(1, 1);
+moveDisc(3, 1);
+moveDisc(1, 3);
