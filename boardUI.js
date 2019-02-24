@@ -6,7 +6,7 @@ const BoardUI = function() {
   const pegWidth = 20;
   const pegHeight = 200;
   const discHeight = 20;
-  const discWidth = 60;
+  const discWidth = 60; // Used as multiplier for disc size
   pegMiddle1 = x / 4;
   pegMiddle2 = x / 2;
   pegMiddle3 = (x / 4) * 3;
@@ -39,10 +39,17 @@ const BoardUI = function() {
     }
   }
 
+  const drawTotalMoves = function() {
+    ctx.font = "17px Arial";
+    ctx.fillStyle = "#000000";
+    ctx.fillText("Total Moves: " + board.getTotalMoves(), 8, 20);
+}
+
   const drawBoard = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawPegs();
     drawDiscs(board.getBoardState());
+    drawTotalMoves();
     requestAnimationFrame(drawBoard);
   }
 
