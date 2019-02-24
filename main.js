@@ -1,22 +1,32 @@
 var Board = function () {
-  var board = [[3, 2, 1],[],[]];
+  var board = [];
   var numMoves = 0
 
+  var startGame = function () {
+    board = []                          //clear board
+    board.push([3, 2, 1], [], [])       //reset board to original
+    var numMoves = 0                    //reset numMoves = 0
+  }
+
   var countMoves = function() {
-    //counts total number times move function used, needs to reset with checkWinner
     numMoves += 1
   }
-  var printBoard = board.map(function (value) {
-    console.log("--- " + value.join())
-  });
 
-
-  var legalMoves = board.filter(function (discNum) {
-    legal = [];
-    if (discNum < //lastDiscNum in each array) {
-
+  var legalMoves = function (discNum) {
+    //1. Create an array with all the last values
+    var last = {};
+    for (i = 0; i < board.length; i++) {
+      last[i] = board[i][board[i].length - 1];
     }
-    //USE FILTER TO PULL OUT LAST NUMBER IN EACH SUBARRAY
+    
+    // last = [];
+    // var findLasts = board.forEach(function (num) {
+    //   var index = num[num.length - 1]
+    //   return (last.push(index))
+    // });
+    //2. Filter last array to compare to discNum return array of true or false
+
+  }
 
   //   var tweets = posts.filter(function (post) {
   // if (post.platform === 'twitter') {
@@ -29,25 +39,23 @@ var Board = function () {
     //2. return array of pegs disc can move to
 
   }
-    var checkWinner = {
-      var totalValue = board.reduce (function (total, array) {
-        array.forEach (function (amount) {
-          total += 1;
-        });
-        return total;
-      }, 0);
-
-      for (i = 1; i < board.length; i++) {
-        if (totalValue == board[i].length) {
-          if otherPegs === boardTotal {
-            console.log("Congratulations, you win!")
-            console.log("Total moves: "+ countMoves)
-            restartGame
-          }
+  var checkWinner = function () {
+                //check total amount of discs in game
+    var totalValue = board.reduce (function (total, array) {
+      array.forEach (function (amount) {
+        total += 1;
+      });
+      return total;
+    }, 0);
+                //check if total discs is on peg2 or peg3.
+    for (i = 1; i < board.length; i++) {
+      if (totalValue == board[i].length) {
+          console.log("Congratulations, you win!")
+          console.log("Total moves: "+ countMoves)
+          startGame
         }
       }
     };
-
   return {
     board: board,
     countMoves: countMoves,
@@ -60,7 +68,7 @@ var Board = function () {
 var Game = function () {
   //print current output of board
   var printBoard = board.map(function (value) {
-    console.log("--- " + value.join())
+    console.log("--- " + value.join(" "))
   });
 
 
@@ -82,15 +90,10 @@ var Game = function () {
     };
   };
 
-  var restartGame = function () {
-      var board = [[3, 2, 1],[],[]];      //reset board to original
-      var numMoves = 0                   //reset numMoves = 0
-
-  }
-
   return {
     moveDisc: moveDisc,
     printBoard: printBoard
   };
 
 };
+startGame
