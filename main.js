@@ -19,12 +19,14 @@ const moveDisc = (currentPeg, newPeg) => {
   newPeg -= 1;
 
   const selectedDisc = board[currentPeg][board[currentPeg].length - 1];
-  
-  if(isValidMove(selectedDisc, newPeg)){
+
+  if(isInvalidMove(selectedDisc, newPeg)){
+    console.log(`You cannot place a larger disc onto a smaller one! Board is still:`);
+  } else {
+    console.log(`That move was successful, board is now:`);
     board[currentPeg].pop(selectedDisc); // take it off the top of currentPeg
     board[newPeg].push(selectedDisc);  // and place it on the top of newPeg
   }
-
   renderBoard();
 }
 
@@ -32,29 +34,14 @@ const moveDisc = (currentPeg, newPeg) => {
 
 // There should be a function that given a certain peg, determines which other pegs the top disc from that peg can be moved to. In order to complete this function, you MUST use a filter function at least once.
 
-const isValidMove = (selectedDisc, newPeg) => {
-  // if the last element of the newPeg is > selectedDisc then "true"
-  const discOnNewPeg = board[newPeg][board[newPeg].length - 1];
+const isInvalidMove = (selectedDisc, newPeg) => {
   // filter out the pegs in which selectedDisc >= the last element of the peg
-  const invalid = board.filter(peg => (selectedDisc >= peg[peg.length - 1]))
-       
-  console.log(selectedDisc);
-  console.log(invalid);
-
+  const invalid = board.filter(peg => (selectedDisc >= peg[peg.length - 1]));
+  // return true if 'some' of the elements in 'invalid' are equal to newPeg
   const result = invalid.some(element => {
-    return element === board[newPeg];
+    return element === board[newPeg]; 
   });
-
-  console.log(result);
-  
-
-  if(discOnNewPeg > selectedDisc || discOnNewPeg === undefined){
-    console.log(`That move was successful, board is now:`);
-    return true;
-  } else {
-    console.log(`You cannot place a larger disc onto a smaller one! Board is still:`);
-    return false;
-  }
+  return result; 
 }
 
 //*************************************************/
@@ -62,19 +49,13 @@ const isValidMove = (selectedDisc, newPeg) => {
 //There should be a function checkWinner that checks to see if the player has won the game. You win the game by putting all the discs back in the original order but on a new peg. As a part of this function, you MUST use the reduce function at least once. As a helpful hint, we suggest that you test this function with only 3 pegs and 3 discs on the board as it will take significantly less moves to "win".
 
 const checkWinner = () => {
-
+  
 }
 
 //*************************************************/
 
 renderBoard();
 
-moveDisc(1, 3);
-moveDisc(1, 2);
-moveDisc(3, 2);
-moveDisc(1, 3);
-moveDisc(2, 1);
-moveDisc(3, 2);
 
 
 
