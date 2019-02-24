@@ -45,18 +45,51 @@ var moveDisc = function(sourcepeg, targetpeg){ //function to moveDisc
   };
 };
 
-var checkWinner = function() { //refactor to use REDUCE
-    if (board[1].includes("1","2","3") || board[2].includes("1", "2","3")) {
-        console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?"); //this lets the player know when they've won
-        newBoard = [ // this resets the game board . ..if I name it "moves' and "board", then the logic above will be based on it because of scope. if i make it new names, the game won't work again
+var checkWinner = function () {
+ 
+    const winner = board.reduce((accumulator, peg) => { //uses reduce to check if the length of the peg is equal to 3. if it is, it returns the indexOf the peg that has 3 elements in it 
+      if (peg.length == 3) return board.indexOf(peg);
+      return accumulator
+      });
+    
+      if (winner === 1 || winner === 2) { //if winner returns index 2 or 3, the player has won!
+          console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?");
+            board = [ // this resets the game board
             ["3", "2", "1"],
             [],
             []
-        ];
-        newMoves = 0; //this resets the counter
-        console.log(printBoard());
-    }
-}
+          ];
+            moves = 0; // this resets the move counter
+            printBoard(); // this shows the user the playing board if they want to play again
+      };
+  };
+  
+
+ //test code
+console.log(moveDisc(1,2));
+console.log(moveDisc(1,2));
+console.log(moveDisc(1,3));
+console.log(moveDisc(2,3));
+console.log(moveDisc(1,2));
+console.log(moveDisc(3,1));
+console.log(moveDisc(2,1));
+console.log(moveDisc(3,2));
+console.log(moveDisc(1,2));
+
+
+// var checkWinner = function() { //refactor to use REDUCE
+//     if (board[1].includes("1","2","3") || board[2].includes("1", "2","3")) {
+//         console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?"); //this lets the player know when they've won
+//     //  newBoard = [ // this resets the game board . ..if I name it "moves' and "board", then the logic above will be based on it because of scope. if i make it new names, the game won't work again
+//     //        ["3", "2", "1"],
+//     //        [],
+//     //        []
+//     //  ];
+//     //  newMoves = 0; //this resets the counter
+//         console.log(printBoard());
+//     }
+// }
+
 // if (sourcepeg.length-1 < targetpeg.length-1) { attempting to see if the last index of sourcepeg is less than the last index of targetpeg
 
 // var moveDisc = function(sourcepeg, targetpeg){ //these 8 lines work!
@@ -81,10 +114,6 @@ var checkWinner = function() { //refactor to use REDUCE
 //         console.log(printBoard());
 //     }
 // }
-
-console.log(moveDisc(1,2));
-console.log(moves);
-console.log(moveDisc(1,3));
 
 
         // function moveDisc(chooseDisc, choosePeg) {
