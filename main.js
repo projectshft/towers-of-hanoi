@@ -1,9 +1,9 @@
 const Board = function() {
-  const board = [["4", "3", "2", "1"], [], []]; // Sets initial board state
+  const board = [["3", "2", "1"], [], []]; // Sets initial board state
   const winCondition = board[0].reduce(((sum, num) => sum + parseInt(num)), 0); // Sets win condition to total of peg1 at start of game
   const numOfDiscs = board[0].length;
   let moveCounter = 0;  // Tracks number of moves
-  let playerMessage = 'Welcome! Please select the starting peg and ending peg for your move!'
+  let playerMessage = 'Please select the starting peg and ending peg for your move!'
   document.getElementById('message').innerHTML = playerMessage;
   
   // Outputs the current state of the board to the console
@@ -26,17 +26,22 @@ const Board = function() {
     return moveCounter;
   }
 
-  // Moves a disk from one peg to another if valid move or print error
+  const getNumDiscs = function() {
+    return numOfDiscs;
+  }
+
+  // Moves a disk from one peg to another if valid move else print error
   const moveDisc = function(pegStart, pegEnd) {
     pegStart = document.getElementById('pegStart').value;
     pegEnd = document.getElementById('pegEnd').value;
     if(errorCheck(pegStart, pegEnd)) {
       const discCanMoveHere = whereCanDiscMove(pegStart);
-      pegStartVal = board[pegStart -1];
-      pegEndVal = board[pegEnd -1];
+      const pegStartVal = board[pegStart -1];
+      const pegEndVal = board[pegEnd -1];
 
       if(discCanMoveHere.indexOf(pegEnd - 1) !== -1) {
         pegEndVal.push(pegStartVal.pop());
+        $('#message').html(playerMessage);
       } else {
         console.log('You are not allowed to move a larger disc onto a smaller disc. Try Again!');
         $('#message').html('You are not allowed to move a larger disc onto a smaller disc. Try Again!');
@@ -68,7 +73,8 @@ const Board = function() {
         $('#message').html('AMAZING! You completed the puzzle in the minimum of ' + moveCounter + ' moves!');
       } else {
       console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!'); 
-      $('#message').html('You win!  This attempt took you a total of ' + moveCounter + ' moves!');
+      $('#message').html('You win!  This attempt took you a total of ' + moveCounter + ' moves!<br>' + 
+        'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1));
       }
       winnerSound.play();
     }
@@ -105,7 +111,8 @@ const Board = function() {
       discsStart: board[0].length,
       getBoardState: getBoardState,
       getTotalMoves: getTotalMoves,
-      resetGame: resetGame
+      resetGame: resetGame,
+      getNumDiscs: getNumDiscs
     }
 }
 
