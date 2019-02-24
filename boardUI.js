@@ -7,14 +7,15 @@ const BoardUI = function() {
   const pegHeight = 200;
   const discHeight = 20;
   const discWidth = 180 / board.getNumDiscs(); // Used as multiplier for disc size
-  pegMiddle1 = x / 4;
-  pegMiddle2 = x / 2;
+  pegMiddle1 = x / 4;  
+  pegMiddle2 = x / 2;  // Determines middle of each peg on x axis
   pegMiddle3 = (x / 4) * 3;
 
+  // Draws the pegs and peg number labels to the canvas
   const drawPegs = function() {
     ctx.beginPath();
-    ctx.rect(pegMiddle2 - pegWidth / 2, y - pegHeight, pegWidth, pegHeight);
     ctx.rect(pegMiddle1 - pegWidth / 2, y - pegHeight, pegWidth, pegHeight);
+    ctx.rect(pegMiddle2 - pegWidth / 2, y - pegHeight, pegWidth, pegHeight);
     ctx.rect(pegMiddle3 - pegWidth / 2, y - pegHeight, pegWidth, pegHeight);
     ctx.fillStyle = '#850007';
     ctx.fill();
@@ -25,9 +26,10 @@ const BoardUI = function() {
     ctx.closePath();
   }
 
+  // Draws the discs to the canvas based on the current board state
   const drawDiscs = function(boardState) {
     for(let i = 0; i < boardState.length; i++){
-      var peg = 'pegMiddle'.concat(i + 1);
+      let peg = 'pegMiddle'.concat(i + 1);
       for(let j = 0; j <= boardState[i].length; j++) {
         ctx.beginPath();
         ctx.rect(window[peg] - ((discWidth / 2) * boardState[i][j]), y - discHeight * (j + 1), discWidth * boardState[i][j], discHeight);
@@ -39,12 +41,14 @@ const BoardUI = function() {
     }
   }
 
+  // Draws the move total to top left of canvas
   const drawTotalMoves = function() {
     ctx.font = "17px Arial";
     ctx.fillStyle = "#000000";
     ctx.fillText("Total Moves: " + board.getTotalMoves(), 8, 20);
-}
+  }
 
+  // Main function to draw all components of the board
   const drawBoard = function() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawPegs();
@@ -53,6 +57,7 @@ const BoardUI = function() {
     requestAnimationFrame(drawBoard);
   }
 
+  // Returns object that allows the board to be drawn
   return {
     drawBoard: drawBoard
   }
