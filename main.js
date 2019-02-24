@@ -171,11 +171,11 @@ var Board = function(){
     }; // end setState
 //-------------------------------------------------------------------
         
-    var isMoveValid = function(fromPeg, toPeg){
+    var isMoveValid = function(fromPeg, targetPeg){
         // Is the desired move valid:
         // INPUTS: 
-        //      fromPeg: the peg from which you want to move a disc
-        //      toPeg: the peg to which you want to move a disc
+        //      fromPeg: the peg from which you want to move a disc (array)
+        //      toPeg: the peg to which you want to move a disc (array)
         // OUTPUTS: boolean
         //      true: if the move is good
         //      false: if the move does not fulfill the following requirements
@@ -183,15 +183,48 @@ var Board = function(){
         //          2) the disc on the fromPeg MUST be SMALLER than the disc on the toPeg
         console.log("DEBUG: =============================");
         console.log("DEBUG: *** in isMoveValid ***");
+
+        if (fromPeg.length !==0){     //peg has discs
+            if (targetPeg.length===0){    //target disc is empty...any disc can be moved here.
+                return true;
+            } //end if
+
+            fromIndex = fromPeg.length-1;
+            targetIndex = targetPeg.length-1;          //value of disc at the top of the fromPeg
+
+            console.log("DEBUG: fromIndex is: ", fromIndex);
+            console.log("DEBUG: targetIndex is: ", targetIndex);
+
+            for (i=0; i<fromPeg.length; i++){
+                console.log("DEBUG: fromPeg[",i,"] is: ",fromPeg[i]);
+            };
+            console.log("DEBUG: fromPeg[fromIndex]: ", fromPeg[fromIndex]);
+            console.log("DEBUG: targetPeg[targetIndex]: ", targetPeg[targetIndex]);
+
+            fromTopDisc = fromPeg[fromIndex];   //value of disc at the top of the targetPeg
+            targetTopDisc = targetPeg[targetIndex];   //value of disc at the top of the targetPeg
+
+            console.log("DEBUG: fromTopDisc is: ", fromTopDisc);
+            console.log("DEBUG: targetTopDisc is: ", targetTopDisc);
+
+            if (fromTopDisc < targetTopDisc){
+                return true;
+            } //end if
+            else {
+                return false;
+            } //end else
+        } //end if
     };// isMoveValid
 //-------------------------------------------------------------------
-   var whichPegs = function (peg) {
+   var whichPegs = function (currPeg) {
         // Determines which other pegs the disc on the given peg can move to
         // INPUTS: peg - the peg from which you want to move a disc
         // OUTPUTS: pegs that can be used to move the given disc to
         // *** MUST use filter function ***
         console.log("DEBUG: =============================");
         console.log("DEBUG: *** in whichPegs ***");
+
+        //var 
 
     }; //end whichPegs
 
@@ -267,4 +300,8 @@ gameBoard = Board();
 
 announceMsg("hello");
 gameBoard.resetBoard();
+console.log(gameBoard.isMoveValid([3, 2], [1]));    //false
+console.log(gameBoard.isMoveValid([3, 2], [4]));    //true
+console.log(gameBoard.isMoveValid([3, 2], []));     //true
+console.log(gameBoard.isMoveValid([5, 2], [4]));    //true
 
