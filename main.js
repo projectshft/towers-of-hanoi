@@ -10,21 +10,25 @@
 console.log('Life is a game and you are the player.'+' As you master the game, so you also create it.');
 console.log('Usage: board.moveDisc(a,b)');
 
-// create printBoard object
-var printBoard = {
-
-  startBoard = [['3', '2', '1'], [], []];
-}
-printBoard();
 
 //object to maintain state of the state of the board
-var board = {
+var board = function() {
 
-  validMove(){
+  startBoard = [['3', '2', '1'], [], []];
+
+  //do something private
+  var printBoard = startBoard.map(function(peg){
+    console.log('---' + peg)
+  });
+
+
+  //do something else private
+  function validMove(){
     if (peg str) = true;
     return something;
   }
 
+  //do something else private
   checkWinner(){
     array.reduce
     if (sum = 6){
@@ -33,8 +37,10 @@ var board = {
   }
 
 
-
+  // return an object exposed to the public
   return {
+
+    printBoard: printBoard,
 
     moveDisc: function(a,b){
       if validMove(){
@@ -42,13 +48,13 @@ var board = {
         array.pop();
         array.push();
       }
-
     }
-  }
+  };
 };
 
-var playGame = board.moveDisc(a,b);
-playGame();
+var board = boardState();
+board.printBoard();
+
 
 // test
 board.moveDisc(1,2);
