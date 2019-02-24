@@ -1,11 +1,44 @@
+//TO-DO LIST
+
+//Reconsider global variables ??? What needs to be "protected" or referenced/passed-by-reference ??? 
+
 //Check variable names for flexBoard, board, and Board. 
 
-//GLOBAL VARIABLES 
-//Board pieces
+//Check various variable names that refer to discs (userInpuNumberOfDiscs, etc.)
 
+//Check various variable names that refer to pegs, pegArray, pegInstance, pegState, etc.
+
+//??? What should be a straight-up function declaration, and what should be a variable assigned to a function ???
+
+//Compare & consider merging board initialization and updateBoard (could initial starting position just be the first call to updateBoard?)
+
+//Re-examine isPegEmpty, topDisc, legalMoves, and checkWinner. ??? Can these be condensed and/or more reliant on each other ???
+
+//Clean-up gobblety-gook at the bottom; decide what to keep and what to cut: startGame, announceWinner, endGame/resetGame, etc.
+
+//RUN MORE SPECIFIC TESTS
+
+//Convert functions to arrow functions where possible and simpler
+
+//Examine where to use 'this'
+
+//Examine more closely where closure is taking place, and where it might yield errors; understand this better
+
+//??? is bind, ball, or prototype necessary anywhere in this program ???
+
+//Create classes and/or pseudo Modules; define methods within board/Board object. Also need one board object that meets assignment description/objections, but also maybe another that tracks ONLY the pegs and not the other, excess info (numberOfMoves, gameOver)
+
+//OOP vs functional programming; re-evaluate design in this context
+
+//HTML/CSS rendering; prompts for user input; linking between files; simple, straightforward presentation
+
+
+//GLOBAL VARIABLES 
+
+//Board pieces
 //const NUMBER_OF_DISCS = 3;
 var userInputedNumberOfDiscs; //= 3; // hardcoded for now; ask for user input to determine numberOfDiscs (part of Extension 2)
-
+var sumOfAllDiscs = 
 //const NUMBER_OF_PEGS = 3; 
 //var userInputedNumberOfPegs; //= 3; // hardcoded; ask for user input to determine numberOfPegs (part of Extension 2)
 
@@ -136,7 +169,6 @@ if (!pegArray.prototype.last){
   };
 }
 
-
 //a function to check whether an inputted peg is empty or not (NOT PART OF ASSIGNMENT; could have functionality in legalMoves and maybe checkWinner)
 // function checkIfMoveIsLegal ();
 //   function isPegEmpty(peg) {
@@ -201,12 +233,37 @@ alert(counter.count);
 //_________________________________________________
 
 // There should be a function checkWinner that checks to see if the player has won the game. You win the game by putting all the discs back in the original order but on a new peg. As a part of this function, you MUST use the reduce function at least once. As a helpful hint, we suggest that you test this function with only 3 pegs and 3 discs on the board as it will take significantly less moves to "win".
+checkWinner() 
+// discs CANNOT be on peg1; must be peg 2 or peg 3
+//invoke isPegEmpty here; one of peg 2 or peg 3 must be empty
+  if (isPegEmpty(pegToCheck)) {
+  var nonEmptyPeg_DiscSum = threePegsArray.reduce(function (sumOfAllDiscs, nonEmptyPegNumber) {
+    //if (isPegEmpty(onePegToCheck/presumedEmptyPeg))  
+    });
+  }
+  //compare current sum of discs on one peg with sumOfAllDiscs
 
-checkWinner()
 //.reduce
+// When to use: When you want a single value that is an accumulation of information in an array.
 
+// The definition for reduce given to us by MDN is, "The reduce() method applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value." The most common way we've seen something like this is to sum an array of integers. 
 gameOver = true;
 
+function sumDiscs (userInputedNumberOfDiscs) {
+  let sumOfAllDiscs = 0;
+  for (let i=userInputedNumberOfDiscs; i>0; i--) { //use helper function instead of for loop???
+    sumOfAllDiscs = sumOfAllDiscs + i + (i-1); 
+    //(userInputedNumberOfDiscs + (userInputedNumberOfDiscs -1));
+    //userInputedNumberOfDiscs--;
+  };
+  return sumOfAllDiscs;
+}
+
+board.peg1.reduce(function () { // board.reduce(function () if board.i == board.peg1)
+
+    //if (isPegEmpty(onePegToCheck/presumedEmptyPeg))  
+  });
+}
 
 //_____________________________________________________
 
