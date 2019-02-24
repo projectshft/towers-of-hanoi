@@ -18,9 +18,17 @@ var myBoard = [["3", "2", "1"],[],[]]; //each nested array myBoard[0], myBoard[1
 // --- 2
 
 var boardState = { //records and manipulates the state of the board, and how many moves have been made.
-  peg1: myBoard[0], //points to the first array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
-  peg2: myBoard[1], //points to the second array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
-  peg3: myBoard[2], //points to the third array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
+  // peg1: myBoard[0], //points to the first array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
+  // peg2: myBoard[1], //points to the second array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
+  // peg3: myBoard[2], //points to the third array of MyBoard. CANNOT BE USED TO MANIPULATE BOARD, ONLY A REFERNCE.
+  // reducerPeg2: myBoard[1].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0),
+  // reducerPeg3: myBoard[2].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0), //currently don't think any of the previous 5 lines are necessary.
+  checkWinner: function(){  //must have a reduce function
+      if (myBoard[1].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0) === 6
+       || myBoard[2].reduce(function(acc, cV) {return parseInt(acc) + parseInt(cV)}, 0) === 6) {
+        console.log("Winner!");
+      }
+    },
   numOfMoves: 0,
   moveDisc: function(give, receive){
   //  if (checkIfLegal(give, receive) === false) {
@@ -32,9 +40,11 @@ var boardState = { //records and manipulates the state of the board, and how man
 
       myBoard.map(function (element) {
       console.log("---" + element.join());
+      }); // prints the updated board to console.log. RETURNS THE SAME ARRAY THAT WAS PASSED IN.
 
       console.log("Number of moves: " + boardState.numOfMoves); // logs the number of moves
-    }); // prints the updated board to console.log. RETURNS THE SAME ARRAY THAT WAS PASSED IN.
+
+      boardState.CheckWinner();
   },
 };
 
@@ -51,7 +61,17 @@ var checkIfLegal = function(theGiver, theReceiver){
 
 };
 
-var checkWinner = function(){
-//must have a reduce function
-
-}
+// var checkWinner = function(){
+// //must have a reduce function
+//   if (reducerPeg2 === 6 || reducerPeg3 === 6) {
+//     console.log("Winner!");
+//   }
+// }
+//
+// var reducerPeg2 = myBoard[1].reduce(function(acc, cV) {
+//   return parseInt(acc) + parseInt(cV);
+// }, 0);
+//
+// var reducerPeg3 = myBoard[2].reduce(function(acc, cV) {
+//   return parseInt(acc) + parseInt(cV);
+// }, 0);
