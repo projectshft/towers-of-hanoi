@@ -20,7 +20,7 @@ var Board = function(){
     //gameBoard = [[],[],[]]; //hard code for 3 pegs/3discs
 
     var gameBoard = [[],[],[]];
-    var nextMove = [];             //stores the move coordinates [fromPeg, toPeg]
+   var nextMove = [];             //stores the move coordinates [fromPeg, toPeg]
 
     var attributes = {
         numPegs: 3,      // number of pegs on the board
@@ -55,7 +55,7 @@ var Board = function(){
         var numDiscsOnPeg; //= gameBoard[0].length;  //number of pegs on a particular disc
 
         console.log("DEBUG: totalPegs ", totalPegs);
-        for (i=0; i < totalPegs; i++) {   //for each peg
+        for (var i=0; i < totalPegs; i++) {   //for each peg
             
             currPeg = gameBoard[i].map(function(elem){
                 return elem;
@@ -66,7 +66,7 @@ var Board = function(){
                  //the number of discs found on the peg.
            
 
-            for (j=0; j< numDiscsOnPeg; j++)  {      //only display the peg--no discs;  
+            for (var j=0; j< numDiscsOnPeg; j++)  {      //only display the peg--no discs;  
                 newPeg = currPeg.shift();
                 pegToDisplay=pegToDisplay + space + newPeg;
                 
@@ -100,9 +100,9 @@ var Board = function(){
         var totalDiscs = attributes["numDiscs"];
         var discNum = totalDiscs;
         console.log("DEBUG: discNum = ", discNum);
-        for (i=0; i<totalPegs; i++){
+        for (var i=0; i<totalPegs; i++){
             if (i === 0) {      //initialize the first array, gameboard[0][x...y] to contain all the discs (x thru y)
-                for (j=0; j < totalDiscs; j++){
+                for (var j=0; j < totalDiscs; j++){
                     gameBoard[i].push (discNum);
                     console.log("DEBUG: gameBoard[",i,"][",j,"] is: ", gameBoard[i][j]);
                     console.log("DEBUG: discNum = ", discNum);
@@ -171,73 +171,140 @@ var Board = function(){
     }; // end setState
 //-------------------------------------------------------------------
         
-    var isMoveValid = function(fromPeg, targetPeg){
-        // Is the desired move valid:
-        // INPUTS: 
-        //      fromPeg: the peg from which you want to move a disc (array)
-        //      toPeg: the peg to which you want to move a disc (array)
-        // OUTPUTS: boolean
-        //      true: if the move is good
-        //      false: if the move does not fulfill the following requirements
-        //          1) the fromPeg MUST have discs
-        //          2) the disc on the fromPeg MUST be SMALLER than the disc on the toPeg
-        console.log("DEBUG: =============================");
-        console.log("DEBUG: *** in isMoveValid ***");
+    // var isMoveValid = function(fromPeg, targetPeg){
+    //     // Is the desired move valid:
+    //     // INPUTS: 
+    //     //      fromPeg: the peg from which you want to move a disc (array)
+    //     //      toPeg: the peg to which you want to move a disc (array)
+    //     // OUTPUTS: boolean
+    //     //      true: if the move is good
+    //     //      false: if the move does not fulfill the following requirements
+    //     //          1) the fromPeg MUST have discs
+    //     //          2) the disc on the fromPeg MUST be SMALLER than the disc on the toPeg
+    //     console.log("DEBUG: =============================");
+    //     console.log("DEBUG: *** in isMoveValid ***");
 
-        if (fromPeg.length !==0){     //peg has discs
-            if (targetPeg.length===0){    //target disc is empty...any disc can be moved here.
-                return true;
-            } //end if
+    //     if (fromPeg.length !==0){     //peg has discs
+    //         if (targetPeg.length===0){    //target disc is empty...any disc can be moved here.
+    //             return true;
+    //         } //end if
 
-            fromIndex = fromPeg.length-1;
-            targetIndex = targetPeg.length-1;          //value of disc at the top of the fromPeg
+    //         fromIndex = fromPeg.length-1;
+    //         targetIndex = targetPeg.length-1;          //value of disc at the top of the fromPeg
 
-            console.log("DEBUG: fromIndex is: ", fromIndex);
-            console.log("DEBUG: targetIndex is: ", targetIndex);
+    //         console.log("DEBUG: fromIndex is: ", fromIndex);
+    //         console.log("DEBUG: targetIndex is: ", targetIndex);
 
-            for (i=0; i<fromPeg.length; i++){
-                console.log("DEBUG: fromPeg[",i,"] is: ",fromPeg[i]);
-            };
-            console.log("DEBUG: fromPeg[fromIndex]: ", fromPeg[fromIndex]);
-            console.log("DEBUG: targetPeg[targetIndex]: ", targetPeg[targetIndex]);
+    //         for (var i=0; i<fromPeg.length; i++){
+    //             console.log("DEBUG: fromPeg[",i,"] is: ",fromPeg[i]);
+    //         };
+    //         console.log("DEBUG: fromPeg[fromIndex]: ", fromPeg[fromIndex]);
+    //         console.log("DEBUG: targetPeg[targetIndex]: ", targetPeg[targetIndex]);
 
-            fromTopDisc = fromPeg[fromIndex];   //value of disc at the top of the targetPeg
-            targetTopDisc = targetPeg[targetIndex];   //value of disc at the top of the targetPeg
+    //         fromTopDisc = fromPeg[fromIndex];   //value of disc at the top of the targetPeg
+    //         targetTopDisc = targetPeg[targetIndex];   //value of disc at the top of the targetPeg
 
-            console.log("DEBUG: fromTopDisc is: ", fromTopDisc);
-            console.log("DEBUG: targetTopDisc is: ", targetTopDisc);
+    //         console.log("DEBUG: fromTopDisc is: ", fromTopDisc);
+    //         console.log("DEBUG: targetTopDisc is: ", targetTopDisc);
 
-            if (fromTopDisc < targetTopDisc){
-                return true;
-            } //end if
-            else {
-                return false;
-            } //end else
-        } //end if
-    };// isMoveValid
+    //         if (fromTopDisc < targetTopDisc){
+    //             return true;
+    //         } //end if
+    //         else {
+    //             return false;
+    //         } //end else
+    //     } //end if
+    // };// isMoveValid
 //-------------------------------------------------------------------
-   var whichPegs = function (currPeg) {
-        // Determines which other pegs the disc on the given peg can move to
-        // INPUTS: peg - the peg from which you want to move a disc
-        // OUTPUTS: pegs that can be used to move the given disc to
+   var whichPegs = function (srcPegIndex) {
+        // Determines which other pegs on the board that the disc on the given peg can move to
+        // INPUTS: (array) peg - the peg from which you want to move a disc
+        // OUTPUTS: (array) pegs that can be used to move the given disc to 
         // *** MUST use filter function ***
         console.log("DEBUG: =============================");
         console.log("DEBUG: *** in whichPegs ***");
+        
+        var numDiscsOnSrcPeg = gameBoard[srcPegIndex].length;
+        var srcTopDisc = gameBoard[srcPegIndex][numDiscsOnSrcPeg-1];  //arrays begin index at 0;
+        console.log("DEBUG: numDiscsOnSrcPeg is: ", numDiscsOnSrcPeg);
+        console.log("DEBUG: srcPegIndex is: ", srcPegIndex);
+        console.log("DEBUG: srcTopDisc is: ", srcTopDisc);
+        var validPegs=[];
 
-        //var 
+        var pegsAvailArr = gameBoard.filter(function(elem, eindex) {
+            console.log("DEBUG: INSIDE FILTER FUNCTION");
+            console.log("DEBUG: eindex is: ", eindex);
+            elemTopDiscIndex = elem.length - 1;
+            console.log("DEBUG: elemTopDiscIndex is: ", elemTopDiscIndex);
+            var currPegTopDisc = elem[elemTopDiscIndex];
+            console.log("DEBUG: currPegTopDisc is: ", currPegTopDisc);
+            if ((currPegTopDisc > srcTopDisc) || (elemTopDiscIndex === -1)){  
+                // currPegTopDisc is bigger and OK || currPeg is empty peg)
+                console.log("DEBUG: return true");
+                validPegs.push(eindex);
+                return true;
+            } //end if
+            else {
+                console.log("DEBUG: return false");
+                return false;
+            } // end else
+        }); //end filter
+        console.log ("DEBUG: validPegs is: ", validPegs);
+        console.log ("DEBUG: pegsAvailArr is: ", pegsAvailArr);
+        return validPegs;
+    //     var pegsAvailArr = [];
+    //     var srcPeg = gameBoard[srcPegIndex];
+    //     console.log("DEBUG: srcPeg is: ", srcPeg);
+    //     console.log("DEBUG: srcPegIndex is: ", srcPegIndex);
+    //     var howManyPegs = gameBoard.length;
+
+    //     console.log("DEBUG: howManyPegs is: ", howManyPegs);
+
+    //    // for (var i=0; i<gameBoard.length; i++){
+    //     console.log("DEBUG: howManyPegs is: ", howManyPegs);
+    //         //if (i!==srcPegIndex) {     //don't look at the src peg index.
+    //             console.log("DEBUG: (i) ",i," !== (srcPegIndex) ", srcPegIndex);
+    //             currPeg = gameBoard[i];
+    //             console.log("DEBUG: srcPeg is: ", srcPeg);
+    //             pegsAvailArr=gameBoard.filter(function(arr)
+    //                 return arr.length));
+    //         } //end if
+    //    // } //end for loop
 
     }; //end whichPegs
 
 //-------------------------------------------------------------------
-    var moveDisc = function (fromPeg, toPeg) {
-        // move a disc from the fromPeg to the toPeg
+    var moveDisc = function (srcPegIndex, targetPegIndex) {
+        // move a disc from the srcPeg to the targetPeg 
         //INPUTS:
-        //      fromPeg - the peg from which you want to take a disc
-        //      toPeg   - the peg to which you want to move the disc.
+        //      fromPeg - the peg index from which you want to take a disc
+        //      toPeg   - the peg index to which you want to move the disc.
         // Don't forget to validate move
         console.log("DEBUG: =============================");
         console.log("DEBUG: *** in moveDisc ***");
 
+        var validPegs = whichPegs(srcPegIndex);
+        var moveOK = validPegs.find(function(elem){
+            return elem === targetPegIndex;
+        })  //end find 
+
+        console.log("DEBUG: targetPegIndex is: ", targetPegIndex);
+        console.log("DEBUG: moveOK is: ", moveOK);
+
+        if (moveOK != undefined){
+            console.log("DEBUG: YAY! WE CAN MOVE THE DISC!");
+            disc = gameBoard[srcPegIndex].pop();
+            console.log("DEBUG: disc is: ", disc);
+            gameBoard[targetPegIndex].push(disc);
+                
+        } else {
+            console.log ("INVALID MOVE, please try again.")
+        }
+        console.log("Current Game Board:")
+        displayBoard();
+ 
+
+            
 
     }; //end move disc
 //-------------------------------------------------------------------
@@ -272,10 +339,13 @@ var Board = function(){
 
     return {
         resetBoard: resetBoard,
+        displayBoard: displayBoard,
         getMove: getMove,
-        isMoveValid: isMoveValid,
+      //  isMoveValid: isMoveValid,   //internal use; added here for testing
         moveDisc: moveDisc,
-        checkWinner: checkWinner
+        checkWinner: checkWinner,
+        whichPegs: whichPegs,        //internal use; added here for testing
+        
       
     };// end return
 //-------------------------------------------------------------------
@@ -300,8 +370,28 @@ gameBoard = Board();
 
 announceMsg("hello");
 gameBoard.resetBoard();
-console.log(gameBoard.isMoveValid([3, 2], [1]));    //false
-console.log(gameBoard.isMoveValid([3, 2], [4]));    //true
-console.log(gameBoard.isMoveValid([3, 2], []));     //true
-console.log(gameBoard.isMoveValid([5, 2], [4]));    //true
+// console.log(gameBoard.isMoveValid([3, 2], [1]));    //false
+// console.log(gameBoard.isMoveValid([3, 2], [4]));    //true
+// console.log(gameBoard.isMoveValid([3, 2], []));     //true
+// console.log(gameBoard.isMoveValid([5, 2], [4]));    //true
+gameBoard.displayBoard();
+console.log(gameBoard.whichPegs(0));
+console.log(gameBoard.moveDisc(0,1));
+gameBoard.displayBoard();
+console.log(gameBoard.moveDisc(0,1));   //expect an error.
+gameBoard.displayBoard();
+console.log(gameBoard.moveDisc(0,2)); 
+gameBoard.displayBoard();
+// console.log(gameBoard.moveDisc(1,2));   //expect error
+// gameBoard.displayBoard();
+console.log(gameBoard.moveDisc(1,2));   
+gameBoard.displayBoard();
+console.log(gameBoard.moveDisc(0,1));
+gameBoard.displayBoard();
+console.log(gameBoard.moveDisc(2,0));
+gameBoard.displayBoard();
+console.log(gameBoard.moveDisc(2,1));
+gameBoard.displayBoard();
+console.log(gameBoard.moveDisc(0,1));
+gameBoard.displayBoard();
 
