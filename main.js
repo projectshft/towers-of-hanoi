@@ -1,53 +1,83 @@
 //GLOBAL VARIABLES 
 //Board pieces
-var numberOfDiscs; 
-var userInputedNumberOfDiscs = 3; // hardcoded for now; ask for user input to determine numberOfDiscs (part of Extension 2)
 
-var numberOfPegs; 
-var userInputedNumberOfPegs = 3; // hardcoded; ask for user input to determine numberOfPegs (part of Extension 2)
+//const NUMBER_OF_DISCS = 3;
+var userInputedNumberOfDiscs; //= 3; // hardcoded for now; ask for user input to determine numberOfDiscs (part of Extension 2)
 
+//const NUMBER_OF_PEGS = 3; 
+//var userInputedNumberOfPegs; //= 3; // hardcoded; ask for user input to determine numberOfPegs (part of Extension 2)
+
+const PEG_BASE = "--- ";
 var selectedDisc; //for move function
 var selectedPeg; // = destinationPeg
 
 var numberOfMoves; //for count function
 var gameOver; // Boolean for global reference
 
+//Set the number of Discs to set the board with. PLACEHOLDER FOR USER INPUT.
+function setNumberOfDiscs (numberOfDiscs) {
+  //userInputedNumberOfDiscs = prompt("How many discs do you want to play with?");
+  userInputedNumberOfDiscs = numberOfDiscs;
+}
 
 //function to initialize the board (object???) SEE BELOW
-function initializeBoard(startingPeg, discs) { //CHECK PARAMETERS: need more? less? different names? 
-  numberOfDiscs = userInputedNumberOfDiscs; 
-  numberOfPegs = userInputedNumberOfPegs;
+function initializeBoard(startingNumberOfDiscs) { //CHECK PARAMETERS: need more? less? different names? 
+  //NUMBER_OF_DISCS = startingNumberOfDiscs
+  let flexBoard = []; // variable for "flexible" board (flexible number of discs that can be set by user  
+
+  //Hardcoding 3 pegs; Create an initializeNumberOfPegs function (using a loop, likely a forEach) to allow user to set number of pegs
+  let firstPeg = [];
+  let secondPeg = [];
+  let thirdPeg = [];
+
+  //populate the firstPeg array with the starting number of discs; all on firstPeg for starting position at beginning of the game
+  for (let i = startingNumberOfDiscs; i > 0; i--){         
+      firstPeg.push(i);
+    };
+
+  //populate the flexBoard with three pegs in starting position
+  flexBoard.push(firstPeg, secondPeg, thirdPeg);
+
+  //graphical depiction to console of flexBoard and pegs, with discs in starting position
+  flexBoard.forEach(function (currentInstanceOfPegArray) {
+      console.log(PEG_BASE + currentInstanceOfPegArray.join("  "))
+    });
+  
+  //set (or reset) dynamic global variables to starting values
   selectedDisc = null;
   selectedPeg = null;
   numberOfMoves = 0;
-  gameOver = false;
-  }
+  gameOver = false; 
+  console.log("First move, please.");
+}
 
-//var Board = function() {
+//Body of executable code
+setNumberOfDiscs(8); // add setNumberOfPegs later
+initializeBoard(userInputedNumberOfDiscs); //initializeBoard(userInputedNumberOfPegs, userInputedNumberOfDiscs);
 
-//create board using forEach
-// this is startingPosition; create a variable to hold it and use for initializeBoard function???
-// userInputed... for 
-var board = [["3", "2", "1"], [], []]; // RENAME
-  var pegBase = "--- ";
-  board.forEach(function (pegArray) {
-    console.log(pegBase + pegArray.join("  "))
-  });
+//______________________________________
 
+//only the above works
+// moveDisc(x, y);
+// console.log("Next move, please.");
 
 
 // There should be a way to move discs from one peg to another.
-var moveDisc = function(disc, pegOfOrigin, destinationPeg){  // also need unUsedPeg???
-  if (!gameOver) {}; // ???
+var moveDisc = function(selectedDisc, destinationPeg){  // need pegOfOrigin, or determine that by the selectedDisc(inherent value); also need unusedPeg???
+  if (!gameOver) {
+    
 } 
 
 
 // There should be an object responsible for maintaining the state of the board and it should control the way to manipulate the inner state of the board. The board should maintain the number of moves that the player has done and output this value when the game completes.
-var stateOfTheBoard = {}; //SEE board above
-var startingState; 
-var peg1;
-var peg2;
-var peg3;
+var stateOfTheBoard = {
+  var startingState; 
+  var peg1;
+  var peg2;
+  var peg3;
+}; //SEE board above
+
+updateBoard(); // use MAP w/ board initialization.
 
 
 //maintain the number of moves
@@ -95,11 +125,11 @@ var legalMoves = function moveValidation(peg){
   return (board[???][???]) // Return legal moves or ILLegal moves???
 }
 
-var tweets = posts.filter(function (post) {
-  if (post.platform === 'twitter') {
-    return true;
-  }
-});
+// var tweets = posts.filter(function (post) {
+//   if (post.platform === 'twitter') {
+//     return true;
+//   }
+// });
 
 //.filter
 // When to use: When you want to create a new array that is a subset of the original array and can be created by interrogating each element in the array.
@@ -121,7 +151,7 @@ gameOver = true;
 
 // Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
 endGame()
-announceWinner() = console.log ("Winner!");
+announceWinner() = console.log("Winner!");
 
 
 function resetGame(start) {
