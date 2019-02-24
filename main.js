@@ -8,74 +8,47 @@
 
 
 console.log('Life is a game and you are the player.'+' As you master the game, so you also create it.');
+console.log('Usage: board.moveDisc(a,b)');
 
-// prompt user for starting peg and ending peg
-// store user input in array
-// convert user input value into ith index in board
-// push array into moveA, moveB
+// create printBoard object
+var printBoard = {
 
-// create board array
-var board = [['3', '2', '1'], [], []];
-  //console.log(board);
-  //console.log(board.length);
+  startBoard = [['3', '2', '1'], [], []];
+}
+printBoard();
 
 //object to maintain state of the state of the board
-var StateOfBoard = function() {
-  var board = [['3', '2', '1'], [], []];
+var board = {
 
+  validMove(){
+    if (peg str) = true;
+    return something;
+  }
 
-  var printBoard = function(peg) {
-    console.log('---' + peg);
-  };
-  board.map(printBoard);
+  checkWinner(){
+    array.reduce
+    if (sum = 6){
+      return win;
+    }
+  }
+
 
 
   return {
-    moveDisc: moveDisc,
-    printBoard: printBoard
-  };
+
+    moveDisc: function(a,b){
+      if validMove(){
+        move disc
+        array.pop();
+        array.push();
+      }
+
+    }
+  }
 };
 
-var board = StateOfBoard();
+var playGame = board.moveDisc(a,b);
+playGame();
 
-board.moveDisc(8);
-board.printBoard();
-
-/*
-// checkMove function checks if move is valid
-var checkMove = stateOfBoard.find(function(moveA,moveB) {
-  //if stateOfBoard.peg.bool = true && pegs
-    //move disc
-
-  //condition #1: That move was successful, board is now:
-  //condition #2: You cannot move a larger disc on top of a smaller one, board is still:
-  //if last disc on moveA > last disc on moveB
-  //console.log 'can not move'
-
-  //keep track of # of moves each time checkMove is invoked
-});
-*/
-
-/*
-// moveDisc function to take in player submitted moves
-var moveDisc = function() {
-  // checkMove function checks if move is valid
-    //if moveA = true; //peg has disc
-
-    //if state == true;
-      board.pop();
-      //board[0].push(moveB);
-
-      console.log(peg);
-};
-
-//board.moveDisc(1,2);
-
-
-
-/*
-// checkWinner function checks if won
-//var checkWinner = takes result of moveDisc
-  //if sum = 6
-  //reduce method
-*/
+// test
+board.moveDisc(1,2);
