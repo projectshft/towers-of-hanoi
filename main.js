@@ -32,6 +32,14 @@ var Board = function (board, boardCopy, moves) {
     }
   };
 
+  /** Function that adds a disc to increase difficulty */
+  var addDisc = function () {
+    var boardLength = state.board[0].length;
+    state.board[0].unshift(boardLength + 1);
+    state.boardCopy[0].unshift(boardLength + 1);
+    displayBoard();
+  }
+
   /** 
    * function that moves one disc to another peg, returns a number to display error type
    * on makeMove function
@@ -145,7 +153,6 @@ var Board = function (board, boardCopy, moves) {
     state.board = [[3, 2, 1], [], []];
     state.boardCopy = [[3, 2, 1], [], []];
     state.moves = 0;
-    console.clear();
     displayBoard();
   };
 
@@ -157,6 +164,7 @@ var Board = function (board, boardCopy, moves) {
   }
 
   return {
+    addDisc: addDisc,
     resetGame: resetGame,
     moveDisc: moveDisc,
     displayBoard: displayBoard,
