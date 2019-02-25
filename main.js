@@ -174,16 +174,6 @@ var Board = function (board, boardCopy, moves) {
 } // End Board Module 
 
 
-
-/** Setting a new game on window load */
-var startingBoard = [[3, 2, 1], [], []];
-var startingBoardCopy = [[3, 2, 1], [], []];
-var initialMoves = 0;
-var board = Board(startingBoard, startingBoardCopy, initialMoves);
-console.log("Starting Board")
-board.displayBoard();
-
-
 /** 
  * Function that gets invoked every time the user clicks the move button  
  */
@@ -248,3 +238,12 @@ function makeMove() {
 
   } while (gameStatus)
 }
+
+
+/** Sets a new game on window load */
+var startingBoard = [[3, 2, 1], [], []];
+var startingBoardCopy = [[3, 2, 1], [], []];
+var initialMoves = 0;
+var board = Board(startingBoard, startingBoardCopy, initialMoves);
+console.log("Starting Board")
+board.displayBoard();
