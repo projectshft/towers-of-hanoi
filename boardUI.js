@@ -28,7 +28,7 @@ const BoardUI = function() {
 
   // Draws the discs to the canvas based on the current board state
   const drawDiscs = function(boardState) {
-    for(let i = 0; i < boardState.length; i++){
+    for(let i = 0; i < boardState.length; i++) {
       let peg = 'pegMiddle'.concat(i + 1);
       for(let j = 0; j <= boardState[i].length; j++) {
         ctx.beginPath();
