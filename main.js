@@ -81,14 +81,14 @@ console.log(TowersOfHanoi.moveDisc(1,2));
 
 // var moveDisc = function(sourcepeg, targetpeg){ - NONWORKING final attempt at using filter
 //     sourcepeg -= 1; //because array index starts at 1, we need to decrease the number so the peg numbers passed are logical for the user, but still work for array manipulation        
-// 	targetpeg -= 1;
- 
+// 	   targetpeg -= 1;
+
 //   var isLegalMove = function() { //this filters the board for empty pegs
 // 		var emptyPegs = board.filter(function (peg) {
 //   			return peg.length === 0;
 // 		});
 		
-// 	if (emptyPegs.includes(targetpeg) || board[sourcepeg] < board[targetpeg]) {	
+// 	if (emptyPegs.includes(targetpeg) || disc < board[targetpeg]) {	//this doesn't work
 // 		var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
 //         board[targetpeg].push(disc); //adds var disc to the target peg
 //         moves += 1; //this is a move!
@@ -102,7 +102,7 @@ console.log(TowersOfHanoi.moveDisc(1,2));
 //   return isLegalMove();
 // };
 // --------------------------------------------------------
-// var checkWinner = function() { //refactor to use REDUCE
+// var checkWinner = function() { // prior to incorporating reduce
 //     if (board[1].includes("1","2","3") || board[2].includes("1", "2","3")) {
 //         console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?"); //this lets the player know when they've won
 //     //  newBoard = [ // this resets the game board . ..if I name it "moves' and "board", then the logic above will be based on it because of scope. if i make it new names, the game won't work again
