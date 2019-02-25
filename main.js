@@ -320,6 +320,34 @@ var Board = function(){
         // *** MUST use the reduce function ***
         console.log("DEBUG: =============================");
         console.log("DEBUG: *** in checkWinner *** ");
+        
+        var totalDiscs = attributes["numDiscs"];
+        var pegWithDiscs = gameBoard.find(function(elem){
+            console.log("DEBUG: elem is:  ", elem);
+           
+            return elem.length;
+        });
+
+        console.log("DEBUG: pegWithDiscs is: ", pegWithDiscs);
+        numDiscs = pegWithDiscs.reduce (function (discCounter, elem){
+            console.log("DEBUG: discCounter is: ", discCounter);
+            return ++discCounter;
+        }, 0);
+        console.log("DEBUG: numDiscs is: ", numDiscs);
+        console.log("DEBUG: gameBoard.numDiscs is: ", gameBoard.numDiscs);
+        if (numDiscs === totalDiscs){
+            console.log("HOORAY--YOU WON!");
+            console.log("Here is your winning board: ");
+            displayBoard();
+            resetBoard();
+        } //end if
+
+        else {
+            console.log ("No winner yet.")
+            console.log("Here is the current board: ");
+            displayBoard();
+        }
+
     }; // end checkWinner
 
 //-------------------------------------------------------------------
@@ -336,6 +364,7 @@ var Board = function(){
         // var toPeg = window.prompt("Move peg TO: (top, middle, bottom");
 
     }; //end getMove
+//-------------------------------------------------------------------
 
     return {
         resetBoard: resetBoard,
@@ -365,33 +394,35 @@ var Board = function(){
 //              notify user that the move is invalid (and keep looping)
 //
 
-gameBoard = Board();
+myGameBoard = Board();
 //
 
 announceMsg("hello");
-gameBoard.resetBoard();
+myGameBoard.resetBoard();
 // console.log(gameBoard.isMoveValid([3, 2], [1]));    //false
 // console.log(gameBoard.isMoveValid([3, 2], [4]));    //true
 // console.log(gameBoard.isMoveValid([3, 2], []));     //true
 // console.log(gameBoard.isMoveValid([5, 2], [4]));    //true
-gameBoard.displayBoard();
-console.log(gameBoard.whichPegs(0));
-console.log(gameBoard.moveDisc(0,1));
-gameBoard.displayBoard();
-console.log(gameBoard.moveDisc(0,1));   //expect an error.
-gameBoard.displayBoard();
-console.log(gameBoard.moveDisc(0,2)); 
-gameBoard.displayBoard();
+myGameBoard.displayBoard();
+console.log(myGameBoard.whichPegs(0));
+console.log(myGameBoard.moveDisc(0,1));
+myGameBoard.displayBoard();
+console.log(myGameBoard.moveDisc(0,1));   //expect an error.
+myGameBoard.displayBoard();
+console.log(myGameBoard.moveDisc(0,2)); 
+myGameBoard.displayBoard();
 // console.log(gameBoard.moveDisc(1,2));   //expect error
 // gameBoard.displayBoard();
-console.log(gameBoard.moveDisc(1,2));   
-gameBoard.displayBoard();
-console.log(gameBoard.moveDisc(0,1));
-gameBoard.displayBoard();
-console.log(gameBoard.moveDisc(2,0));
-gameBoard.displayBoard();
-console.log(gameBoard.moveDisc(2,1));
-gameBoard.displayBoard();
-console.log(gameBoard.moveDisc(0,1));
-gameBoard.displayBoard();
+console.log(myGameBoard.moveDisc(1,2));   
+myGameBoard.displayBoard();
+console.log(myGameBoard.moveDisc(0,1));
+myGameBoard.displayBoard();
+console.log(myGameBoard.moveDisc(2,0));
+myGameBoard.displayBoard();
+console.log(myGameBoard.moveDisc(2,1));
+myGameBoard.displayBoard();
+console.log(myGameBoard.moveDisc(0,1));
+myGameBoard.displayBoard();
+
+myGameBoard.checkWinner();
 
