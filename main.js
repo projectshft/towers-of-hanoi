@@ -3,11 +3,12 @@
  * @param {Array} array - The starting board 
  * @param {Int} moves - Keeps tracks of the number of moves
  */
-var Board = function (array, moves) {
+var Board = function (board, boardCopy, moves) {
   // state of board
   var state = {
-    board: array,
-    moves: moves
+    board: board,
+    moves: moves,
+    boardCopy: boardCopy
   }
 
   /**
@@ -32,27 +33,26 @@ var Board = function (array, moves) {
   };
 
   /** 
-   * function that moves one disc to another peg, returns a number to check for errors
+   * function that moves one disc to another peg, returns a number to display error type
    * on makeMove function
    * @param {Int} moveOne - The starting peg 
    * @param {Int} moveTwo - The ending peg 
    */
   var moveDisc = function (moveOne, moveTwo) {
     var moveStatus;
-    var numberOfPegs = state.board.length;
-
-    console.log(moveOne, moveTwo);
+    var gameCompleted;
+    var numberOfPegs = state.boardCopy.length;
 
     if ((moveOne < 1 || moveOne > numberOfPegs) || (moveTwo > numberOfPegs || moveTwo < 1)) {
       moveStatus = 3;
       return moveStatus;
     }
 
-    var startPeg = state.board[moveOne - 1];
+    var startPeg = state.boardCopy[moveOne - 1];
     var lastIndexOfStartPeg = startPeg.length - 1;
     var topDiscOfStartPeg = startPeg[lastIndexOfStartPeg];
 
-    var endPeg = state.board[moveTwo - 1];
+    var endPeg = state.boardCopy[moveTwo - 1];
 
     if (startPeg.length === 0) {
       moveStatus = 1;
@@ -71,10 +71,17 @@ var Board = function (array, moves) {
       moveStatus = 2;
       return moveStatus;
     }
-
+    // const boardCopy = state.board.slice();
+    // console.log(boardCopy);
     startPeg.splice(lastIndexOfStartPeg, 1)
     endPeg.push(topDiscOfStartPeg);
     state.moves++
+
+    gameCompleted = checkWinner(endPeg);
+    if (gameCompleted) {
+      moveStatus = 5;
+      return moveStatus;
+    }
     return;
   };
 
@@ -90,7 +97,7 @@ var Board = function (array, moves) {
     var lastIndexOfEndPeg = endPeg.length - 1;
     var topDiscOfEndPeg = endPeg[lastIndexOfEndPeg];
 
-    var goodPegs = state.board.filter(function (peg) {
+    var goodPegs = state.boardCopy.filter(function (peg) {
       var index = peg.length - 1;
       return topDiscOfStartPeg < peg[index];
     });
@@ -106,29 +113,51 @@ var Board = function (array, moves) {
     return true;
   };
 
-  /* function that checks if the user has won the game */
-  var checkWinner = function () {
-    // use reduce  here 
-    // check if board is in original order
-    // but in another peg
+  /**
+   * checkWinner - checks if the users has won the game by adding the total
+   * number of discs on the ending peg and comparing it with the original peg
+   * @param {Array} endPeg - The peg that will be checked if the discs are in the right order.
+   * @return {boolean} - Returns true if the user won otherwise false
+   */
+  function checkWinner(endPeg) {
+    var originalStartPegSum = state.board[0].reduce(function (total, disc) {
+      return total += disc;
+    }, 0);
+
+    var copyStartPegSum = state.boardCopy[0].reduce(function (total, disc) {
+      return total += disc;
+    }, 0)
+
+    var userPegSum = endPeg.reduce(function (total, disc) {
+      return total + disc;
+    }, 0);
+
+    if (originalStartPegSum !== copyStartPegSum && originalStartPegSum === userPegSum) {
+      return true;
+    }
+
+    return false;
   };
 
+  /**
+   * Starts a new game by resetting back to the default values
+   */
   var resetGame = function () {
-    // start a new game
-    // reset board state (or just create a new board object)
+    state.board = [[3, 2, 1], [], []];
+    state.boardCopy = [[3, 2, 1], [], []];
+    state.moves = 0;
   };
 
   /** function that shows the current board state to the user */
   var displayBoard = function () {
-    state.board.map(function (peg) {
+    state.boardCopy.map(function (peg) {
       console.log('---', ...peg);
     });
   }
 
   return {
-    moveDisc: moveDisc,
-    checkWinner: checkWinner,
     resetGame: resetGame,
+    moveDisc: moveDisc,
     displayBoard: displayBoard,
     getAttribute: getAttribute,
     setAttribute: setAttribute
@@ -138,10 +167,13 @@ var Board = function (array, moves) {
 
 
 /** Starting board */
-var startingBoards = [[3, 2, 1], [], []];
-var board = Board(startingBoards, 0);
+var startingBoard = [[3, 2, 1], [], []];
+var startingBoardCopy = [[3, 2, 1], [], []];
+var initialMoves = 0;
+var board = Board(startingBoard, startingBoardCopy, initialMoves);
 console.log("Starting Board")
 board.displayBoard();
+// board.checkWinner();
 
 
 /** 
@@ -179,13 +211,12 @@ function makeMove() {
       }
 
     } catch {
-      console.log('GAME TERMINATED')
+      console.log('Move cancelled')
       gameStatus = false;
       return;
     }
 
     var moveStatus = board.moveDisc(startPeg, endPeg);
-
     if (moveStatus === 1) {
       console.log("You cannot move a disc from an empty peg, please try again, board is still")
       board.displayBoard();
@@ -195,14 +226,20 @@ function makeMove() {
       board.displayBoard();
       gameStatus = false;
     } else if (moveStatus === 3) {
-      console.log(`Input out of bounds, make sure you your input is within 1 and ${board.getAttribute('board').length}`)
+      console.log(`Input out of bounds, make sure you your input is within 1 and ${board.getAttribute('boardCopy').length}`)
       board.displayBoard();
       gameStatus = false;
     } else if (moveStatus === 4) {
       console.log('Please enter numbers only, board is still: ');
       board.displayBoard();
-    }
-    else {
+    } else if (moveStatus === 5) {
+      console.clear();
+      console.log(`You have won the game with ${board.getAttribute('moves')} moves!`);
+      // board.displayBoard();
+      board.resetGame();
+      console.log('Starting a new game');
+      board.displayBoard();
+    } else {
       console.log(`That move was successful, board is now: (current moves: ${board.getAttribute('moves')})`);
       board.displayBoard();
     }
