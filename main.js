@@ -1,10 +1,8 @@
 /* EVAL TO DO LIST:
 -refactor possibleMoves function to use FILTER
--wrap game in BoardModule - Object
--when the above is done, make sure to return the functions nested inside BoardModule so that they are public (moveDisc)
 */
 
-// BoardModule = function(){ object to wrap game in
+BoardModule = function(){  //object to wrap game in
 var board = [ // this is my board! a 2d array
     ["3","2","1"],
     [],
@@ -35,7 +33,7 @@ var moveDisc = function(sourcepeg, targetpeg){ //function to moveDisc
         };      
     };
 
-    if (isLegalMove() == true) {
+    if (isLegalMove() == true) { // create constant and use some helper method?
         var disc = board[sourcepeg].pop(); //removes top disc from source peg and sets var disc equal to the return element
         board[targetpeg].push(disc); //adds var disc to the target peg
         moves += 1; //this is a move!
@@ -54,29 +52,33 @@ var checkWinner = function () {
       return accumulator
       });
     
-      if (winner === 1 || winner === 2) { //if winner returns index 2 or 3, the player has won!
-          console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?");
-            board = [ // this resets the game board
+    if (winner === 1 || winner === 2) { //if winner returns index 2 or 3, the player has won!
+        console.log("You've won Towers of Hanoi! " + "in " + moves + " moves! Play again?");
+        board = [ // this resets the game board
             ["3", "2", "1"],
             [],
             []
-          ];
-            moves = 0; // this resets the move counter
-            printBoard(); // this shows the user the playing board if they want to play again
+        ];
+        moves = 0; // this resets the move counter
+        printBoard(); // this shows the user the playing board if they want to play again
       };
   };
-  
+  return {
+    moveDisc : moveDisc
+  };
+};
 
+var TowersOfHanoi = BoardModule();
  //test code and minimum number of moves to win
-console.log(moveDisc(1,2));
-console.log(moveDisc(1,2));
-console.log(moveDisc(1,3));
-console.log(moveDisc(2,3));
-console.log(moveDisc(1,2));
-console.log(moveDisc(3,1));
-console.log(moveDisc(2,1));
-console.log(moveDisc(3,2));
-console.log(moveDisc(1,2));
+console.log(TowersOfHanoi.moveDisc(1,2));
+console.log(TowersOfHanoi.moveDisc(1,2));
+console.log(TowersOfHanoi.moveDisc(1,3));
+console.log(TowersOfHanoi.moveDisc(2,3));
+console.log(TowersOfHanoi.moveDisc(1,2));
+console.log(TowersOfHanoi.moveDisc(3,1));
+console.log(TowersOfHanoi.moveDisc(2,1));
+console.log(TowersOfHanoi.moveDisc(3,2));
+console.log(TowersOfHanoi.moveDisc(1,2));
 
 
 // var checkWinner = function() { //refactor to use REDUCE
