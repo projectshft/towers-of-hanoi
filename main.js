@@ -12,9 +12,9 @@ console.log('Usage: board.moveDisc(a,b)');
 
 
 //object to maintain state of the state of the board
-var board = function() {
+var boardState = function() {
 
-  startBoard = [['3', '2', '1'], [], []];
+  var startBoard = [['3', '2', '1'], [], []];
 
   //do something private
   var printBoard = startBoard.map(function(peg){
@@ -53,7 +53,7 @@ var board = function() {
 };
 
 var board = boardState();
-board.printBoard();
+
 
 
 // test
