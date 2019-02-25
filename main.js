@@ -238,9 +238,8 @@ function makeMove() {
     } else if (moveStatus === 5) {
       console.clear();
       console.log(`You have won the game with ${board.getAttribute('moves')} moves!`);
-      board.resetGame();
       console.log('Starting a new game');
-      board.displayBoard();
+      board.resetGame();
       gameStatus = false;
     } else {
       console.log(`That move was successful, board is now: (current moves: ${board.getAttribute('moves')})`);
