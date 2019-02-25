@@ -26,11 +26,15 @@ function startGame(startingNumberOfDiscs) { //Flexible number of discs, hard-cod
   board.push(firstPeg, secondPeg, thirdPeg);
 
   //graphical depiction to console of the board: 3 pegs, all discs on first peg, in starting position
-  //REPETITIVE FUNCTION, THIS SHOULD JUST CALL renderBoard (I think)
+  //REPETITIVE FUNCTION, THIS SHOULD JUST CALL renderBoard (I think). But this allows a first  "intro" message to be delivered, that's different from the regular "Next move." 
+
+  //Create a message variable that can be selected via moveCount (if moveCount === 0, console.log first message.) 
   //renderBoard(board);
   board.forEach(function (currentInstanceOfPegArray) {
       console.log(PEG_BASE + currentInstanceOfPegArray.join("  "))
     });
+
+
     // console.log("To play this game, please enter moveDisc(disc, destinationPeg), where disc is the number of disc you want to move, and destinationPeg is the peg to which you wish to move it.";
     console.log("First move, please."); //create variable for message string that updates to "new move" or 
 
@@ -38,14 +42,30 @@ function startGame(startingNumberOfDiscs) { //Flexible number of discs, hard-cod
     // //create an object for the state of the board; (review inheritence, prototypes, this)
     // // key: value pairs are a way to keep track of which peg discs are on; perhaps cleaner than keeping track of which peg discs are on as array ???
     // BUT IS THIS NECESSARY FOR THIS DESIGN? 
-    
+  
   stateOfTheBoard.peg1 = board[0]; // or pegOfOrigin, destinationPeg, unusedPeg???
   stateOfTheBoard.peg2 = board[1]; 
-  stateOfTheBoard.peg3 = board[2]
+  stateOfTheBoard.peg3 = board[2];
+  stateOfTheBoard.winnngTotal = (sumDiscs(startingNumberOfDiscs); //(board[0].length));
+  console.log(stateOfTheBoard);
   return board; // is a return necessary here? return to stateOfTheBoardObj?
   //return stateOfTheBoardObj // necessary? consider where to place, re: scope
 }
 
+function sumDiscs(numberOfDiscs) {
+  let sumOfAllDiscs = 0;
+  for (let i = numberOfDiscs; i > 0; i--) { //use helper function instead of for loop???
+    sumOfAllDiscs = sumOfAllDiscs + i; 
+    //(userInputedNumberOfDiscs + (userInputedNumberOfDiscs -1));
+    //userInputedNumberOfDiscs--;
+  };
+  return sumOfAllDiscs;
+}
+
+board.peg1.reduce(function () { // board.reduce(function () if board.i == board.peg1)
+
+    //if (isPegEmpty(onePegToCheck/presumedEmptyPeg))  
+  });
 //placement of stateOfTheBoard object?
 //include also in the object key:value pairs for numberOfMovesMade (a number) and gameStatus (a boolean, "gameOver")
 
@@ -68,13 +88,53 @@ function startGame(startingNumberOfDiscs) { //Flexible number of discs, hard-cod
     console.log("Next move, please.");
   }
 
+// a function that, given a certain peg, determines which other pegs the top disc from that peg can be moved to.
+//filter OUT the pegs that are NOT available; filter should create subset of avaialable pegs.
+//In order to complete this function, you MUST use a filter function at least once.
+  
+  //a function to check whether peg is empty; returns Boolean
+  //var isPegEmpty = 
+  
+  function emptyPeg (board) { //what parameter(s) to take here ??? None???
+    // numberOfPeg === board[(numberOfPeg-1)]
+    board.filter(function (potentiallyEmptyPeg) {
+      return potentiallyEmptyPeg.length === 0;
+    });
+  
+  }
 
-// function legalmove(j) {
-//   if (isempty(j)) return true;
-//   return (board[j][topmost(j)] < board[selectedc][selectedr]);
-//   }
+//a variable that invokes a function that returns the topmost disc on a peg
+var topDisc = function topmostDisc(peg) {
+  board.filter(function(potentiallyEmptyPeg) {
+    return potentiallyEmptyPeg.length === 0;
+  });
+}
 
+  // for (k = 0; k < board[(peg-1)].length; k++) {
+  //   if (board[peg-1][i] != 0) return  i;
+  //   };
+  //   return -1;
+  // } 
 
+// //topDisc first alternative version
+// var topDiscOfPeg = board[(givenPegNumber.length - 1)]; // last element in each peg array
+
+//topDisc second alternative version
+// var topDiscOfPeg = function () {
+// if (!emptyPeg 
+// }
+
+function legalMove(discToBeMoved) {
+  if (pegIsEmpty || topDisc > discToBeMoved) {
+    return true; 
+  }
+  //var legalMoves = board.filter(function (individualPegState) {
+  else return false;
+}
+  
+  //   return (board[j][topmost(j)] < board[selectedpeg][selected...]);
+  //   }
+  
   function moveDisc(selectedDisc, destinationPeg){  
     // check if move is legal
     //invoke legalMove (to return boolean)
@@ -105,6 +165,7 @@ function startGame(startingNumberOfDiscs) { //Flexible number of discs, hard-cod
     console.log(numberOfPegOfOrigin);
 
     //pop disc from pegOfOrigin array and push it onto the destinationPeg
+    //use MAP here?
     board[destinationPeg - 1 ].push(pegOfOrigin.pop());
     
     console.log(board);
@@ -118,6 +179,10 @@ function startGame(startingNumberOfDiscs) { //Flexible number of discs, hard-cod
     renderBoard(board);
   }
 
+  function checkWinner () {
+    board.reduce
+
+  } 
 
 //return moveDisc function so it's "publicly" available to the player;
 //moveDisc should be the only function available to the player. 
