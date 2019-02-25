@@ -146,6 +146,8 @@ var Board = function (board, boardCopy, moves) {
     state.board = [[3, 2, 1], [], []];
     state.boardCopy = [[3, 2, 1], [], []];
     state.moves = 0;
+    console.clear();
+    displayBoard();
   };
 
   /** function that shows the current board state to the user */
@@ -181,12 +183,11 @@ board.displayBoard();
  */
 function makeMove() {
   // variable used to control the game status
-  var gameStatus;
+  var gameStatus = true;
   // get user input
-  var userInput = prompt('enter move: (ex: 2,3)');
 
   do {
-
+    var userInput = prompt('enter move: (ex: 2,3)');
     try {
       var input = userInput.split(",");
       if (input.length !== 2) {
@@ -220,15 +221,12 @@ function makeMove() {
     if (moveStatus === 1) {
       console.log("You cannot move a disc from an empty peg, please try again, board is still")
       board.displayBoard();
-      gameStatus = false;
     } else if (moveStatus === 2) {
       console.log("You cannot move a larger disc on top of a smaller one, board is still:")
       board.displayBoard();
-      gameStatus = false;
     } else if (moveStatus === 3) {
       console.log(`Input out of bounds, make sure you your input is within 1 and ${board.getAttribute('boardCopy').length}`)
       board.displayBoard();
-      gameStatus = false;
     } else if (moveStatus === 4) {
       console.log('Please enter numbers only, board is still: ');
       board.displayBoard();
@@ -239,11 +237,11 @@ function makeMove() {
       board.resetGame();
       console.log('Starting a new game');
       board.displayBoard();
+      gameStatus = false;
     } else {
       console.log(`That move was successful, board is now: (current moves: ${board.getAttribute('moves')})`);
       board.displayBoard();
     }
 
-    gameStatus = false;
   } while (gameStatus)
 }
