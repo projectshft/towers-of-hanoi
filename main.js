@@ -35,7 +35,7 @@ const Board = function() {
 
   // Moves a disk from one peg to another if it's a valid move else prints error to screen and console
   const moveDisc = function(pegStart, pegEnd) {
-    if(!(pegStart && pegEnd)) {  // Sets start and end if user input to allow for auto solving to work
+    if(!(pegStart && pegEnd)) {  // Sets start and end values if user inputs to allow for auto solving to work
     pegStart = document.getElementById('pegStart').value; // Grabs start peg from user input
     pegEnd = document.getElementById('pegEnd').value;  // Grabs end peg from user input
     }
@@ -56,7 +56,7 @@ const Board = function() {
       }
 
     moveCounter += 1;
-    if(moveCounter > 0) {
+    if(moveCounter > 0) { // Once a move has been made disables the solve button
       $('#solve').prop('disabled', true);
     }
     checkWinner();
@@ -64,7 +64,7 @@ const Board = function() {
     }
   }
 
-  // Given the chosen peg you want to move a disc from, returns pegs that are valid to move to
+  // Given the chosen peg you want to move a disc from, returns pegs that are valid to move disc to
   const whereCanDiscMove = function(pegStart) {
     const pegStartIndex = pegStart - 1;
     return board.map((peg, index) => 
@@ -89,7 +89,7 @@ const Board = function() {
         'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1));
       }
       winnerSound.play();
-      $('#movePeg').prop('disabled', true);
+      $('#movePeg').prop('disabled', true); // Disables Move Peg button when game has been won
     }
   }
   
@@ -105,7 +105,7 @@ const Board = function() {
       $('#message').html('One of the pegs you selected does not exist. Try again!');
       boardState();
       return false;
-    } else if(pegStart === pegEnd){
+    } else if(pegStart === pegEnd) {
       console.error('You tried to move a disc to the peg it is currently on.  Try again!');
       $('#message').html('You tried to move a disc to the peg it is currently on.  Try again!');
       boardState();
@@ -136,8 +136,7 @@ const Board = function() {
   }
 
   /* Will solve the puzzle from the starting state for any number of discs
-     Will not solve game from any state however :(
-  */
+     Will not solve game from any state however :( */
   const solvePuzzle = function(numOfDiscs, sourcePeg, holdingPeg, destPeg) {    
     if (numOfDiscs > 0) {
       solvePuzzle(numOfDiscs - 1, sourcePeg, destPeg, holdingPeg);
