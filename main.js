@@ -1,3 +1,8 @@
+// Note: This only seems to work in Repl.it for some reason but it does "kind of" work.
+
+
+
+
 
   var towers = [[3, 2, 1], [], []];
 
@@ -18,16 +23,12 @@
       console.log("Move is not legal.");
     }
 
-
-
-
-
     console.log(towers);
     console.log('Move Count: ' + count);
     checkWinner();
   }
 
-
+    // Does not run properly
     var checkWinner = function() {
       if (towers === [[],[3,2,1],[]] || towers === [[],[],[3,2,1]]) {
         console.log("You Win!!")
