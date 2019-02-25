@@ -71,8 +71,7 @@ var Board = function (board, boardCopy, moves) {
       moveStatus = 2;
       return moveStatus;
     }
-    // const boardCopy = state.board.slice();
-    // console.log(boardCopy);
+
     startPeg.splice(lastIndexOfStartPeg, 1)
     endPeg.push(topDiscOfStartPeg);
     state.moves++
@@ -168,14 +167,13 @@ var Board = function (board, boardCopy, moves) {
 
 
 
-/** Starting board */
+/** Setting a new game on window load */
 var startingBoard = [[3, 2, 1], [], []];
 var startingBoardCopy = [[3, 2, 1], [], []];
 var initialMoves = 0;
 var board = Board(startingBoard, startingBoardCopy, initialMoves);
 console.log("Starting Board")
 board.displayBoard();
-// board.checkWinner();
 
 
 /** 
@@ -184,7 +182,6 @@ board.displayBoard();
 function makeMove() {
   // variable used to control the game status
   var gameStatus = true;
-  // get user input
 
   do {
     var userInput = prompt('enter move: (ex: 2,3)');
@@ -233,7 +230,6 @@ function makeMove() {
     } else if (moveStatus === 5) {
       console.clear();
       console.log(`You have won the game with ${board.getAttribute('moves')} moves!`);
-      // board.displayBoard();
       board.resetGame();
       console.log('Starting a new game');
       board.displayBoard();
