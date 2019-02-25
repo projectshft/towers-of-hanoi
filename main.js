@@ -95,9 +95,9 @@ const Board = function() {
   
   // Checks for basic errors 
   const errorCheck = function(pegStart, pegEnd) {
-    if(pegStart === pegEnd){
-      console.error('You tried to move a disc to the peg it is currently on.  Try again!');
-      $('#message').html('You tried to move a disc to the peg it is currently on.  Try again!');
+    if(board[pegStart -1].length === 0) {
+      console.error('You tried to move a disc from an empty peg. Try again!');
+      $('#message').html('You tried to move a disc from an empty peg. Try again!');
       boardState();
       return false;
     } else if((pegStart < 1 || pegStart > board.length) || (pegEnd < 1 || pegEnd > board.length)) {
@@ -105,9 +105,9 @@ const Board = function() {
       $('#message').html('One of the pegs you selected does not exist. Try again!');
       boardState();
       return false;
-    } else if(board[pegStart -1].length === 0) {
-      console.error('You tried to move a disc from an empty peg. Try again!');
-      $('#message').html('You tried to move a disc from an empty peg. Try again!');
+    } else if(pegStart === pegEnd){
+      console.error('You tried to move a disc to the peg it is currently on.  Try again!');
+      $('#message').html('You tried to move a disc to the peg it is currently on.  Try again!');
       boardState();
       return false;
     } else {
@@ -119,7 +119,7 @@ const Board = function() {
   const getBoardState = function() {
     return board;
   }
-
+  
   // Grabs the current number of moves made during the game
   const getTotalMoves = function() {
     return moveCounter;
