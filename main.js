@@ -1,13 +1,12 @@
 const Board = function() {
   const board = [[], [], []]; // Creates the board
-  let numOfDiscs = prompt('Please choose your number of starting discs (2-7)', '3');
   let moveCounter = 0;
-  const playerMessage = 'Please select the starting peg and ending peg for your move!'; // Sets default player message 
-  
-  document.getElementById('message').innerHTML = playerMessage;
 
-  // Checks if user hit cancel or input something out of range and sets to default of 3
-  numOfDiscs >= 2 && numOfDiscs <= 7 ? numOfDiscs : numOfDiscs = 3; 
+  let numOfDiscs = prompt('Please choose your number of starting discs (2-7)', '3');
+  numOfDiscs >= 2 && numOfDiscs <= 7 ? numOfDiscs : numOfDiscs = 3; // Checks if user hit cancel or input something out of range and sets to default of 3
+  
+  const playerMessage = 'Please select the starting peg and ending peg for your move!'; // Sets default player message 
+  document.getElementById('message').innerHTML = playerMessage;
 
   // Builds initial board state based on user selected number of discs
   const buildBoard = function(numOfDiscs) {
@@ -25,15 +24,13 @@ const Board = function() {
   const boardState = function() {
     console.log('Current Board State: (Moves: ' + moveCounter + ')');
     board.map(function(item) {
-    const pegState = item.join(' ');
-    console.log('--- ' + pegState);
+      const pegState = item.join(' ');
+      console.log('--- ' + pegState);
     });
     console.log(''); // Adds a blank line to console for easier readability
   }
 
-  boardState();  // Puts initial board state into the console before you start game
-
-  // Moves a disk from one peg to another if it's a valid move else prints error to screen and console
+    // Moves a disk from one peg to another if it's a valid move else prints error to screen and console
   const moveDisc = function(pegStart, pegEnd) {
     if(!(pegStart && pegEnd)) {  // Sets start and end values if user inputs to allow for auto solving to work
     pegStart = document.getElementById('pegStart').value; // Grabs start peg from user input
@@ -68,8 +65,8 @@ const Board = function() {
   const whereCanDiscMove = function(pegStart) {
     const pegStartIndex = pegStart - 1;
     return board.map((peg, index) => 
-    (peg.length === 0 || board[pegStartIndex][[board[pegStartIndex].length -1]] < peg[peg.length - 1]) ? index : undefined)
-    .filter(pegIndex => pegIndex >= 0);
+      (peg.length === 0 || board[pegStartIndex][[board[pegStartIndex].length -1]] < peg[peg.length - 1]) ? index : undefined)
+        .filter(pegIndex => pegIndex >= 0);
   }
 
   // Checks if the win condition is met
@@ -83,11 +80,11 @@ const Board = function() {
         console.log('AMAZING! You completed the puzzle in the minimum of ' + moveCounter + ' moves!'); 
         $('#message').html('AMAZING! You completed the puzzle in the minimum of ' + moveCounter + ' moves!');
       } else {
-      console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!<br>' + 
-      'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1)); 
-      $('#message').html('You win!  This attempt took you a total of ' + moveCounter + ' moves!<br>' + 
-        'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1));
-      }
+          console.log('You win!  This attempt took you a total of ' + moveCounter + ' moves!<br>' + 
+          'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1)); 
+          $('#message').html('You win!  This attempt took you a total of ' + moveCounter + ' moves!<br>' + 
+          'The minimum number of moves to solve this puzzle was ' + (Math.pow(2, numOfDiscs) - 1));
+        }
       winnerSound.play();
       $('#movePeg').prop('disabled', true); // Disables Move Peg button when game has been won
     }
@@ -95,23 +92,23 @@ const Board = function() {
   
   // Checks for basic errors 
   const errorCheck = function(pegStart, pegEnd) {
-    if(board[pegStart -1].length === 0) {
-      console.error('You tried to move a disc from an empty peg. Try again!');
-      $('#message').html('You tried to move a disc from an empty peg. Try again!');
-      boardState();
-      return false;
-    } else if((pegStart < 1 || pegStart > board.length) || (pegEnd < 1 || pegEnd > board.length)) {
-      console.error('One of the pegs you selected does not exist. Try again!');
-      $('#message').html('One of the pegs you selected does not exist. Try again!');
-      boardState();
-      return false;
+    if((pegStart < 1 || pegStart > board.length) || (pegEnd < 1 || pegEnd > board.length)) {
+        console.error('One of the pegs you selected does not exist. Try again!');
+        $('#message').html('One of the pegs you selected does not exist. Try again!');
+        boardState();
+        return false;    
+    } else if(board[pegStart -1].length === 0) {
+        console.error('You tried to move a disc from an empty peg. Try again!');
+        $('#message').html('You tried to move a disc from an empty peg. Try again!');
+        boardState();
+        return false;
     } else if(pegStart === pegEnd) {
-      console.error('You tried to move a disc to the peg it is currently on.  Try again!');
-      $('#message').html('You tried to move a disc to the peg it is currently on.  Try again!');
-      boardState();
-      return false;
+        console.error('You tried to move a disc to the peg it is currently on.  Try again!');
+        $('#message').html('You tried to move a disc to the peg it is currently on.  Try again!');
+        boardState();
+        return false;
     } else {
-      return true;
+        return true;
     }
   }
 
@@ -143,7 +140,9 @@ const Board = function() {
       moveDisc(sourcePeg, destPeg);
       solvePuzzle(numOfDiscs - 1, holdingPeg, sourcePeg, destPeg);
     }   
-  } 
+  }
+  
+  boardState();  // Puts initial board state into the console before you start game
 
   //  Returns object with links to necessary functions that need to be accessed outside scope
   return {
