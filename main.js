@@ -1,96 +1,135 @@
-// TOWERS OF HANOI
-// Stripped down to basic function declarations (still using some aray helper methods) to startGame (with flexible, inputted numberOfDics), renderBoard, establish the winningSum, and allow player to moveDisc. Maintains the current state of the board via 2D array and current pegOfOrigin, destinationPeg, and unusedPeg. 
+// Create a game module
+const GameModule = (numberOfPegs, numberOfDiscs) => {
+  /********************
+   * Global variables
+   * ******************/
+  let board = [];
+  let moveCounter = 0;
 
-// REMOVED legalMoves
-// REMOVED isPegEmpty and topDiscOfPeg, which feed into legalMoves
-// REMOVED: checkWinner, endGame, and restartGame
-// ALL are necessary for a fully operational game and will be reconceptualized and completed later
+  const PEG_BASE = '--- ';
 
-// CURRENTLY DOES NOT *formally* prevent illegal moves and notify the player, although the program initiates errors, breaks, and won't proceed if the player tries to moveDisc with an illegal move.
-
-// DOES NOT check for winner and yield a winning message with numberOfMoves, and then resetGame. As long as they play by the rules, a player could theoretically play one game for ~585 billion years... and beyond.  
-
-//********************************************
-
-// create a variable for depicting the bottom portion of the board
-const PEG_BASE = "--- "; 
-
-// create empty board array to be populated with 3 peg arrays and the startingNumberOfDiscs. 
-var board = []; 
-
-// create a function to initialize board and establish beginning values.
-function startGame(startingNumberOfDiscs) { //flexible number of discs, hard-coded for three pegs
-
-  // three peg variables are comparable to what's inside the board/stateOfTheBoard 
-  var firstPeg = [];
-  var secondPeg = [];
-  var thirdPeg = [];
-
-  // populate the firstPeg array with the starting number of discs; all on firstPeg for starting position at beginning of the game
-  for (let i = startingNumberOfDiscs; i > 0; i--){ 
-    firstPeg.push(i);
+  /****************************************
+   * A function to initialize game board
+   * **************************************/
+  const initializeBoard = () => {
+    // Loop through user-specified number of pegs
+    for (let peg = 0; peg < numberOfPegs; peg++) {
+      board[peg] = [];
+      for (let disc = numberOfDiscs; disc > 0; disc--) {
+        if (peg === 0) {
+          board[peg].push(disc);
+        }
+      }
+    }
   };
 
-  // populate the board with three pegs in starting position (hard-coded)
-  board.push(firstPeg, secondPeg, thirdPeg);
-  
-  // establish the winningTotal value to be checked by checkWinner function, as yet unwritten, which will also utilize reduce
-  var winningTotalSum = firstPeg.reduce(function(discAccumulator, startingValue) {
-  return discAccumulator + startingValue; //startingValue = 0, so is it necessary here???
-      }, 0);
-  
-  // *initial* graphical depiction to console of the board: 3 pegs, all discs on first peg, in starting position. 
-  // this could be removed and renderBoard invoked, but this design allows an introductory "first move" prompt to be consoled, distinct from the "next move" that will prompt the player throughout the rest of the game.
-  board.forEach(function (currentInstanceOfPegArray) {
-    console.log(PEG_BASE + currentInstanceOfPegArray.join("  "))
-    });
+  /************************************
+   * A function to render game board
+   * **********************************/
+  const renderBoard = () => {
+    for (let i = 0; i < board.length; i++) {
+      let stringifiedPeg = board[i].map(peggy => {
+        return peggy.toString();
+      });
+      let output = PEG_BASE;
+      for (let j = 0; j < stringifiedPeg.length; j++) {
+        output += stringifiedPeg[j] + ' ';
+      }
+      console.log(output);
+    }
+  };
 
-  // request first move from player  
-  console.log("First move, please.");
+  const checkWinner = () => {
+    let result = board.reduce((state, peg) => {
+      if (!state) {
+        return peg.length == numberOfDiscs && peg != board[0];
+      } else {
+        return true;
+      }
+    }, false);
+
+    return result;
+  };
+
+  const moveDisc = (pegOfOrigin, pegOfDestination) => {
+    let originPeg = board[pegOfOrigin - 1];
+    let destinationPeg = board[pegOfDestination - 1];
+    let originDisc = originPeg[originPeg.length - 1];
+    let discDestination = destinationPeg[destinationPeg.length - 1];
+    // ERROR HANDLING
+    // Check that disc exists on origin peg
+    if (originDisc === undefined) {
+      console.log('Please choose a peg with at least one disc on it.');
+      renderBoard();
+
+      // Check that an appropriate number is given for the origin peg
+    } else if (pegOfOrigin < 1 || pegOfOrigin > numberOfPegs) {
+      console.log('Please choose a peg number, 1 through ', numberOfPegs);
+      renderBoard();
+    }
+    // Check that an appropriate number is given for the destination peg
+    else if (pegOfDestination < 1 || pegOfDestination > numberOfPegs) {
+      console.log('Please choose a peg number, 1 through ', numberOfPegs);
+      renderBoard();
+    }
+
+    //Check that the disc would not be moved on top of a smaller disc
+    else if (originDisc < discDestination || destinationPeg.length === 0) {
+      console.log('Successful move.');
+      board[pegOfDestination - 1].push(board[pegOfOrigin - 1].pop());
+      moveCounter += 1;
+      renderBoard();
+      // Error catchall
+    } else {
+      console.log('Illegal move. Please try another.');
+      renderBoard();
+    }
+
+    if (checkWinner()) {
+      console.log('Winner! You won the game in ' + moveCounter + ' moves.');
+      reset();
+      console.log('Play again?');
+      renderBoard();
+    } else console.log('Next move...');
+  };
+
+  const reset = () => {
+    moveCounter = 0;
+    initializeBoard();
+  };
+
+  initializeBoard(); // Keep board initialize as an internal function, protected from user
+
+  // Functions to return for user access
+  return {
+    renderBoard: renderBoard, // Necessary for first render
+    move: moveDisc, // Primary game-playing command
+    reset: reset // Make the reset command available to user
+  };
+};
+
+let userSpecifiedNumberOfPegs = prompt(
+  'Enter the number of pegs you want to play with, (up to 12 pegs):'
+);
+// Error handling
+if (userSpecifiedNumberOfPegs > 12) {
+  userSpecifiedNumberOfPegs = prompt(
+    "That's too many pegs. Please choose a number less than 13"
+  );
 }
 
-// a function to graphically render the board in the console (use map???
-//pegToCheckForWinner us taken as parameter for later, as yet unimplemented design
-function renderBoard(updatedBoard, pegToCheckForWinner){ //use map?
-  updatedBoard.forEach(function (currentInstanceOfPegArray) {
-    console.log(PEG_BASE + currentInstanceOfPegArray.join("  "))
-    });
-  // if !endOfGame, request next move from player
-  console.log("Next move, please.");
+let userSpecifiedNumberOfDiscs = prompt(
+  'Now enter the number of discs you want to play with:'
+);
+// Error handling
+if (userSpecifiedNumberOfDiscs > 12) {
+  userSpecifiedNumberOfDiscs = prompt(
+    "That's too many discs. Please choose a number less than 13"
+  );
 }
 
-// a function to move disc
-function moveDisc(selectedDisc, destinationPeg){ 
-    
-  // create variable for arrayOfpegOfOrigin
-  // arrayOfPegOfOrigin's value is inherent in selected disc value (there is only ever one disc/number on the entire board, regardless of which peg it's on)
-  var arrayOfPegOfOrigin = board.find(function(onePeg) {
-    return ((onePeg[onePeg.length - 1]) === selectedDisc);
-  });
- 
-  // create variable for the number of the peg of origin
-  var numberOfPegOfOrigin = (board.indexOf(arrayOfPegOfOrigin) + 1); //add one to value because peg numbers start at one, not zero
- 
-  // create variable array of peg numbers to be used to find the number of the unused peg
-  var possiblePegs = [1, 2, 3];
- 
-  // create variable for numberofUnusedPeg and find value (potentially useful in later design) 
-  var numberOfUnusedPeg = possiblePegs.find(function(pegNumberToLookFor) { 
-    return ((pegNumberToLookFor != numberOfPegOfOrigin) && (pegNumberToLookFor != destinationPeg));
-  }); 
-
-  // pop disc from pegOfOrigin array and push it onto the destinationPeg
-  board[destinationPeg - 1].push(arrayOfPegOfOrigin.pop());
-   
-  // call renderBoard to update graphical representation of board
-  renderBoard(board, destinationPeg);
-}
-//______________________________________
-
-// Executable
-startGame(5);
-// board will be rendered and prompt user for first move
-
-
-
-   
+const game = GameModule(userSpecifiedNumberOfPegs, userSpecifiedNumberOfDiscs);
+console.log(
+  "Welcome to Towers of Hanoi. To play, enter your moves in this format: 'game.move(x, y)' where x is the number of the peg from which you want to move the top disc, and y is the peg you want to move the disc to. You can reset the game at any time with the command 'reset()'. Good luck!"
+);
+game.renderBoard();

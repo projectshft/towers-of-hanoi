@@ -1,96 +1,81 @@
 body {
-	background-color: #f4f4f4;
-	color: #555;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	line-height: 1.6em;
-	margin: 0;
+  background-color: #f4f4f4;
+  color: #555;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6em;
+  margin: 0;
 }
 
 .container {
-	width: 80%;
-	margin: auto;
-	overflow: hidden;
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
 }
 
 #main-header {
-	background-color: #333;
-	color: #fff;
+  background-color: #333;
+  color: #fff;
 }
-
-/*
-#navbar {
-	background-color: #333;
-	color: #fff;
-}
-
-#navbar ul {
-	padding: 0;
-	list-style: none;
-}
-
-#navbar li {
-	display: inline;
-}
-
-#navbar a {
-	color: #fff;
-	text-decoration: none;
-	font-size: 18px;
-	padding-right: 15px;
-} */
 
 #showcase {
-	background-image: url('https://is3-ssl.mzstatic.com/image/thumb/Purple1/v4/1a/39/b7/1a39b72e-d719-16fb-32a3-9fb091a59a45/pr_source.png/643x0w.jpg');
-	background-position: center right;
-	min-height: 330px;
-	margin-bottom: 30px;
-	text-align: center;
+  background-image: url('https://is3-ssl.mzstatic.com/image/thumb/Purple1/v4/1a/39/b7/1a39b72e-d719-16fb-32a3-9fb091a59a45/pr_source.png/643x0w.jpg');
+  background-position: center right;
+  min-height: 330px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 #showcase h1 {
-	color: #fff;
-	font-size: 50px;
-	line-height:1.6em;
-	padding-top: 70px;
+  color: #fff;
+  font-size: 50px;
+  line-height: 1.6em;
+  padding-top: 70px;
 }
 
 #main {
-	float: left;
-	width: 70%;
-	padding:0 30px;
-	box-sizing: border-box;
+  float: left;
+  width: 70%;
+  padding: 0 30px;
+  box-sizing: border-box;
 }
 
 #sidebar {
-	float: right;
-	width: 30%;
-	background: #333;
-	color: #fff;
-	padding:10px;
-	box-sizing: border-box;
+  float: right;
+  width: 30%;
+  background: #333;
+  color: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-#sidebar h3 {
-	text-align: center;
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 15px;
 }
 
 #main-footer {
-	background: #333;
-	color: #fff;
-	text-align: center;
-	padding: 20px;
-	margin-top: 40px;
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
 }
 
-@media(max-width:650px) {
-	#main {
-		width: 100%;
-		float: none;
-	}
+@media (max-width: 650px) {
+  #main {
+    width: 100%;
+    float: none;
+  }
 
-	#sidebar {
-		width: 100%;
-		float: none;
-	}
+  #sidebar {
+    width: 100%;
+    float: none;
+  }
 }
