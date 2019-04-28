@@ -47,7 +47,6 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
 
   /********************************************
    * A function to check whether user has won
-   * / TODO: Rewrite a cleaner, clearer version of this
    * ******************************************/
   const checkStateForWinner = () => {
     let winnerCheck = board.reduce((blob, pegster) => {
@@ -136,6 +135,7 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
   };
 };
 // End of module
+/*======================================================================*/
 
 let userSpecifiedNumberOfPegs = prompt(
   'Enter the number of PEGS you want to play with, (up to 12 pegs):'
@@ -163,4 +163,3 @@ console.log(
 );
 game.renderBoard();
 
-// TODO: convert logic to wedge filter helper method in *somewhere* per assignment directive, bc rubric
