@@ -1,5 +1,3 @@
-//TODO: convert logic to use filter *somewhere* per assignment directive, bc inane rubric
-
 // Create a game module
 const GameModule = (numberOfPegs, numberOfDiscs) => {
   /********************
@@ -52,8 +50,8 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
    * / TODO: Rewrite a cleaner, clearer version of this
    * ******************************************/
   const checkStateForWinner = () => {
-    let winnerCheck = board.reduce((check, pegster) => {
-      if (!check) {
+    let winnerCheck = board.reduce((blob, pegster) => {
+      if (!blob) {
         return pegster.length == numberOfDiscs && pegster != board[0];
       } else {
         return true;
@@ -164,3 +162,5 @@ console.log(
   "Welcome to Towers of Hanoi. To play, enter your moves in this format: 'game.move(x, y)' where x is the number of the peg from which you want to move the top disc, and y is the peg you want to move the disc to. You can restart the game at any time with the command 'restart()'. Good luck!"
 );
 game.renderBoard();
+
+// TODO: convert logic to wedge filter helper method in *somewhere* per assignment directive, bc rubric
