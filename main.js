@@ -10,7 +10,7 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
 
   const PEG_BASE = '--- ';
 
-  // Modularize functions so some are protected from user access. Protection is great, including from cavalier advice to NOT modularize bc "You won't learn how to do that until week 6"
+  // Modularize functions so some are protected from user access.
   /****************************************
    * A function to initialize gameboard
    * **************************************/
@@ -31,7 +31,7 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
    * A function to render gameboard
    * **********************************/
   const renderBoard = () => {
-    // Loop through pegs; use map helper method and string each peg along bc why would you expend any effort to rectify the misinformation you gave them, even if they might waste their entire weekend trying to figure out what the f you meant?
+    // Loop through pegs; use map helper method and "stringify" each peg.
 
     for (let i = 0; i < board.length; i++) {
       let stringifiedPeg = board[i].map(peggy => {
@@ -72,22 +72,25 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
     let originDisc = originPeg[originPeg.length - 1];
     let discDestination = destinationPeg[destinationPeg.length - 1];
 
-    /*------------------------------------------
-     * ERROR HANDLING <> Check for legal moves
-     (force a use of filter here?)
-     * -----------------------------------------*/
+    /*---------------------------------------------------------------------------
+     * Check for legal moves
+     (Combine into one function, but lose directed, detailed "error" messages?
+      Force a use of filter here?)
+     * -------------------------------------------------------------------------*/
     // Check that disc exists on origin peg
     if (originDisc === undefined) {
-      console.log('Please choose a peg with at least one disc on it.');
+      console.log(
+        'Emptiness is not a virtue in this game. Please choose a peg with at least one disc on it.'
+      );
       renderBoard();
 
-      // Check that an appropriate number is given for the origin peg
+      // Check that an appropriate number is given for origin peg
     } else if (pegOfOrigin < 1 || pegOfOrigin > numberOfPegs) {
       console.log('Please choose a peg number, 1 through ', numberOfPegs);
       renderBoard();
     }
 
-    // Check that an appropriate number is given for the destination peg
+    // Check that an appropriate number is given for destination peg
     else if (pegOfDestination < 1 || pegOfDestination > numberOfPegs) {
       console.log('Please choose a peg number, 1 through ', numberOfPegs);
       renderBoard();
@@ -134,6 +137,7 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
     restart: restart // Make the restart command available to user
   };
 };
+// End of module
 
 let userSpecifiedNumberOfPegs = prompt(
   'Enter the number of PEGS you want to play with, (up to 12 pegs):'
