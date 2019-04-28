@@ -101,7 +101,7 @@ const GameModule = (numberOfPegs, numberOfDiscs) => {
       moveCounter += 1;
       renderBoard();
 
-      // Error catchall; useful for people who might receive, trust, and follow misguided advice
+      // Error catchall
     } else {
       console.log('Bad move. Try again. Listen to your instinct.');
       renderBoard();
