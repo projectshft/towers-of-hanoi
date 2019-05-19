@@ -54,16 +54,44 @@ var moveDisc = function(start, end) {
     } 
     // Else, take last disc from startRow and place disc in endRow
     else {
-      console.log('That move was successful, board is now:')
+      
       startBoard[startRow].pop() 
       startBoard[endRow].push(poppedDisc)
+
+      // Check if game has been won
+      checkWinner()
+
+      console.log('That move was successful, board is now:')
       renderBoard()
     }
 }
 
 // Function to check if game has been won
+var checkWinner = () => {
+  console.log('checking winner...')
 
+  // If endRow adds up to 6 AND endRow is not the same as starting row (1)
+  var endRowTotal = startBoard[endRow].reduce(function(total, next){
+    console.log('first value: ', total, 'next value: ', next)
+    return total += next
+  })
+  console.log('endRowTotal: ', endRowTotal)
+
+  if (endRowTotal === '321'){
+    console.log('Game won!')
+
+    // Reset game board
+    
+  }
+
+}
 
 
 moveDisc(1, 2)
+moveDisc(1, 2)
+moveDisc(1, 3)
+moveDisc(2, 3)
+moveDisc(1, 2)
+moveDisc(3, 1)
+moveDisc(3, 2)
 moveDisc(1, 2)
