@@ -1,5 +1,3 @@
-// import { start } from "repl";
-
 /*
 1. Prompt user for starting peg and ending peg
 2. Validate move
@@ -18,8 +16,10 @@ var startBoard = [
 var peg = ["--- "];
 
 
+
 // Function to display the board
 const renderBoard = () => {
+
   var printBoard = startBoard.map(function(row) {
 
     var discs = row.join(' ')
@@ -36,16 +36,21 @@ renderBoard()
       
 // Function to move a disc
 var moveDisc = function(start, end) {
-  console.log('start: ', start, 'end: ', end)
+
+  var turn = 0
+
+  console.log('number of turns: ', turn)
+
+  console.log('Your starting peg:', start, ' Your ending peg:', end)
 
   startRow = start-1
   endRow = end-1
 
-  console.log('startRow: ', startRow, 'endRow: ', endRow)
+      // console.log('startRow: ', startRow, 'endRow: ', endRow)
 
   // Identify last disc from startRow as the disc to move
   var poppedDisc = startBoard[startRow][startBoard[startRow].length-1]
-  console.log('poppedDisc: ', poppedDisc)
+      // console.log('poppedDisc: ', poppedDisc)
 
     // If move is not valid
     if (poppedDisc > startBoard[endRow][startBoard[endRow].length-1] ) {
@@ -58,31 +63,53 @@ var moveDisc = function(start, end) {
       startBoard[startRow].pop() 
       startBoard[endRow].push(poppedDisc)
 
-      // Check if game has been won
-      checkWinner()
-
       console.log('That move was successful, board is now:')
       renderBoard()
+
+      // Check if game has been won
+      checkWinner()
     }
 }
 
 // Function to check if game has been won
 var checkWinner = () => {
-  console.log('checking winner...')
 
   // If endRow adds up to 6 AND endRow is not the same as starting row (1)
   var endRowTotal = startBoard[endRow].reduce(function(total, next){
-    console.log('first value: ', total, 'next value: ', next)
+        // console.log('first value: ', total, 'next value: ', next)
     return total += next
   })
-  console.log('endRowTotal: ', endRowTotal)
+        // console.log('endRowTotal: ', endRowTotal)
 
-  if (endRowTotal === '321'){
+  if (endRowTotal === '321' && startBoard.indexOf(endRow) !== 0){
     console.log('Game won!')
 
     // Reset game board
-    
+    resetGame()
   }
+}
+
+// Function to reset the game board
+var resetGame = () => {
+  console.log('resetting game...')
+
+  var startBoard = [
+    ['3', '2', '1'],
+    [],
+    []
+  ];
+  
+  var peg = ["--- "];
+
+  var printBoard = startBoard.map(function(row) {
+
+    var discs = row.join(' ')
+    return peg + discs
+  })
+  
+  printBoard.forEach(function(row) {
+    console.log(row)
+  })
 
 }
 
