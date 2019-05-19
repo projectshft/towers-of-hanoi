@@ -21,7 +21,7 @@ var peg = ["--- "];
 // Function to display the board
 const renderBoard = () => {
   var printBoard = startBoard.map(function(row) {
-    console.log('row is: ', row)
+
     var discs = row.join(' ')
     return peg + discs
   })
@@ -32,6 +32,7 @@ const renderBoard = () => {
 }
 
 renderBoard()
+
       
 // Function to move a disc
 var moveDisc = function(start, end) {
@@ -42,22 +43,27 @@ var moveDisc = function(start, end) {
 
   console.log('startRow: ', startRow, 'endRow: ', endRow)
 
-  // Take last disc from startRow and place disc in endRow
-  // ONLY if the move is valid
-  startBoard[startRow].pop() //selectedDisc
-  startBoard[endRow].push()
+  // Identify last disc from startRow as the disc to move
+  var poppedDisc = startBoard[startRow][startBoard[startRow].length-1]
+  console.log('poppedDisc: ', poppedDisc)
 
-  renderBoard()
-
+    // If move is not valid
+    if (poppedDisc > startBoard[endRow][startBoard[endRow].length-1] ) {
+      console.log('You cannot move a larger disc on top of a smaller one, board is still:')
+      renderBoard()
+    } 
+    // Else, take last disc from startRow and place disc in endRow
+    else {
+      console.log('That move was successful, board is now:')
+      startBoard[startRow].pop() 
+      startBoard[endRow].push(poppedDisc)
+      renderBoard()
+    }
 }
 
+// Function to check if game has been won
 
-// var moveDisc = function()
-//   {
-//     var popped = startBoard[0].pop();
-//     console.log(popped);
-//     startBoard[2].push(popped);
-//     console.log(startBoard);
-//   };
 
-moveDisc(1, 2);
+
+moveDisc(1, 2)
+moveDisc(1, 2)
