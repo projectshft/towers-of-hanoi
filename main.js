@@ -1,3 +1,5 @@
+// import { start } from "repl";
+
 /*
 1. Prompt user for starting peg and ending peg
 2. Validate move
@@ -7,92 +9,55 @@
 */
 
 
-console.log('Life is a game and you are the player.'+' As you master the game, so you also create it.');
-console.log('Usage: board.moveDisc(a,b)');
+var startBoard = [
+  ['3', '2', '1'],
+  [],
+  []
+];
+
+var peg = ["--- "];
 
 
-//object to print current state of the board
-var boardState = function() {
+// Function to display the board
+const renderBoard = () => {
+  var printBoard = startBoard.map(function(row) {
+    console.log('row is: ', row)
+    var discs = row.join(' ')
+    return peg + discs
+  })
+  
+  printBoard.forEach(function(row) {
+    console.log(row)
+  })
+}
 
-  var startBoard = [['3', '2', '1'], [], []];
+renderBoard()
+      
+// Function to move a disc
+var moveDisc = function(start, end) {
+  console.log('start: ', start, 'end: ', end)
 
-  //do something private
-  var printStartBoard = startBoard.map(function(peg){
-    console.log('---' + peg)
-  });
+  startRow = start-1
+  endRow = end-1
 
-  var printCurrentBoard = function(){
-    array.push(disc element returned from moveDisc);
-    console.log();
-  }
+  console.log('startRow: ', startRow, 'endRow: ', endRow)
 
-  // return an object exposed to the public
-  return {
-    printStartBoard: printStartBoard,
-    printCurrentBoard: printCurrentBoard
-  }
-};
+  // Take last disc from startRow and place disc in endRow
+  // ONLY if the move is valid
+  startBoard[startRow].pop() //selectedDisc
+  startBoard[endRow].push()
 
+  renderBoard()
 
-//object to maintain inner state of the board
-var playGame = function(a,b) {
-
-  //create object from user input
-  var pegInput = {
-    start: a,
-    end: b
-  }
-
-  //do something private
-  var pegStart = function(){
-    if(pegInput[pegPosition])...
-    convert peg input to zero-index
-    array.pop();
-    return value;
-  }
-
-  //do something private
-  var pegEnd = function(){
-    like above...
-    take return value;
-    array.push();
-    return value;
-  }
-
-  //do something else private
-  var validMove = function(){
-    if (peg str) = true;
-    array.filter();
-    return something;
-  }
-
-  //do something else private
-  var checkWinner = function(){
-    array.reduce();
-    if (sum = 6){
-      return win;
-      printStartBoard();
-    }
-  }
-
-  // return an object exposed to the public
-  return {
-    moveDisc: function(a,b){
-      if validMove(){
-        move disc
-        array.pop();
-        array.push();
-      }
-      console.log('error');
-    }
-
-    **functions to return/call: pegStart, pegEnd, validMove, checkWinner
-  };
-};
-
-var something = boardState(); 
-var board = playGame();
+}
 
 
-// test
-board.moveDisc(1,2);
+// var moveDisc = function()
+//   {
+//     var popped = startBoard[0].pop();
+//     console.log(popped);
+//     startBoard[2].push(popped);
+//     console.log(startBoard);
+//   };
+
+moveDisc(1, 2);
