@@ -76,12 +76,34 @@ let Board = () => {
   /////////////////////////////////////////////////////////////////////////////
   let legalMoves = peg => {
 
-    if (peg === undefined || peg > board.length) {
+    if (peg === undefined || peg > board.length || peg < 1) {
       console.log(`Enter a peg number as argument (1-${board.length})`);
       return;
     }
 
+    if (board[peg-1].length === 0) {
+      console.log('There are no discs on this peg');
+      return;
+    }
+
     let disc = board[peg-1][board[peg-1].length-1];
+    let pegs = [];
+    for (let i=0; i<board.length; i++) {
+      pegs.push(i+1);
+    }
+
+    //save to variable in case we actually use this instead of just displaying
+
+    let legalPegs = pegs.filter( (currArr, index) => {
+
+      let topOfArray = board[index][board[index].length-1];
+
+      if (board[index].length === 0 || topOfArray > disc)
+        return true;
+
+    });
+
+    console.log(legalPegs);
 
   };
 
