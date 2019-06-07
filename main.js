@@ -16,7 +16,7 @@ let Board = (pegs=3, discs=3) => {
 
   let board, numMoves, winSum;
 
-  let setBoard = () => {
+  const setBoard = () => {
 
     board = [];
 
@@ -37,21 +37,10 @@ let Board = (pegs=3, discs=3) => {
   };
 
   setBoard();
-  
-
-  // let board = [
-  //   ['3','2','1'],
-  //   [],
-  //   []
-  // ];
-
-  
-
-
 
 
   /////////////////////////////////////////////////////////////////////////////
-  let printBoard = () => {
+  const printBoard = () => {
 
     console.log('\n');
     //iterate through pegs, map each peg array to string
@@ -77,7 +66,7 @@ let Board = (pegs=3, discs=3) => {
 
 
   /////////////////////////////////////////////////////////////////////////////
-  let moveDisc = (fromPeg, toPeg) => {
+  const moveDisc = (fromPeg, toPeg) => {
 
     //check for legal values first
     if (fromPeg < 1 || fromPeg > board.length || toPeg < 1 || toPeg > board.length
@@ -116,7 +105,7 @@ let Board = (pegs=3, discs=3) => {
   };
 
   /////////////////////////////////////////////////////////////////////////////
-  let legalMoves = peg => {
+  const legalMoves = peg => {
 
     if (peg === undefined || peg > board.length || peg < 1) {
       console.log(`Enter a peg number as argument (1-${board.length})`);
@@ -152,7 +141,7 @@ let Board = (pegs=3, discs=3) => {
   };
 
   /////////////////////////////////////////////////////////////////////////////
-  let checkWinner = peg => {
+  const checkWinner = peg => {
 
     //not winning if we're on first peg
     if (peg-1 === 0) 
