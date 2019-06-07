@@ -53,7 +53,16 @@ let Board = () => {
   /////////////////////////////////////////////////////////////////////////////
   let moveDisc = (fromPeg, toPeg) => {
 
-    if (board[fromPeg-1].length === 0) 
+    //check for legal values first
+    if (fromPeg < 1 || fromPeg > board.length || toPeg < 1 || toPeg > board.length
+        || typeof fromPeg !== 'number' || typeof toPeg !== 'number') {
+    
+      console.log(`Enter peg numbers from 1 to ${board.length}`);
+      return;
+
+    }
+
+    else if (board[fromPeg-1].length === 0) 
       console.log('There are no more discs on that peg.');
 
     //helper function worth?
@@ -131,6 +140,7 @@ let Board = () => {
     if (sumPeg === winSum) {
 
       console.log('You have won. Good job friend.');
+      //restart game
 
     }
 
