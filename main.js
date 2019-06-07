@@ -147,6 +147,8 @@ let Board = (pegs=3, discs=3) => {
 
     console.log(legalPegs);
 
+    return legalPegs;
+
   };
 
   /////////////////////////////////////////////////////////////////////////////
