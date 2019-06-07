@@ -201,5 +201,5 @@ let Board = (pegs=3, discs=3) => {
 // console.log('New game started. Initial board state:');
 // gameBoard.printBoard();
 
-console.log('New game started.\nCreate new tower by entering \"game = Board(pegs, discs)\" below.');
+console.log('New game started.\nCreate new tower set by entering \"game = Board(pegs, discs)\" below.');
 let game;
