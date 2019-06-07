@@ -9,7 +9,12 @@
 //1st draft - don't use discs and pegs, create board manually to 3x3
 let Board = (pegs=3, discs=3) => {
 
-  const board = [];
+  if (pegs < 3 || discs < 1) {
+    console.log('Enter at least 3 pegs and 1 disc.'); //user can bore themselves if they want to play with 1 or 2 discs
+    return;
+  }
+
+  let board = [];
 
   for (let i=0; i<pegs; i++)
     board.push([]);
@@ -149,15 +154,25 @@ let Board = (pegs=3, discs=3) => {
 
     if (sumPeg === winSum) {
 
-      console.log('You have won. Good job friend.');
+      console.log(`You have won in ${numMoves} moves. Good job friend.`);
       //restart game
+      board = [];
 
+      for (let i=0; i<pegs; i++)
+        board.push([]);
+
+      for (let i=0; i<discs; i++)
+        board[0][i] = discs - i;
+
+      printBoard();
+
+      console.log('Towers reset.\nIf you would like to create new towers enter \"game = Board(pegs, discs)\" below.');
 
     }
 
   };
 
-
+  printBoard();
   /////////////////////////////////////////////////////////////////////////////
   return {
 
@@ -176,7 +191,10 @@ let Board = (pegs=3, discs=3) => {
  * 
  */
 
-let gameBoard = Board();
+// let gameBoard = Board();
 
-console.log('New game started. Initial board state:');
-gameBoard.printBoard();
+// console.log('New game started. Initial board state:');
+// gameBoard.printBoard();
+
+console.log('New game started.\nCreate new tower by entering \"game = Board(pegs, discs)\" below.');
+let game;
