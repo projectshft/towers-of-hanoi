@@ -11,22 +11,23 @@ let Board = () => {
 
   let board = [
     ['3','2','1'],
-    [],
-    []
+    ['4'],
+    ['6','5']
   ];
 
   let printBoard = () => {
 
+    console.log('\n');
     //iterate through pegs, map each peg array to string
     board.forEach( peg => {
 
       //better with reduce since creating a return string?
 
-      let pegString = '---';
+      let pegString = '--- ';
 
       peg.map( disc => {
 
-        pegString += ` ${disc} `;
+        pegString += `${disc} `;
 
       });
 
@@ -34,11 +35,13 @@ let Board = () => {
 
     });
 
+    console.log('\n');
+
   };
 
   return {
 
-    printBoard: printBoard
+    printBoard
 
   };
 
