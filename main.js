@@ -15,6 +15,8 @@ let Board = () => {
     []
   ];
 
+  let numMoves = 0;
+
 
   /////////////////////////////////////////////////////////////////////////////
   let printBoard = () => {
@@ -48,14 +50,21 @@ let Board = () => {
     if (board[fromPeg-1].length === 0) 
       console.log('There are no more discs on that peg.');
 
-    else if (board[toPeg-1].length === 0)
+    //helper function worth?
+    else if (board[toPeg-1].length === 0) {
       board[toPeg-1].push( board[fromPeg-1].pop() );
+      console.log('That move was successful, board is now:');
+      numMoves++;
+    }
 
     else if (board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1])
       console.log('You cannot move a larger disc on top of a smaller one, board is still:');
 
-    else
+    else {
       board[toPeg-1].push( board[fromPeg-1].pop() );
+      console.log('That move was successful, board is now:');
+      numMoves++;
+    }
 
     printBoard();
 
@@ -65,10 +74,24 @@ let Board = () => {
   };
 
   /////////////////////////////////////////////////////////////////////////////
+  let legalMoves = peg => {
+
+    if (peg === undefined || peg > board.length) {
+      console.log(`Enter a peg number as argument (1-${board.length})`);
+      return;
+    }
+
+    let disc = board[peg-1][board[peg-1].length-1];
+
+  };
+
+
+  /////////////////////////////////////////////////////////////////////////////
   return {
 
     printBoard,
-    moveDisc
+    moveDisc,
+    legalMoves
 
   };
 
