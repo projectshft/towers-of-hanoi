@@ -16,6 +16,12 @@ let Board = () => {
   ];
 
   let numMoves = 0;
+  const winSum = board[0].reduce( (sum, curr) => {
+
+    sum += +curr;
+    return sum;
+
+  },0);
 
 
   /////////////////////////////////////////////////////////////////////////////
@@ -67,6 +73,7 @@ let Board = () => {
     }
 
     printBoard();
+    checkWinner(toPeg);
 
     //TODO
     // check winner after every move
@@ -104,6 +111,28 @@ let Board = () => {
     });
 
     console.log(legalPegs);
+
+  };
+
+  /////////////////////////////////////////////////////////////////////////////
+  let checkWinner = peg => {
+
+    //not winning if we're on first peg
+    if (peg-1 === 0) 
+      return;
+
+    let sumPeg = board[peg-1].reduce( (sum, curr) => {
+
+      sum += +curr;
+      return sum
+
+    },0);
+
+    if (sumPeg === winSum) {
+
+      console.log('You have won. Good job friend.');
+
+    }
 
   };
 
