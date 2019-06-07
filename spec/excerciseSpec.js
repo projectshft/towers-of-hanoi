@@ -8,8 +8,19 @@ afterEach(function() {
   game = Board();
 });
 
+describe("board creation", function () {
+  it("game object should only return functions", function () {
+    //game.three = 3; here to see if following tests would fail, they do
+    for (let prop in game) {
+      expect(typeof game[prop]).toEqual("function");
+
+      typeof game[prop];
+    }
+  });
+});
+
 describe("legalPegs for Board", function () {
-  it("checks legal destinations for disc \"1\"", function () {
+  it("checks legal destinations for disc on peg \"1\"", function () {
     expect(game.legalMoves(1)).toEqual([2,3]);
 
     game.legalMoves(1);
@@ -29,4 +40,3 @@ describe("legalPegs for Board", function () {
     game.legalMoves(1);
   });
 });
-
