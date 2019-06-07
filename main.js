@@ -201,5 +201,6 @@ let Board = (pegs=3, discs=3) => {
 // console.log('New game started. Initial board state:');
 // gameBoard.printBoard();
 
-console.log('New game started.\nCreate new tower set by entering \"game = Board(pegs, discs)\" below.');
-let game;
+console.log('New game started, default 3 pegs and 3 discs.');
+console.log('If you would like to create a new tower set, enter \"game = Board(pegs, discs)\" below.');
+let game = Board();
