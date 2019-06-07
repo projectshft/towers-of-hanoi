@@ -11,10 +11,12 @@ let Board = () => {
 
   let board = [
     ['3','2','1'],
-    ['4'],
-    ['6','5']
+    [],
+    []
   ];
 
+
+  /////////////////////////////////////////////////////////////////////////////
   let printBoard = () => {
 
     console.log('\n');
@@ -39,10 +41,32 @@ let Board = () => {
 
   };
 
+
+  /////////////////////////////////////////////////////////////////////////////
+  let moveDisc = (fromPeg, toPeg) => {
+
+    board[toPeg-1].push( board[fromPeg-1].pop() );
+
+  };
+
+  /////////////////////////////////////////////////////////////////////////////
   return {
 
-    printBoard
+    printBoard,
+    moveDisc
 
   };
 
 } //end board
+
+
+/**
+ * 
+ * 'Run' game
+ * 
+ */
+
+let board = Board();
+
+console.log('New game started. Initial board state:');
+board.printBoard();
