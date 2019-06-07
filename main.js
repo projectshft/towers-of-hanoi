@@ -33,7 +33,7 @@ let Board = () => {
 
       });
 
-      console.log(`${pegString} \n`);
+      console.log(`${pegString}\n`);
 
     });
 
@@ -45,7 +45,22 @@ let Board = () => {
   /////////////////////////////////////////////////////////////////////////////
   let moveDisc = (fromPeg, toPeg) => {
 
-    board[toPeg-1].push( board[fromPeg-1].pop() );
+    if (board[fromPeg-1].length === 0) 
+      console.log('There are no more discs on that peg.');
+
+    else if (board[toPeg-1].length === 0)
+      board[toPeg-1].push( board[fromPeg-1].pop() );
+
+    else if (board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1])
+      console.log('You cannot move a larger disc on top of a smaller one, board is still:');
+
+    else
+      board[toPeg-1].push( board[fromPeg-1].pop() );
+
+    printBoard();
+
+    //TODO
+    // check winner after every move
 
   };
 
@@ -66,7 +81,7 @@ let Board = () => {
  * 
  */
 
-let board = Board();
+let gameBoard = Board();
 
 console.log('New game started. Initial board state:');
-board.printBoard();
+gameBoard.printBoard();
