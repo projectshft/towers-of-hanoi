@@ -7,13 +7,21 @@
 
 //later impletement user passing number of discs and pegs, check if it is legal
 //1st draft - don't use discs and pegs, create board manually to 3x3
-let Board = () => {
+let Board = (pegs=3, discs=3) => {
 
-  let board = [
-    ['3','2','1'],
-    [],
-    []
-  ];
+  const board = [];
+
+  for (let i=0; i<pegs; i++)
+    board.push([]);
+
+  for (let i=0; i<discs; i++)
+    board[0][i] = discs - i;
+
+  // let board = [
+  //   ['3','2','1'],
+  //   [],
+  //   []
+  // ];
 
   let numMoves = 0;
   const winSum = board[0].reduce( (sum, curr) => {
@@ -22,6 +30,8 @@ let Board = () => {
     return sum;
 
   },0);
+
+
 
 
   /////////////////////////////////////////////////////////////////////////////
@@ -141,6 +151,7 @@ let Board = () => {
 
       console.log('You have won. Good job friend.');
       //restart game
+
 
     }
 
