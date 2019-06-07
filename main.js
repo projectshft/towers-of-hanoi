@@ -14,13 +14,30 @@ let Board = (pegs=3, discs=3) => {
     return;
   }
 
-  let board = [];
+  let board, numMoves, winSum;
 
-  for (let i=0; i<pegs; i++)
-    board.push([]);
+  let setBoard = () => {
 
-  for (let i=0; i<discs; i++)
-    board[0][i] = discs - i;
+    board = [];
+
+    for (let i=0; i<pegs; i++)
+      board.push([]);
+  
+    for (let i=0; i<discs; i++)
+      board[0][i] = discs - i;
+
+    numMoves = 0;
+    winSum = board[0].reduce( (sum, curr) => {
+
+      sum += +curr;
+      return sum;
+
+    },0);
+
+  };
+
+  setBoard();
+  
 
   // let board = [
   //   ['3','2','1'],
@@ -28,13 +45,7 @@ let Board = (pegs=3, discs=3) => {
   //   []
   // ];
 
-  let numMoves = 0;
-  const winSum = board[0].reduce( (sum, curr) => {
-
-    sum += +curr;
-    return sum;
-
-  },0);
+  
 
 
 
@@ -156,13 +167,7 @@ let Board = (pegs=3, discs=3) => {
 
       console.log(`You have won in ${numMoves} moves. Good job friend.`);
       //restart game
-      board = [];
-
-      for (let i=0; i<pegs; i++)
-        board.push([]);
-
-      for (let i=0; i<discs; i++)
-        board[0][i] = discs - i;
+      setBoard();
 
       printBoard();
 
