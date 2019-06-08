@@ -78,7 +78,7 @@ let Board = (pegs=3, discs=3) => {
         || typeof fromPeg !== 'number' || typeof toPeg !== 'number') {
     
       console.log(`Enter peg numbers from 1 to ${board.length}`);
-      return;
+      return false;
 
     }
 
@@ -103,9 +103,6 @@ let Board = (pegs=3, discs=3) => {
 
     printBoard();
     checkWinner(toPeg);
-
-    //TODO
-    // check winner after every move
 
   };
 

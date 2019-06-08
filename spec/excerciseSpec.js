@@ -22,15 +22,41 @@ describe("board creation", function () {
 
 //printBoard tests
 describe("printBoard for Board", function () {
-  it("checks initial printBoard for 5 peg 5 disc game", function () {
+  it("checks initial printBoard for 5 peg 5 disc game - ignores whitespace", function () {
     game = Board(5,5);
     let gameStateString = '\n--- 5 4 3 2 1 \n--- \n--- \n--- \n--- ';
 
-    //get rid of all whitespace as we don't care if someone else wants to format output differently
     expect(game.printBoard().replace(/\s/g, '')).toEqual(gameStateString.replace(/\s/g, ''));
 
     game.printBoard();
   });
+
+  it("checks printBoard after .moveDisc(1,2) and .moveDisc(1,3) - ignores whitespace", function (){
+    let gameStateString = '\n--- 3 \n--- 1 \n--- 2 ';
+    game.moveDisc(1,2);
+    game.moveDisc(1,3);
+
+    expect(game.printBoard().replace(/\s/g, '')).toEqual(gameStateString.replace(/\s/g, ''));
+  
+    game.printBoard();
+  });
+});
+
+//moveDisc tests
+describe("moveDisc for Board", function () {
+  it("checks if moveDisc first parameter handles incorrect input", function () {
+    expect(game.moveDisc(0,1)).toEqual(false);
+
+    game.moveDisc(0,1);
+
+    expect(game.moveDisc(5,1)).toEqual(false);
+
+    game.moveDisc(5,1);
+
+    expect(game.moveDisc('string',2)).toEqual(false);
+
+    game.moveDisc('string',2);
+  })
 });
 
 //legalMoves tests
