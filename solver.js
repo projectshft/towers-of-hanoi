@@ -28,7 +28,14 @@
 const moveTowers = (discs, start, aux, end) => {
 
   //base case
-  
+  if (discs === 1) {
+    game.moveDisc(start,end);
+    return;
+  }
+
+  moveTowers(discs-1, start, end, aux);
+  moveTowers(1, start, aux, end);
+  moveTowers(discs-1, aux, start, end);
 
 };
 

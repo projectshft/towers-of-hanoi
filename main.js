@@ -179,11 +179,7 @@ let Board = (pegs=3, discs=3) => {
 
   };
 
-  const solveGame = () => {
-
-    moveTowers(discs, 1, 2, 3);
-
-  };
+  const solveGame = () => moveTowers(discs, 1, 2, 3);
 
   printBoard();
   /////////////////////////////////////////////////////////////////////////////
