@@ -1,5 +1,8 @@
 /**
  * Tests for Towers of Hanoi game
+ * 
+ * Tests are run on a 3 peg, 3 disc game unless stated otherwise
+ * 
  * TODO:
  *  test checkWinner
  *  test setBoard
@@ -91,6 +94,24 @@ describe("moveDisc for Board", function () {
     expect(game.moveDisc(2,'string')).toEqual(false);
 
     game.moveDisc(2,'string');
+  });
+
+  it("checks if moveDisc was successful", function () {
+    let response = game.moveDisc(1,2);
+
+    expect(response.moveSuccessful).toEqual(true);
+
+    response = game.moveDisc(1,2);
+
+    expect(response.moveSuccessful).toEqual(false);
+
+    response = game.moveDisc(3,1);
+
+    expect(response.moveSuccessful).toEqual(false);
+  });
+
+  it("checks if checkWinner function is successful", function () {
+    
   });
 });
 
