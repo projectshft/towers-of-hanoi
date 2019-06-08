@@ -63,7 +63,21 @@ describe("moveDisc for Board", function () {
   });
 
   it("checks if moveDisc second parameter handles incorrect input", function () {
-    
+    expect(game.moveDisc(1,0)).toEqual(false);
+
+    game.moveDisc(1,0);
+
+    expect(game.moveDisc(1,5)).toEqual(false);
+
+    game.moveDisc(1,5);
+
+    expect(game.moveDisc(2,'string')).toEqual(false);
+
+    game.moveDisc(2,'string');
+
+    expect(game.moveDisc(1,2)).toEqual(true);
+
+    game.moveDisc(1,2);
   });
 });
 

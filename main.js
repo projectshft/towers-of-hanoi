@@ -105,9 +105,9 @@ let Board = (pegs=3, discs=3) => {
     }
 
     //else
-      board[toPeg-1].push( board[fromPeg-1].pop() );
-      console.log('That move was successful, board is now:');
-      numMoves++;
+    board[toPeg-1].push( board[fromPeg-1].pop() );
+    console.log('That move was successful, board is now:');
+    numMoves++;
 
     printBoard();
     checkWinner(toPeg);
