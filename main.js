@@ -42,13 +42,14 @@ let Board = (pegs=3, discs=3) => {
   /////////////////////////////////////////////////////////////////////////////
   const printBoard = () => {
 
-    console.log('\n');
+    let pegString = '\n';
+    
     //iterate through pegs, map each peg array to string
     board.forEach( peg => {
 
       //better with reduce since creating a return string?
 
-      let pegString = '--- ';
+      pegString += '--- ';
 
       peg.map( disc => {
 
@@ -56,11 +57,15 @@ let Board = (pegs=3, discs=3) => {
 
       });
 
-      console.log(`${pegString}\n`);
+      pegString += '\n';
 
     });
 
-    console.log('\n');
+    pegString += '\n';
+
+    console.log(pegString);
+
+    return pegString;
 
   };
 
