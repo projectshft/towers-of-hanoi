@@ -8,6 +8,7 @@ afterEach(function() {
   game = Board();
 });
 
+//board creation tests
 describe("board creation", function () {
   it("game object should only return functions", function () {
     //game.three = 3; here to see if following tests would fail, they do
@@ -19,7 +20,20 @@ describe("board creation", function () {
   });
 });
 
-describe("legalPegs for Board", function () {
+//printBoard tests
+describe("printBoard for Board", function () {
+  it("checks initial printBoard for 5 peg 5 disc game", function () {
+    game = Board(5,5);
+    let gameStateString = '\n--- 5 4 3 2 1 \n--- \n--- \n--- \n--- ';
+
+    expect(game.printBoard().replace(/\s\s+/g, ' ')).toEqual(gameStateString.replace(/\s\s+/g, ' '));
+
+    game.printBoard();
+  });
+});
+
+//legalMoves tests
+describe("legalMoves for Board", function () {
   it("checks legal destinations for disc on peg \"1\"", function () {
     expect(game.legalMoves(1)).toEqual([2,3]);
 
