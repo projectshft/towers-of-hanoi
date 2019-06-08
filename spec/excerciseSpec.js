@@ -26,7 +26,8 @@ describe("printBoard for Board", function () {
     game = Board(5,5);
     let gameStateString = '\n--- 5 4 3 2 1 \n--- \n--- \n--- \n--- ';
 
-    expect(game.printBoard().replace(/\s\s+/g, ' ')).toEqual(gameStateString.replace(/\s\s+/g, ' '));
+    //get rid of all whitespace as we don't care if someone else wants to format output differently
+    expect(game.printBoard().replace(/\s/g, '')).toEqual(gameStateString.replace(/\s/g, ''));
 
     game.printBoard();
   });
