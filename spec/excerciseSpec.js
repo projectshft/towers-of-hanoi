@@ -56,7 +56,15 @@ describe("moveDisc for Board", function () {
     expect(game.moveDisc('string',2)).toEqual(false);
 
     game.moveDisc('string',2);
-  })
+
+    expect(game.moveDisc(1,2)).toEqual(true);
+
+    game.moveDisc(1,2);
+  });
+
+  it("checks if moveDisc second parameter handles incorrect input", function () {
+    
+  });
 });
 
 //legalMoves tests
