@@ -73,6 +73,11 @@ let Board = (pegs=3, discs=3) => {
   /////////////////////////////////////////////////////////////////////////////
   const moveDisc = (fromPeg, toPeg) => {
 
+    const returnObj = {
+      moveSuccessful: false,
+      gameWon: false
+    };
+
     //check for legal values first
     if (fromPeg < 1 || fromPeg > board.length || toPeg < 1 || toPeg > board.length
         || typeof fromPeg !== 'number' || typeof toPeg !== 'number') {
@@ -90,19 +95,19 @@ let Board = (pegs=3, discs=3) => {
         : console.log('You cannot move a larger disc on top of a smaller one, board is still:');
       
       printBoard();
-      return false;
+      return returnObj;
 
     }
 
     //else
     board[toPeg-1].push( board[fromPeg-1].pop() );
     console.log('That move was successful, board is now:');
+    returnObj.moveSuccessful = true;
     numMoves++;
-
     printBoard();
-    checkWinner(toPeg);
+    returnObj.gameWon = checkWinner(toPeg);
 
-    return true;
+    return returnObj;
 
   };
 
@@ -147,7 +152,7 @@ let Board = (pegs=3, discs=3) => {
 
     //not winning if we're on first peg
     if (peg-1 === 0) 
-      return;
+      return false;
 
     let sumPeg = board[peg-1].reduce( (sum, curr) => {
 
@@ -166,7 +171,11 @@ let Board = (pegs=3, discs=3) => {
 
       console.log('Towers reset.\nIf you would like to create new towers enter \"game = Board(pegs, discs)\" below.');
 
+      return true;
+
     }
+
+    return false;
 
   };
 
