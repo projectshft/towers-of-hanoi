@@ -111,7 +111,38 @@ describe("moveDisc for Board", function () {
   });
 
   it("checks if checkWinner function is successful", function () {
-    
+    let response = game.moveDisc(1,2);
+
+    expect(response.gameWon).toEqual(false);
+
+    game.moveDisc(1,3);
+    game.moveDisc(2,3);
+    game.moveDisc(1,2);
+    game.moveDisc(3,1);
+    game.moveDisc(3,2);
+    response = game.moveDisc(1,2);
+
+    expect(response.gameWon).toEqual(true);
+  });
+
+  it("checks if checkWinner is false when on first peg", function () {
+    game.moveDisc(1,2);
+
+    let response = game.moveDisc(2,1);
+
+    expect(response.gameWon).toEqual(false);
+
+    //more moves in case of unexpected edge cases?
+    game.moveDisc(1,2);
+    game.moveDisc(1,3);
+    game.moveDisc(2,3);
+    game.moveDisc(1,2);
+    game.moveDisc(2,1);
+    game.moveDisc(3,2);
+    game.moveDisc(3,1);
+    response = game.moveDisc(2,1);
+
+    expect(response.gameWon).toEqual(false);
   });
 });
 
