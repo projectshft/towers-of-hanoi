@@ -39,4 +39,13 @@ describe("legalPegs for Board", function () {
 
     game.legalMoves(1);
   });
+
+  it("should return empty array when no legal moves exist from peg", function () {
+    game.moveDisc(1,2);
+    game.moveDisc(1,3);
+
+    expect(game.legalMoves(1)).toEqual([]);
+
+    game.legalMoves(1);
+  });
 });
