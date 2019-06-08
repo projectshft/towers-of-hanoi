@@ -88,17 +88,7 @@ let Board = (pegs=3, discs=3) => {
       return false;
     }
 
-    //helper function worth?
-    if (board[toPeg-1].length === 0) {
-      board[toPeg-1].push( board[fromPeg-1].pop() );
-      console.log('That move was successful, board is now:');
-      numMoves++;
-      printBoard();
-      checkWinner(toPeg);
-      return true;
-    }
-
-    if (board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1]) {
+    if (board[toPeg-1].length !== 0 && board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1]) {
       console.log('You cannot move a larger disc on top of a smaller one, board is still:');
       printBoard();
       return false;
