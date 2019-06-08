@@ -29,11 +29,11 @@ describe("board creation", function () {
   it("game object inputs must be at least 3 pegs and 1 disc", function () {
     game = Board(1,1);
 
-    expect(typeof game).toEqual('undefined');
+    expect(game).toEqual(null);
 
     game = Board(3,0);
 
-    expect(typeof game).toEqual('undefined');
+    expect(game).toEqual(null);
 
     game = Board(4,4);
 

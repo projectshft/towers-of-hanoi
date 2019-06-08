@@ -11,7 +11,7 @@ let Board = (pegs=3, discs=3) => {
 
   if (pegs < 3 || discs < 1) {
     console.log('Enter at least 3 pegs and 1 disc.'); //user can bore themselves if they want to play with 1 or 2 discs
-    return;
+    return null;
   }
 
   let board, numMoves, winSum;
@@ -82,16 +82,16 @@ let Board = (pegs=3, discs=3) => {
 
     }
 
-    if (board[fromPeg-1].length === 0) {
-      console.log('There are no more discs on that peg, board is still:');
+    if ( (board[fromPeg-1].length === 0) || 
+         (board[toPeg-1].length !== 0 && board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1]) ) {
+      
+      (board[fromPeg-1].length === 0) 
+        ? console.log('There are no more discs on that peg, board is still:')
+        : console.log('You cannot move a larger disc on top of a smaller one, board is still:');
+      
       printBoard();
       return false;
-    }
 
-    if (board[toPeg-1].length !== 0 && board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1]) {
-      console.log('You cannot move a larger disc on top of a smaller one, board is still:');
-      printBoard();
-      return false;
     }
 
     //else
@@ -188,11 +188,6 @@ let Board = (pegs=3, discs=3) => {
  * 'Run' game
  * 
  */
-
-// let gameBoard = Board();
-
-// console.log('New game started. Initial board state:');
-// gameBoard.printBoard();
 
 console.log('New game started, default 3 pegs and 3 discs.');
 console.log('If you would like to create a new tower set, enter \"game = Board(pegs, discs)\" below.');
