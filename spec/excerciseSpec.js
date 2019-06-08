@@ -1,3 +1,10 @@
+/**
+ * Tests for Towers of Hanoi game
+ * TODO:
+ *  test checkWinner
+ *  test setBoard
+ */
+
 // creates a new game before each spec
 beforeEach(function () {
   game = Board();
@@ -17,6 +24,20 @@ describe("board creation", function () {
 
       typeof game[prop];
     }
+  });
+
+  it("game object inputs must be at least 3 pegs and 1 disc", function () {
+    game = Board(1,1);
+
+    expect(typeof game).toEqual('undefined');
+
+    game = Board(3,0);
+
+    expect(typeof game).toEqual('undefined');
+
+    game = Board(4,4);
+
+    expect(typeof game).toEqual('object');
   });
 });
 
