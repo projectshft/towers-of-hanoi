@@ -1,9 +1,11 @@
 var towersOfHanoi = function() {
 
 
-    //board should maintain the number of moves a player has completed - outputs value with endGame
+    //There should be an object responsible for maintain the state of the board and it
+    //should control the way to manipulate the inner state of the board.
     var state = {
         moves: 0,
+        //board should maintain the number of moves a player has completed - outputs value with endGame
         board: [
             [3, 2, 1],
             [],
@@ -12,8 +14,6 @@ var towersOfHanoi = function() {
         winState: [3, 2, 1],
         gameStarted: true
     };
-
-
 
     //game will progress by a player using a function to submit moves to the game
     var moveDisc = function(pegFrom, pegTo) {
@@ -41,8 +41,8 @@ var towersOfHanoi = function() {
 
     var displayBoard = function() {
         //must be able to print the board horizontally using **map** (and on cmd line print)
-        console.log(this.state.board.map(peg => {
-            return "--- " + peg.join(" ");
+        console.log(this.state.board.map((peg, pegIndex) => {
+            return `Peg (${pegIndex+1}): --- ` + peg.join(" ");
         }).join("\n"));
 
     };
@@ -121,32 +121,38 @@ var towersOfHanoi = function() {
 
         //debugger
         let currentBoard = this.state.board;
-        if (currentBoard[(pegNumber - 1)].length !== 0) {
-            let discValue = currentBoard[(pegNumber - 1)][currentBoard[(pegNumber - 1)].length];
-            let allowedMoves = currentBoard.filter(function(peg, pegIndex) {
-                if ((pegIndex + 1) !== pegNumber) {
 
-                    if (peg.length === 0 || peg[peg.length] < discValue) {
-                        console.log(`You could move the disc from the top of Peg ${pegNumber} to Peg ${(pegIndex + 1)}.`);
-                    } else {
-                        console.log(`There are no current possible moves from Peg ${pegNumber}, please try another peg!`);
+        if (typeof pegNumber === "number" && ((pegNumber-1) < currentBoard.length) && (pegNumber > 0)) {
+            if (currentBoard[(pegNumber - 1)].length !== 0) {
+                let discValue = currentBoard[(pegNumber - 1)][currentBoard[(pegNumber - 1)].length];
+                let allowedMoves = currentBoard.filter(function(peg, pegIndex) {
+                    if ((pegIndex + 1) !== pegNumber) {
+
+                        if (peg.length === 0 || peg[peg.length] < discValue) {
+                            console.log(`You could move the disc from the top of Peg ${pegNumber} to Peg ${(pegIndex + 1)}.`);
+                        } else if (peg[peg.length] > discValue) {
+                            console.log(` `);
+                        } else {
+                            console.log(`There are no current possible moves from Peg ${pegNumber}, please try another peg!`);
+                        }
                     }
-                }
 
-            });
+                });
+            } else {
+                console.log(`The peg you are checking moves from is empty, please try another peg!`);
+            }
         } else {
-            console.log(`The peg you are checking moves from is empty, please try another peg!`);
+            console.log(`The peg you are checking moves from does not exist, please try another peg!`);
         }
-
     };
 
     var startGame = function() {
 
         //check if we've started this thing already
-        if (this.gameStarted == false) {
+        if (this.state.gameStarted === false) {
 
             //annoying introduction
-            alert("Hello! Let's play Towers of Hanoi. It's your new favorite game.");
+            alert("Hello! Let's play Towers of Hanoi. I can already tell it's your new favorite game.");
             alert("To get started, we will first need to determine how many pegs and discs you'll play with...");
             let discs = parseInt(window.prompt("Please enter the number of disc(s) (minimum 1): "));
 
@@ -188,6 +194,8 @@ var towersOfHanoi = function() {
             this.createBoard(discs, pegs);
             alert(`We have ${pegs} Towers and ${discs} discs! Best of luck, please use the console below to play.`);
 
+        } else {
+            console.log(`The game has already begun with a default of 3 Pegs and 3 Discs.\nOnce you beat this first round, you will have the option to change the number of Pegs/Discs... \nGood Luck! Below is the current board.\nTry towersOfHanoi.possibleMoves(1) in your console to begin.`);
         }
     };
 
@@ -213,17 +221,19 @@ var towersOfHanoi = function() {
     };
 
     var endGame = function() {
-        this.displayMoveTotal();
-        //game should announce that there has been a winner to the console.
-        console.log(`Well done! You've won the game.`);
-        this.state.moves = 0;
-        this.state.board = [];
-        this.state.winState = [];
-        this.state.gameStarted = false;
 
-        //game should automatically reset to a new game.
-        this.startGame()
+        if (this.checkWinner()) {
+            this.displayMoveTotal();
+            //game should announce that there has been a winner to the console.
+            console.log(`Well done! You've won the game.`);
+            this.state.moves = 0;
+            this.state.board = [];
+            this.state.winState = [];
+            this.state.gameStarted = false;
 
+            //game should automatically reset to a new game.
+            this.startGame();
+        }
         // let response = confirm("Would you like to play again?");
         // if response ? this.startGame() : alert("Thanks for playing!");
 
@@ -235,18 +245,18 @@ var towersOfHanoi = function() {
         //this function must use reduce at least once
         magicNum = this.state.winState.length;
         //use find to see if there's a peg with enough discs to potentially win
-        let winningPeg = this.state.board.find(function(peg) {
+        let winningPeg = this.state.board.findIndex(function(peg) {
             return (peg.length == magicNum);
         });
 
         //create array to check each disc vs. win State array
         // let winArray = [];
         //debugger
-        if (winningPeg !== undefined) {
+        if (winningPeg !== -1 && winningPeg !== 0) {
 
             //debugger
             let magicArray = this.state.winState;
-            return winningPeg.reduce(function(accumulator, disc, discIndex) {
+            return this.state.board[winningPeg].reduce(function(accumulator, disc, discIndex) {
                 accumulator.push(disc === magicArray[discIndex]);
                 return accumulator;
             }, []).every(compareToWin => {
@@ -293,3 +303,5 @@ var towersOfHanoi = function() {
 };
 
 var towersOfHanoi = towersOfHanoi();
+towersOfHanoi.startGame();
+towersOfHanoi.displayBoard();
