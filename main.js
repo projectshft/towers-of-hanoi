@@ -122,7 +122,7 @@ var towersOfHanoi = function() {
         //debugger
         let currentBoard = this.state.board;
 
-        if (typeof pegNumber === "number" && ((pegNumber-1) < currentBoard.length) && (pegNumber > 0)) {
+        if (typeof pegNumber === "number" && ((pegNumber - 1) < currentBoard.length) && (pegNumber > 0)) {
             if (currentBoard[(pegNumber - 1)].length !== 0) {
                 let discValue = currentBoard[(pegNumber - 1)][currentBoard[(pegNumber - 1)].length];
                 let allowedMoves = currentBoard.filter(function(peg, pegIndex) {
@@ -263,25 +263,9 @@ var towersOfHanoi = function() {
                 return compareToWin === true;
             });
 
-            // for (let i = 0; i < winningPeg.length; i++) {
-            //     if (winningPeg[i] == this.winState[i]) {
-            //         winArray.push(true);
-            //     } else {
-            //         winArray.push(false);
-            //     }
-            // }
         } else {
             return false
         }
-
-        //do I even need this?
-        // else {
-        //     winArray.push(false);
-        // }
-
-        // return winArray.every(compareToWin => {
-        //     return compareToWin === true;
-        // });
 
     };
 
