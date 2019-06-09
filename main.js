@@ -1,20 +1,33 @@
 var towersOfHanoi = {
 
-    //object must contain the state of the board
-    // state: {[1,2,3,4,5],[],[]};
-
     //board should maintain the number of moves a player has completed - outputs value with endGame
     moves: 0,
 
+    //object must contain the state of the board
     //use 2D array to represent the board
-    board: [],
+    // board: [],
 
-    winState: [],
+    // winState: [],
 
-    gameStarted: false,
+    // gameStarted: false,
+
+    board: [
+        [3, 2, 1],
+        [],
+        []
+    ],
+
+    winState: [3, 2, 1],
+
+    gameStarted: true,
 
     //game will progress by a player using a function to submit moves to the game
     moveDisc: function(pegFrom, pegTo) {
+
+        if (this.gameStarted == false){
+            this.startGame();
+        };
+
         //function will check if a move is possible (i.e. ensuring a smaller disc is being moved onto a bigger)
         if (this.possibleMove(pegFrom, pegTo)) {
             let discMoving = this.board[pegFrom - 1].pop();
@@ -34,9 +47,13 @@ var towersOfHanoi = {
 
     displayBoard: function() {
         //must be able to print the board horizontally using **map** (and on cmd line print)
-        this.board.map(peg => {
-            console.log("--- " + peg.join(" "));
-        });
+
+
+        console.log(this.board.map(peg => {
+            return "--- " + peg.join(" ");
+        }).join("\n"));
+
+
     },
 
     //update number of moves a player has completed
@@ -50,7 +67,7 @@ var towersOfHanoi = {
         //this.displayBoard();
     },
 
-    
+
     possibleMove: function(pegFrom, pegTo) {
 
         //check if peg is a number
@@ -76,7 +93,7 @@ var towersOfHanoi = {
 
                         if (pegFromTopDisc < pegToTopDisc) {
 
-                            console.log(`Moving disc ${pegFromTopDisc} on Peg ${pegFrom} to Peg ${pegTo} is totally possible.`);
+                            //console.log(`Moving disc ${pegFromTopDisc} on Peg ${pegFrom} to Peg ${pegTo} is totally possible.`);
                             return true;
                         } else {
                             return false;
@@ -111,18 +128,24 @@ var towersOfHanoi = {
     possibleMoves: function(pegNumber) {
         //grab the pegs available
 
-        
-        console.log(this.board.filter(function(peg, pegIndex){
+        //debugger
+        let currentBoard = this.board;
+        if (currentBoard[(pegNumber - 1)].length !== 0) {
+            let discValue = currentBoard[(pegNumber - 1)][currentBoard[(pegNumber - 1)].length];
+            let allowedMoves = currentBoard.filter(function(peg, pegIndex) {
+                if ((pegIndex + 1) !== pegNumber) {
 
-            if((pegNumber) != (pegIndex+1)){
-                console.log(`Peg ${pegIndex+1} is not the current peg.`)
-            }
+                    if(peg.length === 0 || peg[peg.length] < discValue){
+                        console.log(`You could move the disc from the top of Peg ${pegNumber} to Peg ${(pegIndex + 1)}.`);
+                    } else {
+                        console.log(`There are no current possible moves from Peg ${pegNumber}, please try another peg!`);
+                    }
+                }
 
-            return (pegNumber) != (pegIndex+1)
-        }));
-
-
-
+            });
+        } else {
+            console.log(`The peg you are checking moves from is empty, please try another peg!`);
+        }
 
     },
 
@@ -134,19 +157,19 @@ var towersOfHanoi = {
             //annoying introduction
             alert("Hello! Let's play Towers of Hanoi. It's your new favorite game.");
             alert("To get started, we will first need to determine how many pegs and discs you'll play with...");
-            let discs = parseInt(window.prompt("Please enter the number of discs (minimum 3): "));
+            let discs = parseInt(window.prompt("Please enter the number of disc(s) (minimum 1): "));
 
             //grab number of discs
             // do {
             if (typeof discs === "number") {
                 //check if discs is greater than 3
-                if (discs < 3) {
-                    alert("Apologies, we will need at least three discs to begin...");
-                    let discs = window.prompt("Please enter the number of discs (minimum 3): ");
+                if (discs < 1) {
+                    alert("Apologies, we will need at least one disc to begin...");
+                    let discs = window.prompt("Please enter the number of disc(s) (minimum 1): ");
                 }
             } else {
                 alert("Apologies, we will need a number to determine how many discs to begin...");
-                let discs = window.prompt("Please enter the number of discs (minimum 3): ");
+                let discs = window.prompt("Please enter the number of disc(s) (minimum 1): ");
             }
             // } while (typeof discs !== "number");
 
