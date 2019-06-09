@@ -147,7 +147,8 @@ describe("moveDisc for Board", function () {
 });
 
 //legalMoves tests
-describe("legalMoves for Board", function () {
+//legalMoves was originally returned into the game object, refactored to be enclosed and only used by moveDisc
+/*describe("legalMoves for Board", function () {
   it("checks legal destinations for disc on peg \"1\"", function () {
     expect(game.legalMoves(1)).toEqual([2,3]);
 
@@ -176,7 +177,7 @@ describe("legalMoves for Board", function () {
 
     game.legalMoves(1);
   });
-});
+});*/
 
 //solveGame tests
 describe("recursive solver", function () {

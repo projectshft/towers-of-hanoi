@@ -97,9 +97,7 @@ let Board = (pegs=3, discs=3) => {
 
     }
 
-    let temp = legalMoves(fromPeg);
-
-    if (temp.includes(toPeg)) {
+    if (legalMoves(fromPeg).includes(toPeg)) {
       board[toPeg-1].push( board[fromPeg-1].pop() );
       returnObj.moveSuccessful = true;
       numMoves++;
@@ -198,7 +196,6 @@ let Board = (pegs=3, discs=3) => {
 
     printBoard,
     moveDisc,
-    legalMoves,
     solveGame
 
   };
