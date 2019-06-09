@@ -114,7 +114,7 @@ let Board = (pegs=3, discs=3) => {
   /////////////////////////////////////////////////////////////////////////////
   const legalMoves = peg => {
 
-    if (peg === undefined || peg > board.length || peg < 1) {
+    if (peg === undefined || peg > board.length || peg < 1 || typeof peg !== 'number') {
       console.log(`Enter a peg number as argument (1-${board.length})`);
       return;
     }
@@ -125,12 +125,13 @@ let Board = (pegs=3, discs=3) => {
     }
 
     let disc = board[peg-1][board[peg-1].length-1];
-    let pegs = [];
-    for (let i=0; i<board.length; i++) {
-      pegs.push(i+1);
+    let pegs = []; //want [1,2,...,n] for n pegs
+    for (let i=1; i<=board.length; i++) {
+      pegs.push(i);
     }
 
     //save to variable in case we actually use this instead of just displaying
+    //if not console.log, replace 'let legalPegs = ' with 'return'
 
     let legalPegs = pegs.filter( (currArr, index) => {
 

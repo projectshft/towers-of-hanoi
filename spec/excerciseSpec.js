@@ -223,4 +223,15 @@ describe("recursive solver", function () {
 
     expect(game.moveDisc.calls.count()).toEqual(63);
   });
+
+  it("should call moveDisc 32767 times for 15 discs", function () {
+    game = Board(3,15);
+    spyOn(game, 'moveDisc');
+
+    expect(game.moveDisc.calls.count()).toEqual(0);
+
+    game.solveGame();
+
+    expect(game.moveDisc.calls.count()).toEqual(32767);
+  });
 });
