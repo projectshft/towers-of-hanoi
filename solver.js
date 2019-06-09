@@ -20,7 +20,6 @@
  *  peg 1 is start
  *  peg 2 is aux
  *  peg 3 is end
- * 
  */
 
 //leave on global or put inside solveGame?

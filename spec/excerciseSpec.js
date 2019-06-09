@@ -177,3 +177,28 @@ describe("legalMoves for Board", function () {
     game.legalMoves(1);
   });
 });
+
+//solveGame tests
+describe("recursive solver", function () {
+  
+  it("should call moveDisc 7 times for 3 discs", function () { 
+    spyOn(game, 'moveDisc');
+    
+    expect(game.moveDisc.calls.count()).toEqual(0);
+
+    game.solveGame();
+
+    expect(game.moveDisc.calls.count()).toEqual(7);
+  });
+
+  it("should call moveDisc 15 times for 3 discs", function () {
+    game = Board(3,4);
+    spyOn(game, 'moveDisc');
+    
+    expect(game.moveDisc.calls.count()).toEqual(0);
+
+    game.solveGame();
+
+    expect(game.moveDisc.calls.count()).toEqual(15);
+  });
+});
