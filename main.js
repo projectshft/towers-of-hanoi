@@ -2,7 +2,7 @@ var towersOfHanoi = function() {
 
 
     //board should maintain the number of moves a player has completed - outputs value with endGame
-    let state = {
+    var state = {
         moves: 0,
         board: [
             [3, 2, 1],
@@ -13,110 +13,110 @@ var towersOfHanoi = function() {
         gameStarted: true
     };
 
-        
 
-        //game will progress by a player using a function to submit moves to the game
-    let moveDisc = function(pegFrom, pegTo) {
 
-            if (this.state.gameStarted == false) {
-                this.startGame();
-            };
+    //game will progress by a player using a function to submit moves to the game
+    var moveDisc = function(pegFrom, pegTo) {
 
-            //function will check if a move is possible (i.e. ensuring a smaller disc is being moved onto a bigger)
-            if (this.possibleMove(pegFrom, pegTo)) {
-                let discMoving = this.state.board[pegFrom - 1].pop();
-                this.state.board[pegTo - 1].push(discMoving);
-                this.updateMoves();
-                console.log(`Moved disc ${discMoving} from Peg ${pegFrom} to Peg ${pegTo}.`);
-                if (this.checkWinner()) {
-                    this.endGame();
-                }
-            } else {
-                console.log(`The disc you are moving cannot be placed onto Peg ${pegTo}, please try another move.`);
+        if (this.state.gameStarted == false) {
+            this.startGame();
+        };
+
+        //function will check if a move is possible (i.e. ensuring a smaller disc is being moved onto a bigger)
+        if (this.possibleMove(pegFrom, pegTo)) {
+            let discMoving = this.state.board[pegFrom - 1].pop();
+            this.state.board[pegTo - 1].push(discMoving);
+            this.updateMoves();
+            console.log(`Moved disc ${discMoving} from Peg ${pegFrom} to Peg ${pegTo}.`);
+            if (this.checkWinner()) {
+                this.endGame();
             }
+        } else {
+            console.log(`The disc you are moving cannot be placed onto Peg ${pegTo}, please try another move.`);
+        }
 
-            this.displayBoard();
+        this.displayBoard();
 
-        };
+    };
 
-    let displayBoard = function() {
-            //must be able to print the board horizontally using **map** (and on cmd line print)
-            console.log(this.state.board.map(peg => {
-                return "--- " + peg.join(" ");
-            }).join("\n"));
+    var displayBoard = function() {
+        //must be able to print the board horizontally using **map** (and on cmd line print)
+        console.log(this.state.board.map(peg => {
+            return "--- " + peg.join(" ");
+        }).join("\n"));
 
-        };
+    };
 
-        //update number of moves a player has completed
-    let updateMoves = function() {
-            this.state.moves++;
-        },
+    //update number of moves a player has completed
+    var updateMoves = function() {
+        this.state.moves++;
+    };
 
-        //outputs value with endGame
-    let displayMoveTotal = function() {
-            console.log(`User has completed ${this.state.moves} moves.`);
-            //this.displayBoard();
-        };
+    //outputs value with endGame
+    var displayMoveTotal = function() {
+        console.log(`User has completed ${this.state.moves} moves.`);
+        //this.displayBoard();
+    };
 
 
-    let possibleMove= function(pegFrom, pegTo) {
+    var possibleMove = function(pegFrom, pegTo) {
 
-            //check if peg is a number
-            if (typeof pegFrom === "number" && typeof pegTo === "number") {
+        //check if peg is a number
+        if (typeof pegFrom === "number" && typeof pegTo === "number") {
 
-                //check if pegFrom/To exists
-                if (pegFrom > 0 && pegFrom <= this.state.board.length && pegTo > 0 && pegTo <= this.state.board.length) {
+            //check if pegFrom/To exists
+            if (pegFrom > 0 && pegFrom <= this.state.board.length && pegTo > 0 && pegTo <= this.state.board.length) {
 
-                    //check for actual top Disc
-                    if (this.state.board[pegFrom - 1].length !== 0) {
+                //check for actual top Disc
+                if (this.state.board[pegFrom - 1].length !== 0) {
 
-                        //check if pegTo is empty
-                        if (this.state.board[pegTo - 1].length === 0) {
-                            return true;
-                        }
-
-                        //check topDisc of pegFrom against pegTo 
-                        if (this.state.board[pegFrom-1].length !== 0) {
-                            //debugger
-                            //find the numbers of the top discs on the pegs
-                            let pegFromTopDisc = this.state.board[pegFrom - 1][(this.state.board[pegFrom - 1].length - 1)];
-                            let pegToTopDisc = this.state.board[pegTo - 1][(this.state.board[pegTo - 1].length - 1)];
-
-                            if (pegFromTopDisc < pegToTopDisc) {
-
-                                //console.log(`Moving disc ${pegFromTopDisc} on Peg ${pegFrom} to Peg ${pegTo} is totally possible.`);
-                                return true;
-                            } else {
-                                return false;
-                            }
-
-                        } else {
-                            return true;
-                        }
-
-                        //console output if selected peg is empty
-                    } else {
-                        console.log(`The peg you are attempting to move a disc from is empty, please try another peg!`);
-                        return false;
+                    //check if pegTo is empty
+                    if (this.state.board[pegTo - 1].length === 0) {
+                        return true;
                     }
-                    //console output if either from peg or to peg does not exist
+
+                    //check topDisc of pegFrom against pegTo 
+                    if (this.state.board[pegFrom - 1].length !== 0) {
+                        //debugger
+                        //find the numbers of the top discs on the pegs
+                        let pegFromTopDisc = this.state.board[pegFrom - 1][(this.state.board[pegFrom - 1].length - 1)];
+                        let pegToTopDisc = this.state.board[pegTo - 1][(this.state.board[pegTo - 1].length - 1)];
+
+                        if (pegFromTopDisc < pegToTopDisc) {
+
+                            //console.log(`Moving disc ${pegFromTopDisc} on Peg ${pegFrom} to Peg ${pegTo} is totally possible.`);
+                            return true;
+                        } else {
+                            return false;
+                        }
+
+                    } else {
+                        return true;
+                    }
+
+                    //console output if selected peg is empty
                 } else {
-                    console.log(`One of the selected pegs does not exist, please try another peg number!`);
+                    console.log(`The peg you are attempting to move a disc from is empty, please try another peg!`);
                     return false;
                 }
-            }
-            //console output if peg is not a number
-            else {
-                console.log(`One of the selected pegs is not a number, please enter an integer and try again.`);
+                //console output if either from peg or to peg does not exist
+            } else {
+                console.log(`One of the selected pegs does not exist, please try another peg number!`);
                 return false;
             }
+        }
+        //console output if peg is not a number
+        else {
+            console.log(`One of the selected pegs is not a number, please enter an integer and try again.`);
+            return false;
+        }
 
 
-        };
+    };
 
     //function that's given a peg, determines which other pegs that peg's top disc can be moved to
     //this function must use filter() at least once
-    let possibleMoves = function(pegNumber) {
+    var possibleMoves = function(pegNumber) {
         //grab the pegs available
 
         //debugger
@@ -140,7 +140,7 @@ var towersOfHanoi = function() {
 
     };
 
-    let startGame = function() {
+    var startGame = function() {
 
         //check if we've started this thing already
         if (this.gameStarted == false) {
@@ -191,7 +191,7 @@ var towersOfHanoi = function() {
         }
     };
 
-    let createBoard = function(discs, pegs) {
+    var createBoard = function(discs, pegs) {
         // count discs for win state
         for (let i = discs; i > 0; i--) {
             this.state.winState.push(i);
@@ -212,7 +212,7 @@ var towersOfHanoi = function() {
         this.state.gameStarted = true;
     };
 
-    let endGame = function() {
+    var endGame = function() {
         this.displayMoveTotal();
         //game should announce that there has been a winner to the console.
         console.log(`Well done! You've won the game.`);
@@ -229,7 +229,7 @@ var towersOfHanoi = function() {
 
     };
 
-    let checkWinner = function() {
+    var checkWinner = function() {
 
         //function checkWinner that determines if the game has been won
         //this function must use reduce at least once
@@ -276,18 +276,20 @@ var towersOfHanoi = function() {
     };
 
     return {
-    state,
-    moveDisc,
-    displayBoard,
-    updateMoves,
-    displayMoveTotal,
-    possibleMove,
-    possibleMoves,
-    startGame,
-    createBoard,
-    endGame,
-    checkWinner
-    
-  };
+        state,
+        moveDisc,
+        displayBoard,
+        updateMoves,
+        displayMoveTotal,
+        possibleMove,
+        possibleMoves,
+        startGame,
+        createBoard,
+        endGame,
+        checkWinner
+
+    };
 
 };
+
+var towersOfHanoi = towersOfHanoi();
