@@ -82,6 +82,7 @@ var moveDisc = function(startPeg, destinationPeg){
 
 //testing
 var newGame = Game();
+newGame.moveDisc(1,4);
 newGame.moveDisc(1,3);
 newGame.moveDisc(1,2);
 newGame.moveDisc(3,2);
