@@ -191,7 +191,7 @@ describe("recursive solver", function () {
     expect(game.moveDisc.calls.count()).toEqual(7);
   });
 
-  it("should call moveDisc 15 times for 3 discs", function () {
+  it("should call moveDisc 15 times for 4 discs", function () {
     game = Board(3,4);
     spyOn(game, 'moveDisc');
     
@@ -200,5 +200,27 @@ describe("recursive solver", function () {
     game.solveGame();
 
     expect(game.moveDisc.calls.count()).toEqual(15);
+  });
+
+  it("should call moveDisc 31 times for 5 discs", function () {
+    game = Board(3,5);
+    spyOn(game, 'moveDisc');
+
+    expect(game.moveDisc.calls.count()).toEqual(0);
+
+    game.solveGame();
+
+    expect(game.moveDisc.calls.count()).toEqual(31);
+  });
+
+  it("should call moveDisc 63 times for 5 discs", function () {
+    game = Board(3,6);
+    spyOn(game, 'moveDisc');
+
+    expect(game.moveDisc.calls.count()).toEqual(0);
+
+    game.solveGame();
+
+    expect(game.moveDisc.calls.count()).toEqual(63);
   });
 });
