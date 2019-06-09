@@ -71,6 +71,16 @@ let Board = (pegs=3, discs=3) => {
 
 
   /////////////////////////////////////////////////////////////////////////////
+  /**
+   * use legalMoves to get array
+   * if undefined - illegal input
+   * [] - no legal moves
+   * [some items] - legal moves
+   * so if [].find(toPeg) then move
+   * else no move
+   * @param {*} fromPeg 
+   * @param {*} toPeg 
+   */
   const moveDisc = (fromPeg, toPeg) => {
 
     const returnObj = {
@@ -82,30 +92,29 @@ let Board = (pegs=3, discs=3) => {
     if (fromPeg < 1 || fromPeg > board.length || toPeg < 1 || toPeg > board.length
         || typeof fromPeg !== 'number' || typeof toPeg !== 'number') {
     
-      console.log(`Enter peg numbers from 1 to ${board.length}`);
+      console.log(`Enter two peg numbers from 1 to ${board.length} like so: "game.moveDisc(1,2)"`);
       return false;
 
     }
 
-    if ( (board[fromPeg-1].length === 0) || 
-         (board[toPeg-1].length !== 0 && board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1]) ) {
-      
-      (board[fromPeg-1].length === 0) 
-        ? console.log('There are no more discs on that peg, board is still:')
-        : console.log('You cannot move a larger disc on top of a smaller one, board is still:');
-      
-      printBoard();
-      return returnObj;
+    let temp = legalMoves(fromPeg);
 
+    if (temp.includes(toPeg)) {
+      board[toPeg-1].push( board[fromPeg-1].pop() );
+      returnObj.moveSuccessful = true;
+      numMoves++;
+
+      console.log('That move was successful, board is now:');
+      printBoard();
+
+      returnObj.gameWon = checkWinner(toPeg);
+
+      return returnObj;
     }
 
     //else
-    board[toPeg-1].push( board[fromPeg-1].pop() );
-    console.log('That move was successful, board is now:');
-    returnObj.moveSuccessful = true;
-    numMoves++;
+    console.log('Illegal move, board is still:');
     printBoard();
-    returnObj.gameWon = checkWinner(toPeg);
 
     return returnObj;
 
@@ -114,6 +123,7 @@ let Board = (pegs=3, discs=3) => {
   /////////////////////////////////////////////////////////////////////////////
   const legalMoves = peg => {
 
+    //don't need this validation if legalMoves only called by moveDisc
     if (peg === undefined || peg > board.length || peg < 1 || typeof peg !== 'number') {
       console.log(`Enter a peg number as argument (1-${board.length})`);
       return;
@@ -121,7 +131,7 @@ let Board = (pegs=3, discs=3) => {
 
     if (board[peg-1].length === 0) {
       console.log('There are no discs on this peg');
-      return;
+      return [];
     }
 
     let disc = board[peg-1][board[peg-1].length-1];

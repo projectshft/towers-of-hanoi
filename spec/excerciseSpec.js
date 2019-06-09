@@ -154,8 +154,8 @@ describe("legalMoves for Board", function () {
     game.legalMoves(1);
   });
 
-  it("should return undefined if no discs on given peg position", function () {
-    expect(game.legalMoves(2)).toEqual(undefined);
+  it("should return empty array if no discs on given peg position", function () {
+    expect(game.legalMoves(2)).toEqual([]);
 
     game.legalMoves(2);
   });
