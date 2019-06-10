@@ -16,6 +16,8 @@ let draw = (board) => {
   const bottom = canvas.height * 0.9;
   const top = canvas.height * 0.5;
 
+  const pegXValues = [150,400,650];
+
   context.fillStyle = 'black';
   
   //make pegs - default 3
@@ -30,20 +32,22 @@ let draw = (board) => {
    *  make this dynamic, currently only has 3 pegs
    */
   context.lineWidth = 8;
-  context.moveTo(150,bottom);
-  context.lineTo(150,top);
-  context.moveTo(400,bottom);
-  context.lineTo(400,top);
-  context.moveTo(650,bottom);
-  context.lineTo(650,top);
+  context.moveTo(pegXValues[0],bottom);
+  context.lineTo(pegXValues[0],top);
+  context.moveTo(pegXValues[1],bottom);
+  context.lineTo(pegXValues[1],top);
+  context.moveTo(pegXValues[2],bottom);
+  context.lineTo(pegXValues[2],top);
   context.stroke();
 
   //create discs
   //size will be number of disc, i.e. 1-n
   let Disc = (x, y, size) => {
 
+    context.lineWidth = 1;
     context.fillStyle = `rgb(${255*Math.random()},${255*Math.random()},${255*Math.random()})`
     context.fillRect(x,y,size*30,30);
+    context.strokeRect(x,y,size*30,30);
 
     //this will need to save color and position to move them later
 
@@ -56,7 +60,7 @@ let draw = (board) => {
   for (let i=board[0].length; i>0; i--) {
     //leaving at +2 for now so you can see discs more clearly
     
-    let x = 0;
+    let x = pegXValues[0] - (i*30)/2;
     let y = bottom-(30*(board[0].length-i+2));
     discRectanglesArray.push(Disc(x,y,i));
 
