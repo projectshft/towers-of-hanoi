@@ -15,6 +15,7 @@ let draw = (board) => {
 
   const bottom = canvas.height * 0.9;
   const top = canvas.height * 0.5;
+  const discHeight = 30;
 
   const pegXValues = [150,400,650];
 
@@ -44,10 +45,18 @@ let draw = (board) => {
   //size will be number of disc, i.e. 1-n
   let Disc = (x, y, size) => {
 
+    this.x = x;
+    this.y = y;
+    this.size = size * 30;
+
+  };
+  
+  const drawDisc = (disc) => {
+
     context.lineWidth = 1;
     context.fillStyle = `rgb(${255*Math.random()},${255*Math.random()},${255*Math.random()})`
-    context.fillRect(x,y,size*30,30);
-    context.strokeRect(x,y,size*30,30);
+    context.fillRect(x,y,size,discHeight);
+    context.strokeRect(x,y,size,discHeight);
 
     //this will need to save color and position to move them later
 
@@ -56,13 +65,19 @@ let draw = (board) => {
   //test disc
   //let disc1 = Disc(10,10,1);
 
-  const discRectanglesArray = [];
+  const discRectanglesArray = [[]];
   for (let i=board[0].length; i>0; i--) {
     //leaving at +2 for now so you can see discs more clearly
-    
+    //doing -(i+1) puts bottom disc inside floor, +2 way above floor. -26 at the end puts right on top of floor
     let x = pegXValues[0] - (i*30)/2;
-    let y = bottom-(30*(board[0].length-i+2));
-    discRectanglesArray.push(Disc(x,y,i));
+    let y = bottom-(discHeight*(board[0].length-i+2) - 26);
+    
+    let tempDisc = Disc(x,y,i);
+    
+    drawDisc(tempDisc);
+    
+    //discRectanglesArray[0].push(Disc(x,y,i));
+    //line above pushes undefined to array
 
   }
 
