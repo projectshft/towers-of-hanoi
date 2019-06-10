@@ -5,10 +5,14 @@ var TowersofHanoi = function() {
     [],
     []
   ];
+
+  var counter = 0;
+
   //takes last element of an array and pushes it onto another
   var moveDisc = function(currentPeg, desiredPeg) {
     let element = board[currentPeg].pop();
     board[desiredPeg].push(element);
+    counter += 1;
     //updating the board
     var displayBoard = board.map(function(elem) {
       return "---" + elem + "\n";
@@ -21,7 +25,7 @@ var TowersofHanoi = function() {
       }
     }, 0);
     if (checkWinner1 === 6) {
-      console.log("Congratulations, You Won!! The playing Board will now be reset");
+      console.log("Congratulations, You Won in " + counter + " moves!! The playing Board will now be reset");
       reset(board);
     }
 
