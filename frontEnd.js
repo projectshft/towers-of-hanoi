@@ -43,7 +43,7 @@ let draw = (board) => {
 
   //create discs
   //size will be number of disc, i.e. 1-n
-  let Disc = (x, y, size) => {
+  function Disc(x, y, size) {
 
     this.x = x;
     this.y = y;
@@ -55,8 +55,8 @@ let draw = (board) => {
 
     context.lineWidth = 1;
     context.fillStyle = `rgb(${255*Math.random()},${255*Math.random()},${255*Math.random()})`
-    context.fillRect(x,y,size,discHeight);
-    context.strokeRect(x,y,size,discHeight);
+    context.fillRect(disc.x,disc.y,disc.size,discHeight);
+    context.strokeRect(disc.x,disc.y,disc.size,discHeight);
 
     //this will need to save color and position to move them later
 
@@ -72,7 +72,9 @@ let draw = (board) => {
     let x = pegXValues[0] - (i*30)/2;
     let y = bottom-(discHeight*(board[0].length-i+2) - 26);
     
-    let tempDisc = Disc(x,y,i);
+    let tempDisc = new Disc(x,y,i);
+
+    discRectanglesArray[0].push(tempDisc);
     
     drawDisc(tempDisc);
     
