@@ -1,31 +1,40 @@
-var Game = function() {
-  var boardArray = [];
-  var pegNumber;
-  var discNumber;
-  var moveCount = 0;
 
-  var initiateGame = function(board) {
-    pegNumber = board.getAttribute('pegNumber');
-    discNumber = board.getAttribute('discNumber');
-    for (var i = 0; i < pegNumber; i++) {
-      if (i === 0) {
-        var firstPeg = [];
-        for (var j = 0; j < discNumber; j++) {
-          firstPeg.push((discNumber - j) + '');
+
+var Game = function() {
+  var attributes = {
+    pegNumber: 0,
+    discNumber: 0,
+    moveCount: 0,
+    boardArray: []
+  };
+
+  var initiateGame = function(pegNum, discNum) {
+    attributes.pegNumber = pegNum;
+    attributes.discNumber = discNum;
+    attributes.moveCount = 0;
+    attributes.boardArray = [];
+    if ((attributes.pegNumber > 0) && (attributes.discNumber > 0)) {
+      for (var i = 0; i < attributes.pegNumber; i++) {
+        if (i === 0) {
+          var firstPeg = [];
+          for (var j = 0; j < attributes.discNumber; j++) {
+            firstPeg.push((attributes.discNumber - j) + '');
+          }
+          attributes.boardArray.push(firstPeg);
+        } else {
+          var otherPegs = [];
+          attributes.boardArray.push(otherPegs);
         }
-        boardArray.push(firstPeg);
-      } else {
-        var otherPegs = [];
-        boardArray.push(otherPegs);
       }
+      console.log("New game! Make your first move.");
+      printVertical();
     }
-    return "The game has begun. Make your first move."
   };
 
   // print with horizontal orientation
 
   var printHorizontal = function() {
-    boardArray.map(function(peg) {
+    attributes.boardArray.map(function(peg) {
       var discString = '--- ';
       peg.forEach(function(disc) {
         discString += disc + ' ';
@@ -41,19 +50,19 @@ var Game = function() {
 
   var makeVerticalArray = function(array) {
     var verticalBoard = [];
-    for (var i = 0; i < discNumber; i++) {
+    for (var i = 0; i < attributes.discNumber; i++) {
       verticalBoard.push([]);
     }
-    for (var i = 0; i < pegNumber; i++) {
-      for (var j = 0; j < discNumber; j++) {
-        verticalBoard[j].push(array[i][discNumber - 1 - j]);
+    for (var i = 0; i < attributes.pegNumber; i++) {
+      for (var j = 0; j < attributes.discNumber; j++) {
+        verticalBoard[j].push(array[i][attributes.discNumber - 1 - j]);
       }
     }
     return verticalBoard;
   };
 
   var printVertical = function() {
-    var arrayV = makeVerticalArray(boardArray);
+    var arrayV = makeVerticalArray(attributes.boardArray);
     arrayV.map(function(level) {
       var levelString = ' ';
       level.forEach(function(item) {
@@ -69,7 +78,7 @@ var Game = function() {
       return levelString;
     });
     var pegBase = ' ';
-    for (i = 0; i < pegNumber; i++) {
+    for (i = 0; i < attributes.pegNumber; i++) {
       pegBase += " - ";
     }
     console.log(pegBase);
@@ -79,7 +88,7 @@ var Game = function() {
 
   var getSizeOfTopDiscOnPeg = function(peg) {
     if (peg.length === 0) {
-      return discNumber + 1;
+      return attributes.discNumber + 1;
     } else {
       return Number(peg[peg.length - 1]);
     }
@@ -87,10 +96,10 @@ var Game = function() {
 
   var possibleMovesFromPeg = function(startPeg) {
     var endPegIndices = [];
-    var startPegTopDiscSize = getSizeOfTopDiscOnPeg(boardArray[startPeg - 1]);
-    var endPegs = boardArray.filter(function(endPeg) {
+    var startPegTopDiscSize = getSizeOfTopDiscOnPeg(attributes.boardArray[startPeg - 1]);
+    var endPegs = attributes.boardArray.filter(function(endPeg) {
       var endPegTopDiscSize = getSizeOfTopDiscOnPeg(endPeg);
-      if ((endPeg !== boardArray[startPeg - 1]) &&
+      if ((endPeg !== attributes.boardArray[startPeg - 1]) &&
         (startPegTopDiscSize < endPegTopDiscSize)) {
         endPegIndices.push(1);
         return true;
@@ -100,7 +109,7 @@ var Game = function() {
       }
     });
     if (endPegIndices.indexOf(1) === -1) {
-      return "You cannot move any discs from peg " + startPeg + ".";
+      console.log("You cannot move any discs from peg " + startPeg + ".");
     } else {
       var endPegs = [];
       for (var i = 0; i < endPegIndices.length; i++) {
@@ -108,25 +117,26 @@ var Game = function() {
           endPegs.push(i + 1);
         }
       }
-      return "You can move a disc from peg " + startPeg + " to the following peg(s): " + endPegs + ".";
+      console.log("You can move a disc from peg " + startPeg + " to the following peg(s): " + endPegs + ".");
     }
   };
 
   var moveDisc = function(sourcePeg, targetPeg) {
-    var sourcePegTopDiscSize = getSizeOfTopDiscOnPeg(boardArray[sourcePeg - 1]);
-    var targetPegTopDiscSize = getSizeOfTopDiscOnPeg(boardArray[targetPeg - 1]);
+    var sourcePegTopDiscSize = getSizeOfTopDiscOnPeg(attributes.boardArray[sourcePeg - 1]);
+    var targetPegTopDiscSize = getSizeOfTopDiscOnPeg(attributes.boardArray[targetPeg - 1]);
     if (sourcePegTopDiscSize < targetPegTopDiscSize) {
-      boardArray[targetPeg - 1].push(boardArray[sourcePeg - 1].pop());
-      moveCount++;
+      attributes.boardArray[targetPeg - 1].push(attributes.boardArray[sourcePeg - 1].pop());
+      attributes.moveCount++;
       console.log("That move was successful, board is now: ");
-    } else if (sourcePegTopDiscSize === discNumber + 1) {
+    } else if (sourcePegTopDiscSize === attributes.discNumber + 1) {
       console.log("There are no discs to move from peg " + sourcePeg + ", board is still: ");
     } else if (sourcePegTopDiscSize > targetPegTopDiscSize) {
       console.log("You cannot move a larger disc on top of a smaller one, board is still: ");
     } else {
       console.log("That was not a valid move, board is still: ");
     }
-    return printVertical();
+     printVertical();
+     checkWinner();
   };
 
   var verifyFullPegOrder = function(fullPeg) {
@@ -142,11 +152,8 @@ var Game = function() {
   };
 
   var checkWinner = function() {
-    if (board.getAttribute('winStatus')) {
-      return "The game has been won in " + moveCount + " moves."
-    } else {
       var indexOfFullPeg = 0;
-      var checkFullPeg = boardArray.reduce(function(accumulator, peg) {
+      var checkFullPeg = attributes.boardArray.reduce(function(accumulator, peg) {
         if (peg.length === 0) {
           accumulator++;
         } else {
@@ -155,12 +162,20 @@ var Game = function() {
         return accumulator;
       }, 0);
 
-      var fullPegDiscOrderCheck = verifyFullPegOrder(boardArray[indexOfFullPeg]);
+      var fullPegDiscOrderCheck = verifyFullPegOrder(attributes.boardArray[indexOfFullPeg]);
 
-      if ((checkFullPeg === boardArray.length - 1) && (indexOfFullPeg !== 0) && (fullPegDiscOrderCheck)) {
-        board.setAttribute('winStatus', true);
+      if ((checkFullPeg === attributes.boardArray.length - 1) && (indexOfFullPeg !== 0) && (fullPegDiscOrderCheck)) {
+        console.log("You won the game in " + attributes.moveCount + " moves!");
+        console.log("Initiate a new game to play again.");
+        initiateGame(0,0);
+      } else {
+        console.log("Your move count is " + attributes.moveCount + ". Make another move.");
       }
-      return (board.getAttribute('winStatus')) ? "The game has been won in " + moveCount + " moves." : "The game has not been won.";
+  };
+
+  var getAttribute = function(attribute) {
+    if (attributes.hasOwnProperty(attribute)) {
+      return attributes[attribute];
     }
   };
 
@@ -169,61 +184,35 @@ var Game = function() {
     printHorizontal: printHorizontal,
     printVertical: printVertical,
     moveDisc: moveDisc,
-    checkWinner: checkWinner,
-    possibleMovesFromPeg: possibleMovesFromPeg
+    possibleMovesFromPeg: possibleMovesFromPeg,
+    getAttribute: getAttribute
   };
 };
 
-var Board = function(pegNumber, discNumber) {
-  var attributes = {
-    pegNumber: pegNumber,
-    discNumber: discNumber,
-    winStatus: false
-  };
-  var getAttribute = function(attribute) {
-    if (attributes.hasOwnProperty(attribute)) {
-      return attributes[attribute];
-    }
-  };
-  var setAttribute = function(attribute, value) {
-    if (attributes.hasOwnProperty(attribute)) {
-      attributes[attribute] = value;
-    }
-  };
-  return {
-    getAttribute: getAttribute,
-    setAttribute: setAttribute
-  };
-};
-
-
+/*
 //
 var numberOfPegs = 3;
 var numberOfDiscs = 3;
-var game;
-var board;
 
-game = Game();
-board = Board(numberOfPegs, numberOfDiscs);
+var board = Game();
 
-game.initiateGame(board);
+board.initiateGame(numberOfPegs, numberOfDiscs);
 
-game.printHorizontal();
-game.printVertical();
+// board.printHorizontal();
+// board.printVertical();
 
-game.moveDisc(1, 2);
+board.moveDisc(1, 2);
+board.moveDisc(1, 3);
+board.moveDisc(2, 3);
+board.moveDisc(1, 2);
+board.moveDisc(3, 1);
+board.moveDisc(3, 2);
 
-game.possibleMovesFromPeg(1);
-game.possibleMovesFromPeg(2);
-game.possibleMovesFromPeg(3);
+board.possibleMovesFromPeg(1);
+board.possibleMovesFromPeg(2);
+board.possibleMovesFromPeg(3);
 
-game.moveDisc(1, 3);
-game.moveDisc(2, 3);
-game.moveDisc(1, 2);
-game.moveDisc(3, 1);
-game.moveDisc(3, 2);
-game.moveDisc(1, 2);
-
-game.checkWinner();
+// board.moveDisc(1, 2);
 
 //
+*/
