@@ -13,7 +13,8 @@ let draw = (board) => {
   const canvas = document.getElementById('towers');
   const context = canvas.getContext('2d');
 
-  const bottom = canvas.height * .9;
+  const bottom = canvas.height * 0.9;
+  const top = canvas.height * 0.5;
 
   context.fillStyle = 'black';
   
@@ -30,11 +31,11 @@ let draw = (board) => {
    */
   context.lineWidth = 8;
   context.moveTo(150,bottom);
-  context.lineTo(150,canvas.height*.1);
+  context.lineTo(150,top);
   context.moveTo(400,bottom);
-  context.lineTo(400,canvas.height*.1);
+  context.lineTo(400,top);
   context.moveTo(650,bottom);
-  context.lineTo(650,canvas.height*.1);
+  context.lineTo(650,top);
   context.stroke();
 
   //create discs
@@ -42,7 +43,7 @@ let draw = (board) => {
   let Disc = (x, y, size) => {
 
     context.fillStyle = `rgb(${255*Math.random()},${255*Math.random()},${255*Math.random()})`
-    context.fillRect(x,y,size*15,15);
+    context.fillRect(x,y,size*30,30);
 
   };
 
@@ -54,7 +55,7 @@ let draw = (board) => {
     //leaving at +2 for now so you can see discs more clearly
     
     let x = 0;
-    let y = bottom-(15*(board[0].length-i+2));
+    let y = bottom-(30*(board[0].length-i+2));
     discRectanglesArray.push(Disc(x,y,i));
 
   }
