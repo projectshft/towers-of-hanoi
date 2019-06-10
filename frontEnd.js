@@ -66,17 +66,36 @@ let draw = (board) => {
 
   //test disc
   //let disc1 = Disc(10,10,1);
-  for (let i=board[0].length; i>0; i--) {
-    //leaving at +2 for now so you can see discs more clearly
-    //doing -(i+1) puts bottom disc inside floor, +2 way above floor. -26 at the end puts right on top of floor
-    let x = pegXValues[0] - (i*30)/2;
-    let y = bottom-(discHeight*(board[0].length-i+2) - 26);
+  // for (let i=board[0].length; i>0; i--) {
+  //   //leaving at +2 for now so you can see discs more clearly
+  //   //doing -(i+1) puts bottom disc inside floor, +2 way above floor. -26 at the end puts right on top of floor
+  //   let x = pegXValues[0] - (i*30)/2;
+  //   let y = bottom-(discHeight*(board[0].length-i+2) - 26);
     
-    let tempDisc = new Disc(x,y,i);
+  //   let tempDisc = new Disc(x,y,i);
 
-    discRectanglesArray.push(tempDisc);
+  //   discRectanglesArray.push(tempDisc);
     
-    drawDisc(tempDisc);
+  //   drawDisc(tempDisc);
+
+  // }
+
+  //refactoring -
+  //for each peg, draw discs that board says should be there
+  for (let i=0; i<pegXValues.length; i++) {
+
+    for (let j=board[i].length; j>0; j--) {
+
+      let x = pegXValues[i] - (j*30)/2;
+      let y = bottom-(discHeight*(board[i].length-j+2) - 26);
+
+      let tempDisc = new Disc(x,y,j);
+
+      discRectanglesArray.push(tempDisc);
+
+      drawDisc(tempDisc);
+
+    }
 
   }
 
