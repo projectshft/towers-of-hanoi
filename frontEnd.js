@@ -15,6 +15,9 @@ let draw = (board) => {
   const canvas = document.getElementById('towers');
   const context = canvas.getContext('2d');
 
+  //clear for redraw
+  context.clearRect(0,0,canvas.width,canvas.height);
+
   const bottom = canvas.height * 0.9;
   const top = canvas.height * 0.5;
   const discHeight = 30;
