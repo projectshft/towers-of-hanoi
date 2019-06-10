@@ -25,11 +25,15 @@ var Board = function() {
     pegs[target].push(tempDisc);
     moves++;
     if (this.checkWinner()) {
-      console.log('You won! Moves: ')
+      console.log('You won! Moves: ' + moves)
+      moves = 0;
       newGame();
     }
-    console.log('Move successful! Moves: ' + moves);
-    this.listPegs();
+    else {
+      console.log('Move successful! Moves: ' + moves);
+      this.listPegs();
+    }
+
   }
   else {
     console.log('Move unsuccessful.  Please try again: ' + moves)
