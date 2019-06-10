@@ -1,32 +1,97 @@
-var board = [
-  [3, 2, 1],
-  [],
-  []
-];
 
-var objBoard = {board};
+var Board = function() {
+  var pegs = [];
+  var moves = 0;
+  var numPegs = 0;
 
-//Displays the current state of the board
-var displayBoard = objBoard.board.map(function (peg) {
-  var boardString = "--- "
-  peg.map(function (disc) {
-    return (boardString += disc + " ")
-  })
-  return boardString;
-})
+  var addPeg = function(peg) {
+    pegs.push(peg);
+    numPegs++;
+  };
 
-//Moves discs on the board
-var moveDisc = function(source, target) {
-  var moveValue = objBoard.board[source-1].pop();
-  objBoard.board[target-1].push(moveValue);
-  displayBoard = objBoard.board.map(function (peg) {
-    var boardString = "--- "
-    peg.map(function (disc) {
-      return (boardString += disc + " ")
+  var listPegs = function() {
+    var boardString = ''
+    pegs.map(function(peg) {
+      return boardString += "--- " + peg + "\n"
     })
-    return boardString;
-  })
-  console.log(displayBoard.toString().replace(/,/g, '\n'));
+    console.log(boardString.replace(/,/g, ' '))
+  };
+
+  var move = function(source, target) {
+    source = source -1;
+    target = target -1;
+    if (this.testMove(source, target)){
+    var tempDisc = pegs[source].pop();
+    pegs[target].push(tempDisc);
+    moves++;
+    if (this.checkWinner()) {
+      console.log('You won! Moves: ')
+      newGame();
+    }
+    console.log('Move successful! Moves: ' + moves);
+    this.listPegs();
+  }
+  else {
+    console.log('Move unsuccessful.  Please try again: ' + moves)
+  }
   }
 
-console.log(displayBoard.toString().replace(/,/g, '\n'));
+  var testMove = function(src, tgt) {
+    var tempSrc = pegs[src].pop();
+    if (tempSrc === undefined) {
+      return false
+    }
+    tempTgt = pegs[tgt].pop();
+    if (tempSrc > 0) {
+          pegs[src].push(tempSrc);
+    }
+    if (tempTgt > 0) {
+    pegs[tgt].push(tempTgt)
+    }
+    if (tempSrc < tempTgt || tempTgt === undefined) {
+      return true
+    }
+    return false
+  }
+
+  var checkWinner = function() {
+    for (i = 1; i < pegs.length; i++) {
+      if (pegs[i].length === numPegs) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  return {
+    move: move,
+    addPeg: addPeg,
+    listPegs: listPegs,
+    testMove: testMove,
+    checkWinner: checkWinner
+  };
+};
+
+var newGame = function() {
+  var peg1 = [3, 2, 1],
+  peg2 = [],
+  peg3 = [],
+  board = new Board();
+
+  board.addPeg(peg1);
+  board.addPeg(peg2);
+  board.addPeg(peg3);
+
+  board.listPegs();
+}
+
+var peg1 = [3, 2, 1],
+peg2 = [],
+peg3 = [],
+board = new Board();
+
+board.addPeg(peg1);
+board.addPeg(peg2);
+board.addPeg(peg3);
+
+board.listPegs();
