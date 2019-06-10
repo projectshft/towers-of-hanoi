@@ -7,6 +7,8 @@
 * 
 */
 
+const discRectanglesArray = [];
+
 //board is 2d array
 let draw = (board) => {
 
@@ -64,8 +66,6 @@ let draw = (board) => {
 
   //test disc
   //let disc1 = Disc(10,10,1);
-
-  const discRectanglesArray = [[]];
   for (let i=board[0].length; i>0; i--) {
     //leaving at +2 for now so you can see discs more clearly
     //doing -(i+1) puts bottom disc inside floor, +2 way above floor. -26 at the end puts right on top of floor
@@ -74,23 +74,11 @@ let draw = (board) => {
     
     let tempDisc = new Disc(x,y,i);
 
-    discRectanglesArray[0].push(tempDisc);
+    discRectanglesArray.push(tempDisc);
     
     drawDisc(tempDisc);
-    
-    //discRectanglesArray[0].push(Disc(x,y,i));
-    //line above pushes undefined to array
 
   }
-
-  // for(let i=0; i<pegs; i++) {
-
-  //   context.moveTo( ((canvas.width/pegs)*(i+1))/(pegs-i) , canvas.height*.9);
-  //   context.lineTo( (canvas.width/pegs) , 0);
-  //   context.stroke();
-
-  // } //end for
-
 
 };
 
