@@ -45,6 +45,8 @@ let draw = (board) => {
     context.fillStyle = `rgb(${255*Math.random()},${255*Math.random()},${255*Math.random()})`
     context.fillRect(x,y,size*30,30);
 
+    //this will need to save color and position to move them later
+
   };
 
   //test disc
