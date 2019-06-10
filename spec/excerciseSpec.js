@@ -3,9 +3,6 @@
  * 
  * Tests are run on a 3 peg, 3 disc game unless stated otherwise
  * 
- * TODO:
- *  test checkWinner
- *  test setBoard
  */
 
 // creates a new game before each spec

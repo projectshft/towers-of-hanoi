@@ -65,6 +65,8 @@ let Board = (pegs=3, discs=3) => {
 
     console.log(pegString);
 
+    draw(board);
+
     return pegString;
 
   };
