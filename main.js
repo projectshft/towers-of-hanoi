@@ -17,7 +17,7 @@
 // originPeg.pop is not a function at Object.moveDisc. We accept the input number and find its corresponding peg. We used -1 in variables startPeg and endPeg to convert from 1 indexing to 0 indexing. 
 var checkWinner = function() {
     var results = board.status.map((peg) => {
-        // console.log(peg);
+        console.log(peg);
         console.log(board.status);
         return peg == board.winningPeg && board.status[0] != peg       
     });
@@ -51,9 +51,9 @@ var validMoves = function() {
 
 var boardReset = function() {
     board.status = [
-        peg1 = [3, 2, 1 ],
-        peg2 = [],
-        peg3 = []
+         [3, 2, 1 ],
+         [],
+         []
     ];
 }
 
