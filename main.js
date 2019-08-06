@@ -18,7 +18,7 @@
 var checkWinner = function() {
     var results = board.status.map((peg) => {
         console.log(peg);
-        console.log(board.status);
+        // console.log(board.status);
         return peg == board.winningPeg && board.status[0] != peg       
     });
     if(results.includes(true)) {
@@ -88,12 +88,6 @@ board.status.map(function(peg) {
 
 // board.moveDisc(peg1, peg2);
 
-board.status.map(function(peg) {
-    console.log(peg)
-});
-
-
-
 
 
 // var disk = function {
@@ -156,8 +150,3 @@ board.status.map(function(peg) {
 // 3. checkWin
 // 4. resetGame 
 
-
-// function move(Disk, End Peg) {
-
-
-// }
