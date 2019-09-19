@@ -105,7 +105,6 @@ const TowersOfHanoi = (pegs = 3, discs = 3) => {
 
   //initializes the first board state when a new instance of TowersOfHanoi is created
   resetBoard(pegs, discs);
-
   
   return {
     moveDisc : moveDisc
