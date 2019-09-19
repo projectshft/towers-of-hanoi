@@ -10,7 +10,7 @@ Windows: <kbd>ctrl</kbd><kbd>shift</kbd><kbd>k</kbd>
 Mac: <kbd>command</kbd><kbd>option</kbd><kbd>k</kbd>
 
 #### Chrome
-Windows: <kbd>ctrl</kbd><kbd>shift</kbd><kbd>i</kbd>
-Mac: <kbd>command</kbd><kbd>option</kbd><kbd>i</kbd>
+Windows: <kbd>ctrl</kbd><kbd>shift</kbd><kbd>j</kbd>
+Mac: <kbd>command</kbd><kbd>option</kbd><kbd>j</kbd>
 
 there will be a prompt for number of pegs and discs on the board.  Then the game will ensue.  When the game is won the number of moves taken will be shown and the board will reset.
