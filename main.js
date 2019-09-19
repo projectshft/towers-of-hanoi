@@ -24,6 +24,10 @@ const TowersOfHanoi = (pegs = 3, discs = 3) => {
         board[index] = [];
       }
     })
+
+    //Welcome the user to a new game and print out the board
+    console.log('Welcome to the Towers of Hanoi game, please select a move with newGame.moveDisc(starting peg, ending peg)');
+    printBoard();
   }
 
   const printBoard = () => {
@@ -39,14 +43,33 @@ const TowersOfHanoi = (pegs = 3, discs = 3) => {
     const source = start - 1,
     target = end - 1;
 
-    if (board[target] && board[end]) {
-      board[target].push(board[source].pop());
-    } 
-    else {
+    if (!board[target] || !board[source]) {
       console.log('Please select a proper move')
+      return printBoard();
+    }
+
+    if (board[source].length === 0) {
+      console.log('Please choose a peg that has discs')
+      return printBoard();
+    }
+
+    if(board[source] === board[target]) {
+      console.log('Please choose a different starting and ending peg')
+      return printBoard();
     }
     
-    printBoard();
+  }
+
+  //function that returns an array of the indeces that are available for a move
+  const checkMove = (peg) => {
+    let moveArray = [];
+
+    board.forEach((p, index) => {
+      if(peg[peg.length - 1] < p[p.length - 1]  || p.length === 0) {
+        moveArray = [...moveArray, index];
+      }
+    })
+    return moveArray
   }
 
   //initializes the first board state when a new instance of TowersOfHanoi is created
@@ -57,7 +80,7 @@ const TowersOfHanoi = (pegs = 3, discs = 3) => {
     printBoard : printBoard,
     moveDisc : moveDisc,
     discTotal : discTotal,
-    moves : moves
+    checkMove : checkMove,
   }
 
 }
