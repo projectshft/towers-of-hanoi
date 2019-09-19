@@ -1,101 +1,37 @@
+const TowersOfHanoi = (pegs = 3, discs = 3) => {
+  let board,
+  moves;
 
-var Board = function() {
-  var pegs = [];
-  var moves = 0;
-  var numPegs = 0;
+  //This will reset the board for new games and will also be used to create the initial board
+  const resetBoard = (pegs, discs) => {
+    let numDiscs = discs;
+    
+    board = new Array(pegs).fill([]);
+    moves = 0;
 
-  var addPeg = function(peg) {
-    pegs.push(peg);
-    numPegs++;
-  };
-
-  var listPegs = function() {
-    var boardString = ''
-    pegs.map(function(peg) {
-      return boardString += "--- " + peg + "\n"
-    })
-    console.log(boardString.replace(/,/g, ' '))
-  };
-
-  var move = function(source, target) {
-    source = source -1;
-    target = target -1;
-    if (this.testMove(source, target)){
-    var tempDisc = pegs[source].pop();
-    pegs[target].push(tempDisc);
-    moves++;
-    if (this.checkWinner()) {
-      console.log('You won! Moves: ' + moves)
-      moves = 0;
-      newGame();
+    //arranges the discs on the first peg
+    while(numDiscs != 0) {
+      board[0] = board[0].concat(numDiscs);
+      numDiscs--;
     }
-    else {
-      console.log('Move successful! Moves: ' + moves);
-      this.listPegs();
-    }
-
-  }
-  else {
-    console.log('Move unsuccessful.  Please try again: ' + moves)
-  }
   }
 
-  var testMove = function(src, tgt) {
-    var tempSrc = pegs[src].pop();
-    if (tempSrc === undefined) {
-      return false
-    }
-    tempTgt = pegs[tgt].pop();
-    if (tempSrc > 0) {
-          pegs[src].push(tempSrc);
-    }
-    if (tempTgt > 0) {
-    pegs[tgt].push(tempTgt)
-    }
-    if (tempSrc < tempTgt || tempTgt === undefined) {
-      return true
-    }
-    return false
+  const printBoard = () => {
+
+    //maps through the board and creates a new string based on the length of the board
+    const boardState = board.map(peg => `--- ${peg.join(' ')} \n`).join('')
+
+    console.log(boardState);
   }
 
-  var checkWinner = function() {
-    for (i = 1; i < pegs.length; i++) {
-      if (pegs[i].length === numPegs) {
-        return true;
-      }
-    }
-    return false;
-  }
+  //initializes the first board state when a new instance of TowersOfHanoi is created
+  resetBoard(pegs, discs);
 
+  
   return {
-    move: move,
-    addPeg: addPeg,
-    listPegs: listPegs,
-    testMove: testMove,
-    checkWinner: checkWinner
-  };
-};
+    printBoard : printBoard
+  }
 
-var newGame = function() {
-  var peg1 = [3, 2, 1],
-  peg2 = [],
-  peg3 = [],
-  board = new Board();
-
-  board.addPeg(peg1);
-  board.addPeg(peg2);
-  board.addPeg(peg3);
-
-  board.listPegs();
 }
 
-var peg1 = [3, 2, 1],
-peg2 = [],
-peg3 = [],
-board = new Board();
-
-board.addPeg(peg1);
-board.addPeg(peg2);
-board.addPeg(peg3);
-
-board.listPegs();
+let newGame = TowersOfHanoi();
