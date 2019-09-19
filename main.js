@@ -34,7 +34,7 @@ const TowersOfHanoi = (pegs = 3, discs = 3) => {
 
     //maps through the board and creates a new string based on the length of the board
     const boardState = board.map(peg => `--- ${peg.join(' ')} \n`).join('')
-
+    console.log(`Number of moves: ${moves}`);
     console.log(boardState);
   }
 
@@ -57,6 +57,23 @@ const TowersOfHanoi = (pegs = 3, discs = 3) => {
       console.log('Please choose a different starting and ending peg')
       return printBoard();
     }
+
+    if(checkMove(board[source]).some(index => board[index] === board[target])) {
+      board[target].push(board[source].pop());
+      moves ++;
+      if (checkWinner()) {
+        console.log(`You won! Number of moves: ${moves}`);
+        return resetBoard(pegs, discs);
+      }
+      else {
+        console.log('Successful move!');
+        return printBoard();
+      }
+    } 
+    else {
+      console.log('Invalid move, the target peg must be either empty or have a smaller peg on top than the source peg');
+      return printBoard();
+    }
     
   }
 
@@ -72,17 +89,27 @@ const TowersOfHanoi = (pegs = 3, discs = 3) => {
     return moveArray
   }
 
+  const checkWinner = () => {
+    //only checking that the pegs that are not the first one
+    for (let i = 1; i < board.length; i++) {
+      if(board[i].length > 0) {
+        //adding the pegs together and checking them against the initial total of pegs
+        let pegTotal = board[i].reduce((accum, val) => accum + val)
+        if (pegTotal === discTotal) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   //initializes the first board state when a new instance of TowersOfHanoi is created
   resetBoard(pegs, discs);
 
   
   return {
-    printBoard : printBoard,
-    moveDisc : moveDisc,
-    discTotal : discTotal,
-    checkMove : checkMove,
+    moveDisc : moveDisc
   }
-
 }
 
 let newGame = TowersOfHanoi();
