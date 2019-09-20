@@ -1,6 +1,6 @@
 var BoardModule = function() {
   // Initialize board representing 3 pegs and 3 discs in starting position
-  var board = [[3, 2, 1], [], []]
+  let board = [[3, 2, 1], [], []]
 
   // Print board status horizontally
   var boardPrint = function () {
@@ -15,25 +15,37 @@ var BoardModule = function() {
 
   // Move disc from start peg to end peg
   function move(startPos, endPos) {
+    var acceptableMove = false;
     var currentPegArr = board[startPos - 1]
     var targetPegArr = board[endPos - 1]
-    var grabDisc = currentPegArr.pop();
-    targetPegArr.push(grabDisc)
+    var potentialPegs = possibleMoves(currentPegArr)
+
+    potentialPegs.forEach(function (peg) {
+      if (peg == targetPegArr){
+        acceptableMove = true;
+      } 
+    })
+    if (acceptableMove === true) {
+      var grabDisc = currentPegArr.pop();
+      targetPegArr.push(grabDisc)
+    } else {
+      console.log('AH AH AH')
+    }
+    boardPrint();
   }
 
   // Checks topmost disc of peg for potential moves
-  function possibleMoves(peg) {
-    const disc = peg[peg.length-1]
+  function possibleMoves(selectedPeg) {
+    var disc = selectedPeg[selectedPeg.length-1]
     var acceptablePegs = board.filter(function(peg) {
-      if(disc < peg[peg.length] || peg.length == 0) {
+      if(disc < peg[peg.length - 1] || peg.length == 0) {
         return true;
       }
-      
-      return false;
+        return false;
     })
-    console.log(acceptablePegs)
     return acceptablePegs;
   }
+
 
   return {
     move: move,
@@ -43,10 +55,8 @@ var BoardModule = function() {
 }
 
 var game = BoardModule();
-game.possibleMoves([3,2,1]);
-// game.boardPrint()
-game.move(1, 3)
 game.boardPrint()
-game.possibleMoves([3, 2]);
-// game.move(1,3)
-// game.boardPrint()
+game.move(1, 2)
+game.move(1, 3)
+game.move(1, 3)
+game.move(3, 1)
