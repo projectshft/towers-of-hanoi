@@ -45,6 +45,17 @@ describe("checks proper game setup", function () {
     hanoiGame = HanoiGame(3,3);
     expect(typeof hanoiGame).toEqual('object');
   });
+  
+    it("prints board. should be all discs on first peg", function () {
+      hanoiGame = HanoiGame(3,1);
+      expect(hanoiGame.boardView()).toEqual("--- 1\n---\n---");
+      hanoiGame = HanoiGame(3,3);
+      expect(hanoiGame.boardView()).toEqual("--- 3 2 1\n---\n---");
+      hanoiGame = HanoiGame(3,5);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---");
+      hanoiGame = HanoiGame(5,5);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
+    });
 
   // it("only allows you to check out books that exist in the library", function () {
   //   var toot = Book('Toot', 'Leslie Patricelli');
