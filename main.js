@@ -24,18 +24,29 @@ var BoardModule = function() {
   // Checks topmost disc of peg for potential moves
   function possibleMoves(peg) {
     const disc = peg[peg.length-1]
-    
+    var acceptablePegs = board.filter(function(peg) {
+      if(disc < peg[peg.length] || peg.length == 0) {
+        return true;
+      }
+      
+      return false;
+    })
+    console.log(acceptablePegs)
+    return acceptablePegs;
   }
 
   return {
     move: move,
-    boardPrint: boardPrint
+    boardPrint: boardPrint,
+    possibleMoves: possibleMoves
   }
 }
 
 var game = BoardModule();
-game.boardPrint()
+game.possibleMoves([3,2,1]);
+// game.boardPrint()
 game.move(1, 3)
 game.boardPrint()
-game.move(1,3)
-game.boardPrint()
+game.possibleMoves([3, 2]);
+// game.move(1,3)
+// game.boardPrint()
