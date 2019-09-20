@@ -44,9 +44,15 @@ var HanoiGame = (pegs, discs) => {
                 if (boardArr[indexToPeg].length == 0
                     || boardArr[indexToPeg][boardArr[indexToPeg].length - 1] > boardArr[indexFromPeg][boardArr[indexFromPeg].length - 1]) {
                     boardArr[indexToPeg].push(boardArr[indexFromPeg].pop())
+                    attributes.moves++;
+                    if(checkWinner()){
+                        console.log(`You won! ${attributes.moves} Moves!`)
+                    }
+                    return;
                 }
             }
         }
+        console.log("ILLEGAL MOVE");
     }
 
     //check if only 1 peg is populated (not the first) and if the sum of it's discs is equal to solution
@@ -54,6 +60,22 @@ var HanoiGame = (pegs, discs) => {
         var populatedPegs = boardArr.filter((peg) => { return peg.length > 0; });
         return boardArr[0].length == 0 && populatedPegs.length == 1
             && populatedPegs[0].reduce((sum, number) => { return sum + number; }, 0) == attributes.solution;
+    }
+
+    var solveHanoi = (itDisks, from, to) => {
+        if(itDisks == 1)
+        {
+            return from + " -> " + to + '\n';
+        }
+        else{
+            var freePeg = 6 - from - to;
+
+            var miniSol = solveHanoi(itDisks - 1, from, freePeg);
+            var thisSol = solveHanoi(1, from, to);
+            var nextSol = solveHanoi(itDisks -1, freePeg, to);
+
+            return miniSol + thisSol + nextSol;
+        }
     }
 
     if (attributes.pegs < 3 || attributes.discs < 1) {
@@ -67,15 +89,12 @@ var HanoiGame = (pegs, discs) => {
         checkWinner: checkWinner,
         boardView: boardView,
         moveDisc: moveDisc,
+        solveHanoi: solveHanoi
     };
 };
 
-var test = HanoiGame(3, 1);
-console.log(test.boardView());
-console.log('---------');
-hanoiGame = HanoiGame(5, 5);
-hanoiGame.moveDisc(1, 2);
-hanoiGame.moveDisc(1, 3);
-hanoiGame.moveDisc(1, 4);
-hanoiGame.moveDisc(2, 4);
-console.log(hanoiGame.boardView());
+var currHanoiGame;
+
+var testClick = () => {
+    document.getElementById("hanoi-data").innerHTML = currHanoiGame.boardView().replace(/(?:\r\n|\r|\n)/g, '<br>');
+}

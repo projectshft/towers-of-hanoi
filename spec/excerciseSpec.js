@@ -122,21 +122,5 @@ describe("play the game to check for winner", function () {
     expect(hanoiGame.checkWinner()).toEqual(false);
     hanoiGame.moveDisc(1, 2);
     expect(hanoiGame.checkWinner()).toEqual(true);
-    //move it back
-    hanoiGame.moveDisc(2, 1);
-    expect(hanoiGame.checkWinner()).toEqual(false);
-    hanoiGame.moveDisc(2, 3);
-    expect(hanoiGame.checkWinner()).toEqual(false);
-    hanoiGame.moveDisc(1, 3);
-    expect(hanoiGame.checkWinner()).toEqual(false);
-    hanoiGame.moveDisc(2, 1);
-    expect(hanoiGame.checkWinner()).toEqual(false);
-    hanoiGame.moveDisc(3, 2);
-    expect(hanoiGame.checkWinner()).toEqual(false);
-    hanoiGame.moveDisc(3, 1);
-    expect(hanoiGame.checkWinner()).toEqual(false);
-    //still false because first peg
-    hanoiGame.moveDisc(2, 1);
-    expect(hanoiGame.checkWinner()).toEqual(false);
   });
 });
