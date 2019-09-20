@@ -56,14 +56,47 @@ describe("checks proper game setup", function () {
       hanoiGame = HanoiGame(5,5);
       expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
     });
+});
 
-  // it("only allows you to check out books that exist in the library", function () {
-  //   var toot = Book('Toot', 'Leslie Patricelli');
-
-  //   expect(toot.getAttribute('checkedOut')).toEqual(false);
-
-  //   library.checkOutBook(toot);
-
-  //   expect(toot.getAttribute('checkedOut')).toEqual(false);
-  // });
+describe("checks proper game movement", function () {
+  it("moves pegs in different scenarios", function () {
+      hanoiGame = HanoiGame(5,5);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
+      //move invalid peg numbers (both non-existing and same to same)
+      hanoiGame.moveDisc(0,0);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
+      hanoiGame.moveDisc(0,1);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
+      hanoiGame.moveDisc(1,0);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
+      hanoiGame.moveDisc(1,10);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
+      hanoiGame.moveDisc(1,1);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2 1\n---\n---\n---\n---");
+      //check valid moves
+      hanoiGame = HanoiGame(5,5);
+      hanoiGame.moveDisc(1,2);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2\n--- 1\n---\n---\n---");
+      hanoiGame = HanoiGame(5,5);
+      hanoiGame.moveDisc(1,3);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4 3 2\n---\n--- 1\n---\n---");
+      hanoiGame = HanoiGame(5,5);
+      hanoiGame.moveDisc(1,2);
+      hanoiGame.moveDisc(1,3);
+      hanoiGame.moveDisc(1,4);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4\n--- 1\n--- 2\n--- 3\n---");
+      hanoiGame = HanoiGame(5,5);
+      hanoiGame.moveDisc(1,2);
+      hanoiGame.moveDisc(1,3);
+      hanoiGame.moveDisc(1,4);
+      hanoiGame.moveDisc(2,4);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4\n---\n--- 2\n--- 3 1\n---");
+      //check invalid moves due to disc size
+      hanoiGame = HanoiGame(5,5);
+      hanoiGame.moveDisc(1,2);
+      hanoiGame.moveDisc(1,3);
+      hanoiGame.moveDisc(1,4);
+      hanoiGame.moveDisc(4,2);
+      expect(hanoiGame.boardView()).toEqual("--- 5 4\n--- 1\n--- 2\n--- 3\n---");
+    });
 });
