@@ -1,15 +1,27 @@
-const welcome = "Welcome to Towers of Hanoi! Input 'game.move(start, end)' to move your disc! Input 'game.startNew()' for a new game."
+const welcome = "Welcome to Towers of Hanoi! Input 'game.move(start, end)' to move your disc! Input 'game.newGame()' for a new game."
 
 var BoardModule = function() {
   let board;
   let hasWon;
-  let discNum
-  // Initialize board representing 3 pegs and 3 discs in starting position
+  let discNum;
+  let pegNum
+  // Initialize board representing prompted pegs and discs in starting position
   function initGame() {
-    board = [[3, 2, 1], [], []]
-    discNum = board[0].length;
-    hasWon = false;
     console.log(welcome);
+    board = [[]];
+    pegNum = prompt('How many pegs would you like? (Recommend 3 to start)')
+    discNum = prompt('How many discs to play with (Recommend 3 to start)')
+    for (var i = discNum; i > 0; i--) {
+      board[0].push(i)
+    }
+    
+
+    for (var i = 1; i < pegNum; i++) {
+      board[i] = [];
+    }
+    //board = [[3, 2, 1], [], []]
+    //discNum = board[0].length;
+    hasWon = false;
     boardPrint();
   }
   
@@ -17,14 +29,13 @@ var BoardModule = function() {
   function checkWinner() {
     if (board[0].length === 0) {
       hasWon = board.reduce(function (prevCondition, peg) {
-        if (peg.length === discNum) {
+        if (peg.length == discNum) {
           prevCondition = true;
         }
         return prevCondition;
       }, false)
     }
   }
-
 
   // Print board status horizontally
   var boardPrint = function () {
@@ -90,7 +101,6 @@ var BoardModule = function() {
 
 var game = BoardModule();
 game.newGame()
-console.log(welcome)
 game.move(1,3)
 game.move(1,2)
 game.move(3,2)
