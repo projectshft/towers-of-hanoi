@@ -2,8 +2,6 @@
 let board = [
   [5, 4, 3, 2, 1],
   [],
-  [],
-  [],
   []
 ]
 
@@ -24,12 +22,14 @@ but use closure to continue to iterate with moves.
   let boardMove = function() {
 //takes input from user which peg to remove from.
   let pillarFrom = prompt("Number of moves: " + counter +
-  ". Enter the pillar number from which you want to move");
-//tried to put in validation here for input, but it broke the rest of the game.
-  /* if (!pillarFrom == "1" || !pillarFrom == "2" || !pillarFrom == "3" ||
-    !pillarFrom == "4" || !pillarFrom == "5" ){
-      alert("Please enter a valid  number between 1 and 5.");
-    } */
+    ". Enter the pillar number from which you want to move");
+/*
+tried to add validation on the prompt, but it broke the game.
+  if (pillarFrom != 1 || pillarFrom != 2 || pillarFrom != 3){
+      alert("Please enter a valid  number between 1 and 3.");
+      pillarFrom = prompt("Let's try that again. Please enter a number between 1 and 3.");
+  }
+*/
 
 //change input into number form for comparison.
   let pillarFrom2 = parseInt(pillarFrom);
@@ -42,27 +42,29 @@ but use closure to continue to iterate with moves.
 checks the board for which moves are possible based on the selection of pillar
 they are moving from. Since filter only returns an array, this looks wonky in
 the console. It lists the actual array, not the peg/index numbers that you can
-move to. And since empty arrays don't show up in the console, those appear to be
-only a space.
+move to. 
 */
   let possibleMoves = board.filter(function(moves){
-    return  (fromValue < moves[moves.length - 1] ||
-      moves[moves.length - 1] === undefined);
+    return (fromValue < moves[moves.length - 1] ||
+    moves === undefined || moves === []);
   });
   console.log("You can move this disc to the following pegs: " + possibleMoves);
 //takes input from user which peg to move item to.
   let pillarTo = prompt("Enter the pillar to which you want to move");
-//tried to put validation on input, but the rest of the game broke.
-  /* if (!pillarTo == "1" || !pillarTo == "2" || !pillarTo == "3" ||
-  !pillarTo == "4" || !pillarTo == "5" ){
-    alert("Please enter a valid  number between 1 and 5.");
-    */
+/*
+tried to add validation on the prompt, but it was breaking the rest of the game.
+  if (pillarTo != "1" || pillarTo != "2" || pillarTo != "3") {
+    alert("Please enter a valid number between 1 and 3.");
+    pillarTo = prompt("Let's try that again. Please enter a number between 1 and 3.");
+  }
+*/
+  pillarTo = parseInt(pillarTo);
 //stores the last item in the to array for checking if it is a valid move.
   let toValue = board[pillarTo - 1];
     toValue = toValue[toValue.length -1];
 //compares value of item to move to the last item in the array specified to
 //move to.
-  if (fromValue < toValue || toValue == undefined) {
+  if (fromValue < toValue || toValue === undefined) {
 //adds item to the specified peg.
       board[pillarTo - 1].push(fromValue);
 //increments counter by one for each move.
@@ -91,8 +93,6 @@ could be manipulated by putting the fist disc back on the original peg.
     counter = 0;
     board = [
       [5, 4, 3, 2, 1],
-      [],
-      [],
       [],
       []
     ]
