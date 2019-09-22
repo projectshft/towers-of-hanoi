@@ -23,7 +23,7 @@ function printBoard() {
 
 /*function isMovePossbile() {
     game.boardArray.filter(function(filter){
-       if (move > game.boardArray {
+       if (pe {
     })
     // conditional logic 
     if ( ) {
@@ -36,10 +36,13 @@ function printBoard() {
 */
 
 // prompt that welcomes user to game 
-var windowPrompt = alert("Welcome to Towers of Hanoi !");      
-    startPeg = prompt("Which disc do you want to move ? ");
-    endPeg = prompt("Which peg do you want to move to ?");
-//alert("Have a good day"); //change this
+var onePrompt = alert("Welcome to Towers of Hanoi !");      
+    twoPrompt = prompt("Which disc do you want to move ? ");
+        if (discToBeMoved > 3) {
+            console.log(alert("Invalid Move"));
+        };
+    thirdPrompt = prompt("Which peg do you want to move to ?");
+
 
 
 var move = function(startPeg, endPeg) {        
@@ -48,9 +51,10 @@ var move = function(startPeg, endPeg) {
     //console.log(startPeg, endPeg);
     var discToBeMoved = game.boardArray[startPeg].pop();
     game.boardArray[endPeg].push(discToBeMoved);
+    
+    
     //console.log(discToBeMoved);
     //console.log(game.boardArray);
-    
 };
 
 //var checkWinner = 
