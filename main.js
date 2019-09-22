@@ -10,8 +10,8 @@ function printBoard() {
     });
 };
 
-// prompt that welcomes user to game 
-var windowPrompt = alert("Welcome to Towers of Hanoi");
+
+    
 //var inputPrompt = prompt("Choose a disc and which peg you would like to move it to.");
 
 //if (windowPrompt != 
@@ -21,7 +21,7 @@ var windowPrompt = alert("Welcome to Towers of Hanoi");
 
 
 
-function isMovePossbile() {
+/*function isMovePossbile() {
     game.boardArray.filter(function(filter){
        if (move > game.boardArray {
     })
@@ -33,14 +33,22 @@ function isMovePossbile() {
     }
 };
 
+*/
+
+// prompt that welcomes user to game 
+var windowPrompt = alert("Welcome to Towers of Hanoi !");      
+    startPeg = prompt("Which disc do you want to move ? ");
+    endPeg = prompt("Which peg do you want to move to ?");
+//alert("Have a good day"); //change this
 
 
-
-var move = function(startPeg, endPeg) {
-    console.log(startPeg, endPeg);
+var move = function(startPeg, endPeg) {        
+    //startPeg();
+    //endPeg();
+    //console.log(startPeg, endPeg);
     var discToBeMoved = game.boardArray[startPeg].pop();
     game.boardArray[endPeg].push(move);
-    console.log(discToBeMoved);
+    //console.log(discToBeMoved);
     console.log(game.boardArray);
     
 };
