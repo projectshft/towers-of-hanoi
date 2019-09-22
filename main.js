@@ -101,11 +101,11 @@ var BoardModule = function() {
 
 var game = BoardModule();
 game.newGame()
-game.move(1,3)
-game.move(1,2)
-game.move(3,2)
-game.move(1,3)
-game.move(2,1)
+// game.move(1,3)
+// game.move(1,2)
+// game.move(3,2)
+// game.move(1,3)
+// game.move(2,1)
 // game.move(2,3)
 // game.move(1,3)
 //game.startnew()
