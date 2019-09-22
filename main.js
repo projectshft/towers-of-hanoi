@@ -47,16 +47,18 @@ var move = function(startPeg, endPeg) {
     //endPeg();
     //console.log(startPeg, endPeg);
     var discToBeMoved = game.boardArray[startPeg].pop();
-    game.boardArray[endPeg].push(move);
+    game.boardArray[endPeg].push(discToBeMoved);
     //console.log(discToBeMoved);
-    console.log(game.boardArray);
+    //console.log(game.boardArray);
     
 };
 
 //var checkWinner = 
 
 printBoard();
+//debugger;
 move(0, 2);
+printBoard();
 
 
 
