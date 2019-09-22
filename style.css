@@ -6,15 +6,24 @@ body {
     color: black;
   }
   
+.display-text {
+  color: red;
+}  
+
 .hanoi-view {
     border: 3px solid black;
     padding-left: 10px;
     min-width: 200px;
+    min-height: 100px;
     display: inline-block;
-    height: 100px;
     background-color: #ccc;
 }  
 
 .hanoi-data {
     padding-right: 10px;
+}
+
+.user-input {
+    width: 20px;
+    text-align: right; 
 }

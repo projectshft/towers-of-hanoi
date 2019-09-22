@@ -1,19 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr"> 
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Tower of Hanoi</title>
-    <script src="main.js"></script> 
-  </head>
-  <body>
-    <h1>Tower of Hanoi</h1>
-    <div class="hanoi-view">
-      <p id="hanoi-data" class="hanoi-data"></p>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Towers of Hanoi</title>
+  <script src="main.js"></script>
+</head>
+
+<body>
+  <h1>Tower of Hanoi</h1>
+  <div class="hanoi-view">
+    <p id="hanoi-data" class="hanoi-data"></p>
+  </div>
+  <br>
+  <br>
+  <div class="setup-controls">
+    <div class="num-pegs">
+      Number of Pegs:  <input type="text" class="user-input" id="num-pegs" value="3"><br>
+    </div>
+    <div class="num-pegs">
+      Number of Discs: <input type="text" class="user-input" id="num-discs" value="3"><br>
     </div>
     <br>
+    <div> 
+      <button class="start-button" id="start-button" onclick="startGame()">Start Game</button>
+    </div>
+  </div>
+  <br>
+  <div class="play-controls" id="play-controls">
+    <div>
+      Move From:  <input type="text" class="user-input" id="from-peg" value="1"><br>
+    </div>
+    <div>
+      Move To: <input type="text" class="user-input" id="to-peg" value="2"><br>
+    </div>
     <br>
-   
-    <div> <button onclick="testClick()">Click me</button></div>
-  </body>
+    <div> 
+      <button class="confirm-move" id="confirm-move" onclick="makeMove()">Make Move</button>
+    </div>
+  </div>
+  <p class="display-text" id="display-text"></p>
+</body>
+
 </html>
