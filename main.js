@@ -163,15 +163,19 @@ var makeMove = () => {
 
 var writeMessage = (msg) => {
     var displayEl = document.getElementById('display-text');
-    displayEl.style.color = "Black";
-    displayEl.innerHTML = msg;
+    if (displayEl) {
+        displayEl.style.color = "Black";
+        displayEl.innerHTML = msg;
+    }
     console.log(msg);
 }
 
 var writeError = (error) => {
     var displayEl = document.getElementById('display-text');
-    displayEl.style.color = "Red";
-    displayEl.innerHTML = error;
+    if (displayEl) {
+        displayEl.style.color = "Red";
+        displayEl.innerHTML = error;
+    }
     console.log(error);
 }
 
