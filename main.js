@@ -5,6 +5,7 @@ var BoardModule = function() {
   let hasWon;
   let discNum;
   let pegNum
+
   // Initialize board representing prompted pegs and discs in starting position
   function initGame() {
     console.log(welcome);
@@ -19,8 +20,6 @@ var BoardModule = function() {
     for (var i = 1; i < pegNum; i++) {
       board[i] = [];
     }
-    //board = [[3, 2, 1], [], []]
-    //discNum = board[0].length;
     hasWon = false;
     boardPrint();
   }
@@ -48,7 +47,7 @@ var BoardModule = function() {
     })
   }
 
-  // Move disc from start peg to end peg if allowed
+  // Move disc from user inputted peg to target peg
   function move(startPos, endPos) {
     var acceptableMove = false;
     var currentPegArr = board[startPos - 1]
@@ -63,6 +62,7 @@ var BoardModule = function() {
       } 
     })
 
+    // Moves disc if target is acceptable
     if (acceptableMove === true) {
       var grabDisc = currentPegArr.pop();
       targetPegArr.push(grabDisc)
@@ -94,18 +94,9 @@ var BoardModule = function() {
 
   return {
     move: move,
-    boardPrint: boardPrint,
     newGame: initGame
   }
 }
 
 var game = BoardModule();
 game.newGame()
-// game.move(1,3)
-// game.move(1,2)
-// game.move(3,2)
-// game.move(1,3)
-// game.move(2,1)
-// game.move(2,3)
-// game.move(1,3)
-//game.startnew()
