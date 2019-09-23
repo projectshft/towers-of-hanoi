@@ -52,6 +52,46 @@ const TowersModule = () => {
 
   };
 
+  const renderBoard2 = () => {
+    let boardList = document.querySelector('table');
+    boardList.innerHTML = '';
+
+    // create number of table rows based on number of discs
+    for (let i = 1; i <= numDiscs; i++) {
+      const rowEl = document.createElement('tr');
+      boardList.appendChild(rowEl);
+    }
+
+    let rows = document.querySelectorAll('tr');
+
+    // create table data columns based on the number of pegs
+    rows.forEach((row, idx) => {
+      for (let i = 0; i < numPegs; ++i) {
+        const colEl = document.createElement('td');
+        colEl.setAttribute('style', 'text-align:center; font-weight:900');
+        row.appendChild(colEl);
+      }
+    })
+
+    let columns = document.querySelectorAll('tr');
+
+    // make the board
+    for (let i = 0; i < board.length; i++) {
+      const peg = board[i];
+      if (peg.length) {
+        for (let j = 0; j < peg.length; ++j) {
+          const discVal = peg[j];
+          let discValPic = '';
+          for (let i = 1; i <= discVal; i++) {
+            discValPic += "\uD83D\uDDB5";
+          }
+          columns[columns.length - (j + 1)].cells[i].innerHTML = discValPic;
+        }
+      } else columns[columns.length - 1].cells[i].innerHTML = '|'; // if the peg is empty
+    }
+  };
+
+
   // check to see what pegs are available 
   const viablePegs = (fromPeg) => {
     let result = [];
@@ -85,7 +125,7 @@ const TowersModule = () => {
       board[toPeg - 1].push(item);
       board[fromPeg - 1].pop();
       ++numMoves
-      renderBoard(board);
+      renderBoard2(board);
       checkWinner(board);
     } else {
       console.log("Make sure to move a disc on top of a smaller one!");
@@ -116,9 +156,9 @@ const TowersModule = () => {
       const boardEl = document.querySelector('ul');
       boardEl.innerHTML = '';
       inputEl.forEach((node) => { node.innerHTML = '' });
-      
+
       // return to original text after five seconds
-      setTimeout(() => { 
+      setTimeout(() => {
         location.reload();
         // h2El.innerText = 'Can you solve it?';
         // h2El.setAttribute('style', "color:black");    
@@ -129,20 +169,21 @@ const TowersModule = () => {
   // object for rendering and changing the game
   return {
     makeBoard: makeBoard,
-    renderBoard: renderBoard,
+    renderBoard2: renderBoard2,
     moveDisc: moveDisc
   };
 }
 
 // create new game
-const newGame = TowersModule(); 
+const newGame = TowersModule();
 
 // set event listener for reset button
 document.getElementById('reset').addEventListener('click', (e) => {
-  // const boardListEl = document.querySelectorAll('form');
-  // if (boardListEl) boardListEl.forEach((node) => { node.innerHTML = '' });
   //location.reload();
+  const boardListEl = document.querySelectorAll('form');
+  if (boardListEl) boardListEl.forEach((node) => { node.innerHTML = '' });
   generateGameDOM();
+  e.target.reset();
 })
 
 // set event listener for the 3 peg recursive button
@@ -164,7 +205,7 @@ const generateGameDOM = (note) => {
   numPegs = parseInt(prompt('Enter # of pegs'));
   numDiscs = parseInt(prompt('Enter # discs'));
   newGame.makeBoard(numPegs, numDiscs);
-  newGame.renderBoard();
+  newGame.renderBoard2();
 
   // Create from peg form
   const fromPegFormEl = document.createElement('form');
@@ -194,14 +235,12 @@ const generateGameDOM = (note) => {
   document.getElementById('fromPeg').addEventListener('submit', function (e) {
     e.preventDefault();
     fromPeg = parseInt(document.querySelector('input[name="fromPeg"]').value);
-    console.log(e)
     e.target.reset();
   });
 
   document.getElementById('toPeg').addEventListener('submit', function (e) {
     e.preventDefault();
     toPeg = parseInt(document.querySelector('input[name="toPeg"]').value);
-    console.log(e)
     e.target.reset();
     newGame.moveDisc(fromPeg, toPeg);
   });
@@ -218,12 +257,15 @@ const renderTowerThreePegs = (numDisks, left, middle, right) => {
     return;
   } // else recurse
   else {
-    renderTowerThreePegs(numDisks-1, left, right, middle);
+    renderTowerThreePegs(numDisks - 1, left, right, middle);
     ++numMovesAlgo;
     console.log(`Move disk ${numDisks} from ${left} to ${right}`);
-    renderTowerThreePegs(numDisks-1, middle, left, right);
+    renderTowerThreePegs(numDisks - 1, middle, left, right);
   }
 }
+
+
+
 
 
 
