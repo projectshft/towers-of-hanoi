@@ -179,11 +179,9 @@ const newGame = TowersModule();
 
 // set event listener for reset button
 document.getElementById('reset').addEventListener('click', (e) => {
-  //location.reload();
   const boardListEl = document.querySelectorAll('form');
   if (boardListEl) boardListEl.forEach((node) => { node.innerHTML = '' });
   generateGameDOM();
-  e.target.reset();
 })
 
 // set event listener for the 3 peg recursive button
@@ -196,12 +194,14 @@ document.getElementById('algo-solve').addEventListener('click', (e) => {
 
 /* create dynamic dom elements for playing game */
 const generateGameDOM = (note) => {
+  // if reset during game, clear forms
   board = []; numMoves = 0; 
   const frPegEl = document.querySelector('#fromPeg');
   if (frPegEl) frPegEl.parentNode.removeChild(frPegEl);
   const toPegEl = document.querySelector('#toPeg');
   if (toPegEl) toPegEl.parentNode.removeChild(toPegEl);
 
+  // gather info and make and render board
   numPegs = parseInt(prompt('Enter # of pegs'));
   numDiscs = parseInt(prompt('Enter # discs'));
   newGame.makeBoard(numPegs, numDiscs);
