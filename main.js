@@ -139,8 +139,9 @@ const newGame = TowersModule();
 
 // set event listener for reset button
 document.getElementById('reset').addEventListener('click', (e) => {
-  const boardListEl = document.querySelectorAll('form');
-  if (boardListEl) boardListEl.forEach((node) => { node.innerHTML = '' });
+  // const boardListEl = document.querySelectorAll('form');
+  // if (boardListEl) boardListEl.forEach((node) => { node.innerHTML = '' });
+  //location.reload();
   generateGameDOM();
 })
 
@@ -154,7 +155,12 @@ document.getElementById('algo-solve').addEventListener('click', (e) => {
 
 /* create dynamic dom elements for playing game */
 const generateGameDOM = (note) => {
-  board = []; 
+  board = []; numMoves = 0; 
+  const frPegEl = document.querySelector('#fromPeg');
+  if (frPegEl) frPegEl.parentNode.removeChild(frPegEl);
+  const toPegEl = document.querySelector('#toPeg');
+  if (toPegEl) toPegEl.parentNode.removeChild(toPegEl);
+
   numPegs = parseInt(prompt('Enter # of pegs'));
   numDiscs = parseInt(prompt('Enter # discs'));
   newGame.makeBoard(numPegs, numDiscs);
@@ -188,12 +194,14 @@ const generateGameDOM = (note) => {
   document.getElementById('fromPeg').addEventListener('submit', function (e) {
     e.preventDefault();
     fromPeg = parseInt(document.querySelector('input[name="fromPeg"]').value);
+    console.log(e)
     e.target.reset();
   });
 
   document.getElementById('toPeg').addEventListener('submit', function (e) {
     e.preventDefault();
     toPeg = parseInt(document.querySelector('input[name="toPeg"]').value);
+    console.log(e)
     e.target.reset();
     newGame.moveDisc(fromPeg, toPeg);
   });
