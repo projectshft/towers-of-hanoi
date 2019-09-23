@@ -59,6 +59,7 @@ const TowersModule = () => {
     // create number of table rows based on number of discs
     for (let i = 1; i <= numDiscs; i++) {
       const rowEl = document.createElement('tr');
+      rowEl.setAttribute('style', 'text-align:center')
       boardList.appendChild(rowEl);
     }
 
@@ -153,7 +154,7 @@ const TowersModule = () => {
       h2El.setAttribute('style', "color:blue");
       console.log(`Good job - you did it in ${numMoves} moves`);
       const inputEl = document.querySelectorAll('form');
-      const boardEl = document.querySelector('ul');
+      const boardEl = document.querySelector('table');
       boardEl.innerHTML = '';
       inputEl.forEach((node) => { node.innerHTML = '' });
 
