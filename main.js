@@ -1,4 +1,4 @@
-var start = prompt ("Would you like to play Tower of Hanoi?");
+var start = prompt ("Would you like to play?");
 var gameWon = false;
 if (start.toLowerCase() == "yes") {
    var game = {
