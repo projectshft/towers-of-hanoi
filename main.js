@@ -1,6 +1,10 @@
 // A board representing 3 pegs, and 3 discs on the first peg in ascending order.  
 var game = {
-    boardArray: [["3", "2", "1"],[],[]]
+    boardArray: [
+        ["3", "2", "1"],
+        [],
+        []
+    ];
 };
 
 // function that prints board to console using map
@@ -10,49 +14,49 @@ function printBoard() {
     });
 };
 
-
     
 //var inputPrompt = prompt("Choose a disc and which peg you would like to move it to.");
 
 //if (windowPrompt != 
 // prompt that takes in disc and peg input
 
+//function that checks moves from the oldPeg to newPeg
+function checkMove(oldPeg, newPeg) {
+    var topDisk = game.boardArray[oldPeg][game.boardArray[oldPeg].length -1];
+    console.log(topDisk);
+ };
+ checkMove(0, 2);
+   
+ 
+ // game.boardArray.filter(function(check){
+        
+        //for (var i = 0; i < game.boardArray.length; i++) 
+        //{  
+       // if (isValid(game.boardArray[i])) {
+       //     return "That move was successful";
+       // } else {
+        //   return "You cannot move a larger disc on top of a smaller one, try again";
+   // }
+//};
 
 
 
-
-/*function isMovePossbile() {
-    game.boardArray.filter(function(filter){
-       if (pe {
-    })
-    // conditional logic 
-    if ( ) {
-        // possible move
-    } else {
-        // not possible move
-    }
-};
-
-*/
-
-// prompt that welcomes user to game 
+ //prompt that welcomes user to game 
 var onePrompt = alert("Welcome to Towers of Hanoi !");      
     twoPrompt = prompt("Which disc do you want to move ? ");
-        if (discToBeMoved > 3) {
-            console.log(alert("Invalid Move"));
-        };
-    thirdPrompt = prompt("Which peg do you want to move to ?");
+//        if (disk > 3) {
+//           alert("Invalid Move");
+//        };
+//    thirdPrompt = prompt("Which peg do you want to move to ?");
 
 
-
+// function that takes in the starting peg information and ending peg information 
 var move = function(startPeg, endPeg) {        
-    //startPeg();
-    //endPeg();
-    //console.log(startPeg, endPeg);
+    console.log("move: " + startPeg + "to" + endPeg);
     var discToBeMoved = game.boardArray[startPeg].pop();
     game.boardArray[endPeg].push(discToBeMoved);
     
-    
+    printBoard();
     //console.log(discToBeMoved);
     //console.log(game.boardArray);
 };
@@ -62,7 +66,6 @@ var move = function(startPeg, endPeg) {
 printBoard();
 //debugger;
 move(0, 2);
-printBoard();
 
 
 
