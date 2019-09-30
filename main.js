@@ -4,14 +4,21 @@ var game = {
         ["3", "2", "1"],
         [],
         []
-    ];
+    ]
 };
 
 // function that prints board to console using map
 function printBoard() {
-    game.boardArray.map(function(peg) {
-        console.log(" --- " + peg.join(''));
+    var printedBoard = game.boardArray.map(function(peg) {
+        return " --- " + peg.join('');
     });
+
+    // // printedBoard.forEach(function (i) {
+    // //     console.log(i);
+
+
+    // //     var printedBoard = game.boardArray.map()
+    // });
 };
 
     
@@ -72,7 +79,7 @@ move(0, 2);
 
 /* need to create three arrays here for the three pegs 
 on game start run board (use map to print board!)
-step 1. player submits move ( function)
+step 1. player submits move (function)
 step 2. game checks if move is valid ( function)
 step 3. action based on step 2. If move is valid, excute move and print. If move is invalid we'll print message to the user. 
 
