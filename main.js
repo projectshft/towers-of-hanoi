@@ -1,29 +1,43 @@
-// towers of Hanoi
-var board = [
+// game Towers of Hanoi
+
+// Begin board using a 2d array
+let startBoard = [
   ['3','2','1'],
   [],
   []
 ];
 
-//create new arr from exisiting arr
-var newBoard = board.map(function(element){
+//Print board horizontally using .map()
+const printBoard = startBoard.map(function(element){
   return ("--- " + element.join(" "));
 });
 
-console.log(newBoard);
+console.log(printBoard);
 
+
+var gamePlay = {
+  pegs: 3,
+  moves: 0,
 
 //player submits moves to game and game accepts/regects
-var moveDisc = function(arr, ind) {
-  var disc;
-  var peg;
-  if (peg === 0) {
-    peg += 1;
- }
-};
+  moveDisc: function(startingPeg, endingPeg) {
+       var lastDiscOnStartingPeg = startBoard[startingPeg].pop();
+       console.log("Board state after moving first disc", startBoard);
+       startBoard[endingPeg].push(lastDiscOnStartingPeg);
+       console.log("Board State after placing disc on new peg", startBoard);
+       console.log('Disc to move is', lastDiscOnStartingPeg);
+     }
 
-moveDisc(1,3)
-console.log(moveDisc);
+ };
+
+  var moves = startBoard.filter(function(move){
+       return move.moves;
+
+});
+
+console.log(moves);
+console.log(gamePlay.moveDisc(0,2));
+
 
 // check winner function to see if player has won the game.
-checkWinner();
+//checkWinner();
