@@ -9,7 +9,7 @@ var play = prompt("Are you ready to be challanged by 'The Towers of Hanoi'? ");
       alert("Maybe Next Time!"))
     }
 // if yes, print board
-    var towers = [
+    var tower = [
       [3, 2, 1],
       [],
       []
@@ -29,7 +29,7 @@ var endPeg = prompt("Which peg would you like to move to?")
     console.log(startPeg);
     console.log(endPeg);
 //send prompt
-  var moveDisk = towers.board[startPeg-1].pop();
+  var moveDisk =[startPeg-1].pop();
       towers.board[endPeg - 1].push(startPeg-1);
       printBoard;
 }
