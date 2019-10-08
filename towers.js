@@ -22,27 +22,29 @@ var printBoard = function () {
     }
 }
 
+var legalMove = function (startPeg) {
+    var discToMove = board[startPeg][board[startPeg].length - 1];
+
+    board.filter(function (peg) {
+        console.log(discToMove);
+    });
+};
+//list of arrays for startPeg to move to
 
 //Moving disc (user will enter a value at 1 higher than index)
 moveDisc = function (startPeg, endPeg) {
+    var legalMoves = legalMove(startPeg - 1);
+
     var startIndex = startPeg - 1;
     var endIndex = endPeg - 1;
-    var pegArray = board[startIndex]
-    var discMoved = pegArray[pegArray.length-1]
-    
+    var startPegArray = board[startIndex]
+    var discMoved = startPegArray[startPegArray.length - 1]
+
     board[startIndex].pop()
     board[endIndex].push(discMoved)
     printBoard()
 }
 // Next move, use filter function - There should be a function that given a certain peg, determines which other pegs the top disc from that peg can be moved to. 
-
+// moving last item on the startPeg
 
 moveDisc(1, 2)
-
-
-
-
-
-// //Prompt which disc do you want to move
-// var startPeg = prompt("Which peg would you like to move from?");
-// var endPeg = prompt("Which peg would you like to move to?");
