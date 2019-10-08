@@ -22,14 +22,22 @@ var printBoard = function () {
     }
 }
 
-// console.log(printBoard())
-printBoard()
 
-//Moving disc
-var movedisc = function (startPeg, endPeg) {
+//Moving disc (user will enter a value at 1 higher than index)
+moveDisc = function (startPeg, endPeg) {
+    var startIndex = startPeg - 1;
+    var endIndex = endPeg - 1;
+    var pegArray = board[startIndex]
+    var discMoved = pegArray[pegArray.length-1]
     
-
+    board[startIndex].pop()
+    board[endIndex].push(discMoved)
+    printBoard()
 }
+// Next move, use filter function - There should be a function that given a certain peg, determines which other pegs the top disc from that peg can be moved to. 
+
+
+moveDisc(1, 2)
 
 
 
