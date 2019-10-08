@@ -1,19 +1,29 @@
-var start = prompt ("Would you like to play?");
-var gameWon = false;
-if (start.toLowerCase() == "yes") {
-   var game = {
-       board : [[3, 2, 1], [], []]
-   }
-}
-else (alert("Have a good day!"));
+var board = [
+  [3, 2, 1],
+  [],
+  []
+];
 
-var move = function(startPeg, endPeg){
-   var printBoard = game.board.map(function(peg){
-       console.log("---" + peg.join(" "));
-       });
-   startPeg = prompt("What peg would you like to move from?");
-   endPeg = prompt("Which peg would you like to move to?");
-   var diskToBeMoved = game.board[startPeg-1].pop();
-   game.board[endPeg-1].push(startPeg-1);
-   printBoard;
+var printBoard = function () {
+  const mappedBoard = board.map(function (peg) {
+    return "---" + peg.join("")
+  });
+  for (var i = 0; i < mappedBoard.length; i++) {
+    console.log(mappedBoard[i])
+  }
 }
+
+//Moving disc (user will enter a value at 1 higher than index)
+moveDisc = function (startPeg, endPeg) {
+  var startIndex = startPeg - 1;
+  var endIndex = endPeg - 1;
+  var pegArray = board[startIndex];
+  var discMoved = pegArray[pegArray.length - 1]
+
+  board[startIndex].pop()
+  board[endIndex].push(discMoved)
+  printBoard()
+
+}
+
+moveDisc(1, 2)
