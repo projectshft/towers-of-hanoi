@@ -18,7 +18,13 @@ var board = [
     });
   }
   var moves = 0;
-  
+
+  var legalMove = function (start) { 
+    return board.filter(function(peg) {
+      return peg[peg.length - 1] > start[start.length-1] || peg[peg.length - 1] === undefined
+    });
+  };
+
   
   //create function to allow player to move discs around pegs 
   //make sure larger discs can't be placed on smaller ones
@@ -29,6 +35,12 @@ var board = [
   
     var lastDisconStartPeg = startPeg[startPeg.length - 1];
     var endPeg = board[endPegPosition];
+
+    console.log(legalMove(startPeg));
+
+    debugger;
+
+    // console.log("legal move?",legalMove(startPeg, endPeg));
   
     //conditional logic
     //filter somewhere in here
@@ -43,9 +55,28 @@ var board = [
       console.log(moveDisc(board));
     }
   };
+
+ 
+
+//   if   {
+//     console.log("You cannot move a larger disc on top of a smaller one, board is still:");
+//     printBoard();
+//   } else {
+//     startPeg.pop();
+//     endPeg.push(lastDisconStartPeg);
+//     return "That move was successful, board is now:"
+//     moves++;
+//     console.log(moveDisc(board));
+//   }
+// };
+
+  
+  
   
   //Capturing user's move here
-  // console.log (moveDisc(0,1));
+ console.log (moveDisc(0,1));
+ console.log (moveDisc(1,2));
+
   
   //function checking for a winning arrangement, 
   //tell player they've won when condition is met.
@@ -67,6 +98,7 @@ var board = [
   // //this displays number of attempts
   console.count(moveDiscs);
   }
+ 
   
   
   
