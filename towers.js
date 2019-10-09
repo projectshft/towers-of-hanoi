@@ -24,12 +24,18 @@ var printBoard = function () {
 
 var legalMove = function (startPeg) {
     var discToMove = board[startPeg][board[startPeg].length - 1];
+    
 
     board.filter(function (peg) {
         console.log(discToMove);
+        if (startPeg < 1)
+            return true;
     });
 };
-//list of arrays for startPeg to move to
+
+//list for startPeg to move to
+
+
 
 //Moving disc (user will enter a value at 1 higher than index)
 moveDisc = function (startPeg, endPeg) {
