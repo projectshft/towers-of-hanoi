@@ -35,7 +35,7 @@ var endPeg = prompt("Which peg would you like to move to?")
 }
 playerMove();
 
-/
+
 //var checkWinner =
   //if(board = [],[3, 2, 1] []] or [], [], [3, 2, 1]] ) {
  //alert("Winner")

@@ -8,10 +8,19 @@
 // }
 
 var board = [
-    [3, 2, 1],
-    [],
-    []
+    [3],
+    [2],
+    [1]
 ];
+
+// var names = ["Aaron", "Bob", "Sue"];
+
+
+// names.forEach(function (name) {
+//     console.log(name);
+// });
+
+
 
 var printBoard = function () {
     const mappedBoard = board.map(function (peg) {
@@ -22,15 +31,18 @@ var printBoard = function () {
     }
 }
 
-var legalMove = function (startPeg) {
+var legalMoves = function (startPeg) {
     var discToMove = board[startPeg][board[startPeg].length - 1];
-    
 
-    board.filter(function (peg) {
-        console.log(discToMove);
-        if (startPeg < 1)
-            return true;
+    var legalPegs = board.filter(function (peg) {
+        var lastItemOnPeg = peg[peg.length - 1];
+
+        if (discToMove < lastItemOnPeg || lastItemOnPeg === undefined) {
+            return true
+        }
     });
+
+    return legalPegs;
 };
 
 //list for startPeg to move to
@@ -39,18 +51,34 @@ var legalMove = function (startPeg) {
 
 //Moving disc (user will enter a value at 1 higher than index)
 moveDisc = function (startPeg, endPeg) {
-    var legalMoves = legalMove(startPeg - 1);
-
     var startIndex = startPeg - 1;
     var endIndex = endPeg - 1;
-    var startPegArray = board[startIndex]
-    var discMoved = startPegArray[startPegArray.length - 1]
 
-    board[startIndex].pop()
-    board[endIndex].push(discMoved)
+    var legalPegs = legalMoves(startIndex);
+
+    var startPegArray = board[startIndex];
+    var endPegArray = board[endIndex];
+
+    if (legalPegs.includes(endPegArray)) {
+        var discMoved = startPegArray[startPegArray.length - 1]
+
+        board[startIndex].pop()
+        board[endIndex].push(discMoved)
+    } else {
+        console.log('Sorry, illegal move');
+    }
+
     printBoard()
 }
 // Next move, use filter function - There should be a function that given a certain peg, determines which other pegs the top disc from that peg can be moved to. 
 // moving last item on the startPeg
 
 moveDisc(1, 2)
+
+//var checkWinner =
+//if(board = [],[3, 2, 1] []] or [], [], [3, 2, 1]] ) {
+//alert("Winner")
+// code will run if condition evaluates to true
+//} else {
+//alert("Try again")
+// or "you cannot add a larger disc to a smaller disc"
