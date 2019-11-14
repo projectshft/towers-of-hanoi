@@ -1,14 +1,17 @@
-var startingBoard = [
-  [5, 4, 3, 2, 1],
-  [],
-  []
-]
+//adjusted starting board to look better visually
+var startingBoard = [[3, 2, 1],[],[]]
+//the board variable that will be updated throughout the game
+var currentBoard = [];
+//added total moves attribute to be incremented each time a successful move is completed
+let totalMoves = 0;
+
+var acceptableMove = false;
+var winner = false;
 
 
 
-var boardMapped = [];
 
-var createBoard = function(array) {
+var Board = function(array) {
   startingBoard.forEach(function(arr) {
     var newArr = arr.map(function(num) {
       return Number(num);
@@ -27,7 +30,6 @@ var printBoard = function() {
 };
 
 
-
 var checkWinner = function() {
   if (boardMapped.find(function(arr) {
       return arr.reduce(function(sum, number) {
@@ -43,32 +45,24 @@ var checkWinner = function() {
 }
 
 
-alert("Here is the starting board:");
-printBoard();
 
 
 
-var board = {
+function moveDisk(start, finish) {
+  start = prompt(("Which disk do you want to move?  Choose between 1, 2, or 3"));
+  if (typeof start === 'number' && typeof finish === 'number') {
+      if (start > 0 && start < board.totalPegs + 1 && finish > 0 && finish < board.totalPegs + 1) {
+        if ((boardMapped[start - 1][boardMapped[start - 1].length - 1] < boardMapped[finish - 1][boardMapped[finish - 1].length - 1]))
+          board.totalMoves += 1;
+          console.log("Total Moves: " + board.totalMoves);
+          console.log("Nice Move!:");
+          checkWinner();
+          return acceptableMove;
 
-  totalPegs: 3,
+  } else {
+      console.log("Invalid Move!:");
+      printBoard();
+      //adding that move was not acceptable if condition not met
+      !acceptableMove;
+  }}}
 
-  totalMoves: 0,
-
-  moveDisc: function(start, finish) {
-    start = prompt(("Which disk do you want to move?  Choose between 1, 2, or 3"));
-    if (typeof start === 'number' && typeof finish === 'number') {
-        if (start > 0 && start < board.totalPegs + 1 && finish > 0 && finish < board.totalPegs + 1) {
-          if ((boardMapped[start - 1][boardMapped[start - 1].length - 1] < boardMapped[finish - 1][boardMapped[finish - 1].length - 1]))
-            board.totalMoves += 1;
-            console.log("Total Moves: " + board.totalMoves);
-            console.log("Nice Move!:");
-            checkWinner();
-
-        } else {
-          console.log("Invalid Move!:");
-          printBoard();
-
-
-  },
-
-};
