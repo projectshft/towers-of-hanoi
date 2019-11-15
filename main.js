@@ -1,7 +1,7 @@
-// A board representing 3 pegs, and 3 discs on the first peg in ascending order.  
+// A board representing 5 pegs, and 3 discs on the first peg in ascending order.  
 var game = {
-    boardArray: [
-        ["3", "2", "1"],
+    pegs: [
+        [5, 4, 3, 2, 1],
         [],
         []
     ]
@@ -9,81 +9,108 @@ var game = {
 
 // function that prints board to console using map
 function printBoard() {
-    var printedBoard = game.boardArray.map(function(peg) {
+    var printedBoard = game.pegs.map(function (peg) {
         return " --- " + peg.join('');
     });
 
-    // // printedBoard.forEach(function (i) {
-    // //     console.log(i);
+    printedBoard.forEach(function (i) {
+        console.log(i);
 
-
-    // //     var printedBoard = game.boardArray.map()
-    // });
+    });
 };
 
-    
-//var inputPrompt = prompt("Choose a disc and which peg you would like to move it to.");
+// This function give the value of the last disc of an array 
+function lastDisc(peg) {
+    return peg[peg.length - 1];
+}
+//This function checks to see if the disc were moving 
+//is smaller than the disc we're placing it on
+function isSmallerThan(disc1, disc2) {
+    return disc1 < disc2
+}
 
-//if (windowPrompt != 
-// prompt that takes in disc and peg input
+// startPegIndex represents the first peg index from where your moving the disc from
+var legalMoves = function (startPegIndex) {
+    var startPeg = game.pegs[startPegIndex];
+    var startDisc = lastDisc(startPeg);
 
-//function that checks moves from the oldPeg to newPeg
-function checkMove(oldPeg, newPeg) {
-    var topDisk = game.boardArray[oldPeg][game.boardArray[oldPeg].length -1];
-    console.log(topDisk);
- };
- checkMove(0, 2);
-   
- 
- // game.boardArray.filter(function(check){
-        
-        //for (var i = 0; i < game.boardArray.length; i++) 
-        //{  
-       // if (isValid(game.boardArray[i])) {
-       //     return "That move was successful";
-       // } else {
-        //   return "You cannot move a larger disc on top of a smaller one, try again";
-   // }
-//};
+    var isStartEmpty = startPeg.length === 0
+    if (isStartEmpty) {
+        return [];
+    };
 
-
-
- //prompt that welcomes user to game 
-var onePrompt = alert("Welcome to Towers of Hanoi !");      
-    twoPrompt = prompt("Which disc do you want to move ? ");
-//        if (disk > 3) {
-//           alert("Invalid Move");
-//        };
-//    thirdPrompt = prompt("Which peg do you want to move to ?");
-
-
-// function that takes in the starting peg information and ending peg information 
-var move = function(startPeg, endPeg) {        
-    console.log("move: " + startPeg + "to" + endPeg);
-    var discToBeMoved = game.boardArray[startPeg].pop();
-    game.boardArray[endPeg].push(discToBeMoved);
-    
-    printBoard();
-    //console.log(discToBeMoved);
-    //console.log(game.boardArray);
+    var availablePegs = game.pegs.filter(function (currentPegThatWeAreLookingAt, currentPegIndex) {
+        //if this peg is the start peg then moving it to the same peg is illegal
+        var isStartPeg = startPegIndex === currentPegIndex;
+        if (isStartPeg) {
+            return false;
+        }
+        // if the peg that were moving to is empty then that move is legal 
+        var isPegEmpty = currentPegThatWeAreLookingAt.length === 0
+        if (isPegEmpty) {
+            return true;
+        }
+        //if disc to move is larger than where we're moving it to, then it is not allowed 
+        var currentDisc = lastDisc(currentPegThatWeAreLookingAt);
+        var canPutDiscOnTopOfCurrentDisc = isSmallerThan(startDisc, currentDisc);
+        if (canPutDiscOnTopOfCurrentDisc) {
+            return true;
+        }
+        return false;
+    })
+    return availablePegs;
 };
 
-//var checkWinner = 
+// function that takes in the starting peg and ending peg information 
+var move = function (startPegIndex, endPegIndex) {
+    var availablePegsToMoveTo = legalMoves(startPegIndex);
+    var pegToMoveFrom = game.pegs[startPegIndex];
+    var pegToBeMovedTo = game.pegs[endPegIndex];
 
-printBoard();
-//debugger;
-move(0, 2);
+    // console.log("Move: " + startPegIndex + " to " + endPegIndex);
+    if (availablePegsToMoveTo.includes(pegToBeMovedTo)) {
+        // move disc from pegToMoveFrom to pegToMoveTo
+        var discToMove = pegToMoveFrom.pop();
+        pegToBeMovedTo.push(discToMove)
+        checkMove()
+        console.log('Move is successful');
+
+        printBoard()
+
+    } else {
+        console.log('Your move is illegal, please try again');
+
+    }
+};
+
+// This function checks the board every move that is made to see if there win
+function checkMove() {
+    var totalArray = [];
+
+    for (let i = 0; i < game.pegs.length; i++) {
+        var totals = game.pegs[i].reduce((acc, curr) => {
+            return acc + curr
+        }, 0)
+        totalArray.push(totals);
+    }
+
+    if (totalArray.includes(6) && totalArray[0] == 0) {
+        console.log('Winner, Winner, chicken Dinner! Lets play again')
+        game = {
+            pegs: [
+                [3, 2, 1],
+                [],
+                []
+            ]
+        };
+        printBoard()
+    };
+
+}
 
 
 
 
-/* need to create three arrays here for the three pegs 
-on game start run board (use map to print board!)
-step 1. player submits move (function)
-step 2. game checks if move is valid ( function)
-step 3. action based on step 2. If move is valid, excute move and print. If move is invalid we'll print message to the user. 
 
-need a hint function where user can enter peg number. Use filter to return pegs with valid moves 
-all discs on one peg 
-have to be in certain order, highest value to lowest value, has to be a different peg. if all conditions are met game will check winner and the gane will end using reduce function 
-*/
+
+
