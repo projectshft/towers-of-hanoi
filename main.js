@@ -10,7 +10,6 @@ var winner = false;
 
 
 
-
 var Board = function(array) {
   startingBoard.forEach(function(arr) {
     var newArr = arr.map(function(num) {
@@ -38,13 +37,11 @@ var checkWinner = function() {
         return num > array[i + 1] || num === 1
       })
     }) && boardMapped[0].length === 0) {
-    console.log("You won the game! " + board.totalMoves +
+    console.log("You won the game in " + board.totalMoves +
     " moves!");
     createBoard(boardMapped);
   }
 }
-
-
 
 
 
