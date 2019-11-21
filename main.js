@@ -94,7 +94,7 @@ function checkMove() {
         totalArray.push(totals);
     }
 
-    if (totalArray.includes(6) && totalArray[0] == 0) {
+    if (totalArray.includes(15) && totalArray[0] == 0) {
         console.log('Winner, Winner, chicken Dinner! Lets play again')
         game = {
             pegs: [
