@@ -1,4 +1,4 @@
-// A board representing 5 pegs, and 3 discs on the first peg in ascending order.  
+// A board representing 3 pegs, and 5 discs on the first peg in ascending order.  
 var game = {
     pegs: [
         [5, 4, 3, 2, 1],
@@ -98,7 +98,7 @@ function checkMove() {
         console.log('Winner, Winner, chicken Dinner! Lets play again')
         game = {
             pegs: [
-                [3, 2, 1],
+                [5, 4, 3, 2, 1],
                 [],
                 []
             ]
@@ -107,7 +107,7 @@ function checkMove() {
     };
 
 }
-
+printBoard();
 
 
 
