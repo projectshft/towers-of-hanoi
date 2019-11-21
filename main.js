@@ -1,4 +1,7 @@
 var start = prompt ("Would you like to play Tower of Hanoi?");
+var startPeg;
+var endPeg;
+
 
 if (start.toLowerCase() == "yes") {
     var game = {
@@ -7,41 +10,58 @@ if (start.toLowerCase() == "yes") {
         win : false  
     }
     
+    var peg= game.board;
+    
     //var pegs= prompt("How many pegs?");
     //var disks= prompt("How many disk?");
     printBoard();
-        if (game.win == false) 
-        {
+    
+    console.log(startPeg);
+    console.log(endPeg);
+
+    if (game.win === false) {
         move();
         printBoard();
-        } 
+    } 
 }
 else (alert("Have a good day!"));
 
-function move()
-            {
-            var startPeg = parseInt(prompt("Which peg would you like to move from?"));
-            var endPeg = parseInt(prompt("Which peg would you like to move to?"));
-                console.log(startPeg);
-                console.log(endPeg);
-                console.log(game.board[startPeg-1]);
-                console.log(game.board[startPeg-1][game.board[startPeg-1].length-1]);
-                console.log(game.board[endPeg-1][game.board[endPeg-1].length-1]);
-                //if (game.board[startPeg-1][game.board.length-1] < game.board[endPeg-1][game.board.length-1]){
-                //    console.log("Your move has been accepted!");
-                //    var moveDisk = game.board[startPeg-1].pop();
-                //    game.board[endPeg-1].push(moveDisk);}
-                //else (
-                //    prompt("Try a different move");
-                //    startPeg = prompt("What peg would you like to move from?");
-                //    endPeg = prompt("Which peg would you like to move to?");
-                //)
-            }
+function move(){
+    startPeg = parseInt(prompt("Which peg would you like to move from?"));
+    console.log(startPeg);
+    endPeg = parseInt(prompt("Which peg would you like to move to?"));
+        console.log(endPeg);
+        console.log(peg[startPeg-1][peg[startPeg-1].length-1]);
+        console.log(peg[1].length);
+        //console.log(peg[1].length);
+
+        if (peg[startPeg-1][peg[startPeg-1].length-1] < peg[endPeg-1][peg[endPeg-1].length-1]){
+            console.log("Your move has been accepted!");
+            var moveDisk = peg[startPeg-1].pop();
+            peg[endPeg-1].push(moveDisk);
+            game.count++
+            console.log(game.count);
+        }
+        else if (!peg[endPeg-1][peg[endPeg-1].length-1]){
+            console.log("Your move has been accepted!");
+            var moveDisk = peg[startPeg-1].pop();
+            peg[endPeg-1].push(moveDisk);
+            game.count++
+            console.log(game.count);
+        }
+        else {
+            prompt("Try a different move");
+            move();
+            // startPeg = prompt("What peg would you like to move from?");
+            // endPeg = prompt("Which peg would you like to move to?");
+        }
+    }
 
 function printBoard() {
-    var gameBoard = game.board.map(function(peg){
+    var gameBoard = peg.map(function(peg)
+    {
         console.log("---" + peg.join(" "));
-        });
+    });
 }
 
 
