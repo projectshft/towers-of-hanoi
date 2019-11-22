@@ -41,25 +41,13 @@ var checkWinner = function() {
     createBoard(boardMapped);
   }
 }
-
-
-alert("Here is the starting board:");
-printBoard();
-
-
-
-var board = {
-
-  totalPegs: 3,
-
-  totalMoves: 0,
-
-  moveDisc: function(start, finish) {
-    start = prompt(("Which disk do you want to move?  Choose between 1, 2, or 3"));
-    if (typeof start === 'number' && typeof finish === 'number') {
-        if (start > 0 && start < board.totalPegs + 1 && finish > 0 && finish < board.totalPegs + 1) {
-          if ((boardMapped[start - 1][boardMapped[start - 1].length - 1] < boardMapped[finish - 1][boardMapped[finish - 1].length - 1]))
-            board.totalMoves += 1;
+//
+function moveDisc(fromPeg, toPeg) {
+  start = prompt(("Which disk do you want to move?  Choose between 1, 2, or 3"));
+    if (typeof fromPeg === 'number' && typeof toPeg === 'number') {
+        if (fromPeg > 0 && fromPeg < boardMapped.totalPegs + 1 && toPeg > 0 && toPeg < boardMapped.totalPegs + 1) {
+          if ((boardMapped[fromPeg- 1][boardMapped[fromPeg - 1].length - 1] < boardMapped[toPeg - 1][boardMapped[toPeg - 1].length - 1]))
+            boardMapped.totalMoves += 1;
             console.log("Total Moves: " + board.totalMoves);
             console.log("Nice Move!:");
             checkWinner();
@@ -70,4 +58,38 @@ var board = {
         }
       }
     }
-  }
+  
+  
+
+
+alert("Here is the starting board:");
+printBoard();
+
+moveDisc();
+
+// var board = {
+
+//   totalPegs: 3,
+
+//   totalMoves: 0,
+
+//   moveDisc: function(start, finish) {
+//     start = prompt(("Which disk do you want to move?  Choose between 1, 2, or 3"));
+//     if (typeof start === 'number' && typeof finish === 'number') {
+//         if (start > 0 && start < board.totalPegs + 1 && finish > 0 && finish < board.totalPegs + 1) {
+//           if ((boardMapped[start - 1][boardMapped[start - 1].length - 1] < boardMapped[finish - 1][boardMapped[finish - 1].length - 1]))
+//             board.totalMoves += 1;
+//             console.log("Total Moves: " + board.totalMoves);
+//             console.log("Nice Move!:");
+//             checkWinner();
+
+//         } else {
+//           console.log("Invalid Move!:");
+//           printBoard();
+//         }
+//       }
+//     }
+//   }
+
+
+ 
