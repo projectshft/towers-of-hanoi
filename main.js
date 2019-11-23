@@ -1,7 +1,7 @@
 
 //creating function to wrap game in
 const Towers = function() {
-  let boardMapped = [];
+  let board = [["3", "2", "1"],[],[]];
   let checkWinner;
   let peg;
   let disc;
@@ -9,14 +9,17 @@ const Towers = function() {
   let moves = 0;
 
 
-  let printBoard = function() {
+  var printBoard = function() {
     alert('The starting board is shown on your console:')
-    console.log("--- " + boardMapped[0].join(" "));
-    console.log("--- " + boardMapped[1].join(" "));
-    console.log("--- " + boardMapped[2].join(" "));
+    return board.map(function (peg) {
+      console.log("---", ...peg);
 
-  console.log(printBoard)();
-  }
+    });
+  };
+  //starting board print test - works in console
+  printBoard();
+
+
 
 
 
