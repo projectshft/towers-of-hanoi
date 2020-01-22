@@ -3,8 +3,10 @@
 const towersOfHanoi = {
   // log the number of player moves
   movesCount: movesCount = 1,
+  //userInput for what disc they want to put in the suitable Peg function
+  myDisc: 1, //userInput; try for all 3 values;
   // create an initialize function for resetting the game
-  initializeBoard: initializeBoard = function(){
+  clearBoardAndMoves: clearBoardAndMoves = function(){
     //resets the board by returning the original board
     return [[3, 2, 1],
       [],
@@ -21,12 +23,11 @@ const towersOfHanoi = {
   //a function that prints a copy of the board with the pegs
   printBoard: function(){
      //uses map function to create a new array
-     this.board.map(function(element){
-       //console logs the pegs with the map function
-       console.log('--- ' + element);
-       //to seperate for readibility
-       console.log(' ');
+     return this.board.map(function (element) {
+       //returns with the peg '---'
+       return "---" + element;
      });
+
    },
    //moveDisc function moves the topDiscOnStartPeg from startPeg to an endPeg
    //endPeg is empty or topDiscOnEndPeg is the correct size
@@ -36,7 +37,7 @@ const towersOfHanoi = {
   //defines the topDiscOnEndPeg as a number for comparison
   const topDiscOnEndPeg = this.board[endPeg-1][this.board[endPeg-1].length-1];
     //checks if a disc at endPeg (if it's empty) & if (topDiscOnStartPeg < topDiscOnEndPeg)
-  if (!([endPeg-1].length === 0) && (topDiscOnStartPeg > topDiscOnEndPeg) {
+  if (!([endPeg-1].length === 0) && (topDiscOnStartPeg > topDiscOnEndPeg)) {
         // return the original array before you moved it
       console.log('you have made an illegal move!')
       //if the move is allowed it will occur as outlined below
@@ -44,13 +45,12 @@ const towersOfHanoi = {
     // removes the topDiscOnStartPeg off of startPeg
   this.board[startPeg-1].pop(topDiscOnStartPeg);
     // pushes topDiscOnStartPeg to the endPeg if the conditions(empty array or biggerDisc) are met
-  this.board[endPeg-1].push(topDiscOnStartPeg)
+  this.board[endPeg-1].push(topDiscOnStartPeg);
 };
   //logs the number of moves
     console.log('you have made ' + this.movesCount++ +' move(s).');
 },
 //in order to use filter and check which pegs where myDisc can fit
-//** i know it's hard coded but I couldn't figure out how else to properly use the filter function
   suitablePeg: suitablePeg = function (){
     //first suitablePeg function puts the pegs and discs in an object with specific properties
     let suitablePegObjectInArray = [
@@ -65,25 +65,23 @@ const towersOfHanoi = {
   });
   //logs the suitable pegs object when you invoke the suitablePeg function.
   console.log (suitablePegFilterFunction)},
-  //userInput for what disc they want to put in the suitable Peg function
-  myDisc: 2, //userInput; try for all 3 values;
+
 //this function uses the reduce function twice to log a single array and then a sum
 //** I don't think it's doing what it's supposed to but it works
   checkWinner: function () {
-    //logs the board once the player has completed to see if they won.
-    let winningBoard = this.board;
+    //logs the board once the player has completed to see if they won.???
     //using the reduce method to turn an array of arrays into a single array
-    let oneArray = winningBoard.reduce(function(total, amount) {
+    let winningBoard = this.board.reduce(function(total, amount) {
       //uses concat to combine multiple arrays into one
       return total.concat(amount);
     }, []);
-    console.log(oneArray);
+    console.log(winningBoard);
     // if it looks like on [3,2,1 on peg2 or peg3]
-    if(oneArray = [3,2,1]){
+    if(winningBoard = [3,2,1]){
         console.log('you have won the game!')
     }
     //using the reduce method to turn arrays into a sum
-    let sum = oneArray.reduce(function(total, amount){
+    let sum = winningBoard.reduce(function(total, amount){
       return total + amount;
     }, 0);
       //logs the total number of values should always equal 6.
@@ -92,6 +90,6 @@ const towersOfHanoi = {
 //if the player wins, it should automatically reset the board to its original status
   resetGame: resetGame = function (){
     //this resets movesCount & board to its original status
-     this.board = this.initializeBoard () ;
+     this.board = this.clearBoardAndMoves();
    }
 };

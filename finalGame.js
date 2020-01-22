@@ -45,7 +45,7 @@ const towersOfHanoi = {
   this.board[startPeg-1].pop(topDiscOnStartPeg);
     // pushes topDiscOnStartPeg to the endPeg if the conditions(empty array or biggerDisc) are met
   this.board[endPeg-1].push(topDiscOnStartPeg)
-};
+}};
   //logs the number of moves
     console.log('you have made ' + this.movesCount++ +' move(s).');
 },
@@ -64,7 +64,8 @@ const towersOfHanoi = {
     return peg.length===0 || peg.topDisc > this.myDisc;
   });
   //logs the suitable pegs object when you invoke the suitablePeg function.
-  console.log (suitablePegFilterFunction)},
+  console.log (suitablePegFilterFunction)
+},
   //userInput for what disc they want to put in the suitable Peg function
   myDisc: 2, //userInput; try for all 3 values;
 //this function uses the reduce function twice to log a single array and then a sum
@@ -95,3 +96,6 @@ const towersOfHanoi = {
      this.board = this.initializeBoard () ;
    }
 };
+
+towersOfHanoi.suitablePeg();
+console.log(towersOfHanoi.board);
