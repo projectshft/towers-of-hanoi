@@ -3,8 +3,6 @@
 <HTML>
     <HEAD>
       <TITLE>Towers of Hanoi</TITLE>
-      
-      <script src="main.js" charset="utf-8"></script>
     </HEAD>
     
     <label>      <H1>Towers of  Hanoi</H1>
@@ -17,7 +15,8 @@
       <label for="playmove">Tower to move from:</label><input id="moveDiskFrom" type="text" /><br /><br />
       <label for="playmove">Tower to move to:</label><input id="moveDiskTo" type="text" /><br /><br />
 
-      <button type="button" onclick="moveDisk()">Move</button>  
+
+      <button type="button" onclick="playGame()">Move</button>  
       <button style="margin:15px;" type="button" onclick="resetGame()">Reset Game</button>
 
       <p id="boardMessage">Enter your move</p>
@@ -25,9 +24,7 @@
       <p id="peg1">1--- 5 4 3 2 1</p>
       <p id="peg2">2--- </p>
       <p id="peg3">3--- </p>
-      
-
-           
-
+         
+      <script src="main.js" charset="utf-8"></script>
      </BODY>
     </HTML>
