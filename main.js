@@ -34,19 +34,22 @@ var showBoard = function() {
 };
 
 
+var checkWinner = function() {
+  if (startBoard.find(function(arr) {
+      return arr.reduce(function(sum, number) {
+        return sum + number
+      }, 0) === 15 && arr.every(function(num, i, array) {
+        return num > array[i + 1] || num === 1
+      })
+    }) && boardArray[0].length === 0) {
+    console.log(winnerChickenDinner + board.totalMoves + " moves!");
+    displayBoard(boardArray);
+  }
+}
 
-var checkWinner = function(){
-  // The checkWinnter function works through an array to determine if a Winner has been found
-    startBoard.map(function(item){
-      var sumArray = item.reduce(function(sum, currentItem){ //use reduce to keep track of sum of each array
-        return parseInt(sum + currentItem);
-      }, []);
-      if(sumArray === 6){ //winning threshold would be a sum of 6
-        console.log(winnerChickenDinner + board.totalMoves +
-        " moves!");
-      };
-    });
-};
+
+
+
 
 
 // Display Welcome message and opening placement of the pegs
