@@ -4,6 +4,7 @@ var towersOfHanoi = {
     boardObj: [[5, 4, 3, 2, 1], [], []],
     totalNumMoves: 0,
     boardState: function() {
+    console.log('The Current Board State is below');
        this.boardObj.map(function(item) {
            console.log("--- " + item);
        })
@@ -18,17 +19,25 @@ var towersOfHanoi = {
         }
     },
     moveDisc: function(startPeg, endPeg) {
+        //Print the initial state of the board before each move
+        this.boardState();
+        if (startPeg < 1 || endPeg > 3){
+            throw new Error("Either the starting peg or the ending peg doesn't exist");
+        }
+
         // change inputs to arrays since each peg is an array
         startPeg = this.boardObj[startPeg - 1];
         endPeg = this.boardObj[endPeg - 1];
-        // If checkMove returns true then the move is made
+        // If checkMove and checkPeg returns true then the move is made
         if (checkMove()) {
             endPeg.push(startPeg.pop());
             this.totalNumMoves += 1;
+            this.checkWinner();
+            this.boardState();
         } else {
             console.error('You cannot move a larger disc on top of a smaller one, board is still: ');
         } 
-        this.boardState();
+       
         // The checkMove fuction validates the move
         function checkMove() {
             var discToMove = startPeg[startPeg.length - 1];
@@ -36,33 +45,37 @@ var towersOfHanoi = {
             var moveAvailable = false;
             if(discToMove < topDisc || endPeg.length === 0) {
                 moveAvailable = true;
-            }
+            } 
             return moveAvailable;
         }
-        towersOfHanoi.checkWinner();
+
+        
     },
     checkWinner: function() {
-        var winningPeg = this.boardObj.reduce(function(arr1, peg, index) {
+        //Changed naming of arguments to more specific varibale names
+        var winningPeg = this.boardObj.reduce(function(boardArray, peg, index) {
             if (peg[index] >= 1) {
-                return peg.reduce(function(arr2, disc, index) {
+                return peg.reduce(function(winnerPeg, disc, index) {
                         var nextDisc = peg[index + 1];
                         var lastDisc = peg[peg.length - 1];
                         if (disc > nextDisc || disc === lastDisc) {
-                            arr2.push(disc);
+                            winnerPeg.push(disc);
                         }
                 
-                        return arr2
-                    }, [])
+                        return winnerPeg
+                }, [])
             }
-            return arr1
+            return boardArray
         }, [])
-        // This function makes sure that the length of the array is 3
-        var valWin = function(arr3) {
-            if (arr3.length >= 5) {
-                return true
-            } else {
-                return false
-            }
+        // This function makes sure that the length of boardPeg
+        var valWin = function(boardPeg) {
+            let youWon = false;
+          
+            if (boardPeg.length >= 5) {
+                youWon = true;
+            } 
+            return youWon
+            
         } 
         //The boolean determines whether you won or not
         if (valWin(winningPeg)) {
@@ -75,12 +88,13 @@ var towersOfHanoi = {
     },
     restBoard: function() {
         console.clear();
-        this.boardObj = [[5, 4, 3, 2, 1], [], []];
+        this.boardObj = [[ 5, 4, 3, 2, 1], [], []];
         this.totalNumMoves = 0;
         this.boardState();
     }
 }
 
+// game moves
 towersOfHanoi.moveDisc(1,2);
 towersOfHanoi.moveDisc(1,3);
 towersOfHanoi.moveDisc(2,3);
@@ -89,11 +103,29 @@ towersOfHanoi.moveDisc(3,1);
 towersOfHanoi.moveDisc(3,2);
 towersOfHanoi.moveDisc(1,2);
 towersOfHanoi.moveDisc(1,3);
-// towersOfHanoi.restBoard();
-// towersOfHanoi.moveDisc(1,2);
-// towersOfHanoi.moveDisc(1,3);
-towersOfHanoi.moveCount();
-
+towersOfHanoi.moveDisc(2,3);
+towersOfHanoi.moveDisc(2,1);
+towersOfHanoi.moveDisc(3,1);
+towersOfHanoi.moveDisc(2,3);
+towersOfHanoi.moveDisc(1,2);
+towersOfHanoi.moveDisc(1,3);
+towersOfHanoi.moveDisc(2,3);
+towersOfHanoi.moveDisc(1,2);
+towersOfHanoi.moveDisc(3,1);
+towersOfHanoi.moveDisc(3,2);
+towersOfHanoi.moveDisc(1,2);
+towersOfHanoi.moveDisc(3,1);
+towersOfHanoi.moveDisc(2,3);
+towersOfHanoi.moveDisc(2,1);
+towersOfHanoi.moveDisc(3,1);
+towersOfHanoi.moveDisc(3,2);
+towersOfHanoi.moveDisc(1,2);
+towersOfHanoi.moveDisc(1,3);
+towersOfHanoi.moveDisc(2,3);
+towersOfHanoi.moveDisc(1,2);
+towersOfHanoi.moveDisc(3,1);
+towersOfHanoi.moveDisc(3,2);
+towersOfHanoi.moveDisc(1,2);
 
 
 
