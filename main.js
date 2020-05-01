@@ -14,10 +14,6 @@ let isValidMoveType = (moveType) => {
 }
 
 const moveDisc = (start, end) => {
-  let startDisc = board[start][board[start].length - 1];
-  console.log(`startDisc = ${startDisc}`);
-  let endDisc = board[end][board[end].length - 1]
-  console.log(`endDisc = ${endDisc}`)
 
   if (!isValidMoveType(start) || !isValidMoveType(end)) {
     console.log(`INVALID MOVE: Please enter a valid peg number (Between 0 and 2). The board is still:`);
@@ -31,30 +27,31 @@ const moveDisc = (start, end) => {
     return;
   }
 
+  let startDisc = board[start][board[start].length - 1];
+  console.log(`startDisc = ${startDisc}`);
+  let endDisc = board[end][board[end].length - 1]
+  console.log(`endDisc = ${endDisc}`)
+  
   if(startDisc > endDisc) {
     console.log(`INVALID MOVE: You can not move a larger disc on top of a smaller disc. The board is still:`);
     console.log(board);
     return;
   }
 
-  
   board[end].push(board[start][board[start].length - 1]);
   board[start].pop();
   console.log(`The move was successful. The board is now:`);
   console.log(board);
 };
 
-// moveDisc(-1, 1)
-// moveDisc('pizza', 1)
-// moveDisc(0,3)
-// moveDisc(0, 2)
-// moveDisc(0, 2)
-// moveDisc(0, 2)
+moveDisc(-1, 1)
+moveDisc('pizza', 1)
+moveDisc(0,3)
 moveDisc(0, 2)
-
-moveDisc(0,2)
-
-moveDisc(2, 0)
+moveDisc(0, 1)
+moveDisc(2,1)
+moveDisc(0, 2)
+moveDisc(0,1)
 
 
 
