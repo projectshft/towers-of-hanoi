@@ -1,5 +1,8 @@
 var board = {
 
+  // For user functionality, we create an initializer function
+  // that determines peg's length x and populates index 0 with numbers
+  // 1 - y. We also create a disc weight (using reduce, return 1, then add 2, then...)
   pegs: [
     [3, 2, 1],
     [],
@@ -9,16 +12,66 @@ var board = {
   totalMoves: 0,
 
   move: function(fromPeg, toPeg) {
-    var disc = this.pegs[fromPeg-1].pop();
-    // Check to make sure
-    this.pegs[toPeg-1].push(disc);
+    if (this.checkMove(fromPeg)) {
 
-    this.totalMoves++
-    //this.printBoard();
-    this.checkWin();
+      var disc = this.pegs[fromPeg - 1].pop();
+      this.pegs[toPeg - 1].push(disc);
+      this.totalMoves++;
+      console.log("That move was successful, board is now: ");
+      this.printBoard();
+      this.checkWin();
+    } else {
+      console.log("You cannot move a larger disc on top of a smaller one, board is still: ");
+      this.printBoard();
+    }
+  },
+  //We will return a filtered array
+  //How do I reference the last indexed value of
+  possibleMoves: function(startPeg) {
+    var onStartPeg = this.pegs[startPeg - 1]; //disc = [3]
+
+    var getTopDisc = function(array){
+      if (array.length === 0) {
+        return 0;
+      } else {
+      return array[array.length-1];
+    }
+    }
+
+    var allMoves = this.pegs.filter(function(peg) {
+      if (getTopDisc(peg) === 0) {
+        return peg;
+      }
+      else if (getTopDisc(peg) > getTopDisc(onStartPeg)) {
+        return peg;
+      }
+    });
+
+    return allMoves;
+
   },
 
-  checkMove: function() {},
+  checkMove: function(startPeg) {
+
+    if (this.possibleMoves(startPeg).length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+
+    // if (endPeg[endPeg.length] < discInPlay)
+    // var lessThan = function(value) {
+    //   if (this[this.length-1] < value) {  //this is referencing lessThan...
+    //     return this[this.length-1];
+    //   };
+    // }
+    // console.log(lessThan(3));
+    //
+    // console.log([4, 3, 2, 1].filter(lessThan(3)));
+    //var legalMoves = this.pegs.filter(lessThan(discInPlay));
+
+    //  console.log(legalMoves);
+  },
 
   checkWin: function() {
 
@@ -29,20 +82,21 @@ var board = {
       return array;
     }, []);
 
-    console.log(discWeights);
-    console.log(discWeights[1]);
-    console.log(discWeights[2]);
-
-    if (discWeights[1] === 6 || discWeights[2] === 6) {
-      console.log('You have won in ' + this.totalMoves + ' moves. Starting new game.');
-      this.resetBoard();
-      console.log("------------------------------");
-    }
-
+    discWeights.forEach(function (discWeight) {
+      if (discWeight === 6) {
+        console.log('You have won in ' + this.pegs.totalMoves + ' moves. Starting new game.');
+        this.pegs.resetBoard();
+        console.log("------------------------------");
+      }
+    });
   },
 
   resetBoard: function() {
-    this.pegs = [ [3, 2, 1], [], [] ];
+    this.pegs = [
+      [3, 2, 1],
+      [],
+      []
+    ];
   },
 
   printBoard: function() {
@@ -64,8 +118,12 @@ var board = {
 
 }
 
+
 board.move(1, 3);
 board.move(1, 2);
+
+board.move(1, 2);
+
 board.move(3, 2);
 board.move(1, 3);
 board.move(2, 1);
