@@ -42,7 +42,16 @@ const board = {
 
   //this needs work, we have to check for a win by using reduce function, and also check that the full peg is not peg 1
   checkForWin: function (endPegArray) {
-    if (endPegArray.length === 4 && this.gameBoardArray[0].length === 0) {
+    const isAWin = this.gameBoardArray.reduce(function(booleanAcc, pegArray, index) {
+         if (index > 0) {
+           return booleanAcc || pegArray.length === 4;
+         } else {
+           return booleanAcc;
+         }
+       }, false);
+      
+
+    if (isAWin) {
       console.log(`Winner! You beat the game in ${this.gameMoves.length} moves.`);
       this.printGameBoard();
       console.log(`Here are the moves you made: \n(${this.gameMoves.join(') -> (')})`);
