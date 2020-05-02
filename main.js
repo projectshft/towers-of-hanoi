@@ -58,22 +58,11 @@ var board = {
     } else {
       return true;
     }
-
-    // if (endPeg[endPeg.length] < discInPlay)
-    // var lessThan = function(value) {
-    //   if (this[this.length-1] < value) {  //this is referencing lessThan...
-    //     return this[this.length-1];
-    //   };
-    // }
-    // console.log(lessThan(3));
-    //
-    // console.log([4, 3, 2, 1].filter(lessThan(3)));
-    //var legalMoves = this.pegs.filter(lessThan(discInPlay));
-
-    //  console.log(legalMoves);
   },
 
   checkWin: function() {
+
+    console.log(this.totalMoves + ' total moves');
 
     var discWeights = this.pegs.reduce(function(array, currentPeg) {
       array.push(currentPeg.reduce(function(sum, currentDisc) {
@@ -82,13 +71,17 @@ var board = {
       return array;
     }, []);
 
-    discWeights.forEach(function (discWeight) {
-      if (discWeight === 6) {
-        console.log('You have won in ' + this.pegs.totalMoves + ' moves. Starting new game.');
-        this.pegs.resetBoard();
-        console.log("------------------------------");
+    for (var i = 0; i < discWeights.length; i++) {
+      if (discWeights[i] === 6) {
+        this.winGame();
       }
-    });
+    }
+  },
+
+  winGame: function() {
+    console.log('You have won in ' + this.totalMoves + ' moves. Starting new game.');
+    this.resetBoard();
+    console.log("------------------------------");
   },
 
   resetBoard: function() {
