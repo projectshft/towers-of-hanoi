@@ -7,6 +7,8 @@ var towersOfHanoi = function() {
     []
   ]
 
+  var counter = 0
+
   var moveDisc = function(startPeg, endPeg) {
     // if the disc on the endPeg is greater than the disc you're moving, OR if the endPeg is empty
     if ((board[endPeg][0] > board[startPeg][board[startPeg].length -1]) || (board[endPeg][0] === undefined)){
@@ -15,9 +17,9 @@ var towersOfHanoi = function() {
     // then delete the starting disc in its original location
     board[startPeg].splice(board[startPeg].length -1)
     // add 1 to the counter
-    boardControls.counter ++
+    counter ++
     // check to see if the game is over
-    boardControls.checkWinner()
+    checkWinner()
     } else {
     throw "cannot move a bigger disc onto a smaller disc"
     }
@@ -30,13 +32,13 @@ var towersOfHanoi = function() {
       return (peg[0] === undefined) || (board[startPeg][board[startPeg].length-1] > peg[0])
       // (board[startPeg][board[startPeg].length-1] > peg[0])
     })
-    console.log(board[possiblePegs]);
+    console.log(board.indexOf(possiblePegs));
   }
 
-  var printBoard = function(peg) {
+  var printBoard = function() {
     // return board without commas
     var printedBoard = board.map(function(num) {
-      return "---" + num.join(" ")
+      return "--- " + num.join(" ")
     })
     // print board
     console.log(printedBoard);
@@ -53,7 +55,7 @@ var towersOfHanoi = function() {
     },false)
     // if true, declare winner and reset board
     if (isItAWin === true) {
-      console.log("Now that's a winner! You completed the game in " + boardControls.counter + " moves.")
+      console.log("Now that's a winner! You completed the game in " + counter + " moves.")
       console.log("Play again?")
       board = [['3', '2', '1'],[],[]]
     }
@@ -68,7 +70,8 @@ var towersOfHanoi = function() {
 
 var action = towersOfHanoi()
 
-action.printBoard();
+action.possibleMoves(0)
+
 
 
 
