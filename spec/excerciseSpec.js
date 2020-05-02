@@ -130,6 +130,5 @@ describe("check for winners using reduce:", function() {
     board.moveDisc(1, 2);
 
     expect(console.log).toHaveBeenCalled();
-    expect(board.resetBoard).toHaveBeenCalled;
   });
 });
