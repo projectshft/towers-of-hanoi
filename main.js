@@ -26,9 +26,10 @@ const Board = function(totalPegs, totalDiscs) {
   const moveDisc = function (startPeg, endPeg) {
 
     /* 
-       Here we create variables that point to the nested peg arrays in the gameboard.
-       We will assign a value of null to the peg arrays if the player chooses a peg that 
-       is not on the board. There is a error check for this below.
+       Here we create variables that point to the nested peg arrays in the
+       gameboard. We will assign a value of null to the peg arrays if the player
+       chooses a peg that is not on the board. There is a error check for this
+       below.
     */   
     const startPegArray = gameInfo.gameBoardArray[startPeg - 1] || null;
     const endPegArray = gameInfo.gameBoardArray[endPeg - 1] || null;
@@ -74,8 +75,9 @@ const Board = function(totalPegs, totalDiscs) {
   /* 
      This will first filter the gameBoard array into an array of pegs that are
      empty or pegs that have discs larger than the disc we want to move. 
-     The result array will then be filtered to see if our endPegArray is included. 
-     If it is, the final resulting array won't be empty and this whole function will return 'true'  
+     The result array will then be filtered to see if our endPegArray is
+     included. If it is, the final resulting array won't be empty and this whole
+     function will return 'true'  
   */
   const moveIsLegal = function (sizeOfDiscToMove, endPegArray) {
     return gameInfo.gameBoardArray.filter(function (peg) {
@@ -87,9 +89,10 @@ const Board = function(totalPegs, totalDiscs) {
 
 
   /* 
-     This function uses the reduce method to determine if there is a win
-     If there is a full stack of discs on any peg but peg 1, 'isAWin' will be true
-     If win is true, the winning message and gameboard will print and game will reset
+     This function uses the reduce method to determine if there is a win.
+     If there is a full stack of discs on any peg but peg 1, 'isAWin' will be
+     true. If win is true, the winning message and gameboard will print and game
+     will reset.
   */
   const checkForWin = function () {
     const isAWin = gameInfo.gameBoardArray.reduce(function (booleanAcc, pegArray, index) {
@@ -127,9 +130,10 @@ const Board = function(totalPegs, totalDiscs) {
 
   /* 
      This will set the game's number of pegs and discs to the players's choosing.
-     If the player doesn't specify the numbers of pegs and discs, they will default 
-     to the previous game, or default to the numbers set from when board object was
-     created (eg, board = Board(3, 3)). The board will then refresh and print.
+     If the player doesn't specify the numbers of pegs and discs, they will
+     default to the previous game, or default to the numbers set from when board
+     object was created (eg, board = Board(3, 3)). The board will then refresh
+     and print.
   */
   const startGame = function (numberOfPegs = gameInfo.totalPegs, numberOfDiscs = gameInfo.totalDiscs) {
     gameInfo.totalPegs = numberOfPegs;
