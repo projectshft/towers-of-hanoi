@@ -1,6 +1,5 @@
 var game = {
 
-
   gameDiscs: null,
 
   gamePegs: null,
@@ -161,8 +160,6 @@ var game = {
 
   printBoard: function() {
 
-    // Adding spaces to replace empty arrays.
-    // Also add a space between each column.
     // Vertical array looks.
     // 1   *   *
     // 2   2   *
@@ -174,28 +171,12 @@ var game = {
     // a new array? Then, I console.log each line, starting at the end of
     // the array.
 
-    // How do I concatenate the string?
-    // Well, right now board looks like
-    // [
-    //   [3, 2, 1],
-    //   [],
-    //   []
-    // ]
-
     // I need it to look like this:
     // [
     //  [==, A, 3, 2, 1],
     //  [====, B, *, *, *],
     //  [====, C, *, *, *]
     // ]
-
-    // So, my map function needs for each peg:
-    // Get the initial array lenght
-    // Unshift a letter corresponding to the peg's index in board
-    // Then, Unshift ===
-
-    // THen, compare initial array length to this.gameDiscs and
-    // for each unit of difference, push * to the peg.
 
     //This maps vertical board.
 
@@ -210,66 +191,46 @@ var game = {
     // No, we concatenate a string with each element, and console log that.
 
     var maxHeight = this.gameDiscs;
+    var space = "  ";
+    var spaceBetweenPegs = ["==", space];
+    for (var i = 0; i < maxHeight; i++) {
+      spaceBetweenPegs.push(space);
+    }
 
-      verticalBoard = this.board.map(function(peg, index) {
-          var initialPegIndex = index;
-          var initialPegLength = peg.length;
-          var asterisksNeeded = maxHeight - initialPegLength;
-          var uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
+    var verticalBoard = this.board.map(function(peg, index) {
+      var initialPegIndex = index;
+      var initialPegLength = peg.length;
+      var asterisksNeeded = maxHeight - initialPegLength;
+      var uppercase = ['A ', 'B ', 'C ', 'D ', 'E ', 'F ', 'G ', 'H ', 'I ', 'J ', 'K ', 'L ', 'M ', 'N ', 'O ', 'P '];
 
-          var transformedPeg = ["=="]; //
-          transformedPeg.push(uppercase[initialPegIndex]);
-          if (initialPegLength !== 0) {
-            for (var i = 0; i < initialPegLength; i++) {
-              transformedPeg.push(peg[i].toString());
-            }
-          }
-          console.log(asterisksNeeded);
-          if (asterisksNeeded !== 0) {
-            for (var i = 0; i < asterisksNeeded; i++) {
-              transformedPeg.push("*");
-            }
-          }
-          console.log(transformedPeg);
-
-          for (var i = 0; i < peg.length; i++) {
-              if (peg[i] > 0) { //Better way of checking if it's not empty
-                var transformedDisc = "";
-                for (var j = 0; j < peg[i]; j++) {
-                  if (transformedDisc === "") {
-                    transformedDisc = "=";
-                    //console.log(transformedDisc);
-                } else {
-                  transformedDisc = transformedDisc.concat("="); //concat returns new string
-                }
-              }
-              transformedPeg.push(transformedDisc);
-          }
+      // Initial translation
+      var transformedPeg = ["=="]; //
+      transformedPeg.push(uppercase[initialPegIndex]);
+      if (initialPegLength !== 0) {
+        for (var i = 0; i < initialPegLength; i++) {
+          transformedPeg.push(peg[i].toString());
         }
-        return transformedPeg;
-      });
+      }
+      if (asterisksNeeded !== 0) {
+        for (var i = 0; i < asterisksNeeded; i++) {
+          transformedPeg.push("*");
+        }
+      }
+      return transformedPeg;
+    });
 
-    console.log(verticalBoard); //Board needs three bases of equal length.
+    //Adding spaces for readability
+    var lengthBeforeSpacing = verticalBoard.length; // ran into a freakout her
+    var counter = 1;
+    for (var i = 0; i < lengthBeforeSpacing; i++) {
+      verticalBoard.splice(counter, 0, spaceBetweenPegs);
+      counter += 2;
+    }
 
-    // if (peg.length < this.gameDiscs) {
-    //   for (var i = 0; i < ((peg.length - this.gameDiscs) + 2); i++) {
-    //     // push ||
-    //   }
-    // }
-    //
-  //   var printablePegs =
-  //
-  //   printablePegs.forEach(function(peg) {
-  //     console.log(peg);
-  //   });
-  //
-  //   console.log("------------------------------");
-  // }
-
-}
+    console.log(verticalBoard);
+  }
 
 }
-
 
 game.input(3, 3);
 game.printBoard();
