@@ -1,6 +1,9 @@
+
+//This Board module will return a board object that will limit the player to starting a game and moving a disc. Game info, including accessing the game board, will be kept private
+
 const Board = function(totalPegs, totalDiscs) {
   /* The gameInfo object will store information about the game
-      The gameboard array will be filled at the start of the game, per the player's choice of peg and disc numbers 
+      The gameboard array will be filled at the start of the game, from totalPegs and totalDiscs values
       The gameMoves array will store all the player's completed moves
   */
   const gameInfo = { 
@@ -52,7 +55,7 @@ const Board = function(totalPegs, totalDiscs) {
     const legalPegs = gameInfo.gameBoardArray.filter(function (peg) {
       return peg.length === 0 || peg[peg.length - 1] > discSize;
     });
-
+    
     return legalPegs.includes(endPegArray) ? true : false; 
   };
 
@@ -78,6 +81,7 @@ const Board = function(totalPegs, totalDiscs) {
       console.log(`Want to play again with the same board? Here it is, just Type board.moveDisc() like before!\n`);
       printGameBoard();
       console.log(`Want to play with a new board? Just type board.startGame(x, y) where x and y are your pegs and discs, and you'll be good to go!`);
+    
     } else {
       console.log(`That move was successful, board is now:`)
       printGameBoard();
@@ -95,19 +99,19 @@ const Board = function(totalPegs, totalDiscs) {
 
 
   /* -This will set the game's number of pegs and discs to the players's choosing.
-     -If the player doesn't specify the number of pegs and discs, they will default to the previous game, or default to the numbers set from when board object was created (eg, board = new Board(3, 3)).
+     -If the player doesn't specify the numbers of pegs and discs, they will default to the previous game, or default to the numbers set from when board object was created (eg, board = Board(3, 3)).
      -The board will then refresh and print
   */
   const startGame = function (numberOfPegs = gameInfo.totalPegs, numberOfDiscs = gameInfo.totalDiscs) {
     gameInfo.totalPegs = numberOfPegs;
     gameInfo.totalDiscs = numberOfDiscs;
     refreshTheBoard();
-    console.log(`Here is your gameboard, please make a move: (type board.moveDisc(1, 2))`);
+    console.log(`Here is your gameboard, please make a move: type board.moveDisc(1, 2)`);
     printGameBoard();
   };
 
 
-  // This will build the board and clear the moves array when starting or after winning a game
+  // This will build the board and clear the moves array after winning or starting a new game
   const refreshTheBoard = function() {
     gameInfo.gameMoves.length = 0;
     gameInfo.gameBoardArray.length = 0;
@@ -126,9 +130,9 @@ const Board = function(totalPegs, totalDiscs) {
 };
 
 
-const board = new Board(3, 3);
+const board = Board(3, 3);
 
-console.log(`Welcome to Towers of Hanoi! \n\nThe game will default to 3 pegs and 3 discs. \nType 'board.startGame()' to play!\n\nIf you'd like to play with a different number of pegs and discs, type\n'board.startGame(x, y)'  (x = number of pegs and y = number of discs) \n\nFor example: board.startGame(4, 4) will be a game of 4 pegs and 4 discs. \n\nLet's go!\n`);
+console.log(`Welcome to Towers of Hanoi! \n\nThe game will default to 3 pegs and 3 discs. \nType 'board.startGame()' to play!\n\nIf you'd like to play with a different number of pegs and discs, type\n'board.startGame(x, y)'  (x = number of pegs, y = number of discs) \n\nFor example: board.startGame(4, 4) will be a game of 4 pegs and 4 discs. \n\nLet's go!\n`);
 
 board.startGame();
 
@@ -136,7 +140,7 @@ board.startGame();
 // board.moveDisc(0, 4);
 // board.moveDisc(1, 2);
 
-// board.moveDisc(1, 2);
+// // board.moveDisc(1, 2);
 // board.moveDisc(1, 3);
 // board.moveDisc(2, 3);
 // board.moveDisc(1, 2);
