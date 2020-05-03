@@ -13,8 +13,8 @@ This game is designed to be played in the console.
 */
 
 let board = [
-  [5, 4, 3, 2],
-  [1],
+  [5, 4, 3, 2, 1],
+  [],
   []
 ];
 
@@ -36,7 +36,7 @@ const controlBoard = {
   },
 
   moveDisc(start, end) { //user selects 1-3. 
-    //The code for referencing the arrays is adjusted accordingly with (-1) add to start and end
+    //The code for referencing the arrays is adjusted accordingly with (-1) to start and end to properly access an array.
     //initial validation for correct inputs
     if (!this.isValidPeg(start) || !this.isValidPeg(end)) {
       console.log(this.messageBoard.errorInvalidPeg)
@@ -74,31 +74,30 @@ const controlBoard = {
 
   moveOptions(pegNumber) {
     //ensuring the moveOption entry has a disc on it
-    if (board[pegNumber].length === 0) {
+    if (!this.isValidPeg(pegNumber) || board[pegNumber - 1].length === 0) {
       console.log(this.messageBoard.errorNoDiscs2)
       return;
     }
     //creating deep clone of board
     let newBoard = JSON.parse(JSON.stringify(board));
-    //adding Peg# for return use
+    //adding Peg# to front of array for use in final return
     newBoard.forEach((boards) => {
       boards.unshift(('Peg' + ' ' + (newBoard.indexOf(boards) + 1)))
     });
 
-    //console.log(newBoard);
-    
-    //filtering out only pegs that have a higher number from input or only contains the newly created string
+    //filtering out only pegs that have a final value that is a higher number from input or only contains the newly created string with Peg#
     let filter = newBoard.filter((pegs) => {
-      
       let slicedPegs = pegs.slice(-1)
       let pegsType = typeof(slicedPegs[0])
       
-      if ((slicedPegs[0]) > newBoard[pegNumber].slice(-1)[0] || pegsType === 'string')
-      
-      return true
+      return ((slicedPegs[0]) > newBoard[pegNumber-1].slice(-1)[0] || pegsType === 'string')
     });
-
-    return console.log(filter)
+    //Transforming the filter variable to a user friendly readable string
+    let availableMoves = filter.forEach(item => {
+      console.log(`${item[0]} is an available move`);
+    })
+    //Printing the available pegs
+    return availableMoves;
   },
 
   printBoard() {
@@ -110,7 +109,7 @@ const controlBoard = {
 
   checkWinner() {
     //reduce helper methods that transforms the board into objects.
-    //object keys equal array indexes board and the values are the sum of the nested arrays
+    //object keys equal the array indexes of board and the values are the sum the board's nested arrays
     let boardCalc = board.reduce((accumulator, boards) => {
       let id = board.indexOf(boards);
       let pegCalc = boards.reduce((accumulator, peg) => (accumulator += peg), 0)
@@ -139,15 +138,4 @@ const controlBoard = {
     ]
     return this.printBoard();
   }
-}
-
-//console.log(board)
-console.log(controlBoard.moveOptions(1))
-
-
-//Tests are below:
-// controlBoard.moveDisc(-1, 1) // invalid move
-// controlBoard.moveDisc(1,3)
-// controlBoard.moveDisc(3,2)
-// controlBoard.moveDisc(1,3)
-// controlBoard.moveDisc(3,2)
+};
