@@ -46,7 +46,7 @@ var towersOfHanoi = function() {
   var printBoard = function() {
     // return board without commas
     var printedBoard = board.map(function(num) {
-      return "--- " + num.join(" ")
+      return "--- " + num.join(" ");
     })
     // print board
     console.log(printedBoard);
@@ -59,14 +59,14 @@ var towersOfHanoi = function() {
       if ((currentIndex >= 1) && (peg.length === 3)) {
         accumulator = true;
         }
-      return accumulator
+      return accumulator;
     },false)
     // if true, declare winner and reset board
     if (isItAWin === true) {
-      console.log("Now that's a winner! You completed the game in " + counter + " moves.")
-      console.log("Here's your winning board. Play again?")
-      console.log(printBoard())
-      board = [['3', '2', '1'],[],[]]
+      console.log("Now that's a winner! You completed the game in " + counter + " moves.");
+      console.log("Here's your winning board. Play again?");
+      console.log(printBoard());
+      board = [['3', '2', '1'],[],[]];
     }
   }
 
@@ -79,10 +79,10 @@ var towersOfHanoi = function() {
 
 var action = towersOfHanoi()
 
-action.moveDisc(0,2)
-action.moveDisc(0,1)
-action.moveDisc(2,1)
-action.moveDisc(0,2)
-action.moveDisc(1,0)
-action.printBoard()
-action.possibleMoves(1)
+// action.moveDisc(0,2)
+// action.moveDisc(0,1)
+// action.moveDisc(2,1)
+// action.moveDisc(0,2)
+// action.moveDisc(1,0)
+// action.moveDisc(1,2)
+// action.moveDisc(0,2)
