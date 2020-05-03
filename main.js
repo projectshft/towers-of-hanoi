@@ -34,7 +34,8 @@ const controlBoard = {
     return (moveValue >= 1) && (moveValue <= board.length)
   },
 
-  moveDisc(start, end) {
+  moveDisc(start, end) { //user selects 1-3. 
+    //The code for referencing the arrays is adjusted accordingly with (-1) add to start and end
     //initial validation for correct inputs
     if (!this.isValidPeg(start) || !this.isValidPeg(end)) {
       console.log(this.messageBoard.errorOne)
@@ -58,7 +59,7 @@ const controlBoard = {
       return;
     }
     
-    //act of moving the discs begins below (if constraints are passed above)
+    //moving the discs begins below (if constraints are passed above)
     board[end - 1].push(board[start -1][board[start - 1].length - 1]);
     board[start - 1].pop();
     
@@ -70,29 +71,32 @@ const controlBoard = {
     this.checkWinner();
   },
 
-  // moveOptions(pegNumber) {
+  moveOptions(pegNumber) {
      
-  //   let newBoard = JSON.parse(JSON.stringify(board))
-
-  //   newBoard.forEach((boards) => {
-  //     boards.unshift(('Peg' + ' ' + newBoard.indexOf(boards)))
-  //   });
-
-  //   console.log(newBoard);
-  //   console.log(board)
-
-  //   let filter = newBoard.filter((pegs) => {  
-  //     if ((pegs.slice(-1)[0]) > newBoard[pegNumber].slice(-1)[0] || pegs.slice(-1)[0] === typeof(string)) {
-  //     console.log(`Peg: ${board.indexOf(pegs)} is an available move`);
-  //       return true;
-  //     }
-  //   });
+    let newBoard = JSON.parse(JSON.stringify(board));
     
-  //   return filter
+    newBoard.forEach((boards) => {
+      boards.unshift(('Peg' + ' ' + newBoard.indexOf(boards)))
+    });
+
+    // console.log(newBoard);
+    // console.log('break')
+    // console.log(newBoard[0])
+    // console.log(newBoard[1])
+    // console.log(newBoard[2])
+
+    let filter = newBoard.filter((pegs) => {  
+      if ((pegs.slice(-1)[0]) > newBoard[pegNumber].slice(-1)[0] || pegs.slice(-1)[0] === typeof(string)) {
+      console.log(pegs.slice(-1)[0])
+        //console.log(`Peg: ${board.indexOf(pegs)} is an available move`);
+       
+      }
+    });
+    
+    return filter
 
   
-  // },
-
+  },
 
   printBoard() {
     return board.map((boards) => {
@@ -102,8 +106,8 @@ const controlBoard = {
   },
 
   checkWinner() {
-    //reduce helper methods that turns the board into objects.
-    //the key of the objects = array indexes of the board and the values are the sum of the nested arrays
+    //reduce helper methods that transforms the board into objects.
+    //object keys equal array indexes board and the values are the sum of the nested arrays
     let boardCalc =  board.reduce((accumulator, boards) => {
       let id = board.indexOf(boards);
       let pegCalc = boards.reduce((accumulator, peg) => (accumulator += peg),0)
@@ -130,31 +134,18 @@ const controlBoard = {
   }
 }
 
-//console.log(controlBoard.moveOptions())
+//console.log(board)
+console.log(controlBoard.moveOptions(1))
 
 
 //Tests are below:
-console.log(board)
 // controlBoard.moveDisc(-1, 1) // invalid move
-// //console.log(controlBoard.moveCount) // 0
-// controlBoard.moveDisc('pizza', 1) // invalid move
-// //console.log(controlBoard.moveCount) // 0
-// controlBoard.moveDisc(1,3) // invalid move
-// //console.log(controlBoard.moveCount) // 0
-// controlBoard.moveDisc(1, 2) // valid move
-// //console.log(controlBoard.moveCount) // 1
-// controlBoard.moveDisc(3, 2) // 
-// //console.log(controlBoard.moveCount) // 2
-// controlBoard.moveDisc(1, 3) // valid move
-// // console.log(controlBoard.moveCount) // 3
-// controlBoard.moveDisc(3, 2) // invalid move
-// // console.log(controlBoard.moveCount) // 4
-// // controlBoard.moveDisc(0,1) // invalid move
-// // console.log(controlBoard.moveCount) // 4
-// // controlBoard.moveDisc(1,0)
-// // console.log(controlBoard.moveCount) // 5
-// // controlBoard.moveDisc(1,2)
-// // console.log(controlBoard.moveCount) // 6
+// controlBoard.moveDisc(1,3)
+// controlBoard.moveDisc(3,2)
+// controlBoard.moveDisc(1,3)
+// controlBoard.moveDisc(3,2)
+
+
 
 
 //saved just in case new filter function does not work
