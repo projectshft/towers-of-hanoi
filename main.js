@@ -16,10 +16,9 @@ const Board = function(totalPegs, totalDiscs) {
 
     const startPegArray = gameInfo.gameBoardArray[startPeg - 1] || null;
     const endPegArray = gameInfo.gameBoardArray[endPeg - 1] || null;
-    //const sizeOfDiscToMove = startPegArray[startPegArray.length - 1] || null;
 
 
-    // This checks if the player has chosen starting or ending pegs that are not on the board
+    // This checks if the player has chosen pegs that are on the board
     if (startPegArray === null || endPegArray === null) {
       console.log('You must choose pegs that are on the board. Board is still:');
       printGameBoard()
@@ -33,8 +32,9 @@ const Board = function(totalPegs, totalDiscs) {
       return;
     } 
 
-    // This checks if the move is legal (meaning we can only place a smaller disc on a larger disc)
-    // If it's legal, we'll add the move to gameMoves array, move the disc and check for a win
+    // If the player chooses an acceptable start peg(above), we can grab the disc and check if the move is legal (meaning we can only place a smaller disc on a larger disc). If it's legal, we'll add the move to gameMoves array, move the disc and check for a win
+    const sizeOfDiscToMove = startPegArray[startPegArray.length - 1];
+
     if (moveIsLegal(sizeOfDiscToMove, endPegArray)) {
       gameInfo.gameMoves.push([startPeg, endPeg]);
       endPegArray.push(startPegArray.pop());    //disc is removed from one peg, added to another
@@ -130,10 +130,11 @@ const board = new Board(3, 3);
 
 console.log(`Welcome to Towers of Hanoi! \n\nThe game will default to 3 pegs and 3 discs. \nType 'board.startGame()' to play!\n\nIf you'd like to play with a different number of pegs and discs, type\n'board.startGame(x, y)'  (x = number of pegs and y = number of discs) \n\nFor example: board.startGame(4, 4) will be a game of 4 pegs and 4 discs. \n\nLet's go!\n`);
 
+board.startGame();
 
-board.startGame(3, 3);
-
-board.moveDisc(4, 1);
+// board.moveDisc(4, 1);
+// board.moveDisc(0, 4);
+// board.moveDisc(1, 2);
 
 // board.moveDisc(1, 2);
 // board.moveDisc(1, 3);
