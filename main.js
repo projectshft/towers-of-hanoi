@@ -38,9 +38,9 @@ const Board = function(totalPegs, totalDiscs) {
     // This checks if the player has chosen pegs that are on the board
     if (startPegArray === null || endPegArray === null) {
       console.log('You must choose pegs that are on the board. Board is still:');
-      printGameBoard()
+      printGameBoard();
       return;
-    }
+    };
 
     /* 
        This checks if there are any discs on the start peg (there has to be a 
@@ -48,7 +48,7 @@ const Board = function(totalPegs, totalDiscs) {
     */
     if (startPegArray.length === 0) {
       console.log(`There is not a disc on your starting peg. Board is still:`);
-      printGameBoard()
+      printGameBoard();
       return;
     } 
 
@@ -163,7 +163,7 @@ const Board = function(totalPegs, totalDiscs) {
   return {
     startGame: startGame,
     moveDisc: moveDisc,
-  }
+  };
 };
 
 
