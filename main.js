@@ -19,34 +19,43 @@ let board = [
   []
 ];
 
-let controlBoard = {
+const controlBoard = {
 
   moveCount: 0,
 
+  messageBoard: {
+    errorOne: `INVALID MOVE: Please enter a valid peg number (Between 0 and 2). The board is still:`,
+    errorTwo: `INVALID MOVE: There are no more moves for that peg, please refer to board printout. The board is still:`,
+    errorThree: `INVALID MOVE: You can not move a larger disc on top of a smaller disc. The board is still:`,
+    validMove: `The move was successful. The board is now:`,
+    winningMessage: `WINNER! IT TOOK YOU ${this.moveCount} MOVES TO COMPLETE THE GAME. THE GAME BOARD WILL NOW BE RESET FOR A NEW GAME.`
+  },
+
   isValidPeg (moveType) { //helper function to help simplify moveDisc function
-    return (moveType >= 0) && (moveType <= 2)
+    return (moveType >= 0) && (moveType <= board.length - 1)
   },
 
   moveDisc(start, end) {
 
     if (!this.isValidPeg(start) || !this.isValidPeg(end)) {
-      console.log(`INVALID MOVE: Please enter a valid peg number (Between 0 and 2). The board is still:`);
-      console.log(board);
+      console.log(this.messageBoard.errorOne)//(`INVALID MOVE: Please enter a valid peg number (Between 0 and 2). The board is still:`);
+      this.printBoard();
       return;
     }
   
     if(board[start].length === 0) {
-      console.log(`INVALID MOVE: There are no more moves for that peg, please refer to board printout. The board is still:`);
-      console.log(board);
+      console.log(this.messageBoard.errorTwo)//(`INVALID MOVE: There are no more moves for that peg, please refer to board printout. The board is still:`);
+      this.printBoard();
       return;
     }
-  
+    
+    //consider moving the functions below to a helper function
     let startDisc = board[start][board[start].length - 1];
-    let endDisc = board[end][board[end].length - 1]
+    let endDisc = board[end][board[end].length - 1] // try and use the .slice(-1)[0]
     
     if(startDisc > endDisc) {
-      console.log(`INVALID MOVE: You can not move a larger disc on top of a smaller disc. The board is still:`);
-      console.log(board);
+      console.log(this.messageBoard.errorThree)//(`INVALID MOVE: You can not move a larger disc on top of a smaller disc. The board is still:`);
+      this.printBoard();
       return;
     }
     
@@ -55,21 +64,29 @@ let controlBoard = {
     board[start].pop();
     
     this.moveCount = this.moveCount + 1
-    console.log(`The move was successful. The board is now:`);
-    this.printBoard();
     
+    console.log(this.messageBoard.validMove)//(`The move was successful. The board is now:`);
+    this.printBoard();
     this.checkWinner();
   },
 
+  moveOptions(pegNumber) {
+    let filter = board.filter((pegs) => {
+      if ((pegs.slice(-1)[0]) > board[pegNumber].slice(-1)[0] || pegs.slice(-1)[0] === undefined) {
+        console.log(`Peg: ${board.indexOf(pegs)} is an available move`);
+        return;
+      }
+    });
+  
+    return filter
+  },
+
+
   printBoard() {
-    
     return board.map((boards) => {
       let printedBoard = boards.join(' ')
       console.log(`--- ${printedBoard}`)
-    })
-    
-    
-
+    });
   },
 
   checkWinner() {
@@ -84,50 +101,47 @@ let controlBoard = {
     }, {});
 
     if (boardCalc['1'] === 6 || boardCalc['2'] === 6) {
-      console.log(`WINNER! IT TOOK YOU ${this.moveCount} TO WIN COMPLETE THE GAME. THE GAME BOARD WILL NOW BE RESET`);
+      console.log(this.messageBoard.winningMessage)//(`WINNER! IT TOOK YOU ${this.moveCount} MOVES TO COMPLETE THE GAME. THE GAME BOARD WILL NOW BE RESET FOR A NEW GAME.`);
       return this.resetBoard()
     } else {
       return;
     }
-
   },
 
   resetBoard() {
     this.moveCount = 0
     return board = [[3,2,1],[],[]]
   }
-
 }
 
+console.log(controlBoard.moveOptions(0));
+//console.log(controlBoard.messageBoard['errorOne']);
 
 //Tests are below:
-// controlBoard.moveDisc(-1, 1)
-// console.log(controlBoard.moveCount)
-// controlBoard.moveDisc('pizza', 1)
-// console.log(controlBoard.moveCount)
-// controlBoard.moveDisc(0,3)
-// console.log(controlBoard.moveCount)
-// controlBoard.moveDisc(0, 2)
-// console.log(controlBoard.moveCount)
-// controlBoard.moveDisc(0, 1)
-// console.log(controlBoard.moveCount)
-// controlBoard.moveDisc(2,1)
-// console.log(controlBoard.moveCount)
-// controlBoard.moveDisc(0, 2)
-// console.log(controlBoard.moveCount)
-// controlBoard.moveDisc(0,1)
-// console.log(controlBoard.moveCount)
-// controlBoard.resetBoard();
-// console.log(board);
-// console.log(controlBoard.moveCount)
+// console.log(board)
+// controlBoard.moveDisc(-1, 1) // invalid move
+// console.log(controlBoard.moveCount) // 0
+// controlBoard.moveDisc('pizza', 1) // invalid move
+// console.log(controlBoard.moveCount) // 0
+// controlBoard.moveDisc(0,3) // invalid move
+// console.log(controlBoard.moveCount) // 0
+// controlBoard.moveDisc(0, 2) // valid move
+// console.log(controlBoard.moveCount) // 1
+// controlBoard.moveDisc(0, 1) // valid move
+// console.log(controlBoard.moveCount) // 2
+// controlBoard.moveDisc(2,1) // valid move
+// console.log(controlBoard.moveCount) // 3
+// controlBoard.moveDisc(0, 2) // valid move
+// console.log(controlBoard.moveCount) // 4
+// controlBoard.moveDisc(0,1) // invalid move
+// console.log(controlBoard.moveCount) // 5
+// controlBoard.moveDisc(1,0)
+// controlBoard.moveDisc(1,2)
+// controlBoard.moveDisc(0,2) // FINAL MOVE TO WIN GAME - OUTPUT SHOULD BE THE CHECKWINNER TRUE RESULT
 
-// Interesting function I found
-// function sum(obj) {
-//   return Object.keys(obj).reduce((sum,key)=>sum+parseFloat(obj[key]||0),0);
-// }
-// let sample = { a: 1 , b: 2 , c:3 };
 
-// console.log(`sum:${sum(sample)}`);
+
+
 
 //this for in loop will print the board vertically; however, i'm not sure if this will print appropriately?
     // for (let i in board)
