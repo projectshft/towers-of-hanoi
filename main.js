@@ -14,18 +14,27 @@ const Board = function(totalPegs, totalDiscs) {
   //this function will move a disc from one peg to another IF the move is allowed, see below
   const moveDisc = function (startPeg, endPeg) {
 
-    const startPegArray = gameInfo.gameBoardArray[startPeg - 1];
-    const endPegArray = gameInfo.gameBoardArray[endPeg - 1];
-    const sizeOfDiscToMove = startPegArray[startPegArray.length - 1];
+    const startPegArray = gameInfo.gameBoardArray[startPeg - 1] || null;
+    const endPegArray = gameInfo.gameBoardArray[endPeg - 1] || null;
+    //const sizeOfDiscToMove = startPegArray[startPegArray.length - 1] || null;
 
-    //this checks if there are any discs on the start peg (there has to be a disc on the peg if we want to move it)
-    if (startPegArray.length === 0) {
-      console.log(`There is not a disc on your starting peg. Board is still:`);
+
+    // This checks if the player has chosen starting or ending pegs that are not on the board
+    if (startPegArray === null || endPegArray === null) {
+      console.log('You must choose pegs that are on the board. Board is still:');
       printGameBoard()
       return;
     }
 
-    //this checks if the move is legal and if so, adds the move to gameMoves array, moves the disc and checks for a win
+    // This checks if there are any discs on the start peg (there has to be a disc on the peg if we want to move it)
+    if (startPegArray.length === 0) {
+      console.log(`There is not a disc on your starting peg. Board is still:`);
+      printGameBoard()
+      return;
+    } 
+
+    // This checks if the move is legal (meaning we can only place a smaller disc on a larger disc)
+    // If it's legal, we'll add the move to gameMoves array, move the disc and check for a win
     if (moveIsLegal(sizeOfDiscToMove, endPegArray)) {
       gameInfo.gameMoves.push([startPeg, endPeg]);
       endPegArray.push(startPegArray.pop());    //disc is removed from one peg, added to another
@@ -38,7 +47,7 @@ const Board = function(totalPegs, totalDiscs) {
   };
 
 
-  //this creates a array of pegs that we are allowed to move the disc to. If the desired end peg is in this array, the move is allowed by returning 'true'  
+  // This creates a array of pegs that we are allowed to move the disc to. If the desired end peg is in this array, the move is allowed by returning 'true'  
   const moveIsLegal = function (discSize, endPegArray) {
     const legalPegs = gameInfo.gameBoardArray.filter(function (peg) {
       return peg.length === 0 || peg[peg.length - 1] > discSize;
@@ -76,7 +85,7 @@ const Board = function(totalPegs, totalDiscs) {
   };
 
 
-  //this will print the gameboard array to the console for easy viewing
+  // This will print the gameboard array to the console for easy viewing
   const printGameBoard = function () {
     const printedMap = gameInfo.gameBoardArray.map(function (peg) {
       return `--- ${peg.join(' ')}\n`
@@ -98,7 +107,7 @@ const Board = function(totalPegs, totalDiscs) {
   };
 
 
-  //this will build the board and clear the moves array when starting or after winning a game
+  // This will build the board and clear the moves array when starting or after winning a game
   const refreshTheBoard = function() {
     gameInfo.gameMoves.length = 0;
     gameInfo.gameBoardArray.length = 0;
@@ -124,24 +133,24 @@ console.log(`Welcome to Towers of Hanoi! \n\nThe game will default to 3 pegs and
 
 board.startGame(3, 3);
 
+board.moveDisc(4, 1);
 
+// board.moveDisc(1, 2);
+// board.moveDisc(1, 3);
+// board.moveDisc(2, 3);
+// board.moveDisc(1, 2);
+// board.moveDisc(3, 1);
+// board.moveDisc(3, 2);
+// board.moveDisc(1, 3);
+// board.moveDisc(2, 1);
+// board.moveDisc(3, 1);
+// board.moveDisc(2, 3);
+// board.moveDisc(1, 2);
+// board.moveDisc(1, 3);
+// board.moveDisc(2, 3);
 
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(3, 1);
-board.moveDisc(3, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 1);
-board.moveDisc(3, 1);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-
-board.moveDisc(1, 2);
-board.startGame(4, 4);
+// board.moveDisc(1, 2);
+// board.startGame(4, 4);
 
 
 //board.startGame(4, 4);
