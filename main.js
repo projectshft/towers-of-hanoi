@@ -167,7 +167,9 @@ const board = Board(3, 3);
 
 console.log(`Welcome to Towers of Hanoi! \n\nThe game will default to 3 pegs and 3 discs. \nType board.startGame() to play!\n\nIf you'd like to play with a different number of pegs and discs, type\nboard.startGame(x, y)  (x = number of pegs, y = number of discs) \n\nFor example: board.startGame(4, 4) will be a game of 4 pegs and 4 discs. \n\nLet's go!\n`);
 
-board.startGame();
+//Press enter and then board.startGame()
+
+//board.startGame();
 
 //Moves to beat a 3 peg 3 disc game
 
@@ -186,19 +188,19 @@ board.startGame();
 // board.moveDisc(2, 3);
 
 
-// How to beat a 4 peg 4 disc game
+// Moves to beat a 4 peg 4 disc game
 
 //board.startGame(4, 4);
 
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(1, 4);
-board.moveDisc(2, 4);
-board.moveDisc(3, 2);
-board.moveDisc(3, 4);
-board.moveDisc(2, 4);
+// board.moveDisc(1, 2);
+// board.moveDisc(1, 3);
+// board.moveDisc(2, 3);
+// board.moveDisc(1, 2);
+// board.moveDisc(1, 4);
+// board.moveDisc(2, 4);
+// board.moveDisc(3, 2);
+// board.moveDisc(3, 4);
+// board.moveDisc(2, 4);
 
 
 
