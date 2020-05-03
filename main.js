@@ -96,22 +96,34 @@ var TowersGame = function(userPegs, userDiscs) {
     // need to be decremented because of 0-index
     desiredPeg--;
     originPeg--;
-    let allowedPegs = [];
 
-    current.board.filter((peg, pegNumber) => {
-      let lastDiscOrigin = current.board[originPeg][current.board[originPeg].length - 1];
-      let lastDiscPeg = peg[peg.length - 1];
+    let lastDiscOfOrigin = current.board[originPeg][current.board[originPeg].length - 1];
+    let lastDiscOfDesired = current.board[desiredPeg][current.board[desiredPeg].length - 1];
 
-      if (peg.length == 0 || lastDiscPeg > lastDiscOrigin) {
-        allowedPegs.push(pegNumber);
+    // if the desired peg is empty, no need to investigate further; go ahead and move
+    if (current.board[desiredPeg].length === 0) {
+      mover();
+    }
+
+    // illegal move needs to break the function
+    if (lastDiscOfOrigin > lastDiscOfDesired) {
+      throw new Error(`You can't put a big disc onto a small disc!`);
+    }
+
+    // for pegs that have a disc, we'll return those that can be used and then move
+    let allowedPegs = current.board.filter((peg, pegNumber) => {
+      let lastofDesiredPeg = peg[peg.length - 1];
+
+      if (lastofDesiredPeg > lastDiscOfOrigin) {
+        return peg;
       }
     });
 
-    if (allowedPegs.includes(desiredPeg)) {
-      mover();
-    } else {
-      throw new Error("You can't put a big disc onto a small disc!");
-    }
+    allowedPegs.forEach(allowedPeg => {
+      if (lastDiscOfDesired === allowedPeg[allowedPeg.length - 1]) {
+        mover();
+      }
+    });
 
     /**
      * Actually moves the disk
@@ -120,9 +132,13 @@ var TowersGame = function(userPegs, userDiscs) {
      */
     function mover() {
       current["board"][desiredPeg].push(current["board"][originPeg].pop());
+
       current.moves += 1;
+
       console.log("Your move #" + current.moves + " was successful. Board is now: ");
+
       printBoard();
+
       if (checkWinner()) {
         promptPlayAgain();
       };

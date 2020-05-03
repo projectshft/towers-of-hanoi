@@ -93,7 +93,7 @@ describe("allow moving discs: ", function() {
   })
 
   it("should only move disc if no smaller disc on desired peg", function() {
-    expect(() => {
+      expect(() => {
       board.moveDisc(1, 2);
       board.moveDisc(1, 2);
     }).toThrowError();
