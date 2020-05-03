@@ -17,7 +17,6 @@ const Board = function(totalPegs, totalDiscs) {
     const startPegArray = gameInfo.gameBoardArray[startPeg - 1];
     const endPegArray = gameInfo.gameBoardArray[endPeg - 1];
     const sizeOfDiscToMove = startPegArray[startPegArray.length - 1];
-    const totalDiscs = gameInfo.numberOfDiscs;
 
     //this checks if there are any discs on the start peg (there has to be a disc on the peg if we want to move it)
     if (startPegArray.length === 0) {
@@ -97,9 +96,8 @@ const Board = function(totalPegs, totalDiscs) {
   const startGame = function (numberOfPegs = gameInfo.numberOfPegs, numberOfDiscs = gameInfo.numberOfDiscs) {
     gameInfo.numberOfPegs = numberOfPegs;
     gameInfo.numberOfDiscs = numberOfDiscs;
-
     constructTheBoard();
-    console.log(`Here is your starting gameboard, please make a move: (type board.moveDisc(1, 2))\n`);
+    console.log(`Here is your starting gameboard, please make a move: (type board.moveDisc(1, 2))`);
     printGameBoard();
   };
 
@@ -124,7 +122,7 @@ const Board = function(totalPegs, totalDiscs) {
 
 const board = new Board(3, 3);
 
-console.log(`Welcome to Towers of Hanoi! Please type: 'board.startGame()' to play\n\nThe game will default to 3 pegs and 3 discs. If you'd like to play with a different number of pegs and discs, enter those numbers like so:\nboard.startGame(x, y)\n(where x is the number of pegs and y is the number of discs you want to play with) \n\nFor example: board.startGame(4, 4) will be a game of 4 pegs and 4 discs. \n\nLet's go!\n`);
+console.log(`Welcome to Towers of Hanoi! \n\nThe game will default to 3 pegs and 3 discs. \nType 'board.startGame()' to play!\n\nIf you'd like to play with a different number of pegs and discs, type\n'board.startGame(x, y)'  (x = number of pegs and y = number of discs) \n\nFor example: board.startGame(4, 4) will be a game of 4 pegs and 4 discs. \n\nLet's go!\n`);
 
 
 board.startGame(4, 4);
@@ -161,7 +159,7 @@ board.moveDisc(2, 4);
 board.moveDisc(3, 2);
 board.moveDisc(3, 4);
 board.moveDisc(2, 4);
-
+board.startGame(3, 3);
 // board.startGame(3, 3);
 // board.moveDisc(1, 2);
 // board.moveDisc(1, 2);
