@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Towers of Hanoi</title>
+    <script src="main.js"></script>
+    <script src="pageScript.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Towers of Hanoi</h1>
+
+    <div id="gameBoard"></div>
+
+    <div id="inputForms">
+      <h3>Create a Game</h3>
+
+      <form id="initialInput">
+        <label for="pegsInput">Number of Pegs:</label>
+        <input type="number" id ="pegsInput" name="pegsInput" value=3>
+        <label for="disksInput">Number of Disks:</label>
+        <input type="number" id="disksInput" name="disksInput" value=3>
+        <input type="button" value="Start Game" onclick="buildBoard(pegsInput.value, disksInput.value); initializeHTMLBoard(); this.value='Restart Game'">
+      </form>
+
+      <h3>Enter a Move</h3>
+
+      <form id="moveInput">
+        <label for="pegSource">Move from peg: </label>
+        <input type="number" id="pegSource" name="pegSource" value="">
+        <label for="pegTarget">to peg: </label>
+        <input type="number" id="pegTarget" name="pegTarget" value="">
+        <input type="button" value="Move Disk" onclick="validateMoveInput(pegSource.value, pegTarget.value); updateDisks()">
+      </form>
+    </div>
+
+  </body>
+</html>

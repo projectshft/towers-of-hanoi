@@ -1,0 +1,70 @@
+#gameBoard {
+  text-align: center;
+}
+
+#inputForms {
+  text-align: center;
+  margin: 40px 40px;
+}
+
+#initialInput {
+  margin: 10px 10px;
+}
+
+#moveInput {
+  margin: 10px 10px;
+}
+
+body {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 50px;
+}
+
+.pegNumber {
+  bottom: 0px;
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  margin-left: 24px;
+  margin-right: 24px;
+  position: absolute;
+}
+
+.peg {
+  bottom: 12px;
+  height: 250px;
+  width: 24px;
+  background-color: brown;
+  display: inline-block;
+  margin-left: 24px;
+  margin-right: 24px;
+  position: absolute;
+}
+
+.disk {
+  margin-left: 12px;
+  margin-right: 12px;
+  height: 20px;
+  width: 48px;
+  background-color: gray;
+  border-radius: 50%;
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  color: white;
+}
+
+.diskNumber {
+  position: absolute;
+  display: inline-block;
+}
+
+.pegContainer {
+  height: 250px;
+  width: 72px;
+  display: inline-block;
+  position: relative;
+}
