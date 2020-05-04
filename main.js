@@ -3,7 +3,7 @@ var board = {
     var pegs = 3;
     var disks = 3;
     var moves = 0;
-    var board =[];
+    var board = [];
 
     var setPegs = function(pegNumber) {
       pegs = pegNumber;
@@ -15,7 +15,7 @@ var board = {
 
     var clearBoard = function() {
       var boardLength = board.length;
-      for(let i = 0; i < boardLength; i++) {
+      for (let i = 0; i < boardLength; i++) {
         board.pop();
       }
     }
@@ -94,7 +94,8 @@ var board = {
       this.display(boardState);
       boardState.incrementMoves();
     } else {
-      alert(`You cannot move a larger disk on top of a smaller one, board is still:`);
+      alert("You cannot move a larger disk on top of a smaller one, board is still:");
+      console.log("You cannot move a larger disk on top of a smaller one, board is still:");
       this.display(boardState);
     }
     this.checkWinner(boardState);
@@ -125,7 +126,7 @@ var board = {
 
   calculateWinningPeg: function(boardState) {
     var winningPeg = "";
-    for(let i = boardState.getPegs(); i > 0; i--) {
+    for (let i = boardState.getPegs(); i > 0; i--) {
       winningPeg += i.toString();
     }
     return winningPeg;

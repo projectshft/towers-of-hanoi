@@ -1,3 +1,11 @@
+body {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 50px;
+}
+
 #gameBoard {
   text-align: center;
 }
@@ -13,14 +21,6 @@
 
 #moveInput {
   margin: 10px 10px;
-}
-
-body {
-  text-align: center;
-}
-
-h1 {
-  margin-bottom: 50px;
 }
 
 .pegNumber {
