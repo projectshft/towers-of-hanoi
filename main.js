@@ -171,37 +171,25 @@ var game = {
     // a new array? Then, I console.log each line, starting at the end of
     // the array.
 
-    // I need it to look like this:
-    // [
-    //  [==, A, 3, 2, 1],
-    //  [====, B, *, *, *],
-    //  [====, C, *, *, *]
-    // ]
-
-    //This maps vertical board.
-
-    // But then, for each peg, I need a "peg" of empty arrays
-    // with peg[0] "==".
-    // So, run a for loop, and splice that peg in at peg[i+1]
-
     // Then, the last step. A double for loop.
     // For each "peg"[i]
     // And then, for each "disk" - peg[i[that peg's. length minus 1]]
     // We console log the last element (length-1) of each array (from 0 - n).
     // No, we concatenate a string with each element, and console log that.
 
-    var maxHeight = this.gameDiscs;
-    var space = "  ";
+    var pegHeight = this.gameDiscs;
+    var baseHeight = 2;
+    var space = "   ";
     var spaceBetweenPegs = ["==", space];
-    for (var i = 0; i < maxHeight; i++) {
+    for (var i = 0; i < pegHeight; i++) {
       spaceBetweenPegs.push(space);
     }
 
     var verticalBoard = this.board.map(function(peg, index) {
       var initialPegIndex = index;
       var initialPegLength = peg.length;
-      var asterisksNeeded = maxHeight - initialPegLength;
-      var uppercase = ['A ', 'B ', 'C ', 'D ', 'E ', 'F ', 'G ', 'H ', 'I ', 'J ', 'K ', 'L ', 'M ', 'N ', 'O ', 'P '];
+      var asterisksNeeded = pegHeight - initialPegLength;
+      var uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
 
       // Initial translation
       var transformedPeg = ["=="]; //
@@ -227,7 +215,21 @@ var game = {
       counter += 2;
     }
 
-    console.log(verticalBoard);
+    // turning things the right way
+    var printVertical = [];
+
+    for(var j = (pegHeight + baseHeight - 1); j > -1; j-- ) {
+      var newColumn = "";
+      for(var i = 0; i < verticalBoard.length; i++) {
+        newColumn = newColumn.concat(verticalBoard[i][j]);
+      }
+      printVertical.push(newColumn);
+    }
+
+    for (var i = 0; i < printVertical.length; i++) {
+      console.log(printVertical[i]);
+    }
+
   }
 
 }
@@ -235,20 +237,20 @@ var game = {
 game.input(3, 3);
 game.printBoard();
 
-// game.move('A', 'C');
-// game.move('a', 'b');
-//
-// game.move('a', 'b'); //bad
-//
-// game.move('C', 'b');
-// game.move('A', 'c');
-// game.move(2, 1);
-// game.move('b', 'a');
-// game.move('b', 'c');
-// game.move('a', 'c');
-//
-// game.input(4, 7);
-// game.printBoard();
-//
+game.move('A', 'C');
+game.move('a', 'b');
+
+game.move('a', 'b'); //bad
+
+game.move('C', 'b');
+game.move('A', 'c');
+game.move(2, 1);
+game.move('b', 'a');
+game.move('b', 'c');
+game.move('a', 'c');
+
+game.input(4, 7);
+game.printBoard();
+
 // How could I "enclose" this game such that the user
 // only has public functions move and startNewGame?
