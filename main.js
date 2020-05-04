@@ -176,6 +176,7 @@ var game = {
 
   },
 
+  // This function resets the board when the input() function is called.
   resetBoard: function() {
     this.gameDiscs = null;
     this.gamePegs = null;
@@ -262,31 +263,29 @@ var game = {
 
 console.log('Please input the desired number of pegs and discs.');
 
-game.input(3, 3);
-
-
-game.move('A', 'C');
-game.move('a', 'b');
-
-game.move('a', 'b'); // Invalid move
-game.move('C', 'b');
-game.move('A', 'c');
-game.move(2, 1); // Invalid input
-game.move('b', 'a');
-game.move('b', 'c');
-game.move('a', 'c');
-
-game.input(4, 7);
-
-game.move('A', 'C');
-game.move('a', 'b');
-game.move('a', 'b'); // Invalid move
-
-game.move('C', 'b');
-game.move('A', 'c');
-game.move('C', 'A');
-game.move('B', 'A');
-game.move('B', 'A'); // Invalid move
-game.move('A', 'C');
-game.move('B', 'A');
-game.move('C', 'A'); // Invalid move
+// game.input(3, 3);
+//
+// game.move('A', 'C');
+// game.move('a', 'b');
+// game.move('a', 'b'); // Invalid move
+// game.move('C', 'b');
+// game.move('A', 'c');
+// game.move(2, 1); // Invalid input
+// game.move('b', 'a');
+// game.move('b', 'c');
+// game.move('a', 'c');
+//
+// game.input(4, 7);
+//
+// game.move('A', 'C');
+// game.move('a', 'b');
+// game.move('a', 'b'); // Invalid move
+//
+// game.move('C', 'b');
+// game.move('A', 'c');
+// game.move('C', 'A');
+// game.move('B', 'A');
+// game.move('B', 'A'); // Invalid move
+// game.move('A', 'C');
+// game.move('B', 'A');
+// game.move('C', 'A'); // Invalid move
