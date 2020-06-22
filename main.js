@@ -4,58 +4,78 @@ const board = [
   []
 ];
 
-var moves = 0
+console.log (board);
 
-board.map(function (pegs) {
+var moves = 0;
 
-    console.log ('--- ' + pegs.join(' '))
-    });
+
+var checkWinner = function() {
+
+  var winningBoard = board.reduce(function(accumulator, peg, currentIndex) {
+
+    if ((currentIndex >= 1) && (peg.length === 3)) {
+      accumulator = true;
+      }
+    return accumulator;
+  },false)
+
+  if (winningBoard === true) {
+    console.log("you win! Play again?");
+    board = [['3', '2', '1'],[],[]];
+
+  }
+};
+
+
 
 var moveDisk = function (fromPeg, toPeg) {
 
   var startPeg = board[fromPeg - 1];
   var endPeg = board[toPeg - 1];
 
+  if (startPeg.length) {
+    console.log('Your disc can be moved to these peg(s):');
 
-  var options = board.filter(function (post) {
-    // post = []
-    return board.indexOf(post)
-
-    if (!startPeg && (startPeg[startPeg.length -1] < post[post.length -1]  || post.length === 0)) {
-      // return board.indexOf(post)
-    }
-  })
-
-  console.log ('You can move to peg ' + options)
-        // board.map((pegs) => console.log (pegs))
-
-  if (endPeg[endPeg.length -1] > startPeg[startPeg.length -1] || endPeg.length === 0){
-
-    endPeg.push(startPeg.pop())
-
-    board.map(function (pegs) {
-
-      console.log ('--- ' + pegs.join(' '))
+    possiblePegs = board.filter(function(peg) {
+      return (startPeg[startPeg.length -1] < peg[0] || peg[0] === undefined);
     });
 
-    var numMoves = moves += 1
+    possiblePegs.forEach(function(peg) {
+      if (board.indexOf(peg) !== board.indexOf(startPeg)) {
+        console.log(board.indexOf(peg) + 1);
+      }
+    });
 
-    console.log ('You have performed ' + numMoves + ' move(s)')
 
-    var checkWinner = board.reduce(function (accumulator, peg) {
-      if (board[0].length !== peg && peg.length === 3) {
-      console.log ('You win! Play again')
-
-      };
-
-    // return accumulator.concat(peg)
-
-  });
-
-  } else {
-    console.log ('You cannot move a larger disc on top of a smaller one')
-  };
+      if (endPeg[endPeg.length -1] > startPeg[startPeg.length -1] || endPeg.length === 0){
 
 
 
-};
+        endPeg.push(startPeg.pop());
+
+        moves ++;
+
+        console.log(`You have made ${moves} move(s)`)
+
+        board.map(function (pegs) {
+
+        console.log ('--- ' + pegs.join(' '))
+        });
+
+        checkWinner();
+
+      } else {
+        console.log("cannot move a bigger disc onto a smaller disc");
+
+      }
+  } else console.log("There's no disc on that peg");
+}
+
+
+moveDisk(1, 3);
+moveDisk(1, 2);
+moveDisk(3, 2);
+moveDisk(1, 3);
+moveDisk(2, 1);
+moveDisk(2, 3);
+moveDisk(1, 3);
