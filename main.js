@@ -1,4 +1,4 @@
-const board = [
+var board = [
   ['3', '2', '1'],
   [],
   []
@@ -7,6 +7,11 @@ const board = [
 console.log (board);
 
 var moves = 0;
+
+var resetBoard = function() {
+  board = [['3', '2', '1'],[],[]];
+  moves = 0;
+};
 
 
 var checkWinner = function() {
@@ -21,8 +26,7 @@ var checkWinner = function() {
 
   if (winningBoard === true) {
     console.log("you win! Play again?");
-    board = [['3', '2', '1'],[],[]];
-
+    resetBoard();
   }
 };
 
@@ -79,3 +83,4 @@ moveDisk(1, 3);
 moveDisk(2, 1);
 moveDisk(2, 3);
 moveDisk(1, 3);
+console.log (board);
