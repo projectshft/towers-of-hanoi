@@ -6,7 +6,6 @@
 
 var defaultBoard = [[3, 2, 1],[],[]];
 
-//stores the game board seperate from the default board. Should change the layout?
 var gameBoard = defaultBoard.map(function(peg){
   return peg.map(function(disc){
     return disc;
@@ -15,88 +14,106 @@ var gameBoard = defaultBoard.map(function(peg){
 
 var numOfMoves = [];//Tally for each time a move is made
 
-
 var board = {
-  
-  moveDisc : function (start, end){
+
+//function that takes two arguments, the peg of the disc being moved, and the location it is to be moved to.
+  moveDisc : function(start, end){
     var startIndex = start - 1;
     var endIndex = end - 1;
-    var discStart = gameBoard[startIndex];
-    var discDestination = gameBoard[endIndex];
+    var discStart = gameBoard[startIndex]; 
+    var discDestination = gameBoard[endIndex]; 
     var lastIndexStart = discStart[discStart.length - 1];
     var lastIndexEnd = discDestination[discDestination.length - 1];
 
-    if(lastIndexStart < lastIndexEnd || lastIndexEnd === undefined){//checks to see if a move is legal. If the disc being moved is smaller than the last disc on the desitnation peg OR the peg is empty.
-
+    if(lastIndexStart < lastIndexEnd || lastIndexEnd === undefined){
+      numOfMoves.push(1);
+      var removedDisc = discStart.pop();
+      discDestination.push(removedDisc);
+      // console.log('The Board is now...')
+      // console.log(gameBoard)
+      // return gameBoard;
+      
+  } else {      
       numOfMoves.push(1);//adds 1 to an empty array each time a move is made
-      var removedDisc = discStart.pop();//removes the last disc from the start postion and stores in in removedDisc variable
-      discDestination.push(removedDisc);//pushes the removed disc to the disc destination
+      console.log('You cannot move a larger disc on top of a smaller one, the board is still:');
+      console.log(gameBoard);
+      // return gameBoard;
+      
+    }
+  },
 
 
+//function that prints the current board
+  printBoard : function(){
+    console.log('The Board is now...')
+    console.log(gameBoard)
+  },
 
-      //if a move is legal, this if statement checks to see if the winning conditions are met yet.
+//resets the board to the default board
+  resetBoard : function(){
+    gameBoard = defaultBoard
+    console.log('The board is reset ')
+    console.log(gameBoard)
+  },
+
+
+  //function that checks to see if the 2 possible winning conditions are met(if peg one and two are empty OR if peg one and three are empty)
+  checkWinner : function(){
+      //checks to see if the winning conditions are met yet.
       var checkPegOne = gameBoard[0].reduce(function(accumulator, currentValue){
-      return accumulator + currentValue;
-      }, 0);//the sum of discs in peg one
+        return accumulator + currentValue;
+        }, 0);//the sum of discs in peg one
 
       var checkPegTwo = gameBoard[1].reduce(function(accumulator, currentValue){
-      return accumulator + currentValue;
-      }, 0);//the sum of discs in peg two
+        return accumulator + currentValue;
+        }, 0);//the sum of discs in peg two
 
       var checkPegThree = gameBoard[2].reduce(function(accumulator, currentValue){
-      return accumulator + currentValue;
-      }, 0);//the sum of discs in peg three
+        return accumulator + currentValue;
+        }, 0);//the sum of discs in peg three
 
-      function checkWinner (){//checks to see if the 2 winning conditions are met:
+      
       if (checkPegOne === 0 && checkPegTwo === 0){//if peg one and two are empty OR...
-        gameBoard = defaultBoard;
+        gameBoard = defaultBoard; //reset the board
+
         console.log("You Win! You used " + numOfMoves.length + "moves. The board is reset:");
         numOfMoves = [];//resets the number of moves
         console.log(gameBoard);
       } else if (checkPegOne === 0 && checkPegThree === 0){// OR if peg one and three are empty
-        gameBoard = defaultBoard;
+        gameBoard = defaultBoard;//reset the board
+
         console.log("You Win! You used " + numOfMoves.length + " moves. The board is reset:");
         numOfMoves = [];//resets the number of moves
         console.log(gameBoard);
-      }
-
-    };
-      //if the winning conditions are not yet met, but the move is legal:
-      console.log('That move was successful, board is now:')
-      console.log(gameBoard);
-      return checkWinner();
-
-    } else {//if the disc being moved is bigger than the top disc on the destination peg
-
-      numOfMoves.push(1);//adds 1 to an empty array each time a move is made
-      console.log('You cannot move a larger disc on top of a smaller one, board is still:')
-      console.log(gameBoard);
-    }
+      } else {
+        console.log("You haven't won yet. The board is still...");
+        console.log(gameBoard);
+        }
   },
 
-//   availMoves : function (peg){//doesn't work. My thought is that I need to check the last disc in each array and if it is bigger than the peg passed in as an argument, then we add it to a new array.
+  //filters the game board and returns all pegs where the last peg is larger than the disc being moved
+  checkMoves : function(pegToMove){
+    var startIndex = pegToMove - 1;
+    var discStart = gameBoard[startIndex]; 
+    var lastIndexStart = discStart[discStart.length - 1];//returns the last disc on the pegToMove
 
-//     var pegIndex = peg - 1;
-//     var pegLocation = gameBoard[pegIndex];
-//     var lastDisc = pegLocation[pegLocation.length - 1];
+    const result = gameBoard.filter(function(peg) {
+    return peg[peg.length-1] > lastIndexStart || peg.length === undefined
+      });
+    console.log(result)
+  }
 
-//     var moves = gameBoard.filter(function (peg) {
-//      if (lastDisc < peg){
-//      return true;
-//       }
-//     })
-//     console.log(moves)
-//   }
 };
 
 
 // The following moves test/win the game:
-// board.moveDisc(1, 2);
-// board.moveDisc(1, 2);
-// board.moveDisc(1, 3);
-// board.moveDisc(2, 3);
-// board.moveDisc(1, 2);
-// board.moveDisc(2, 3);
-// board.moveDisc(3, 1);
-// board.moveDisc(3, 2);
-// board.moveDisc(1, 2);
+board.moveDisc(1, 2);
+board.moveDisc(1, 2);
+board.moveDisc(1, 3);
+board.moveDisc(2, 3);
+board.moveDisc(1, 2);
+board.moveDisc(2, 3);
+board.moveDisc(3, 1);
+board.moveDisc(3, 2);
+board.moveDisc(1, 2);
+board.checkWinner();
