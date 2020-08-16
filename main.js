@@ -1,22 +1,24 @@
 let board;
-let gameOver = false;
-let moves = 0;
 let startingBoard = [
     ['3', '2', '1'],
     [],
     []
 ];
-let playingBoard;
+let playingBoard= [];
 
-const map = function(boardArray) {
+const mapping = function(boardArray) {
     let spacing = ''
     let pegs = '|'
     
+    if(boardArray === startingBoard) {
+        boardArray[0].reverse();
+        startingBoard.forEach(element => {
+            let copying = element.map(x => x)
+            playingBoard.push(copying)
+        })
+    }
+
     for (let i = 0; i < boardArray.length; i++) {
-        if(boardArray === startingBoard) {
-            boardArray[i].reverse();
-            playingBoard = JSON.parse(JSON.stringify(startingBoard));
-        }
         if(i >= 1) {
             spacing += '   '
         };
@@ -33,19 +35,23 @@ const map = function(boardArray) {
     console.log(pegs)
     console.log(spacing)
 }
-map(startingBoard);
 
 const Board = function() {
+    let gameOver = false;
+    let moves = 0;
+    
     let moveDisc = function(startPeg, endPeg) {
         let startPegIndex = startPeg - 1;
         let endPegIndex = endPeg - 1;
 
         if(Math.min(...playingBoard[endPegIndex]) < Math.min(...playingBoard[startPegIndex])) {
-            console.log('That is an invalid move!')
+            console.log('You cannot move a larger disc on top of a smaller one, board is still:')
+            mapping(playingBoard)
         } else {
-            let start = playingBoard[startPegIndex].shift();
-            playingBoard[endPegIndex].unshift(start);
-            map(playingBoard);
+            let disc = playingBoard[startPegIndex].shift();
+            playingBoard[endPegIndex].unshift(disc);
+            console.log('That move was successful, board is now:')
+            mapping(playingBoard);
             moves++;
             checkWinner();
         }
@@ -53,8 +59,10 @@ const Board = function() {
         if(gameOver) {
             console.log(`Congratulations! You win!`);
             console.log(`Number of moves: ${moves}`)
+            console.log('           ')
+            console.log('Play again?')
             startingBoard[0].reverse();
-            playingBoard = startingBoard;
+            mapping(startingBoard)         
         }
     };
 
@@ -65,14 +73,15 @@ const Board = function() {
         if(playingBoard[pegIndex].length == 0) {
             console.log('There is no disc to move on this peg');
         } else {
-            for (let i = 0; i < playingBoard.length; i++) {
-                if(Math.min(...playingBoard[i]) == Infinity || pegMin < Math.min(...playingBoard[i])) {
-                    console.log(`you can move a disc to peg ${i + 1}`)
+            playingBoard.filter(element => {
+                let currentPeg = playingBoard.indexOf(element) + 1;
+                if (Math.min(...element) == Infinity || pegMin < Math.min(...element)) {
+                    console.log(`You can move a disc from this peg to peg ${currentPeg}`)
                 } else {
-                    console.log(`you cannot move a disc to peg ${i + 1}`)
+                    console.log(`You cannot move a disc from this peg to peg ${currentPeg}`)
                 }
-            }
-        }
+            })
+        };
     };
 
     let checkWinner = function() {
@@ -87,23 +96,40 @@ const Board = function() {
             }
 
         })
+    };
+
+    let addPegs = function(numOfPegs) {
+        for (let i = 0; i < numOfPegs; i++) {
+            startingBoard.push([])
+        }
+    }
+
+    let addDiscs = function(numOfDiscs) {
+        for (let j = 0; j < numOfDiscs; j++) {
+            startingBoard[0].unshift((Math.max(...startingBoard[0]) + 1).toString())
+        }
     }
 
     return {
         moveDisc: moveDisc,
-        moveCheck: moveCheck
-    }
-}
+        moveCheck: moveCheck,
+        addPegs: addPegs,
+        addDiscs: addDiscs
+    };
+};
 
 board = Board();
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(3, 1);
-board.moveDisc(3, 2);
-board.moveDisc(1, 2);
 
-//console.log(startingBoard);
-//console.log(playingBoard);
+//board.moveDisc(1, 2);
+board.addPegs(1);
+board.addDiscs(2);
+mapping(startingBoard);
+//console.log(startingBoard)
+// board.moveDisc(1, 2);
+// board.moveDisc(1, 3);
+// board.moveDisc(2, 3);
+// board.moveDisc(1, 2);
+// board.moveDisc(3, 1);
+// board.moveDisc(3, 2);
+// board.moveDisc(1, 2);
 
