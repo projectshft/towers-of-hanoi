@@ -5,6 +5,7 @@ let boardState = [   // a basic 3x3 board
   [],
   []
 ];
+let freshBoard = boardState;  // to reset a new game 
 let startingPeg = 1;  // peg we start on (1 in human-readable form, 0 in index)
 
 var BoardController = function () {
@@ -12,6 +13,15 @@ var BoardController = function () {
     console.log('startRound() called');
     if (!moves){
       console.log('Welcome. Here is the game start configuration.');
+      let winSum = 0;
+      
+      for (let i = 0; i < boardState.length; i++) {
+        winSum = (boardState[i].reduce(function(sum, element){return sum + parseInt(element)}, 0));
+        if (winSum > 0) {
+          console.log('winSum = ' + winSum);
+          return winSum;
+        }
+      }
     }
     //console.log(boardState);
     console.log(outputBoard(boardState));    
@@ -64,7 +74,7 @@ var BoardController = function () {
     }
   }
 
-  var testMove = function(start) {
+  var testMove = function(start) {  // REQs: use FILTER
     let currentDiscSize = boardState[start-1][(boardState[start-1].length)-1];
     console.log(currentDiscSize + ' : currentDiscSize detected');
     let response = [];  // test each row one at a time, if it's valid, add to valid array
@@ -80,7 +90,7 @@ var BoardController = function () {
       }
       return validMoves;
     }
-
+  }
   var incrementMoves = function() {
     console.log('incrementMoves() called');
     console.log('moves made : ' + moves + 1);
@@ -90,11 +100,13 @@ var BoardController = function () {
     console.log('checkWinner() called');  // REQ's = use REDUCE at least once **achieved**
     for (let i = 0; i < boardArray.length; i++) {  //common loop through elements in array - could be double .map I think
       //console.log('reducing to ' + boardArray[i].reduce(function(sum, element){return sum + element}, 0));
-      if (!boardArray[i].reduce(function(sum, element){return sum + element}, 0)) {
-        if (startingPeg != i) {
-          console.log('WINNER IN ROW ' + [i]);
-          return
-        }  
+      if (boardArray[i].reduce(function(sum, element){return sum + parseInt(element)}, 0) === winSum) {
+        if (startingPeg-1 != i) {
+          console.log('WINNER IN ROW ' + [i+1]);
+          resetGame(); //TODO
+        }  else {
+          console.log('Sorry, no win yet.');
+        }
       }
         
       
@@ -106,8 +118,8 @@ var BoardController = function () {
     // NOTE subtract 1 from peg to equal index of array
   }
 }
-  var testProcess = function() {
-    console.log('see, it works');  // just testing reachability of functions
+  var resetGame = function() {
+    console.log('need to resetGame()');  // just testing reachability of functions
   }
   return {
     startRound : startRound,
@@ -115,7 +127,7 @@ var BoardController = function () {
     moveDisc : moveDisc,
     incrementMoves : incrementMoves,
     checkWinner : checkWinner,
-    testProcess : testProcess
+    resetGame : resetGame
   }      
 }
 
@@ -125,7 +137,7 @@ var BoardController = function () {
     
 var board = BoardController();
 let moves = 0;
-board.startRound();
+let winSum = board.startRound();  // pull winSum into global scope. Use to test all discs on a peg.
 board.incrementMoves();
 board.moveDisc(1,2); // put test here
 board.moveDisc(1,3);
@@ -134,6 +146,7 @@ board.moveDisc(1,2);
 board.moveDisc(3,1);
 board.moveDisc(3,2);
 board.moveDisc(1,2); // put test here
+console.log(board.outputBoard(boardState));
 board.checkWinner(boardState);  // this is going to need to be called by moveDisc()
  
 // now we should be ready for console commands
