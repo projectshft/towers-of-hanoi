@@ -10,7 +10,7 @@ let startingPeg = 1;  // peg we start on (1 in human-readable form, 0 in index)
 
 var BoardController = function () {
   var startRound = function () {
-    console.log('startRound() called');
+    // console.log('startRound() called');
     if (!moves){
       let winSum = 0;
       console.log('Welcome. Here is the game start configuration.');
@@ -29,49 +29,43 @@ var BoardController = function () {
    
   }
   var outputBoard = function(boardArray) {    // REQs = use MAP at least once **achieved**
-    console.log('outputBoard() called');
-    let output = '';
+    // console.log('outputBoard() called');
+    let output = '';  // in scope of boardArray()
     for (let i = 0; i < boardArray.length; i++) {  //common loop through elements in array - could be double .map I think
-      //console.log('i loop ' + i); 
       if (!boardArray[i].length){   // too clever? length is the only param that works
         output += '---\n';
       } else {
-        output += '--- ';  // start with the post
-        output += boardArray[i].map(function(disc){  // add bits of (hopefully formatted) results to post
-          //console.log('disc ', disc);
-          //disc = disc.replace(/,/g , '');
-          return (disc += ' ') //.replace(/,/g , '');
+        output += '--- ';  // start drawing the peg
+        output += boardArray[i].map(function(disc){  // add bits of (hopefully formatted) results to peg
+          return (disc += ' ') // output is dirty - run .replace(/,/g , '');
         });
         output = output.replace(/,/g , '');  // clean out the commas before returning. But where do they come from?
-        output += '\n';
+        output += '\n'; // add a newline at end of peg with discs
       }
-      
       }
-      return output;
+    return output;
   }
   var moveDisc = function(start, dest) {
-    console.log('moveDisc() called');
-    console.log('calling testMove with start peg ('+start+') returns-->' + testMove(start));
-    console.log('and now does it include dest? '+ testMove(start).includes(dest));
-    if (testMove(start).includes(dest)) {   // should be a valid test, expecting array of valid moves returned
-    board.incrementMoves();
+    // console.log('calling testMove with start peg ('+start+') returns-->' + testMove(start));
+    // console.log('and now does it include dest? '+ testMove(start).includes(dest));
+    
       /* NOTE reduce input val's by 1 to equal array index
-      test if ok to make move, else bounce with error - call testMove()
-      increment moves (regardless of allowed move, we'll say) - send bad message
-      if ok, update array - send good message
-      call startRound - for now startRound renders board */
+      test if ok to make move with .testMove(), else bounce with error -  send bad message
+      if ok, update board array, increment moves - send good message
+      call startRound() - startRound renders board 
+      call checkWinner()*/
       // console.log('---- the arrays we are look at. start, dest')
       // console.log(boardState[start - 1]);
       // console.log(boardState[dest - 1]);
-    let movingDisc = boardState[start - 1].pop();  // store disc from start peg in var
-    boardState[dest - 1].push(movingDisc);  // push disc onto board
-    console.log('boardState by itself after moves');
-    console.table(boardState);
-    console.log(outputBoard(boardState));
-    checkWinner(boardState);
+    if (testMove(start).includes(dest)) {   // expecting array of valid pegs returned
+      let movingDisc = boardState[start - 1].pop();  // store disc from start peg in var
+      boardState[dest - 1].push(movingDisc);  // push disc onto board 
+      board.incrementMoves();
+      //console.table(boardState);
+      checkWinner(boardState);
     }else{
       console.log('Sorry, that move is not allowed. Rules is rules.');
-      console.log('I don\'t know if this counts as a move, so for now, it doesn\'t');
+      // I don't know if this counts as a move, so for now, it doesn't
       // board.incrementMoves();
     }
   }
