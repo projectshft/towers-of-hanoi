@@ -86,10 +86,11 @@ var BoardController = function () {
       } else if (boardState[boardIndex][boardState[boardIndex].length-1] > currentDiscSize || !boardState[boardIndex][boardState[boardIndex].length-1]) {
         validMoves.push(boardIndex+1); // +1 because human readable peg number
       } else {
-        validMoves.push(0);
+        validMoves.push(0);  // could be '' or anything not a peg number
       }
-      return validMoves;
+     
     }
+    return validMoves;
   }
   var incrementMoves = function() {
     console.log('incrementMoves() called');
@@ -125,6 +126,7 @@ var BoardController = function () {
     startRound : startRound,
     outputBoard : outputBoard,
     moveDisc : moveDisc,
+    testMove : testMove,
     incrementMoves : incrementMoves,
     checkWinner : checkWinner,
     resetGame : resetGame
