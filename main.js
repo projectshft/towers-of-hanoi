@@ -12,9 +12,9 @@ var BoardController = function () {
   var startRound = function () {
     console.log('startRound() called');
     if (!moves){
-      console.log('Welcome. Here is the game start configuration.');
       let winSum = 0;
-      
+      console.log('Welcome. Here is the game start configuration.');
+      console.log(outputBoard(boardState));       
       for (let i = 0; i < boardState.length; i++) {
         winSum = (boardState[i].reduce(function(sum, element){return sum + parseInt(element)}, 0));
         if (winSum > 0) {
@@ -22,9 +22,11 @@ var BoardController = function () {
           return winSum;
         }
       }
+    } else {
+      console.log('Moves taken: ' + moves);
+      console.log(outputBoard(boardState));
     }
-    //console.log(boardState);
-    console.log(outputBoard(boardState));    
+   
   }
   var outputBoard = function(boardArray) {    // REQs = use MAP at least once **achieved**
     console.log('outputBoard() called');
@@ -80,7 +82,6 @@ var BoardController = function () {
     let response = [];  // test each row one at a time, if it's valid, add to valid array
     let validMoves = [];  // ultimately return this, where it gets tested by .includes()
     for (let boardIndex = 0; boardIndex < boardState.length; boardIndex++) {
-    console.log('aye aye is ' + boardIndex);
       if ( start-1 === boardIndex) { // moving to current peg not valid
         validMoves.push(0);  // could be '' or anything not a peg number
       } else if (boardState[boardIndex][boardState[boardIndex].length-1] > currentDiscSize || !boardState[boardIndex][boardState[boardIndex].length-1]) {
@@ -104,7 +105,7 @@ var BoardController = function () {
       if (boardArray[i].reduce(function(sum, element){return sum + parseInt(element)}, 0) === winSum) {
         if (startingPeg-1 != i) {
           console.log('WINNER IN ROW ' + [i+1]);
-          resetGame(); //TODO
+          resetGame(); 
         }  else {
           console.log('Sorry, no win yet.');
         }
@@ -120,7 +121,12 @@ var BoardController = function () {
   }
 }
   var resetGame = function() {
-    console.log('need to resetGame()');  // just testing reachability of functions
+    console.log('resetGame() called');
+    boardState = freshBoard;  // return the board to starting configuration
+    moves = 0; // reset the move counter
+    winSum = 0; // will be reset by startRound(), but just covering all bases
+    startRound();
+    return; // needed?
   }
   return {
     startRound : startRound,
