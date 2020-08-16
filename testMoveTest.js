@@ -1,6 +1,6 @@
 let boardState = [   // a basic 3x3 board
-  ['3', '2', '1'],
-  [],
+  ['1'],
+  ['3', '2'],
   []
 ];
 
@@ -47,17 +47,19 @@ let boardState = [   // a basic 3x3 board
 
   var testMove = function(start) {
     let currentDiscSize = boardState[start-1][(boardState[start-1].length)-1];
+    console.log(currentDiscSize + ' : currentDiscSize detected');
     let response = [];  // test each row one at a time, if it's valid, add to valid array
     let validMoves = [];  // ultimately return this, where it gets tested by .includes()
     for (let boardIndex = 0; boardIndex < boardState.length; boardIndex++) {
     console.log('aye aye is ' + boardIndex);
       if ( start-1 === boardIndex) { // moving to current peg not valid
         validMoves.push(0);  // could be '' or anything not a peg number
-      } else if (boardState[boardState.length-1] < currentDiscSize || !boardState[boardState.length-1]) {
+      } else if (boardState[boardIndex][boardState[boardIndex].length-1] > currentDiscSize || !boardState[boardIndex][boardState[boardIndex].length-1]) {
         validMoves.push(boardIndex+1); // +1 because human readable peg number
       } else {
         validMoves.push(0);
       }
+      return validMoves;
     }
       console.log('validMoves contains: ' + validMoves);
     // response = boardState[i].filter(function(element){  // finding it hard to need filter
@@ -75,4 +77,4 @@ let boardState = [   // a basic 3x3 board
       }
 
 
-  testMove(1);
+  testMove(2);
