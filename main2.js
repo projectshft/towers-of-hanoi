@@ -1,6 +1,4 @@
-//This version prints the game to the console vertically and is still under development.
-// main2.js prints horizontally and is a finished version.
-
+//This is the finished version of my Towers of Hanoi eval project.
 let board;
 let startingBoard = [
     ['3', '2', '1'],
@@ -10,35 +8,33 @@ let startingBoard = [
 let playingBoard= [];
 
 const mapping = function(boardArray) {
-    let spacing = ''
-    let pegs = '|'
+    //Copy startingBoard to playingBoard at start and reset. 
+    //displayBoard serves as a mutating array to display each peg. 
+    //playingBoard serves as the array holding all the moves throughout the game.
+    //Empty string console.log's serve as spacing between moves.
+    let displayBoard;
     
     if(boardArray === startingBoard) {
-        boardArray[0].reverse();
-        startingBoard.forEach(element => {
-            let copying = element.map(x => x)
-            playingBoard.push(copying)
-        })
-    }
+    startingBoard.forEach(element => {
+        let copy = element.map(x => x)
+        playingBoard.push(copy)
+    })
+}
     for (let i = 0; i < boardArray.length; i++) {
-        if(i >= 1) {
-            spacing += '   '
-        };
-        for (let j = 0; j < boardArray[i].length; j++) {
-            console.log(spacing + Number(boardArray[i][j]))
-        };
-    };
-
-    for (let k = 0; k < boardArray.length; k++) {
-        if ( k >= 1) {
-            pegs += '  |'
-        };
-    }   
-    console.log(pegs)
-    console.log(spacing)
+        if(boardArray[i].length > 0){
+            displayBoard = boardArray[i].reduce((accumulator, currentValue) => accumulator + '  ' + currentValue);
+            console.log(`--- ${displayBoard}`)
+        }else {
+            console.log('---')
+        }
+    }
+    console.log('        ')
 }
 
 const Board = function() {
+    //moveDisc compares smallest numbers from arrays at startPeg and endPeg to determine legal moves.
+        //Then, checks for winning condition and resets the game when true.
+    //moveCheck detemines possible moves for peg passed as argument.
     let gameOver = false;
     let moves = 0;
     
@@ -50,8 +46,8 @@ const Board = function() {
             console.log('You cannot move a larger disc on top of a smaller one, board is still:')
             mapping(playingBoard)
         } else {
-            let disc = playingBoard[startPegIndex].shift();
-            playingBoard[endPegIndex].unshift(disc);
+            let disc = playingBoard[startPegIndex].pop();
+            playingBoard[endPegIndex].push(disc);
             console.log('That move was successful, board is now:')
             mapping(playingBoard);
             moves++;
@@ -63,7 +59,6 @@ const Board = function() {
             console.log(`Number of moves: ${moves}`)
             console.log('           ')
             console.log('Play again?')
-            startingBoard[0].reverse();
             mapping(startingBoard)         
         }
     };
@@ -120,12 +115,17 @@ const Board = function() {
     };
 };
 
+//Allow for board to use methods in Board and call mapping on startingBoard to start game.
+//Add discs or pegs before starting game.
 board = Board();
+// board.addPegs();
+// board.addDiscs();
+
 mapping(startingBoard);
 
-//board.addPegs(1);
-// board.addDiscs(2);
 
+
+board.moveDisc(1, 2);
 board.moveDisc(1, 2);
 board.moveDisc(1, 3);
 board.moveDisc(2, 3);
@@ -133,5 +133,3 @@ board.moveDisc(1, 2);
 board.moveDisc(3, 1);
 board.moveDisc(3, 2);
 board.moveDisc(1, 2);
-
-
