@@ -13,7 +13,6 @@ const mapping = function(boardArray) {
     //playingBoard serves as the array holding all the moves throughout the game.
     //Empty string console.log's serve as spacing between moves.
     let displayBoard;
-    board = Board();
     
     if(boardArray === startingBoard) {
         console.log(`Let's play a game...`)
@@ -26,12 +25,12 @@ const mapping = function(boardArray) {
     for (let i = 0; i < boardArray.length; i++) {
         if(boardArray[i].length > 0){
             displayBoard = boardArray[i].reduce((accumulator, currentValue) => accumulator + '  ' + currentValue);
-            console.log(`--- ${displayBoard}`)
+            console.log(`--- ${displayBoard}`);
         }else {
-            console.log('---')
+            console.log('---');
         }
     }
-    console.log('        ')
+    console.log('        ');
 }
 
 const Board = function() {
@@ -53,9 +52,9 @@ const Board = function() {
         } else {
             let disc = playingBoard[startPegIndex].pop();
             playingBoard[endPegIndex].push(disc);
+            moves++;
             console.log('That move was successful, board is now:')
             mapping(playingBoard);
-            moves++;
             checkWinner();
         }
 
@@ -94,7 +93,7 @@ const Board = function() {
                 let reducer = (accumulator, currentValue) => accumulator + currentValue;
                 winningPeg = element.reduce(reducer);
                 if (winningPeg.length === startingBoard[0].length) {
-                    return gameOver = true;
+                    gameOver = true;
                 }
             }
 
@@ -120,7 +119,7 @@ const Board = function() {
         addDiscs: addDiscs
     };
 };
-
+board = Board();
 let startGame = () => mapping(startingBoard);
 
 //Add discs or pegs with the provided methods before starting.
