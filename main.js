@@ -68,7 +68,6 @@ var BoardController = function () {
       boardState[dest - 1].push(movingDisc);  // push disc onto board 
       incrementMoves();
       if (checkWinner(boardState)) {
-        outputBoard(boardState); 
         resetGame();
         return;
       }
@@ -117,7 +116,10 @@ var BoardController = function () {
       // -1 to turn human-friendly peg to index number
       //  console.log('testing if' + boardArray[i].reduce(function(sum, element){return sum + parseInt(element)}, 0) + '=' + winSum);
       if (boardArray[i].reduce(function(sum, element){return sum + parseInt(element)}, 0) === winSum && ((startingPeg-1) != i )) {    
+        console.log(outputBoard(boardArray));
         console.log('WINNER IN ROW ' + [i+1]);
+        console.log('Total moves taken: ' + moves + '\n\n');
+        
           return true;
         }  else {
           // console.log('Sorry, no win yet.');  // is this obvious enough?
@@ -155,30 +157,18 @@ var BoardController = function () {
 var board = BoardController();
 let moves = 0;
 board.startRound();  // set up game first run
-board.moveDisc(1,2); // put test here
+
+//sample winning moves 
+/* board.moveDisc(1,2); 
 board.moveDisc(1,3);
 board.moveDisc(2,3);
 board.moveDisc(1,2);
 board.moveDisc(3,1);
 board.moveDisc(3,2);
-board.moveDisc(1,2); // put test here
-//console.log(board.outputBoard(boardState));
-//board.checkWinner(boardState);  // this is going to need to be called by moveDisc()
- 
+board.moveDisc(1,2);  */
+//
 // now we should be ready for console commands
 
-// console.log(moves);
-
-
-/* winning moves on a 3x3 board
-board.moveDisc(1,2);
-board.moveDisc(1,3);
-board.moveDisc(2,3);
-board.moveDisc(1,2);
-board.moveDisc(3,1);
-board.moveDisc(3,2);
-board.moveDisc(1,2);
-*/
 
 /* actions to perform when calling moveDisc
  1 - call function to FILTER what pegs are compatible
