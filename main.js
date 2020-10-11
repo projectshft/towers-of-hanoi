@@ -24,11 +24,11 @@ let playGame = () => {
         }
         // function to display the board correctly 
         let printBoard = () => {
-            let prettyBoard = towersBoard.map(disk => {
-                return disk.toString().split(',').join(' ');
+            let prettyBoard = towersBoard.map(peg => {
+                return peg.toString().split(',').join(' ');
            })
-           prettyBoard.forEach((array) => {
-               console.log(' --- ' + array);
+           prettyBoard.forEach((peg) => {
+               console.log(' --- ' + peg);
            })
         }
         //checks to see if there is a disk on the startPeg
