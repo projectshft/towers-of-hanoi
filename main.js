@@ -13,12 +13,21 @@ let playGame = () => {
         let endPegPosition = towersBoard[endPeg -1]
         // function to check if the user wins the game, if true, resets the game
         let checkWin = () => {
-            if (endPegPosition.length === 3 && !towersBoard[0].length) {
+            if (endPegPosition.length === 5 && !towersBoard[0].length) {
                 console.log('You won!')
                 towersBoard = [['5', '4', '3', '2', '1'],
                 [],
                 []];
             }
+        }
+        // function to display the board correctly 
+        let printBoard = () => {
+            let prettyBoard = towersBoard.map(disk => {
+                return disk.toString().split(',').join(' ');
+           })
+           prettyBoard.forEach((array) => {
+               console.log(' --- ' + array);
+           })
         }
         //checks to see if there is a disk on the startPeg
         if(startPegPosition.length > 0){
@@ -26,18 +35,19 @@ let playGame = () => {
             if(endPegPosition[endPegPosition.length - 1] > startPegPosition[startPegPosition.length -1] || endPegPosition.length === 0) {
                 endPegPosition.push(startPegPosition.pop());
                 console.log('That move was successful, board is now:')
-                console.log(towersBoard);
+                
+                printBoard();
                 checkWin();
             // if the move is to move a larger disk on a smaller disk, throws error
             } 
             else {
                 console.log('You cannot move a larger disc on top of a smaller one, board is still:');
-                console.log(towersBoard);
+                printBoard();
             }
         }   // if the move is to move a disk from an empty peg, throws an error
         else {
             console.log('You cannot move a disk from a peg that has no disks! Board is still:')
-            console.log(towersBoard);
+            printBoard();
         }       
     }
     // given the peg inputted as the argument, should determine which other pegs the top disc from that peg can be moved to
@@ -65,6 +75,11 @@ let playGame = () => {
 }
 // sets the invoked playgame function to a variable in order to utilize methods created within
 board = playGame();
+
+board.moveDisc(1,2);
+board.moveDisc(1,3);
+board.moveDisc(2,3);
+board.moveDisc(1,2);
 
 
 
