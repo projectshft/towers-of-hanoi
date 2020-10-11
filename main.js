@@ -14,10 +14,12 @@ let playGame = () => {
         // function to check if the user wins the game, if true, resets the game
         let checkWin = () => {
             if (endPegPosition.length === 5 && !towersBoard[0].length) {
-                console.log('You won!')
+                console.log(`You won!`)
                 towersBoard = [['5', '4', '3', '2', '1'],
                 [],
                 []];
+                console.log('Board is now reset!');
+                printBoard();
             }
         }
         // function to display the board correctly 
@@ -76,14 +78,35 @@ let playGame = () => {
 // sets the invoked playgame function to a variable in order to utilize methods created within
 board = playGame();
 
+// all the moves to win the game
 board.moveDisc(1,2);
 board.moveDisc(1,3);
 board.moveDisc(2,3);
 board.moveDisc(1,2);
-
-
-
-
-
-
-
+board.moveDisc(3,1);
+board.moveDisc(3,2);
+board.moveDisc(1,2);
+board.moveDisc(1,3);
+board.moveDisc(2,3);
+board.moveDisc(2,1);
+board.moveDisc(3,1);
+board.moveDisc(2,3);
+board.moveDisc(1,2);
+board.moveDisc(1,3);
+board.moveDisc(2,3);
+board.moveDisc(1,2);
+board.moveDisc(3,1);
+board.moveDisc(3,2);
+board.moveDisc(1,2);
+board.moveDisc(3,1);
+board.moveDisc(2,3);
+board.moveDisc(2,1);
+board.moveDisc(3,1);
+board.moveDisc(3,2);
+board.moveDisc(1,2);
+board.moveDisc(1,3);
+board.moveDisc(2,3);
+board.moveDisc(1,2);
+board.moveDisc(3,1);
+board.moveDisc(3,2);
+board.moveDisc(1,2);
