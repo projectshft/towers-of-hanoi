@@ -29,13 +29,41 @@ const TowersOfHanoiEngine = function () {
 
   //Updates board with move
   this.makeMove = function (currentPeg, newPeg) {
-    var discMoved = this.board[currentPeg-1].pop();
-    this.board[newPeg-1].push(discMoved);
+    if(this.checkMove(currentPeg,newPeg)) {
+      var discMoved = this.board[currentPeg-1].pop();
+      this.board[newPeg-1].push(discMoved);
+    }
   }
 
   //Checks if it is a valid move
-  this.checkMove = function (disc, newPeg) {
+  this.checkMove = function (currentPeg, newPeg) {
+    //Checks if inputs are numbers
+    if(typeof currentPeg !== 'number' || typeof newPeg !== 'number') {
+      console.log('Please choose a proper peg number')
+      return false;
+    }
 
+    //Checks if inputs are actual peg locations
+    if(currentPeg < 1 || currentPeg > this.board.length || newPeg < 1 || newPeg > this.board.length) {
+      console.log('There is no peg at that location. Please choose again.');
+      return false;
+    }
+
+    //Checks if there is a disc on the peg user wishes to move a disc from.
+    if(this.board[currentPeg-1].length === 0) {
+      console.log(`There is no disc on ${currentPeg}. That is an invalid move.`);
+      return false
+    }
+
+    //checks if the disc user wishes to move is larger than the top disc on the desired peg
+    var discMoved = this.board[currentPeg-1][this.board[currentPeg-1].length-1];
+    var currentTopDisc = this.board[newPeg-1][this.board[newPeg-1].length-1];
+    if(parseInt(discMoved) > parseInt(currentTopDisc)) {
+      console.log('You cannot move a larger disc onto a smaller disc. That is an invalid move');
+      return false
+    }
+    
+    return true
   }
 
   //Check if player has won the game
