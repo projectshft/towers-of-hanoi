@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="main.js"></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1>Create New Game Board</h1>
+    <label for="pegNum">Number of Pegs</label>
+    <input type="number" fname="pegNum" class="pegNumber" />
+    <label for="discNum">Number of Discs</label>
+    <input type="number" fname="discNum" class="discNumber" />
+    <button class="generateButton">Create Board</button>
+    <br />
+    <br />
+    <label for="startPeg">Move disc from Peg</label>
+    <input type="number" fname="startPeg" />
+    <label for="endPeg">to Peg</label>
+    <input type="number" fname="endPeg" />
+    <button>Move Disc</button>
+    <script src="main.js"></script>
+  </body>
 </html>

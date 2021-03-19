@@ -105,7 +105,13 @@ const TowersOfHanoiEngine = function () {
 }
 
 var game = new TowersOfHanoiEngine();
-game.generateBoard(5,3);
+var pegNumber = document.querySelector('.pegNumber');
+var discNumber = document.querySelector('.discNumber');
+var generateButton = document.querySelector('.generateButton')
+generateButton.onclick = () => {
+  game.generateBoard(pegNumber.value, discNumber.value);
+}
+// game.generateBoard(5,3);
 // var game = new TowersOfHanoiEngine();
 // game.generateBoard(4,2);
 // game.displayBoard();
