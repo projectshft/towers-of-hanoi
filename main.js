@@ -1,5 +1,7 @@
 const TowersOfHanoiEngine = function () {
   this.board = [];
+  this.discs = 0;
+  this.pegs = 0;
 
   //Creates the intial game board
   this.generateBoard = function (pegs, discs) {
@@ -11,6 +13,9 @@ const TowersOfHanoiEngine = function () {
       initialBoard[0].push(i.toString());
     }
     this.board = initialBoard;
+    this.discs = discs;
+    this.pegs = pegs;
+
   }
 
   //Displays board to console
@@ -68,7 +73,11 @@ const TowersOfHanoiEngine = function () {
 
   //Check if player has won the game
   this.checkWinner = function () {
-
+    var numOfDiscs = this.discs;
+    return this.board.some(function (peg, index) {
+      //checks to see if all the discs are on one peg other than the first one
+      return peg.length === numOfDiscs && index !== 0
+    })
   }
 
   //Begins the game
@@ -78,5 +87,5 @@ const TowersOfHanoiEngine = function () {
 }
 
 var game = new TowersOfHanoiEngine();
-game.generateBoard(4,9);
+game.generateBoard(4,2);
 game.displayBoard();
