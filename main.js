@@ -15,7 +15,16 @@ const TowersOfHanoiEngine = function () {
 
   //Displays board to console
   this.displayBoard = function () {
-
+    var pegArr = this.board.map(function (line) {
+      return '--- ' + line.join(' ');
+    })
+    pegArr.reduce(function (acc, line) {
+      //Adds an extra blank space every time to avoid problem in Chrome console of identical lines being collapsed together rather than each line displaying seperately
+      // example "3 ---" shows up in console rather than "---" displaying three times if these lines are identical.
+      acc = acc + " "
+      console.log(line + acc)
+      return acc;
+    },'')
   }
 
   //Updates board with move
@@ -41,4 +50,4 @@ const TowersOfHanoiEngine = function () {
 
 var game = new TowersOfHanoiEngine();
 game.generateBoard(4,9);
-console.log(game.board);
+game.displayBoard();
