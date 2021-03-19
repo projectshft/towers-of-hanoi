@@ -28,8 +28,9 @@ const TowersOfHanoiEngine = function () {
   }
 
   //Updates board with move
-  this.makeMove = function (disc, newPeg) {
-
+  this.makeMove = function (currentPeg, newPeg) {
+    var discMoved = this.board[currentPeg-1].pop();
+    this.board[newPeg-1].push(discMoved);
   }
 
   //Checks if it is a valid move
