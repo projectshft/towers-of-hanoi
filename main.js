@@ -37,26 +37,34 @@ const TowersOfHanoiEngine = function () {
     if(this.checkMove(currentPeg,newPeg)) {
       var discMoved = this.board[currentPeg-1].pop();
       this.board[newPeg-1].push(discMoved);
+      if(this.checkWinner()) {
+        this.displayBoard();
+        console.log('You have won the game! Play Again:');
+        this.generateBoard(this.pegs, this.discs);
+      } else {
+        console.log('That move was successful. Board is now:')
+      }
     }
+    this.displayBoard();
   }
 
   //Checks if it is a valid move
   this.checkMove = function (currentPeg, newPeg) {
     //Checks if inputs are numbers
     if(typeof currentPeg !== 'number' || typeof newPeg !== 'number') {
-      console.log('Please choose a proper peg number')
+      console.log('Please choose a proper peg number. Board is still:')
       return false;
     }
 
     //Checks if inputs are actual peg locations
     if(currentPeg < 1 || currentPeg > this.board.length || newPeg < 1 || newPeg > this.board.length) {
-      console.log('There is no peg at that location. Please choose again.');
+      console.log('There is no peg at that location. Board is still:');
       return false;
     }
 
     //Checks if there is a disc on the peg user wishes to move a disc from.
     if(this.board[currentPeg-1].length === 0) {
-      console.log(`There is no disc on ${currentPeg}. That is an invalid move.`);
+      console.log(`There is no disc on ${currentPeg}. Board is still:`);
       return false
     }
 
@@ -64,7 +72,7 @@ const TowersOfHanoiEngine = function () {
     var discMoved = this.board[currentPeg-1][this.board[currentPeg-1].length-1];
     var currentTopDisc = this.board[newPeg-1][this.board[newPeg-1].length-1];
     if(parseInt(discMoved) > parseInt(currentTopDisc)) {
-      console.log('You cannot move a larger disc onto a smaller disc. That is an invalid move');
+      console.log('You cannot move a larger disc onto a smaller disc. Board is still:');
       return false
     }
     
@@ -74,15 +82,25 @@ const TowersOfHanoiEngine = function () {
   //Check if player has won the game
   this.checkWinner = function () {
     var numOfDiscs = this.discs;
-    return this.board.some(function (peg, index) {
+    var hasWon = this.board.some(function (peg, index) {
       //checks to see if all the discs are on one peg other than the first one
       return peg.length === numOfDiscs && index !== 0
     })
+    return hasWon
+  }
+
+  this.playTurn = function () {
+        //asks for user to make move
+    //updates the game board
+    //checks to see if they have one
+    //If not asks user for next move...
   }
 
   //Begins the game
   this.playGame = function () {
-
+    //first asks user how many discs and pegs they would like to play with
+    //generates the game board
+    //calls playTurn
   }
 }
 
