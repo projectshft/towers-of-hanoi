@@ -12,6 +12,31 @@ const TowersOfHanoiEngine = function () {
     }
     this.board = initialBoard;
   }
+
+  //Displays board to console
+  this.displayBoard = function () {
+
+  }
+
+  //Updates board with move
+  this.makeMove = function (disc, newPeg) {
+
+  }
+
+  //Checks if it is a valid move
+  this.checkMove = function (disc, newPeg) {
+
+  }
+
+  //Check if player has won the game
+  this.checkWinner = function () {
+
+  }
+
+  //Begins the game
+  this.playGame = function () {
+
+  }
 }
 
 var game = new TowersOfHanoiEngine();
