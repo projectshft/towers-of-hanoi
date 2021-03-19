@@ -15,7 +15,7 @@ const TowersOfHanoiEngine = function () {
     this.board = initialBoard;
     this.discs = discs;
     this.pegs = pegs;
-
+    this.displayBoard();
   }
 
   //Displays board to console
@@ -43,9 +43,9 @@ const TowersOfHanoiEngine = function () {
         this.generateBoard(this.pegs, this.discs);
       } else {
         console.log('That move was successful. Board is now:')
+        this.displayBoard();
       }
     }
-    this.displayBoard();
   }
 
   //Checks if it is a valid move
@@ -79,7 +79,7 @@ const TowersOfHanoiEngine = function () {
     return true
   }
 
-  //Check if player has won the game
+  //Checks if player has won the game
   this.checkWinner = function () {
     var numOfDiscs = this.discs;
     var hasWon = this.board.some(function (peg, index) {
@@ -105,5 +105,7 @@ const TowersOfHanoiEngine = function () {
 }
 
 var game = new TowersOfHanoiEngine();
-game.generateBoard(4,2);
-game.displayBoard();
+game.generateBoard(5,3);
+// var game = new TowersOfHanoiEngine();
+// game.generateBoard(4,2);
+// game.displayBoard();
