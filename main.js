@@ -2,6 +2,10 @@ const TowersOfHanoiEngine = function () {
   this.board = [];
   this.discs = 0;
   this.pegs = 0;
+  this.movesTaken = 0;
+
+  //This is so that jasmine can run properly. When set to true the displayBoardHTML and updateMoveCounter methods won't be called in the makeMove method.
+  this.runningJasmine = false;
 
   //Creates game board
   this.generateBoard = function (pegs, discs) {
@@ -9,24 +13,26 @@ const TowersOfHanoiEngine = function () {
     for (i = 0; i < pegs; i++) {
       initialBoard.push([])
     }
+    //Creates stack of discs on first peg
     for (i = discs; i >= 1; i--) {
       initialBoard[0].push(i.toString());
     }
     this.board = initialBoard;
     this.discs = discs;
     this.pegs = pegs;
+    this.movesTaken = 0;
   }
 
   //Displays board to console
   this.displayBoardConsole = function () {
-    var pegArr = this.board.map(function (line) {
-      return '--- ' + line.join(' ');
+    var pegDisplayStrings = this.board.map(function (peg) {
+      return '--- ' + peg.join(' ');
     })
-    pegArr.reduce(function (acc, line) {
+    pegDisplayStrings.reduce(function (acc, peg) {
       //Adds an extra blank space every time to avoid problem in Chrome console of identical lines being collapsed together rather than each line displaying seperately
-      // example "3 ---" shows up in console rather than "---" displaying three times if these lines are identical.
+      // example: "3 ---" shows up in console rather than "---" displaying three times if these lines are identical.
       acc = acc + " "
-      console.log(line + acc)
+      console.log(peg + acc)
       return acc;
     },'')
   }
@@ -34,42 +40,52 @@ const TowersOfHanoiEngine = function () {
   //Displays board to HTML page
   this.displayBoardHTML = function () {
     var numOfDiscs = this.discs;
-    //This if statement is so that jasmine can run. Since the jasmine page doesn't have a boardHTML element it will throw an error without the if statement.
-    if(boardHTML) {
-      boardHTML.innerHTML = this.board.reduce(function (htmlString, peg, index, array) {
-        htmlString += '<div>'
-        for(j = numOfDiscs-1; j >= 0; j--) {
-          htmlString += array[index][j] ? `<h1>${array[index][j]}</h1>` : '<h1>.</h1>';
-        }
-        htmlString += `<h1>Peg ${index+1}__</h1></div>`
-        return htmlString;
-      },'')
-    }
+    boardHTML.innerHTML = this.board.reduce(function (htmlString, peg, index, array) {
+      htmlString += '<div>'
+      for(j = numOfDiscs-1; j >= 0; j--) {
+        //Tests whether there is a disc present and places either the disc number or a . placeholder
+        htmlString += array[index][j] ? `<h1>${array[index][j]}</h1>` : '<h1>.</h1>';
+      }
+      htmlString += `<h1>_Peg ${index+1}_</h1></div>`
+      return htmlString;
+    },'')
+  }
+
+  //Updates the Total Moves Taken display on the page
+  this.updateMoveCounter = function () {
+    moveCounter.innerHTML = `Total Moves Taken: ${this.movesTaken}`;
   }
 
   //Updates board with desired move
   this.makeMove = function (currentPeg, newPeg) {
-    if(this.checkMove(currentPeg,newPeg)) {
+    //First tests if it is a valid move
+    if(this.checkMove(currentPeg, newPeg)) {
       var discMoved = this.board[currentPeg-1].pop();
       this.board[newPeg-1].push(discMoved);
+      this.movesTaken += 1;
+      //After move tests if player has won
       if(this.checkWinner()) {
         this.displayBoardConsole();
-        this.displayBoardHTML();
+        //this.displayBoardHTML();
         console.log('You have won the game! Play Again:');
+        //alert("You have won the game! Play Again:");
         this.generateBoard(this.pegs, this.discs);
       } else {
         console.log('That move was successful. Board is now:')
       }
     }
     this.displayBoardConsole();
-    this.displayBoardHTML();
+    if(!this.runningJasmine) {
+      this.displayBoardHTML();
+      this.updateMoveCounter();
+    }
   }
 
   //Checks if desired move is valid
   this.checkMove = function (currentPeg, newPeg) {
     //Checks if inputs are numbers
     if(typeof currentPeg !== 'number' || typeof newPeg !== 'number') {
-      console.log('Please choose a proper peg number. Board is still:')
+      console.log('Please choose a proper peg number. Board is still:');
       return false;
     }
 
@@ -86,9 +102,9 @@ const TowersOfHanoiEngine = function () {
     }
 
     //checks if the disc the user wishes to move is larger than the top disc on the desired peg
-    var discMoved = this.board[currentPeg-1][this.board[currentPeg-1].length-1];
+    var discToBeMoved = this.board[currentPeg-1][this.board[currentPeg-1].length-1];
     var currentTopDisc = this.board[newPeg-1][this.board[newPeg-1].length-1];
-    if(parseInt(discMoved) > parseInt(currentTopDisc)) {
+    if(parseInt(discToBeMoved) > parseInt(currentTopDisc)) {
       console.log('You cannot move a larger disc onto a smaller disc. Board is still:');
       return false
     }
@@ -115,15 +131,19 @@ var boardHTML = document.querySelector('.board');
 var startingPegInput = document.querySelector('.startingPeg');
 var endingPegInput = document.querySelector('.endingPeg');
 var moveButton = document.querySelector('.moveDisc');
+var moveCounter = document.querySelector('.moveCounter');
+
+//Creates a new board and updates the console and page with it
 generateButton.onclick = () => {
-  //Creates a new board and displays it to console and page
   game.generateBoard(parseInt(pegNumberInput.value), parseInt(discNumberInput.value));
   game.displayBoardConsole();
   game.displayBoardHTML();
-}
+  game.updateMoveCounter();
+};
+
 moveButton.onclick = () => {
   game.makeMove(parseInt(startingPegInput.value), parseInt(endingPegInput.value));
-}
+};
 
 
 var game = new TowersOfHanoiEngine();

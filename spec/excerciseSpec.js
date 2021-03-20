@@ -1,6 +1,7 @@
 var game;
 beforeEach(function () {
   game = new TowersOfHanoiEngine();
+  game.runningJasmine = true;
   game.generateBoard(5,3);
 });
 
