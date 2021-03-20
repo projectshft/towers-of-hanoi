@@ -73,7 +73,7 @@ Board.prototype.resetBoard = function () {
 };
 
 
-console.log("Welcome to Towers of Hanoi. Use the following commands to play! \n tower.moveDisc(peg number, peg number) \n tower.showCurrentBoard() \n tower.checkForWin() \n tower.resetBoard()")
+console.log("Welcome to Towers of Hanoi. Use the following commands to play! \n towers.moveDisc(peg number, peg number) \n towers.showCurrentBoard() \n towers.checkForWin() \n towers.resetBoard()")
 
 var towers = new Board();
 
