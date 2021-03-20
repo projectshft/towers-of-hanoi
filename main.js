@@ -16,6 +16,7 @@ const TowersOfHanoiEngine = function () {
     this.discs = discs;
     this.pegs = pegs;
     this.displayBoard();
+    this.displayBoardHTML();
   }
 
   //Displays board to console
@@ -32,6 +33,20 @@ const TowersOfHanoiEngine = function () {
     },'')
   }
 
+  //Displays board to HTML page
+  this.displayBoardHTML = function () {
+    var boardString = '';
+    for(i=0;i<this.pegs;i++) {
+      boardString += '<div>'
+      for(j = this.discs-1; j>=0; j--) {
+        boardString += this.board[i][j] ? `<h1>${this.board[i][j]}</h1>` : '<h1>.</h1>';
+        //boardString += 
+      }
+      boardString += '<h1>Peg #</h1></div>'
+    }
+    boardHTML.innerHTML = boardString;
+  }
+
   //Updates board with move
   this.makeMove = function (currentPeg, newPeg) {
     if(this.checkMove(currentPeg,newPeg)) {
@@ -39,11 +54,13 @@ const TowersOfHanoiEngine = function () {
       this.board[newPeg-1].push(discMoved);
       if(this.checkWinner()) {
         this.displayBoard();
+        this.displayBoardHTML();
         console.log('You have won the game! Play Again:');
         this.generateBoard(this.pegs, this.discs);
       } else {
         console.log('That move was successful. Board is now:')
         this.displayBoard();
+        this.displayBoardHTML();
       }
     }
   }
@@ -88,29 +105,24 @@ const TowersOfHanoiEngine = function () {
     })
     return hasWon
   }
-
-  this.playTurn = function () {
-        //asks for user to make move
-    //updates the game board
-    //checks to see if they have one
-    //If not asks user for next move...
-  }
-
-  //Begins the game
-  this.playGame = function () {
-    //first asks user how many discs and pegs they would like to play with
-    //generates the game board
-    //calls playTurn
-  }
 }
 
 var game = new TowersOfHanoiEngine();
 var pegNumber = document.querySelector('.pegNumber');
 var discNumber = document.querySelector('.discNumber');
 var generateButton = document.querySelector('.generateButton')
+var boardHTML = document.querySelector('.board');
+var startingPeg = document.querySelector('.startingPeg');
+var endingPeg = document.querySelector('.endingPeg');
+var moveButton = document.querySelector('.moveDisc');
 generateButton.onclick = () => {
-  game.generateBoard(pegNumber.value, discNumber.value);
+  game.generateBoard(parseInt(pegNumber.value), parseInt(discNumber.value));
 }
+moveButton.onclick = () => {
+  game.makeMove(parseInt(startingPeg.value), parseInt(endingPeg.value));
+}
+game.generateBoard(3,5)
+game.displayBoardHTML();
 // game.generateBoard(5,3);
 // var game = new TowersOfHanoiEngine();
 // game.generateBoard(4,2);
