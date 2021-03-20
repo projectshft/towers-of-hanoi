@@ -3,7 +3,7 @@ const TowersOfHanoiEngine = function () {
   this.discs = 0;
   this.pegs = 0;
 
-  //Creates the intial game board
+  //Creates game board
   this.generateBoard = function (pegs, discs) {
     var initialBoard = [];
     for (i = 0; i < pegs; i++) {
@@ -15,12 +15,10 @@ const TowersOfHanoiEngine = function () {
     this.board = initialBoard;
     this.discs = discs;
     this.pegs = pegs;
-    this.displayBoard();
-    this.displayBoardHTML();
   }
 
   //Displays board to console
-  this.displayBoard = function () {
+  this.displayBoardConsole = function () {
     var pegArr = this.board.map(function (line) {
       return '--- ' + line.join(' ');
     })
@@ -35,37 +33,39 @@ const TowersOfHanoiEngine = function () {
 
   //Displays board to HTML page
   this.displayBoardHTML = function () {
-    var boardString = '';
-    for(i=0;i<this.pegs;i++) {
-      boardString += '<div>'
-      for(j = this.discs-1; j>=0; j--) {
-        boardString += this.board[i][j] ? `<h1>${this.board[i][j]}</h1>` : '<h1>.</h1>';
-        //boardString += 
-      }
-      boardString += '<h1>Peg #</h1></div>'
+    var numOfDiscs = this.discs;
+    //This if statement is so that jasmine can run. Since the jasmine page doesn't have a boardHTML element it will throw an error without the if statement.
+    if(boardHTML) {
+      boardHTML.innerHTML = this.board.reduce(function (htmlString, peg, index, array) {
+        htmlString += '<div>'
+        for(j = numOfDiscs-1; j >= 0; j--) {
+          htmlString += array[index][j] ? `<h1>${array[index][j]}</h1>` : '<h1>.</h1>';
+        }
+        htmlString += `<h1>Peg ${index+1}__</h1></div>`
+        return htmlString;
+      },'')
     }
-    boardHTML.innerHTML = boardString;
   }
 
-  //Updates board with move
+  //Updates board with desired move
   this.makeMove = function (currentPeg, newPeg) {
     if(this.checkMove(currentPeg,newPeg)) {
       var discMoved = this.board[currentPeg-1].pop();
       this.board[newPeg-1].push(discMoved);
       if(this.checkWinner()) {
-        this.displayBoard();
+        this.displayBoardConsole();
         this.displayBoardHTML();
         console.log('You have won the game! Play Again:');
         this.generateBoard(this.pegs, this.discs);
       } else {
         console.log('That move was successful. Board is now:')
-        this.displayBoard();
-        this.displayBoardHTML();
       }
     }
+    this.displayBoardConsole();
+    this.displayBoardHTML();
   }
 
-  //Checks if it is a valid move
+  //Checks if desired move is valid
   this.checkMove = function (currentPeg, newPeg) {
     //Checks if inputs are numbers
     if(typeof currentPeg !== 'number' || typeof newPeg !== 'number') {
@@ -85,7 +85,7 @@ const TowersOfHanoiEngine = function () {
       return false
     }
 
-    //checks if the disc user wishes to move is larger than the top disc on the desired peg
+    //checks if the disc the user wishes to move is larger than the top disc on the desired peg
     var discMoved = this.board[currentPeg-1][this.board[currentPeg-1].length-1];
     var currentTopDisc = this.board[newPeg-1][this.board[newPeg-1].length-1];
     if(parseInt(discMoved) > parseInt(currentTopDisc)) {
@@ -107,23 +107,26 @@ const TowersOfHanoiEngine = function () {
   }
 }
 
-var game = new TowersOfHanoiEngine();
-var pegNumber = document.querySelector('.pegNumber');
-var discNumber = document.querySelector('.discNumber');
+//HTML functionality
+var pegNumberInput = document.querySelector('.pegNumber');
+var discNumberInput = document.querySelector('.discNumber');
 var generateButton = document.querySelector('.generateButton')
 var boardHTML = document.querySelector('.board');
-var startingPeg = document.querySelector('.startingPeg');
-var endingPeg = document.querySelector('.endingPeg');
+var startingPegInput = document.querySelector('.startingPeg');
+var endingPegInput = document.querySelector('.endingPeg');
 var moveButton = document.querySelector('.moveDisc');
 generateButton.onclick = () => {
-  game.generateBoard(parseInt(pegNumber.value), parseInt(discNumber.value));
+  //Creates a new board and displays it to console and page
+  game.generateBoard(parseInt(pegNumberInput.value), parseInt(discNumberInput.value));
+  game.displayBoardConsole();
+  game.displayBoardHTML();
 }
 moveButton.onclick = () => {
-  game.makeMove(parseInt(startingPeg.value), parseInt(endingPeg.value));
+  game.makeMove(parseInt(startingPegInput.value), parseInt(endingPegInput.value));
 }
+
+
+var game = new TowersOfHanoiEngine();
 game.generateBoard(3,5)
 game.displayBoardHTML();
-// game.generateBoard(5,3);
-// var game = new TowersOfHanoiEngine();
-// game.generateBoard(4,2);
-// game.displayBoard();
+game.displayBoardConsole();
