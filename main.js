@@ -1,7 +1,7 @@
 var towersOfHanoi = {
   gameboard: [
-    [5, 4, 3, 2, 1],
-    [],
+    [1],
+    [5, 4, 3, 2],
     []
   ],
   moveDisc: function (onePeg, twoPeg){
@@ -66,3 +66,4 @@ var towersOfHanoi = {
   }
 }
 
+towersOfHanoi.moveDisc(1, 2);
