@@ -4,7 +4,7 @@ const TowersOfHanoiEngine = function () {
   this.pegs = 0;
   this.movesTaken = 0;
 
-  //This is so that jasmine can run properly. When set to true the displayBoardHTML and updateMoveCounter methods won't be called in the makeMove method.
+  //This is so that jasmine can run properly. When set to true the displayBoardHTML and updateMoveCounter methods won't be called in the makeMove method and alert won't be displayed upon winning.
   this.runningJasmine = false;
 
   //Creates game board
@@ -58,22 +58,22 @@ const TowersOfHanoiEngine = function () {
 
   //Updates board with desired move
   this.makeMove = function (currentPeg, newPeg) {
-    //First tests if it is a valid move
+    //First checks if it is a valid move
     if(this.checkMove(currentPeg, newPeg)) {
       var discMoved = this.board[currentPeg-1].pop();
       this.board[newPeg-1].push(discMoved);
       this.movesTaken += 1;
-      //After move tests if player has won
+      //After move checks if player has won
       if(this.checkWinner()) {
         this.displayBoardConsole();
-        //this.displayBoardHTML();
         console.log('You have won the game! Play Again:');
-        //alert("You have won the game! Play Again:");
+        !this.runningJasmine ? alert(`You have won the game in ${this.movesTaken} moves! Play Again:`): null;
         this.generateBoard(this.pegs, this.discs);
       } else {
         console.log('That move was successful. Board is now:')
       }
     }
+
     this.displayBoardConsole();
     if(!this.runningJasmine) {
       this.displayBoardHTML();
@@ -121,6 +121,29 @@ const TowersOfHanoiEngine = function () {
     })
     return hasWon
   }
+
+  //Solves the game utilizing the first three pegs by getting all the discs to the second peg
+  //Note: Only works when run if board is in its start of game setup (i.e. all the discs on the first peg)
+  this.solve = function (numofDiscsToBeMoved=this.discs, currentPeg=1, destinationPeg=2, flipper=true) {
+      // debugger;
+    if(numofDiscsToBeMoved === 0) {
+      return
+    }
+    var newDestinationPeg = flipper ? destinationPeg + 1 : destinationPeg - 1;
+    if (newDestinationPeg > 3) {
+      newDestinationPeg = 1;
+    }
+    if (newDestinationPeg < 1) {
+      newDestinationPeg = 3;
+    }
+
+    //Moves all discs on top of bottom disc
+    this.solve(numofDiscsToBeMoved-1, currentPeg, newDestinationPeg, !flipper);
+    //Moves bottom disc to desired peg
+    this.makeMove(currentPeg, destinationPeg);
+    //Moves the remaining discs back on top of bottom disc on the new peg
+    this.solve(numofDiscsToBeMoved-1, newDestinationPeg, destinationPeg, !flipper);
+  }
 }
 
 //HTML functionality
@@ -132,6 +155,7 @@ var startingPegInput = document.querySelector('.startingPeg');
 var endingPegInput = document.querySelector('.endingPeg');
 var moveButton = document.querySelector('.moveDisc');
 var moveCounter = document.querySelector('.moveCounter');
+var solveButton = document.querySelector('.solveButton');
 
 //Creates a new board and updates the console and page with it
 generateButton.onclick = () => {
@@ -144,6 +168,10 @@ generateButton.onclick = () => {
 moveButton.onclick = () => {
   game.makeMove(parseInt(startingPegInput.value), parseInt(endingPegInput.value));
 };
+
+solveButton.onclick = () => {
+  game.solve();
+}
 
 
 var game = new TowersOfHanoiEngine();
