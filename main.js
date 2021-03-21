@@ -1,6 +1,6 @@
 var board = {
   pegs: [
-    [3, 2, 1],
+    [5, 4, 3, 2, 1],
     [],
     []
   ],
@@ -20,7 +20,7 @@ var board = {
     });    
   },
   checkWinner: function() {
-    var startPos = 3;
+    var startPos = 5;
     if (this.pegs[2].length === startPos || this.pegs[1].length === startPos){
       console.log(`winner!`);
     } else {
@@ -31,13 +31,5 @@ var board = {
 };
 
 
-board.moveDisc(1,3);
-board.moveDisc(1,2);
-board.moveDisc(1,2) //disallowed moved
-board.moveDisc(3,2);
-board.moveDisc(1,3);
-board.moveDisc(2,1);
-board.moveDisc(2,3);
-board.moveDisc(1,3); //winning move
 
 
