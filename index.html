@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Towers of Hanoi</h1>
+    <h2>Create Game Board:</h2>
+    <label for="pegNum">Number of Pegs</label>
+    <input type="number" fname="pegNum" class="pegNumber" />
+    <label for="discNum">Number of Discs</label>
+    <input type="number" fname="discNum" class="discNumber" />
+    <button class="generateButton">Create Board</button>
+    <br />
+    <br />
+    <h2>Game Board:</h2>
+    <div style="display: flex; text-align: center" class="board"></div>
+    <label for="startPeg">Move disc from Peg</label>
+    <input type="number" fname="startPeg" class="startingPeg" />
+    <label for="endPeg">to Peg</label>
+    <input type="number" fname="endPeg" class="endingPeg" />
+    <button class="moveDisc">Move Disc</button>
+    <br />
+    <br />
+    <button class="solveButton">Have Computer Solve</button>
+    <h2 class="moveCounter">Total Moves Taken: 0</h2>
+    <script src="main.js"></script>
+  </body>
+</html>
