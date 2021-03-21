@@ -21,6 +21,7 @@ const TowersOfHanoiEngine = function () {
     this.discs = discs;
     this.pegs = pegs;
     this.movesTaken = 0;
+    console.log("The Board is:")
   }
 
   //Displays board to console
@@ -66,14 +67,11 @@ const TowersOfHanoiEngine = function () {
       //After move checks if player has won
       if(this.checkWinner()) {
         this.displayBoardConsole();
-        console.log('You have won the game! Play Again:');
+        console.log(`You have won the game in ${this.movesTaken} moves! Play Again:`);
         !this.runningJasmine ? alert(`You have won the game in ${this.movesTaken} moves! Play Again:`): null;
         this.generateBoard(this.pegs, this.discs);
-      } else {
-        console.log('That move was successful. Board is now:')
       }
     }
-
     this.displayBoardConsole();
     if(!this.runningJasmine) {
       this.displayBoardHTML();
@@ -109,6 +107,7 @@ const TowersOfHanoiEngine = function () {
       return false
     }
     
+    console.log('That move was successful. Board is now:')
     return true
   }
 
@@ -125,7 +124,7 @@ const TowersOfHanoiEngine = function () {
   //Solves the game utilizing the first three pegs by getting all the discs to the second peg
   //Note: Only works when run if board is in its start of game setup (i.e. all the discs on the first peg)
   this.solve = function (numofDiscsToBeMoved=this.discs, currentPeg=1, destinationPeg=2, flipper=true) {
-      // debugger;
+    // debugger;
     if(numofDiscsToBeMoved === 0) {
       return
     }
@@ -136,7 +135,6 @@ const TowersOfHanoiEngine = function () {
     if (newDestinationPeg < 1) {
       newDestinationPeg = 3;
     }
-
     //Moves all discs on top of bottom disc
     this.solve(numofDiscsToBeMoved-1, currentPeg, newDestinationPeg, !flipper);
     //Moves bottom disc to desired peg
@@ -156,22 +154,18 @@ var endingPegInput = document.querySelector('.endingPeg');
 var moveButton = document.querySelector('.moveDisc');
 var moveCounter = document.querySelector('.moveCounter');
 var solveButton = document.querySelector('.solveButton');
-
-//Creates a new board and updates the console and page with it
 generateButton.onclick = () => {
   game.generateBoard(parseInt(pegNumberInput.value), parseInt(discNumberInput.value));
   game.displayBoardConsole();
   game.displayBoardHTML();
   game.updateMoveCounter();
 };
-
 moveButton.onclick = () => {
   game.makeMove(parseInt(startingPegInput.value), parseInt(endingPegInput.value));
 };
-
 solveButton.onclick = () => {
   game.solve();
-}
+};
 
 
 var game = new TowersOfHanoiEngine();
