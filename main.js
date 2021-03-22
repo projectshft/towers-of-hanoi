@@ -1,7 +1,7 @@
 var towersOfHanoi = {
   gameboard: [
-    [1],
-    [5, 4, 3, 2],
+    [5, 4, 3, 2, 1],
+    [],
     []
   ],
   moveDisc: function (onePeg, twoPeg){
@@ -56,9 +56,9 @@ var towersOfHanoi = {
     this.printBoard();
   },
   printBoard: function () {
-    this.gameboard.map(function (peg) {
-      console.log(peg.join('--'));
-    })
+    this.gameboard.forEach(function (peg) {
+      console.log('---' + peg.join(' '));
+    });
   },
   gameConditions: {
     numDiscs: 5,
