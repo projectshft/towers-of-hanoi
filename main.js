@@ -8,15 +8,15 @@ var board = {
   
   // Initialize game board
   currentPegBoard: [
-                    [1],
-                    [5, 4, 3, 2],
+                    [5, 4, 3, 2, 1],
+                    [],
                     []
                    ],
 
   // Start a game with directions
   startGame: function() {
     console.log(`TOWERS OF HANOI`);
-    console.log(`Directions: Towers of Hanoi is an ancient puzzle played with three stacks and five differently-sized discs. At the start, all the discs are in the leftmost stack, with the largest disc on the bottom and the smallest on the top. The object is to get all the discs over to another peg with the following rules:`);
+    console.log(`Directions: Towers of Hanoi is an ancient puzzle played with three stacks and five differently-sized discs. At the start, all the discs are in the leftmost stack, with the largest disc on the bottom and the smallest on the top. The object is to get all the discs, stacked from biggest to smallest over to the right most peg with the following rules:`);
     console.log(`- You can only move one disc per move, and you can only move the top disc on a stack.`);
     console.log(`- You can't move a larger disc on top of a smaller disc. `);
     console.log(`- Discs can only be moved to empty pegs or on top of larger discs.`); 
@@ -80,10 +80,10 @@ var board = {
   // checks if the player has won
   checkWinner: function(currentPegBoard) {
     let winningStack = [5, 4, 3, 2, 1];
-    // NEED TO SIMPLIFY THIS -- DUPLICATE CODE!
 
+    // checks if the right most stack has the winning order
     if (winningStack.every(function(element, index) {
-      return element === currentPegBoard[1][index]; 
+      return element === currentPegBoard[currentPegBoard.length - 1][index]; 
       })) {
         console.log('Congratulations! You are a Tower of Hanoi MASTER!!! Play again?');
         board.currentPegBoard = board.startingPegBoard;
@@ -91,15 +91,7 @@ var board = {
         return;
     };
 
-    if (winningStack.every(function(element, index) {
-      return element === currentPegBoard[2][index]; 
-      })) {
-        console.log('Congratulations! You are a Tower of Hanoi MASTER!!! Play again?');
-        board.currentPegBoard = board.startingPegBoard;
-        this.printBoard(this.currentPegBoard);
-        return;
-    };
-
+    // Reprints the board to continue game play
     if (this.currentPegBoard[1].length !== 5 || this.currentPegBoard[2].length !== 5) {
       console.log('That move was successful, board is now:');
       this.printBoard(currentPegBoard);
