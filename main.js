@@ -8,10 +8,21 @@ var board = {
   
   // Initialize game board
   currentPegBoard: [
-                    [5, 4, 3, 2, 1],
-                    [],
+                    [1],
+                    [5, 4, 3, 2],
                     []
                    ],
+
+  // Start a game with directions
+  startGame: function() {
+    console.log(`TOWERS OF HANOI`);
+    console.log(`Directions: Towers of Hanoi is an ancient puzzle played with three stacks and five differently-sized discs. At the start, all the discs are in the leftmost stack, with the largest disc on the bottom and the smallest on the top. The object is to get all the discs over to another peg with the following rules:`);
+    console.log(`- You can only move one disc per move, and you can only move the top disc on a stack.`);
+    console.log(`- You can't move a larger disc on top of a smaller disc. `);
+    console.log(`- Discs can only be moved to empty pegs or on top of larger discs.`); 
+    console.log(`- To move a disc, type into the console board.moveDisc(numberOne, numberTwo). numberOne is the peg you want to move from. numberTwo is disc you want to move the peg to. For example, board.moveDisc(1, 2) would move a disc from peg 1 to peg 2. Good luck!`);
+    this.printBoard(this.currentPegBoard);
+  },
 
   // Moves discs between pegs
   moveDisc: function (startPeg, endPeg) {
@@ -61,9 +72,8 @@ var board = {
 
   // Prints board to console
   printBoard: function(pegBoard) {
-    // CAN I ADD A PEG NUMBER TO THIS?
-    pegBoard.map(peg => {
-      console.log(`Peg: ${peg.join(' ')}`);
+    pegBoard.map((peg, index) => {
+      console.log(`Peg ${index + 1}: ${peg.join(' ')}`);
     });
   },
 
@@ -71,7 +81,7 @@ var board = {
   checkWinner: function(currentPegBoard) {
     let winningStack = [5, 4, 3, 2, 1];
     // NEED TO SIMPLIFY THIS -- DUPLICATE CODE!
-    
+
     if (winningStack.every(function(element, index) {
       return element === currentPegBoard[1][index]; 
       })) {
@@ -95,9 +105,6 @@ var board = {
       this.printBoard(currentPegBoard);
     };
   }   
-}
+};
 
-
-
-
-
+board.startGame();
