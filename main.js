@@ -23,15 +23,6 @@ var towersOfHanoi = {
     []
   ],
 
-  //prints board to console horizontally
-  printBoard: function() {
-    var gameBoard = this['board'].map(function (pegs) {
-      return console.log('--- ' + pegs.join(' '))  
-    });
-  
-    return gameBoard; 
-  },
-
   moveDisc: function(startPeg, endPeg) {
     //adjusts parameters so they can act as indexes
     startPeg -= 1;
@@ -39,19 +30,30 @@ var towersOfHanoi = {
     
     var board = this.board; 
   
+    //logic to moveDiscs
     if(board[endPeg].length === 0) {
       board[endPeg].push(board[startPeg].pop());
   
     };
   
-    towersOfHanoi.printBoard();
+    printBoard(); 
   },
 
 };
 
+  //prints board to console horizontally
+  var printBoard = function() {
+    var gameBoard = towersOfHanoi['board'].map(function (pegs) {
+      return console.log('--- ' + pegs.join(' '))  
+    });
+  
+    return gameBoard; 
+  };
 
 
-towersOfHanoi.moveDisc(1, 3);
+
+
+
 
 
 
