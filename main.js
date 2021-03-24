@@ -23,33 +23,45 @@ var towersOfHanoi = {
     []
   ],
 
-  moveDisc: function(startPeg, endPeg) {
+    moveDisc: function(startPeg, endPeg) {
     //adjusts parameters so they can act as indexes
     startPeg -= 1;
     endPeg -= 1; 
     
     var board = this.board; 
+    var start = board[startPeg];
+    var end = board[endPeg]; 
   
-    //logic to moveDiscs
-    if(board[endPeg].length === 0) {
-      board[endPeg].push(board[startPeg].pop());
-  
-    };
+    //logic to moveDisc
+    if(end.length === 0 || start[start.length-1] < end[end.length-1]) {
+      end.push(start.pop());
+
+    } else {
+      console.log('That move is not allowed! Try again.')
+    }
+  },
   
     printBoard(); 
-  },
-
 };
 
-  //prints board to console horizontally
-  var printBoard = function() {
-    var gameBoard = towersOfHanoi['board'].map(function (pegs) {
-      return console.log('--- ' + pegs.join(' '))  
-    });
   
-    return gameBoard; 
-  };
+//prints board to console horizontally
 
+var printBoard = function() {
+  var gameBoard = towersOfHanoi['board'].map(function (pegs) {
+    return console.log('--- ' + pegs.join(' '))  
+  });
+  
+  return gameBoard; 
+};
+
+
+
+//starting position 
+//printBoard(); 
+
+//play
+//towersOfHanoi.moveDisc(1,3); 
 
 
 
