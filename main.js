@@ -17,33 +17,41 @@
 //var board = towersOfHanoi.board;
 
 var towersOfHanoi = {
-  
-  startBoard: [
+
+  board: [
     [5, 4, 3, 2, 1],
     [],
     []
   ],
 
-  playingBoard: [
-    [5, 4, 3, 2, 1],
-    [],
-    []
-  ],
+  //prints board to console horizontally
+  printBoard: function(b) {
+    //var board = this.playingBoard
+    var gameBoard = b.map(function (pegs) {
+      return console.log('--- ' + pegs.join(' '))  
+    });
 
-  //add checkWinner fxn. maybe use FIND to find winner after each move???
-    //see if you can print start boar along witn it? 
+    console.log('______')
+    return gameBoard; 
+  }, 
 
   checkWinner: function() {
-    var board = this.playingBoard;
-    var winner = board.find(function(pegs) {
+    var board = this.board;
+    var win = board.find(function() {
       return board[1].length === 5 || board[2].length === 5
     });
 
-    if(winner) {
-      console.log('You Won! Play Again?');
-      //
+    if(win) {
+      console.log('You Won! Play Again?')
+      //reset??
+      board = [
+        [5, 4, 3, 2, 1],
+        [],
+        []
+      ];
+      this.printBoard(board); 
     };
-    
+
   },
 
   moveDisc: function(startPeg, endPeg) {
@@ -51,15 +59,15 @@ var towersOfHanoi = {
     startPeg -= 1;
     endPeg -= 1; 
     
-    var board = this.playingBoard; 
+    var board = this.board; 
     var start = board[startPeg];
     var end = board[endPeg]; 
   
     //logic to moveDisc
     if(end.length === 0 || start[start.length-1] < end[end.length-1]) {
+
       end.push(start.pop());
-      
-      printBoard(); 
+      this.printBoard(board);
       this.checkWinner();
 
     } else {
@@ -69,19 +77,11 @@ var towersOfHanoi = {
 };
 
   
-//prints board to console horizontally
-//add logic to be able to print starting board for reset after a winner?  
-var printBoard = function() {
-    var gameBoard = towersOfHanoi['playingBoard'].map(function (pegs) {
-      return console.log('--- ' + pegs.join(' '))  
-    });
-  console.log('Great move. Where to next?')
-  return gameBoard; 
-};
 
-
+ 
 
 //play
+
 towersOfHanoi.moveDisc(1,2); //1
 towersOfHanoi.moveDisc(1,3);//2
 towersOfHanoi.moveDisc(2,3);//3
@@ -114,9 +114,6 @@ towersOfHanoi.moveDisc(3,1); //29
 towersOfHanoi.moveDisc(3,2); //30
 towersOfHanoi.moveDisc(1,2); //31
  
-
-     
-
 
 
 
