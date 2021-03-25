@@ -29,7 +29,6 @@ const board = {
   checkWinner() {
     if (gameBoard[1].length === 5 || gameBoard[2].length === 5) {
       console.log(`YOU WON THE GAME!`);
-      console.log(`Board is now reset for a new game:`);
       this.newGame();
     }
   },
@@ -37,6 +36,7 @@ const board = {
     gameBoard = [["5", "4", "3", "2", "1"],
     [],
     []];
+    console.log(`Board is now reset for a new game:`);
     this.printBoard();
   }
 };
