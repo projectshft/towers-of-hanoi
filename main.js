@@ -2,33 +2,19 @@
 var towersOfHanoi = {
 
   board: [
-    [5, 4, 3, 2, 1],
+    ['5', '4', '3', '2', '1'],
     [],
     []
   ],
   
-  //checks winning condition and resets board if met
-  checkWinner: function() {
-    var board = this.board;
-    var win = board.find(function() {
-      return board[1].length === 5 || board[2].length === 5
-    });
-
-    if(win) {
-      console.log('You Won! Play Again?')
-      reset();
-    };
-
-  },
-
   moveDisc: function(startPeg, endPeg) {
     //adjusts parameters so they can act on the correct index
     startPeg -= 1;
     endPeg -= 1; 
     
     var board = this.board; 
-    var start = board[startPeg]; //board[0] for move 1
-    var end = board[endPeg]; //board[2] for move 1
+    var start = board[startPeg]; //board[0] (peg 1) for move 1
+    var end = board[endPeg]; //board[1] (peg 3) for move 1
   
     //logic to moveDisc based on legal vs illegal moves
     if(end.length === 0 || start[start.length-1] < end[end.length-1]) {
@@ -37,45 +23,55 @@ var towersOfHanoi = {
       printBoard(board);
 
       //checks for winner after each move
-      this.checkWinner(); 
+      checkWinner(); 
 
     } else {
-      console.log('That move is not allowed! Try again.')
-    }
-  },
-};
+      console.log('That move is not allowed! Try again.');
+    };
 
+  }
+};
 
 //prints board to console horizontally
 var printBoard = function(b) {
-  //var board = this.playingBoard
   var gameBoard = b.map(function (pegs) {
-    return console.log('--- ' + pegs.join(' '))  
+    return console.log('--- ' + pegs.join(' '));  
   });
 
-  console.log('_____________')
+  console.log('_____________');
+  
   return gameBoard; 
 };
 
-  
+//checks winning condition and resets board if met
+var checkWinner = function() {
+  var board = towersOfHanoi['board'];
+  var win = board.find(function() {
+    return board[1].length === 5 || board[2].length === 5
+  });
+
+  if(win) {
+    console.log('You won! Play again?')
+    reset();
+  };
+};
+
 //resets board to starting position
 var reset = function () {
   towersOfHanoi['board'] = [
-    [5, 4, 3, 2, 1],
+    ['5', '4', '3', '2', '1'],
      [],
      []
   ];
-  
   var resetBoard = towersOfHanoi['board'];
   
-  //var printReset(board) = towersOfHanoi['printBoard'];
   return printBoard(resetBoard);
-  
 };
 
-
+/*
 //play
 reset(); //startingBoard
+//moves to win
 towersOfHanoi.moveDisc(1,2);//1
 towersOfHanoi.moveDisc(1,3);//2
 towersOfHanoi.moveDisc(2,3);//3
@@ -106,8 +102,8 @@ towersOfHanoi.moveDisc(2,3);//27
 towersOfHanoi.moveDisc(1,2); //28
 towersOfHanoi.moveDisc(3,1); //29
 towersOfHanoi.moveDisc(3,2); //30
-towersOfHanoi.moveDisc(1,2); //31
- 
+towersOfHanoi.moveDisc(1,2); //31 solution
+*/ 
 
 
 
