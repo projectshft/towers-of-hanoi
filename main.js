@@ -94,7 +94,7 @@ HANOI.prototype.checkWinner = function () {
     //find out if discs (numbers) on this peg are consecutive 
     var winner = fullPeg.reduce(function(accum, disc, i){
         var difIsOne = disc - fullPeg[i + 1] === 1;
-        var lastDisc = i === (this.discAmount - 1);
+        var lastDisc = i === (dscAmt - 1);
 
         //if disc - nextDisc = 1, and if this isn't the last disc : true
         if(difIsOne && !lastDisc){
