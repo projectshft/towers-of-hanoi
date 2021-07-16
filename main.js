@@ -25,3 +25,37 @@ const board = {
         }
     }
 }
+
+
+//  Code to use to check for a win in game
+// board.moveDisc(1, 3)
+// board.moveDisc(1, 2)
+// board.moveDisc(3, 2)
+// board.moveDisc(1, 3)
+// board.moveDisc(2, 1)
+// board.moveDisc(2, 3)
+// board.moveDisc(1, 3)
+// board.moveDisc(1, 2)
+// board.moveDisc(3, 2)
+// board.moveDisc(3, 1)
+// board.moveDisc(2, 1)
+// board.moveDisc(3, 2)
+// board.moveDisc(1, 3)
+// board.moveDisc(1, 2)
+// board.moveDisc(3, 2)
+// board.moveDisc(1, 3)
+// board.moveDisc(2, 1)
+// board.moveDisc(2, 3)
+// board.moveDisc(1, 3)
+// board.moveDisc(2, 1)
+// board.moveDisc(3, 2)
+// board.moveDisc(3, 1)
+// board.moveDisc(2, 1)
+// board.moveDisc(2, 3)
+// board.moveDisc(1, 3)
+// board.moveDisc(1, 2)
+// board.moveDisc(3, 2)
+// board.moveDisc(1, 3)
+// board.moveDisc(2, 1)
+// board.moveDisc(2, 3)
+// board.moveDisc(1, 3)
