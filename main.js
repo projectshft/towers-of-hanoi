@@ -16,10 +16,11 @@ var printBoard = function (arr) {
 Array.prototype.moveDisc = function (peg1, peg2) {
   peg1--;
   peg2--;
+  var sourcePeg = board[peg1];
+  var destPeg = board[peg2];
+
   if (peg1 < board.length && peg2 < board.length) {
     
-    var sourcePeg = board[peg1];
-    var destPeg = board[peg2];
     var topDisc1 = sourcePeg[sourcePeg.length - 1];
     var topDisc2 = destPeg[destPeg.length - 1];
 
@@ -36,6 +37,29 @@ Array.prototype.moveDisc = function (peg1, peg2) {
   }
 
   printBoard(board);
+
+  if (checkWinner(destPeg)) {
+    console.log("Winner!");
+  }
+}
+
+var checkWinner = function (peg) {
+  if (peg != 0 && peg.length == 5) {
+
+    var isWinner = peg.reduce(function (hasWon, curr, index) {
+      if (index > 0) {
+        var previous = peg[index - 1];
+
+        if (curr != previous - 1) {
+          hasWon = false;
+        }
+      }
+      return hasWon;
+    }, true);
+
+    return isWinner;
+  }
+  return false;
 }
 
 printBoard(board);
