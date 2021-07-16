@@ -4,17 +4,18 @@ var newGame = function () {
   board[0] = ["5", "4", "3", "2", "1"];
   board[1] = [];
   board[2] = [];
-  console.log("New game started!")
+  console.log("New game started!");
   printBoard(board);
 }
 
 var printBoard = function (arr) {
-  for (var i = 0; i <= arr.length; i++) {
-    if (arr[i])
-      console.log("--- " + arr[i].join(' '));
-    else 
-      console.log("--- ");
-  }
+  var printArr = arr.map(function (peg) {
+    var pegLine = "---";
+    var newArr = [pegLine].concat(peg);
+    return newArr;
+  })
+
+  console.log(printArr[0].join(' ') + '\n' + printArr[1].join(' ') + '\n' + printArr[2].join(' '));
 }
 
 Array.prototype.moveDisc = function (peg1, peg2) {
@@ -43,8 +44,7 @@ Array.prototype.moveDisc = function (peg1, peg2) {
   printBoard(board);
 
   if (checkWinner(destPeg)) {
-    console.log("Winner!");
-    console.log("**********");
+    console.log("********** \n Winner! \n**********");
     newGame();
   }
 }
