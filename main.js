@@ -20,14 +20,14 @@ Board.prototype.printBoard = function() {
 };
 
 Board.prototype.checkWinner = function() {  
-  this.layout.forEach(function(peg) {
-    peg.forEach(function() {
-      if (peg.length === board.numDiscs) {
-        return true;
-      } 
-    });
+  this.layout.forEach(function(peg) {   
+    
+    if ((peg.length === board.numDiscs) && (peg[0] === board.numDiscs)) {      
+      return true;
+    }     
   });
-};//something either here or in moveDisc isnt working
+  return false;
+};//not working. Conditions for true aren't working
 
 
 Board.prototype.moveDisc = function(startPeg, endPeg) {
@@ -55,7 +55,7 @@ Board.prototype.moveDisc = function(startPeg, endPeg) {
   };
 
   if (this.checkWinner()) {
-    var again = alert('You win! Play again? Enter y or n.');
+    var again = prompt('You win! Play again? Enter y or n.');
     if (again === 'y') {
       board = new Board;
     } else {
