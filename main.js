@@ -1,8 +1,12 @@
-var board = [
-  ["5", "4", "3", "2", "1"],
-  [],
-  []
-]
+var board = []
+
+var newGame = function () {
+  board[0] = ["5", "4", "3", "2", "1"];
+  board[1] = [];
+  board[2] = [];
+  console.log("New game started!")
+  printBoard(board);
+}
 
 var printBoard = function (arr) {
   for (var i = 0; i <= arr.length; i++) {
@@ -40,6 +44,8 @@ Array.prototype.moveDisc = function (peg1, peg2) {
 
   if (checkWinner(destPeg)) {
     console.log("Winner!");
+    console.log("**********");
+    newGame();
   }
 }
 
@@ -62,4 +68,4 @@ var checkWinner = function (peg) {
   return false;
 }
 
-printBoard(board);
+newGame();
