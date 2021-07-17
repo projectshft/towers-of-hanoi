@@ -17,6 +17,10 @@ const board = {
           initalPeg -= 1;
           targetPeg -= 1;
 
+          var board = this.board;
+          var begin = board[initialPeg];
+          var end = board[targetPeg];
+
           // logic for moveDisc to differentiate between legal and illegal moves
 
 
@@ -26,11 +30,14 @@ const board = {
     },
     checkWinner: () => {
         // const winner = ...some logic to check for the winner
+        var win = board.find (function () {
+          return board[1].length === 5 || board[2].length === 5;
+        });
         if (winner) {
             console.log("You won!!")
             // reset to initial state
           var resetGame = function () {
-            // this line needs to be re-written
+            // line 41 has a problem and needs to be re-written
             return board.gameState;
           }
 
