@@ -1,8 +1,8 @@
 
-var Game = function (pegCount, discCount) {
+var Game = function () {
   this.board= [];
-  this.pegCount = pegCount;
-  this.discCount = discCount;
+  this.pegCount = 3;
+  this.discCount = 5;
 }
 
 Game.prototype.newGame = function () {
@@ -20,7 +20,12 @@ Game.prototype.printBoard = function () {
     return newArr;
   })
 
-  console.log(printArr[0].join(' ') + '\n' + printArr[1].join(' ') + '\n' + printArr[2].join(' '));
+  var printStr = printArr.reduce(function (acc, currPeg) {
+    acc += currPeg.join(' ') + '\n';
+    return acc;
+  }, '')
+
+  console.log(printStr);
 }
 
 Game.prototype.moveDisc = function (peg1, peg2) {
@@ -73,5 +78,5 @@ Game.prototype.checkWinner = function (peg) {
   return false;
 }
 
-var game = new Game(3, 5);
+var game = new Game();
 game.newGame();
