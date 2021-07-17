@@ -28,9 +28,8 @@ Game.prototype.printBoard = function () {
     return newArr;
   })
 
-  var printStr = printArr.reduce(function (acc, currPeg) {
-    acc += currPeg.join(' ') + '\n';
-    return acc;
+  var printStr = printArr.reduce(function (acc, currPeg) { 
+    return acc += currPeg.join(' ') + '\n';;
   }, '')
 
   console.log(printStr);
