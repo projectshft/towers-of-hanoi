@@ -1,77 +1,57 @@
-var board = [];
+var boardArr = [];
 
-var initializeBoard = function () {
- board = [ ['5','4','3','2','1'], [], [] ];
- console.log('Game begin, board is:');
- printBoard();
-}
+var board = {
 
-var printBoard = function() {
- var pegDisplay =  board.map(function(peg) {
-   return ('--- '+peg.join(' '));
-  })
-  console.log(pegDisplay[0]);
-  console.log(pegDisplay[1]);
-  console.log(pegDisplay[2]);
-}
+  initializeGame: function() {
+    boardArr = [ ['5','4','3','2','1'], [], [] ];
+    console.log('Game begin, board is:');
+    this.printBoard();
+  },
 
-var moveDisc = function(fromPeg,toPeg) {
-  if(board[fromPeg-1].length < 1) {
-    console.log(`There are no discs on peg ${fromPeg}, board is still:`);
-    printBoard();
-  } else if
-  (board[fromPeg-1][board[fromPeg-1].length-1] > board[toPeg-1][board[toPeg-1].length-1] ) {
-    console.log('You cannot move a larger disc on top of a smaller one, board is still:');
-    printBoard();
-  } else {
-    var liftedPeg = board[fromPeg-1].splice(board[fromPeg-1].length-1,1);
-    board[toPeg-1].push(liftedPeg[0]);
-    console.log('That move was successful, board is now:');
-    printBoard();
-    checkWinner();
+  printBoard: function() {
+    var pegDisplay =  boardArr.map(function(peg) {
+      return ('--- '+peg.join(' '));
+     })
+     console.log(pegDisplay[0]);
+     console.log(pegDisplay[1]);
+     console.log(pegDisplay[2]);
+  },
+
+  moveDisc: function(fromPeg,toPeg) {
+    if(fromPeg < 1 || fromPeg > 3) {
+      console.log(`Peg ${fromPeg} does not exist, board is still:`);
+      this.printBoard();
+    } else if(toPeg < 1 || toPeg > 3) {
+      console.log(`Peg ${toPeg} does not exist, board is still:`);
+      this.printBoard();
+    } else if(fromPeg === toPeg) {
+      console.log(`That disc is already on peg ${toPeg}, board is still:`);
+      this.printBoard();
+    } else if(boardArr[fromPeg-1].length < 1) {
+      console.log(`There are no discs on peg ${fromPeg}, board is still:`);
+      this.printBoard();
+    } else if
+    (boardArr[fromPeg-1][boardArr[fromPeg-1].length-1] > boardArr[toPeg-1][boardArr[toPeg-1].length-1] ) {
+      console.log('You cannot move a larger disc on top of a smaller one, board is still:');
+      this.printBoard();
+    } else {
+      var liftedPeg = boardArr[fromPeg-1].splice(boardArr[fromPeg-1].length-1,1);
+      boardArr[toPeg-1].push(liftedPeg[0]);
+      console.log('That move was successful, board is now:');
+      this.printBoard();
+      this.checkWinner();
+    }
+  },
+
+  checkWinner: function() {
+    var winCondition = '54321';
+    if (boardArr[1].join('') === winCondition || boardArr[2].join('') === winCondition) {
+      console.log('Congratulations, you win!');
+      console.log('Resetting...');
+      this.initializeGame();
+    }
   }
+  
 }
 
-var checkWinner = function() {
-  var winCondition = '54321';
-  if (board[1].join('') === winCondition || board[2].join('') === winCondition) {
-    console.log('Congratulations, you win!');
-    console.log('Resetting...');
-    initializeBoard();
-  }
-}
-
-initializeBoard();
-
-moveDisc(1, 3);
-moveDisc(1, 2);
-moveDisc(3, 2);
-moveDisc(1, 3);
-moveDisc(2, 1);
-moveDisc(2, 3);
-moveDisc(1, 3);
-moveDisc(1, 2);
-moveDisc(3, 2);
-moveDisc(3, 1);
-moveDisc(2, 1);
-moveDisc(3, 2);
-moveDisc(1, 3);
-moveDisc(1, 2);
-moveDisc(3, 2);
-moveDisc(1, 3);
-moveDisc(2, 1);
-moveDisc(2, 3);
-moveDisc(1, 3);
-moveDisc(2, 1);
-moveDisc(3, 2);
-moveDisc(3, 1);
-moveDisc(2, 1);
-moveDisc(2, 3);
-moveDisc(1, 3);
-moveDisc(1, 2);
-moveDisc(3, 2);
-moveDisc(1, 3);
-moveDisc(2, 1);
-moveDisc(2, 3);
-//moveDisc(1, 3);
-
+board.initializeGame();
