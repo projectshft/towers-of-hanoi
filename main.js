@@ -47,17 +47,22 @@ Game.prototype.moveDisc = function (peg1, peg2) {
     var topDisc1 = sourcePeg[sourcePeg.length - 1];
     var topDisc2 = destPeg[destPeg.length - 1];
 
-    if (topDisc2 > topDisc1 || !topDisc2) {
-      destPeg.push(topDisc1);
-      sourcePeg.pop();
-      console.log("Move successful, board is now: ");
+    if (!topDisc1) {
+      console.log("There's no disc there! Board is still: ")
     } else {
-      console.log("You cannot move a larger disc on top of a smaller one, board is still: ");
+      if (topDisc2 > topDisc1 || !topDisc2) {
+        destPeg.push(topDisc1);
+        sourcePeg.pop();
+        console.log("Move successful, board is now: ");
+      } else {
+        console.log("You cannot move a larger disc on top of a smaller one, board is still: ");
+      }
     }
+    
   
     this.printBoard();
 
-    if (this.checkWinner(destPeg)) {
+    if (this.checkWinner(destPeg) && peg2 != 0) {
       console.log("********** \n Winner! \n**********");
       this.newGame();
     }
@@ -68,7 +73,7 @@ Game.prototype.moveDisc = function (peg1, peg2) {
 }
 
 Game.prototype.checkWinner = function (peg) {
-  if (peg != 0 && peg.length == this.discCount) {
+  if (peg.length == this.discCount) {
 
     var isWinner = peg.reduce(function (hasWon, curr, index) {
       if (index > 0) {
