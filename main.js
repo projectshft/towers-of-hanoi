@@ -1,14 +1,22 @@
 
-var Game = function () {
+var Game = function (pegCount, discCount) {
   this.board= [];
-  this.pegCount = 3;
-  this.discCount = 5;
+  this.pegCount = pegCount;
+  this.discCount = discCount;
 }
 
 Game.prototype.newGame = function () {
-  this.board[0] = ["5", "4", "3", "2", "1"];
-  this.board[1] = [];
-  this.board[2] = [];
+  this.board[0] = [];
+
+  for (var i = this.discCount; i > 0; i--) {
+    var disc = i.toString();
+    this.board[0].push(disc);
+  }
+
+  for (var i = 1; i < this.pegCount; i++) {
+    this.board[i] = [];
+  }
+
   console.log("New game started!");
   this.printBoard();
 }
@@ -60,7 +68,7 @@ Game.prototype.moveDisc = function (peg1, peg2) {
 }
 
 Game.prototype.checkWinner = function (peg) {
-  if (peg != 0 && peg.length == 5) {
+  if (peg != 0 && peg.length == this.discCount) {
 
     var isWinner = peg.reduce(function (hasWon, curr, index) {
       if (index > 0) {
@@ -78,5 +86,5 @@ Game.prototype.checkWinner = function (peg) {
   return false;
 }
 
-var game = new Game();
+var game = new Game(3, 5);
 game.newGame();
