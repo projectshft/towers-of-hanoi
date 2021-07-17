@@ -1,6 +1,6 @@
 
 var Game = function (pegCount, discCount) {
-  this.board= [];
+  this.board = [];
   this.pegCount = pegCount;
   this.discCount = discCount;
 }
@@ -58,7 +58,6 @@ Game.prototype.moveDisc = function (peg1, peg2) {
       }
     }
     
-  
     this.printBoard();
 
     if (this.checkWinner(destPeg) && peg2 != 0) {
@@ -73,22 +72,10 @@ Game.prototype.moveDisc = function (peg1, peg2) {
 
 Game.prototype.checkWinner = function (peg) {
   if (peg.length == this.discCount) {
-
-    var isWinner = peg.reduce(function (hasWon, curr, index) {
-      if (index > 0) {
-        var previous = peg[index - 1];
-
-        if (curr != previous - 1) {
-          hasWon = false;
-        }
-      }
-      return hasWon;
-    }, true);
-
-    return isWinner;
+    return true;
   }
   return false;
 }
 
-var game = new Game(3, 5);
+var game = new Game(6, 3);
 game.newGame();
