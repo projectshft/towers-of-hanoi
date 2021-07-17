@@ -11,7 +11,9 @@ var Board = function () {
     console.log('Successful move! Your towers now looks like');
     this.logBoard();
     if( this.checkWin()) {
-      console.log('You win!');
+      console.log('You win! Play again?');
+      this.newGame();
+      this.logBoard();
     }
   } else {
     console.log('Your move was not vaild, try a different move.');
@@ -29,6 +31,9 @@ Board.prototype.logBoard = function () {
   })
 };
 
+Board.prototype.newGame = function () {
+  this.towers = [['5','4','3','2','1'],[],[]]
+};
+
 var board = new Board;
 
-board.moveDisc(1,2);
