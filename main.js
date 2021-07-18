@@ -7,7 +7,7 @@ var board = [
 var startingBoard = board.map (function (game) {
   return game;
 });
-
+//stuck on how to move disk
 var moveDisk = startingBoard.map (function (move) { 
   var newPostion = [];
   if(this.peg == 1 && this.disk.includes(this.disk.length(-1))) {
