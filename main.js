@@ -25,7 +25,7 @@ const game = {                         // declaring an object of game
   
         if (end.length === 0 || start[start.length - 1] < end[end.length - 1]) {
           end.push(start.pop());  
-        };                                     // If the targetPeg array equals 0 or the initialPeg array value is less than the targetPeg value, then do the following code
+        };                                     // If the targetPeg array equals 0 or the initialPeg array value is less than the targetPeg value, then do the following code.  This will allow the code to follow the rules of Towers of Hanoi --  a larger disc can not go on top of a smaller disc
                                                // Remove the value (pop) from ititialPeg and "push" value to targetPeg
         
                                                // after every move, you want to check for a winner
