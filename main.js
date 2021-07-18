@@ -1,9 +1,9 @@
 
 
 const initialState = [            //  declaring an array of arrays with "initialState"
-    ["5", "4", "3", "2", "1"],    //  This is the first peg at index[0]
-    [],                           //  This is the second peg at index[1]
-    [],                           //  This is the third peg at index[2]
+    ["5", "4", "3", "2", "1"],    //  This is the first peg at index[0], five discs on the peg to begin
+    [],                           //  This is the second peg at index[1], no discs to start (empty array)
+    [],                           //  This is the third peg at index[2], no discs to start (empty array)
 ];                                //  Closing the array of arrays
 
 const game = {                         // declaring an object of game
@@ -30,12 +30,13 @@ const game = {                         // declaring an object of game
         game.checkWinner()                     // call the game.CheckWinner function
         game.displayPegs();                    // call the game.displayPegs function
     },
-    checkWinner: () => {
-        // const winner = ...some logic to check for the winner
+    checkWinner: () => {                       // declare a checkWinner function to check to see if player won
+        
         
         var hasWon = (game.board[1].length === 5 || game.board[2].length === 5);
-        if (hasWon) {
-            console.log("You won!!")            
+        //  this is the logic to check if the player has one the game.  The conditions are 5 discs on either  Peg 2 or Peg 3
+        if (hasWon) {                           // check to see if var hasWon is true
+            console.log("You won!!")            // indicate to the player that they have won 
         }
     }
 }
