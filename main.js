@@ -31,8 +31,7 @@ Board.prototype.checkWinner = function() {
 };
 
 
-Board.prototype.moveDisc = function(startPeg, endPeg) {
-  
+Board.prototype.moveDisc = function(startPeg, endPeg) {  
   if ((startPeg <= this.numPegs) && (endPeg <= this.numPegs)) {//check to see if peg is on board
 
     startPeg -=1;//adjust for 0 index
