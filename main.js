@@ -19,15 +19,16 @@ Board.prototype.printBoard = function() {
   });
 };
 
-Board.prototype.checkWinner = function() {  
-  this.layout.forEach(function(peg) {   
-    
-    if ((peg.length === board.numDiscs) && (peg[0] === board.numDiscs)) {      
-      return true;
-    }     
+Board.prototype.checkWinner = function() { 
+  var discs = this.numDiscs; 
+  var win = false
+  this.layout.forEach(function(peg) {
+    if (peg.length === discs && peg[0] === discs) {      
+      win = true;
+    };
   });
-  return false;
-};//not working. Conditions for true aren't working
+  return win;
+};//Well...this was working on Friday, but now (sunday) conditions for true aren't working
 
 
 Board.prototype.moveDisc = function(startPeg, endPeg) {
