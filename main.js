@@ -28,7 +28,7 @@ Board.prototype.checkWinner = function() {
     };
   });
   return win;
-};//Well...this was working on Friday, but now (sunday) conditions for true aren't working
+};
 
 
 Board.prototype.moveDisc = function(startPeg, endPeg) {
