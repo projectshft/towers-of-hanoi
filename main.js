@@ -26,14 +26,21 @@ Board.prototype.checkWin = function () {
 }
 
 Board.prototype.logBoard = function () {
-  this.towers.map(function (tower, index) {
-    console.log('---' + board.towers[index].toString());
-  })
+  var printedBoard = this.towers.map(function (tower) {
+    return `--- ${tower.map(function (disc) {
+      return `${disc}`
+    })}`
+  });
+  var loggedBoard = printedBoard.reduce(function (acc, arr) {
+    return (acc += `${arr}\n`);
+  }, '')
+  console.log(loggedBoard);
 };
 
 Board.prototype.newGame = function () {
   this.towers = [['5','4','3','2','1'],[],[]]
 };
+
 
 var board = new Board;
 
