@@ -41,9 +41,9 @@ function moveDisc(from, to) {
 
   //Checks if there is a disk available to be moved.
   if (source.length === 0) {
-  console.log('There is no disk to move. The board is still:\n');
-  displayBoard();
-  return;
+    console.log('There is no disk to move. The board is still:\n');
+    displayBoard();
+    return;
   };
 
   //Checks if the disk being moved is larger than the one it will be placed on.
@@ -58,16 +58,16 @@ function moveDisc(from, to) {
   console.log('That move was successful, the board is now: \n');
   displayBoard();
 
-//Checks if the win condition has been met. 
+  //Checks if the win condition has been met. 
   checkWinner();
 }
 
 function checkWinner() {
-if (pegs[1].length === 5 || pegs[2].length === 5) {
-  console.log('Congratulations! You won! Restarting board for next game.\n');
-  resetGame();
-  displayBoard();
-}
+  if (pegs[1].length === 5 || pegs[2].length === 5) {
+    console.log('Congratulations! You won! Restarting board for next game.\n');
+    resetGame();
+    displayBoard();
+  }
 }
 
 displayBoard();
