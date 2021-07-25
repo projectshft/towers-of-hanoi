@@ -88,7 +88,7 @@ Board.prototype.moveDisc = function (pos1, pos2) {
     playingBoard.print();
     playingBoard.checkWinner();
 }
-
+//Just for commit comment
 Board.prototype.checkWinner = function () {    
     if (originalPeg === 1) {
         if (this.arr1.length === 0 && this.arr2.toString() === startingPeg.toString()) {
