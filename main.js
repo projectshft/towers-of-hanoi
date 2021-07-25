@@ -48,6 +48,5 @@ var checkWinner = function() {
   }
 };
 
-moveDisc(1,3);
-moveDisc(2,3);
-moveDisc(1,3);
+console.log('Welcome to Towers of Hanoi! The starting board is:')
+printBoard(board);
