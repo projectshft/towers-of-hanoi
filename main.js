@@ -1,21 +1,22 @@
 var board = 
 [
-  ['3','2','1'],
+  ['5','4','3','2','1'],
   [],
   []
 ];
 
-var winningPeg = ['3','2','1'];
+var winningPeg = ['5','4','3','2','1'];
 
 var printBoard = function(board) {
-  board.map(peg => {
-    
-    var currRow = peg.reduce(function(row, disc) {
-      return row + ' ' + disc;
-    },'---');
-    
-    console.log(currRow);
+  var boardAsStringArray = board.map(peg => {
+    return '--- ' + peg.join(' ');
   });
+  
+  var boardAsString = boardAsStringArray.reduce(function(boardString, item) {
+    return boardString + item + '\n';
+  },'')
+
+  console.log(boardAsString);
 };
 
 var moveDisc = function(pegFrom, pegTo) {
@@ -36,12 +37,11 @@ var moveDisc = function(pegFrom, pegTo) {
 };
 
 var checkWinner = function() {
-
   if (JSON.stringify(board[1]) === JSON.stringify(winningPeg) || JSON.stringify(board[2]) === JSON.stringify(winningPeg)) {
     console.log('Congrats! The game is over and you have won!');
     board = 
     [
-      ['3','2','1'],
+      ['5','4','3','2','1'],
       [],
       []
     ]
