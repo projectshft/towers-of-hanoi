@@ -47,9 +47,12 @@ var board = {
     console.log(printBoard.join('\n'));
   },
   checkWinner: function(index) {
+    if (index === 0) {
+      return false;
+    };
     if (this.gameBoard[index].length != this.winningPeg.length) {
       return false;
-    }
+    };
     var isWinner = true;
     for (var i = 0; i < this.gameBoard[index].length; i++) {
       if (this.gameBoard[index][i] != this.winningPeg[i]) {
