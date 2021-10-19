@@ -4,11 +4,12 @@ var board = {
   []],
 
   moveDisc: function(startPeg, endPeg) {
-  console.log(`--- ${board.pegs[0]}`);
-  console.log(`--- ${board.pegs[1]}`);
-  console.log(`--- ${board.pegs[2]}`);
-
-
+  board.pegs.map(peg => {
+    var pegLine = "---";
+    var newArr = [pegLine].concat(peg);
+    return newArr;
+  })
+  
     var startPegArray = board.pegs[(startPeg-1)];
     var endPegArray = board.pegs[(endPeg-1)];
 
@@ -39,8 +40,11 @@ var board = {
 
   printBoard: function() {
     board.pegs.map(peg => {
-      console.log(`--- ${peg}`);
+      var pegLine = "---";
+      var newArr = [pegLine].concat(peg);
+      console.log(newArr);
     });
+
   }
 };
 
