@@ -1,15 +1,20 @@
 var board = {
-  pegs: [[5, 4, 3, 2, 1],
+  pegs: [
+    [5, 4, 3, 2, 1],
   [],
-  []],
+  []
+],
+
+printBoard: function() {
+  var browserBoard = this.pegs.map(peg => {
+    return '---' + peg.join(' ');
+  });
+
+  console.log(browserBoard);
+},
 
   moveDisc: function(startPeg, endPeg) {
-  board.pegs.map(peg => {
-    var pegLine = "---";
-    var newArr = [pegLine].concat(peg);
-    return newArr;
-  })
-  
+
     var startPegArray = board.pegs[(startPeg-1)];
     var endPegArray = board.pegs[(endPeg-1)];
 
@@ -37,15 +42,7 @@ var board = {
       this.pegs[2].splice(0, 5);
     };
   },
-
-  printBoard: function() {
-    board.pegs.map(peg => {
-      var pegLine = "---";
-      var newArr = [pegLine].concat(peg);
-      console.log(newArr);
-    });
-
-  }
+  
 };
 
 // winning moves
