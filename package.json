@@ -1,0 +1,19 @@
+{
+  "name": "towers-of-hanoi",
+  "version": "1.0.0",
+  "description": "Towers of Hanoi game, built as an eval for Parsity Unit 1.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drake-nathan/towers-of-hanoi.git"
+  },
+  "author": "Nathan Drake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drake-nathan/towers-of-hanoi/issues"
+  },
+  "homepage": "https://github.com/drake-nathan/towers-of-hanoi#readme"
+}
