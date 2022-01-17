@@ -10,7 +10,7 @@ let board = {
       board.currentBoard[to - 1].push(board.currentBoard[from - 1].pop());
       board.printBoard = convertBoard(board.currentBoard);
 
-      if (checkWinner()) {
+      if (checkWinner(board.boardSize.pegNum, )) {
         console.log(`\n${board.printBoard}`);
         console.log('\nYou win!\n')
       } else {
@@ -20,6 +20,7 @@ let board = {
     }
   }
 }
+
 const createBoard = (pegNum, discNum) => {
   const boardArr = [];
   for (let peg = 0; peg < pegNum; peg++) {
@@ -36,22 +37,36 @@ const startGame = (pegNum, discNum) => {
   board.boardSize.discs = discNum;
   board.currentBoard = createBoard(pegNum, discNum);
   board.printBoard = convertBoard(board.currentBoard);
-  board.winRefArr = board.currentBoard.map(num => num);
+
+  board.winRefArr = [];
+  for (let peg = pegNum; peg > 0; peg--) {
+    board.winRefArr.push(peg);
+  }
 
   console.log(`\n${board.printBoard}`);
   console.log('\nA new game has begun, your move.\n');
 }
 
-const convertBoard = boardParam => {
-  const mapBoard = boardParam.map(arr => "--- " + arr.toString().replaceAll(',', ' '));
+const convertBoard = boardToConvert => {
+  const mapBoard = boardToConvert.map(arr => "--- " + arr.toString().replaceAll(',', ' '));
   const str = mapBoard.toString().replaceAll(',', '\n');
   return str;
 }
 
-const checkWinner = () => {
-  for (let peg = 1; peg <= board.pegNum; peg++) {
-    if (board.currentBoard[peg] === board.winRefArr) {
+const checkWinner = (boardPegSize, boardCheck, winCheck) => {
+  for (let peg = 1; peg < boardPegSize; peg++) {
+    if (boardCheck[peg] === winCheck) {
+      console.log('You won!')
       return true;
+    } else {
+      console.log('You haven\'t won yet.');
+      return false;
     }
   }
 }
+
+const launch = () => {
+  console.log('To play Towers of Hanoi, please enter \"startGame(3, 5)\" in the console. Feel free to change the parameters. The 1st number is the numbers of pegs the board will start with, and the 2nd number is the number of discs. Good luck!');
+}
+
+launch();

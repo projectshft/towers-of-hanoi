@@ -1,5 +1,16 @@
 body {
-  background-color: rgb(194, 193, 193);
+  background-color: rgb(207, 207, 207);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
+}
+
+button {
+  cursor: pointer;
+  padding: 5px;
+  margin: 20px;
+}
+
+.game-inputs {
+  cursor: pointer;
+  margin: 8px;
 }

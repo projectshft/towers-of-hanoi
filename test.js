@@ -1,13 +1,13 @@
-let arr1 = [1, 2, 3];
-
-const createArrCopy = arr => {
-  return arr.map(num => num);
+const checkWinner = (boardPegSize, boardToCheck, winRefArr) => {
+  for (let peg = 1; peg < boardPegSize; peg++) {
+    if (boardToCheck[peg] == winRefArr) {
+      console.log('You won!')
+      return true;
+    } else {
+      console.log('You haven\'t won yet.');
+      return false;
+    }
+  }
 }
 
-let arr2 = createArrCopy(arr1);
-console.log(arr2);
-
-arr2.push(4);
-
-console.log(arr1);
-console.log(arr2);
+checkWinner(3, [[], [], [3, 2, 1]], [3, 2, 1]);
