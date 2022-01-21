@@ -8,53 +8,14 @@
     <title>Towers of Hanoi</title>
     <script type="text/javascript" src="./main.js"></script>
   </head>
+  <header>
+    <h1>Towers of Hanoi</h1>
+    <hr />
+  </header>
   <body>
-    <header>
-      <h1>Towers of Hanoi</h1>
-      <hr />
-    </header>
-    <div class="game-setup">
-      <input
-        type="range"
-        name="pegs"
-        id="pegs"
-        class="game-inputs"
-        min="3"
-        max="6"
-        value="3"
-        list="peg-ticks"
-      />
-      <label for="pegs">Number of Pegs</label>
-      <datalist id="peg-ticks">
-        <option value="3" label="3"></option>
-        <option value="4" label="4"></option>
-        <option value="5" label="5"></option>
-        <option value="6" label="6"></option>
-      </datalist>
-      <br />
-      <input
-        type="range"
-        name="discs"
-        id="discs"
-        class="game-inputs"
-        min="3"
-        max="10"
-        value="5"
-        list="disc-ticks"
-      />
-      <label for="discs">Number of Discs</label>
-      <datalist id="disc-ticks">
-        <option value="3" label="3"></option>
-        <option value="4" label="4"></option>
-        <option value="5" label="5"></option>
-        <option value="6" label="6"></option>
-        <option value="7" label="7"></option>
-        <option value="8" label="8"></option>
-        <option value="9" label="9"></option>
-        <option value="10" label="10"></option>
-      </datalist>
-      <br />
-      <button id="start-buttom">Start Game</button>
-    </div>
+    <p>
+      Open the Chrome Devtools JS Console to play the game. (command + option +
+      j)
+    </p>
   </body>
 </html>
