@@ -1,7 +1,7 @@
 var board = {
   pegs: [
-    ["5", "4", "3", "2", "1"],
-    //["3", "2", "1"],
+    //["5", "4", "3", "2", "1"],
+    ["3", "2", "1"],
     [],
     []
   ],
@@ -31,11 +31,34 @@ var board = {
     if (this.pegs[1].length === winningPosition || this.pegs[2].length === winningPosition) {
       console.log(`Winner!`)
       this.printBoard();
+      this.resetGame();
     } else {
       console.log(`Successful move`)
       this.printBoard();
     }
-  }
+  },
 
+  resetGame: function() {
+    console.log('Game Reset')
+    this.pegs = [
+      //["5", "4", "3", "2", "1"],
+      ["3", "2", "1"],
+      [],
+      []
+    ]
+    this.printBoard()
+  }
 }
 
+//Winner with 3 pegs
+board.moveDisc(1,2)
+board.moveDisc(1,3)
+board.moveDisc(2,3)
+board.moveDisc(1,2)
+board.moveDisc(3,1)
+board.moveDisc(3,2)
+board.moveDisc(1,2)
+
+//Illegal move
+// board.moveDisc(1,2)
+// board.moveDisc(1,2)
