@@ -12,7 +12,7 @@ const board = {
       // after making the move, checks to see if player has won yet. if not, displays the board after the recent move
       if (checkWinner(board.currentBoard, board.winRefArr)) {
         console.log(`\n${board.printBoard}`);
-        console.log(`\nYou win! Type startGame(${board.boardSize.pegs}, ${board.boardSize.discs}) to play again!\n`)
+        console.log(`\nYou win! Type startGame(${board.boardSize.pegs}, ${board.boardSize.discs}) to play again! (Change the numbers to change the board size.)\n`)
       } else {
         console.log(`\n${board.printBoard}`);
         console.log('\nYour move.\n');
@@ -20,7 +20,6 @@ const board = {
     }
   }
 }
-
 
 // logs the welcome message when the program is run
 const launch = () => {
@@ -32,14 +31,15 @@ const startGame = (pegNum, discNum) => {
   board.boardSize.pegs = pegNum;
   board.boardSize.discs = discNum;
   board.currentBoard = createBoard(pegNum, discNum);
-  board.printBoard = convertBoard(board.currentBoard, pegNum);
+  board.printBoard = convertBoard(board.currentBoard);
   
-  board.winRefArr = [...board.currentBoard];
+  board.winRefArr = [...board.currentBoard[0]];
   
   console.log(`\n${board.printBoard}`);
   console.log('\nA new game has begun, your move.\n');
 }
 
+// dynamically generates the board, based on inputs
 const createBoard = (pegNum, discNum) => {
   const boardArr = [];
   for (let peg = 0; peg < pegNum; peg++) {
@@ -52,12 +52,12 @@ const createBoard = (pegNum, discNum) => {
 }
 
 // converts the board array to the vertical verson to display in the console
-const convertBoard = (boardToConvert, pegs) => {
-  // const numArr = [];
-  // for (let i = 1; i <= pegs; i++) {
-  //   numArr.push(i);
-  // }
-  const mapBoard = boardToConvert.map(arr =>  "--- " + arr.toString().replaceAll(',', ' '));
+const convertBoard = boardToConvert => {
+  let counter = 0;
+  const mapBoard = boardToConvert.map(arr =>  {
+    counter++;
+    return counter + ") --- " + arr.toString().replaceAll(',', ' ');
+});
   const str = mapBoard.toString().replaceAll(',', '\n');
   return str;
 }
