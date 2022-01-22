@@ -195,7 +195,7 @@ function moveDisc(pegFrom, pegTo) {
     throw new Error("Please specify two different values for the input");
   }
 
-  // Translating input from number to peg number. I know there is a better way to do this :)
+  // Translating input from number to peg number. I THOUGHT that we weren't supposed to use 'for' loops so I didn't use them to match up the number and peg. I know there is a better way to do this though :)
 
   if (pegFrom === 1) {
     pegFrom = firstPeg;
