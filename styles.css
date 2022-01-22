@@ -132,11 +132,13 @@ button.pop-out-close:active {
 }
 
 .add-row-err {
-  color: red;
+  color: rgb(248, 184, 184);
   font-style: italic;
+  font-weight: 600;
   text-align: center;
   font-size: 1.5rem;
   display: none;
+  transition: 0.2s;
 }
 
 .btn-header {
@@ -155,6 +157,7 @@ button.pop-out-close:active {
   font-size: 1.8rem;
   text-align: center;
   line-height: 1.5;
+  height: 3rem;
 }
 
 .move-btns {

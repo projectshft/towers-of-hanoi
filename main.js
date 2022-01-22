@@ -40,7 +40,6 @@ const moveFailMsg =
   "You cannot move a larger disc on top of a smaller one! Try again.";
 const moveSuccessMsg = "That move was successful, check out the new board.";
 const wrongMove = "You cannot move from an empty peg. Try again.";
-const error = `Inputs must be different and be between 1 and ${pegNum}`;
 
 //Variables for DOM manipulation, with event listener, then the rest is incorporated into the moveDisc function;
 const inputTo = document.querySelector(".input-to-data");
@@ -64,7 +63,7 @@ submitBtn.addEventListener("click", () => {
   let pegFrom = parseInt(inputFrom.value);
 
   if (pegTo > pegNum || pegFrom > pegNum || pegTo === 0 || pegFrom === 0) {
-    msg.innerText = error;
+    msg.innerText = `Inputs must be unique and be between 1 and ${pegNum}`;
     styleErrMsg();
     clearMsg();
     clearInputs();
@@ -86,10 +85,6 @@ addRow.addEventListener("click", () => {
     throw new Error("You cannot add a row after the game has begun");
   } else {
     addPeg();
-    // boardState.fourthPeg = [];
-    // fourthPeg = boardState.fourthPeg;
-    // pegNum = 4;
-    // pegFourDocNums = document.querySelector(".nums-pegFour");
   }
 });
 
@@ -170,6 +165,7 @@ reset.addEventListener("click", () => {
 //Move Disc Function
 
 function moveDisc(pegFrom, pegTo) {
+  const error = `Your inputs must start at 1 and cannot exceed ${pegNum} pegs`;
   //Before doing anything, let's make sure the inputs are even usable
   //First, let's make sure they are not zero.
   if (pegFrom < 1 || pegTo < 1) {
@@ -177,7 +173,7 @@ function moveDisc(pegFrom, pegTo) {
     styleErrMsg();
     clearMsg();
     clearInputs();
-    throw new Error(`Your inputs must start at 1`);
+    throw error;
   }
 
   //Now make sure they are not higher than the number of pegs we have;
@@ -187,7 +183,7 @@ function moveDisc(pegFrom, pegTo) {
     //Discard the browser message after 3s (function for this is later in the code;
     clearMsg();
     clearInputs();
-    throw new Error(`We only have ${pegNum} pegs so choose within those pegs`);
+    throw error;
   }
 
   //Third, let's check that people didn't put in the same number for both 'from' and 'to'
@@ -286,11 +282,15 @@ function checkWinner() {
     thirdPeg.map((item) => Number(item)).join(" ") === startingNums
   ) {
     winner.style.display = "block";
-    console.log("YOU'VE WON! Game is resetting");
+    console.log(
+      "YOU'VE WON! Click reset button in browser or refresh to reset!"
+    );
   } else if (fourthPeg) {
     if (fourthPeg.map((item) => Number(item)).join(" ") === startingNums) {
       winner.style.display = "block";
-      console.log("YOU'VE WON! Game is resetting");
+      console.log(
+        "YOU'VE WON! Click reset button in browser or refresh to reset!"
+      );
     }
   }
 }
@@ -305,7 +305,7 @@ function styleMsg() {
 //And one to style an error message
 function styleErrMsg() {
   msg.style.fontStyle = "italic";
-  msg.style.color = "red";
+  msg.style.color = "rgb(248, 184, 184)";
 }
 
 // Function to clear input fields after 2s after pressing the submit button
@@ -314,7 +314,7 @@ function clearInputs() {
   setTimeout(function () {
     inputTo.value = "";
     inputFrom.value = "";
-  }, 3000);
+  }, 500);
 }
 
 // Function to clear the text of the message (4s) that user gets in the browser after inputs
@@ -323,7 +323,7 @@ function clearMsg() {
     msg.innerText = "How do you want to move the numbers?";
     msg.style.fontStyle = "normal";
     msg.style.color = "#decfeb";
-  }, 5000);
+  }, 3000);
 }
 
 //Function to add a 4th peg
@@ -354,37 +354,3 @@ function addPeg() {
   pegNum = 4;
   pegFourDocNums = document.querySelector(".nums-pegFour");
 }
-
-//Moves to check winner function with three pegs.
-
-// moveDisc(1, 2);
-// moveDisc(1, 3);
-// moveDisc(2, 3);
-// moveDisc(1, 2);
-// moveDisc(3, 1);
-// moveDisc(3, 2);
-// moveDisc(1, 2);
-// moveDisc(1, 3);
-// moveDisc(2, 3);
-// moveDisc(2, 1);
-// moveDisc(3, 1);
-// moveDisc(2, 3);
-// moveDisc(1, 2);
-// moveDisc(1, 3);
-// moveDisc(2, 3);
-// moveDisc(1, 2);
-// moveDisc(3, 1);
-// moveDisc(3, 2);
-// moveDisc(1, 2);
-// moveDisc(3, 1);
-// moveDisc(2, 3);
-// moveDisc(2, 1);
-// moveDisc(3, 1);
-// moveDisc(3, 2);
-// moveDisc(1, 2);
-// moveDisc(1, 3);
-// moveDisc(2, 3);
-// moveDisc(1, 2);
-// moveDisc(3, 1);
-// moveDisc(3, 2);
-// moveDisc(1, 2);
