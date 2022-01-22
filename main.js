@@ -329,6 +329,9 @@ function clearMsg() {
 //Function to add a 4th peg
 
 function addPeg() {
+  if (firstPeg.length < 5) {
+    throw new Error("You cannot add a row after the game has begun");
+  }
   //selecting the third peg to clone
   let existingPeg = document.querySelector(".pegThree");
   const container = document.querySelector(".innerContainer");
