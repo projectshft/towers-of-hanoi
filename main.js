@@ -86,10 +86,10 @@ addRow.addEventListener("click", () => {
     throw new Error("You cannot add a row after the game has begun");
   } else {
     addPeg();
-    boardState.fourthPeg = [];
-    fourthPeg = boardState.fourthPeg;
-    pegNum = 4;
-    pegFourDocNums = document.querySelector(".nums-pegFour");
+    // boardState.fourthPeg = [];
+    // fourthPeg = boardState.fourthPeg;
+    // pegNum = 4;
+    // pegFourDocNums = document.querySelector(".nums-pegFour");
   }
 });
 
@@ -348,9 +348,14 @@ function addPeg() {
   //Switch out classnames
   document.querySelector(".pegFour .numbers").classList.remove("nums-pegThree");
   document.querySelector(".pegFour .numbers").classList.add("nums-pegFour");
+
+  boardState.fourthPeg = [];
+  fourthPeg = boardState.fourthPeg;
+  pegNum = 4;
+  pegFourDocNums = document.querySelector(".nums-pegFour");
 }
 
-//Moves to check winner function
+//Moves to check winner function with three pegs.
 
 // moveDisc(1, 2);
 // moveDisc(1, 3);
