@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600&display=swap&?family=Lato&display=swap""
+    rel=" stylesheet" />
+
+    <link rel="stylesheet" href="styles.css" />
+    <title>Towers of Hanoi</title>
+</head>
+
+<body>
+    <header>
+
+        <h1>Towers of Hanoi</h1>
+        <button class="instructions">How to Play</button>
+        <div class="pop-out-container" >
+            <p class="pop-out-text">The goal is to move a set of discs of different sizes, ranging in size from the
+                smallest (1) the largest(5), from one peg to another. You can only move the topmost disc off the peg and
+                you can't put a larger disc on top of a smaller one.
+
+                You win when you put all the discs back in their original order on a DIFFERENT peg.
+
+                The game has three pegs but if you want an easier challenge, add a row by clicking the 'Add Row' button.
+            </p>
+            <button class="pop-out-close">Close</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="innerContainer">
+                <div class="pegOne peg">
+                    <div class="img-box">
+                        <img src="images/numberoneinacircle_80030.png" class="num-icons" alt="number one" />
+
+                    </div>
+                    <div>
+                        <p class="lines">---</p>
+                    </div>
+                    <div>
+                        <p class="numbers nums-pegOne">5 4 3 2 1</p>
+                    </div>
+                </div>
+
+                <div class="pegTwo peg">
+                    <div class="img-box">
+
+                        <img src="images/numbertwoinacircle_80299.png" class="num-icons" alt="number two" />
+                    </div>
+                    <div>
+                        <p class="lines">---</p>
+                    </div>
+                    <div>
+                        <p class="numbers nums-pegTwo"></p>
+                    </div>
+                </div>
+
+                <div class="pegThree peg">
+                    <div class="img-box">
+                        <img src="images/numberthreeinacircle_80289 (1).png" class="num-icons" alt="number three" />
+                    </div>
+                    <div>
+                        <p class="lines">---</p>
+                    </div>
+
+                    <div>
+                        <p class="numbers nums-pegThree"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="add-peg">
+                <div class="add-peg-btn-wrap">
+                    <button class="btn-add">Add a row</button>
+                    <p class="add-row-err">You cannot add a row after the game has begun</p>
+                </div>
+            </div>
+
+            <div class="btn-header">
+                <div class="direction-container">
+                    <h2>Pick your move</h2>
+                    <p class="directions">
+                        How do you want to move the numbers? 
+                    </p>
+                </div>
+
+                <div class="move-btns">
+                    <div class="input-boxes">
+                        <div class="input-item input-from">
+                            <input type="text" name="inputPegFrom" class="input-from-data" id="inputPegFrom" />
+                            <label id="inputPegFrom">Move from?</label>
+                        </div>
+
+                        <div class="input-item input-to">
+                            <input type="text" name="inputPegTo" class="input-to-data" id="inputPegTo" />
+                            <label id="inputPegTo">Move to?</label>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-input">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="winner-screen">
+                <div class="winner-container">
+                    <p class="winner-text">YOU'VE WON! &#127881</p>
+                    <button class="btn-reset">Reset Game</button>
+                </div>
+            </div>
+    </main>
+    <footer>
+        <p>Designed and coded by Amanda Richardson</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
