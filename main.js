@@ -20,11 +20,18 @@ const move = function(disc, spot) {
   //function for checking wins
   const win = () => {
     if(actualBoard[1].length === 5 || actualBoard[2].length === 5) {
-      alert('Congrats, you won in ' + moves + ' turns!')
+      alert('Congrats, you won in ' + moves + ' turns!');
       console.log("Reseting Board:");
       moves = 0;
       return actualBoard = [[5, 4, 3, 2, 1], [], []];  
     } 
+  };
+
+  //function for console.log
+  const map = () => {
+    return actualBoard.map(element => {
+      console.log(element);
+    })
   };
 
   //Code for cutting the disc from peg
@@ -40,15 +47,15 @@ const move = function(disc, spot) {
     actualBoard[spot -1] = pegSpot;
     moveCounter();
     win();
-    console.log(actualBoard);
-  } 
-  else {
-    console.log(actualBoard)
-    pegDisc.push(push);
-    return alert('Disc ' + push + " can't be put atop of disc " + value);
+    map();
   }
+  else {
+    pegDisc.push(push);
+    map();
+    return alert('Disc ' + push + " can't be put atop of disc " + value);
+  };
   // debugger;
-}
+};
 move(1, 2);
 move(1, 3);
 move(2, 3);
@@ -82,14 +89,7 @@ move(3, 2);
 //move(1, 2)
 
 
-//Need to have a check that looks at the value behind value being pushed into spot array. 
-// let var = pegspot[pegspot.length]
 
-// if(var > push) {
-//   bingo
-// } else {
-//   bongo
-// }
 
 
 
