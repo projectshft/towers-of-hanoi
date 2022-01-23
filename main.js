@@ -81,8 +81,18 @@ addRow.addEventListener("click", () => {
     document.querySelector(".add-row-err").style.display = "block";
     setTimeout(function () {
       document.querySelector(".add-row-err").style.display = "none";
+      document.querySelector(".add-row-err").textContent =
+        "You cannot add a row after the game has begun";
     }, 4000);
     throw new Error("You cannot add a row after the game has begun");
+  } else if (fourthPeg) {
+    document.querySelector(".add-row-err").style.display = "block";
+    setTimeout(function () {
+      document.querySelector(".add-row-err").style.display = "none";
+      document.querySelector(".add-row-err").innerHTML =
+        "Maximum number of rows is 4";
+    }, 4000);
+    throw new Error("You cannot add more than 4 rows");
   } else {
     addPeg();
   }
@@ -308,7 +318,7 @@ function styleErrMsg() {
   msg.style.color = "rgb(248, 184, 184)";
 }
 
-// Function to clear input fields after 2s after pressing the submit button
+// Function to clear input fields after a short period after pressing the submit button
 
 function clearInputs() {
   setTimeout(function () {
@@ -317,7 +327,7 @@ function clearInputs() {
   }, 500);
 }
 
-// Function to clear the text of the message (4s) that user gets in the browser after inputs
+// Function to clear the text of the message  that user gets in the browser after inputs
 function clearMsg() {
   setTimeout(function () {
     msg.innerText = "How do you want to move the numbers?";
@@ -331,6 +341,10 @@ function clearMsg() {
 function addPeg() {
   if (firstPeg.length < 5) {
     throw new Error("You cannot add a row after the game has begun");
+  }
+
+  if (fourthPeg) {
+    throw new Error("You cannot add more than a fourth peg");
   }
   //selecting the third peg to clone
   let existingPeg = document.querySelector(".pegThree");
