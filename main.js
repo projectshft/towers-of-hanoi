@@ -7,15 +7,17 @@ var board = [
 var rowIndicator = '-';
 
 
-var printBoard = function (boardArray) {
-  var rowsAsStrings = boardArray.map(function (row) {
+var printBoard = function () {
+  var rowsAsStrings = board.map(function (row) {
     return row.join(' ');
   });
   
   var fullString = rowsAsStrings.reduce(function (acc, element) {
-    acc += `${rowIndicator * 3} ${element}\n`;
+    acc += `${rowIndicator.repeat(3)} ${element}\n`;
     return acc;
   }, '');
 
   console.log(fullString);
 };
+
+
