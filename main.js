@@ -85,14 +85,6 @@ addRow.addEventListener("click", () => {
         "You cannot add a row after the game has begun";
     }, 4000);
     throw new Error("You cannot add a row after the game has begun");
-  } else if (fourthPeg) {
-    document.querySelector(".add-row-err").style.display = "block";
-    setTimeout(function () {
-      document.querySelector(".add-row-err").style.display = "none";
-      document.querySelector(".add-row-err").innerHTML =
-        "Maximum number of rows is 4";
-    }, 4000);
-    throw new Error("You cannot add more than 4 rows");
   } else {
     addPeg();
   }
@@ -161,6 +153,8 @@ function resetState() {
   if (fourthPeg) {
     document.querySelector(".pegFour").remove();
   }
+
+  document.querySelector(".add-peg").style.display = "block";
 
   console.log(startingBoard);
 }
@@ -370,4 +364,7 @@ function addPeg() {
   fourthPeg = boardState.fourthPeg;
   pegNum = 4;
   pegFourDocNums = document.querySelector(".nums-pegFour");
+
+  //Hide add row btn
+  document.querySelector(".add-peg").style.display = "none";
 }
