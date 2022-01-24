@@ -6,7 +6,7 @@ let board = [
 ];
 let printBoard = function() {
   board.map(function (peg) {
-    return peg
+    return peg;
 
   });
 
@@ -18,7 +18,7 @@ var display = printBoard();
 
 
 const moveDisc = function (a, b) {
-  if (board[a-1].length) < (board[b-1].length)
+  
   
 };
 
