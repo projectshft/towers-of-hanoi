@@ -4,9 +4,8 @@ var board = [
   []
 ];
 
-var rowIndicator = '-';
-
 var boardState = {
+  indicator: '-',
   playing: true,
   illegalMove: ''
 };
@@ -18,7 +17,7 @@ var printBoard = function () {
   });
   
   var fullString = rowsAsStrings.reduce(function (acc, element) {
-    acc += `${rowIndicator.repeat(3)} ${element}\n`;
+    acc += `${boardState.indicator.repeat(3)} ${element}\n`;
     return acc;
   }, '');
 
@@ -34,18 +33,36 @@ var moveIsLegal = function (firstPeg, lastPeg) {
   var acceptableDiscSize = topDisc < bottomDisc || bottomDisc === undefined;
   if (!rowHasDiscs) {
     boardState.illegalMove = 'There are no discs to move on that peg!';
-  }
-  if (!acceptableDiscSize) {
+  } else if (!acceptableDiscSize) {
     boardState.illegalMove = 'You cannot place a larger disc on top of a smaller.';
   }
   
   return rowHasDiscs && acceptableDiscSize;
 };
 
+var checkWinner = function () {
+  var winnerTest = board.filter(function (row) {
+    return row.length;
+  });
+  
+  return winnerTest.length === 1 && !board[0].length;
+};
 
+var resetBoard = function () {
+  board = board.map(function () {
+    return [];
+  });
+  board[0] = ['5', '4', '3', '2', '1']
+
+  boardState.playing = true;
+  boardState.illegalMove = '';
+};
 
 var moveDisc = function (startPeg, endPeg) {
   // note: the pegs are not the same as the index: so peg 1 is index 0 in its row
+  if (!boardState.playing) {
+    boardState.playing = true;
+  }
   var startPegDiscs = board[startPeg - 1];
   var endPegDiscs = board[endPeg - 1];
 
@@ -58,4 +75,15 @@ var moveDisc = function (startPeg, endPeg) {
     console.log(`Board remains unchanged.`)
     printBoard();
   }
+
+  if (checkWinner()) {
+    boardState.playing = false;
+    console.log('\nWell done, you won!');
+    resetBoard();
+    console.log('The board is ready for a new game.');
+  }
 };
+
+var changeStyle = function (indicator) {
+  boardState.indicator = indicator;
+}
