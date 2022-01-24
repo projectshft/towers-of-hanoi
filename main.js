@@ -7,7 +7,8 @@ var board = [
 var boardState = {
   indicator: '-',
   playing: true,
-  illegalMove: ''
+  illegalMove: '',
+  numOfMoves: 0
 };
 
 
@@ -70,6 +71,7 @@ var moveDisc = function (startPeg, endPeg) {
     endPegDiscs.push(startPegDiscs.pop())
     console.log('That move was successful!');
     printBoard();
+    boardState.numOfMoves += 1;
   } else {
     console.log(boardState.illegalMove);
     console.log(`Board remains unchanged.`)
@@ -79,6 +81,7 @@ var moveDisc = function (startPeg, endPeg) {
   if (checkWinner()) {
     boardState.playing = false;
     console.log('\nWell done, you won!');
+    console.log(`You won in ${boardState.numOfMoves} moves.`);
     resetBoard();
     console.log('The board is ready for a new game.');
   }
