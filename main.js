@@ -6,20 +6,20 @@ let board = [
 ];
 let printBoard = function() {
   board.map(function (peg) {
-    return peg.map(function (disc) {
-      return disc;
-    });
+    return peg
 
   });
 
   
 };
 
+var display = printBoard();
 
 
-/*const moveDisc = function (a, b) {
+
+const moveDisc = function (a, b) {
   if (board[a-1].length) < (board[b-1].length)
   
-}*/
+};
 
-console.log(printBoard);
+console.log(display);
