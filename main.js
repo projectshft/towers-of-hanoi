@@ -35,6 +35,13 @@ const game = {
         }
         //log the post-moveDisc state of the board
         this.logBoard();
+        this.checkWinner(peg2);
+    },
+    checkWinner(peg) {
+        //player wins if a peg other than peg 1 contains five discs; unnecessary to check order of discs because they can never be placed out of increasing order
+        if(peg !== 1 && this.board[peg - 1]) {
+            console.log("Congratulations, you win! I hope there weren't 64 discs!")
+        }
     }
 }
 
