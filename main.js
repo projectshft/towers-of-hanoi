@@ -1,0 +1,1 @@
+alert("Welcome to Towers of Hanoi! Good luck!")
