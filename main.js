@@ -15,7 +15,7 @@ const TowerOfHanoiGame = (numDiscs) => {
     let discCount = numDiscs || 5;
 
     let board = [
-        // ["5", "4", "3", "2", "1"],
+        //build array of size 5 prefilled with null values then map over it to give each element a string value of the index plus one
         Array.apply(null, Array(discCount)).map((element, idx) => {
             return (idx + 1).toString();
         }),
@@ -36,6 +36,10 @@ const TowerOfHanoiGame = (numDiscs) => {
     logBoard();
 
     return {
+        //return value of top disc of selected peg
+        getTopDisc: function(peg) {
+            return board[peg - 1][board[peg - 1].length - 1]
+        },
         moveDisc: function(peg1, peg2) {
             //peg indexes in board are one less than the peg args provided
             let peg1Idx = peg1 - 1;
@@ -65,7 +69,5 @@ const TowerOfHanoiGame = (numDiscs) => {
     }
 }
 
-//create an instance of the game
-let game = TowerOfHanoiGame(7);
 
 
