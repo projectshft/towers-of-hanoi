@@ -17,8 +17,9 @@ let board = {
    } else {
      endPeg.push(lastDiscOnStartPeg);
      startPeg.pop(lastDiscOnStartPeg);
-     console.log('That move was successful, board is now:')
-     this.printBoard()
+     this.checkWinner();
+     console.log('That move was successful, board is now:');
+     this.printBoard();
    }
   },
  
@@ -30,9 +31,26 @@ let board = {
     let endBoard = this.gameBoard.map(function(arr) {
     return rows(arr);
   });
+    console.log(endBoard[0]);
+    console.log(endBoard[1]);
+    console.log(endBoard[2]);
+  },
 
-  console.log(endBoard[0]);
-  console.log(endBoard[1]);
-  console.log(endBoard[2]);
-}
-}
+  checkWinner: function () {
+    let winningPeg = ['5', '4', '3', '2', '1'].toString();
+    let peg1 = this.gameBoard[0].toString();
+    let peg2 = this.gameBoard[1].toString();
+    let peg3 = this.gameBoard[2].toString();
+
+    if (peg2 === winningPeg || peg3 === winningPeg) {
+      console.log('You won!');
+      this.resetGame();
+    }
+  },
+
+  resetGame: function () {
+    this.gameBoard[0] = ['5', '4', '3', '2', '1'];
+    this.gameBoard[1] = [];
+    this.gameBoard[2] = [];
+  }
+} 
