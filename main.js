@@ -1,16 +1,19 @@
-alert("Welcome to Towers of Hanoi! Good luck!");
+alert("Welcome to Tower of Hanoi! Good luck!");
 //must have object that maintains the state of the board
 //needs to be a way to move discs from one peg to another
 //checkWinner function will check to see if the player has won the game, which means putting all the discs back in the original order but on a new peg
 //once a player ends the game should automatically win by announcing a winner (through console.log) and reset for a new game;
 
 //create game-creating module so the board is only accessible via the functions explicitly defined to interact with it
-const TowersOfHanoiGame = (numDiscs) => {
+const TowerOfHanoiGame = (numDiscs) => {
     if(numDiscs === 64) {
         numDiscs = 65;
         console.log('Playing this game with 64 discs could cause the world to end; you can play with 65 instead');
     }
+
+    //discCount defaults to 5 if no numDiscs value passed
     let discCount = numDiscs || 5;
+
     let board = [
         // ["5", "4", "3", "2", "1"],
         Array.apply(null, Array(discCount)).map((element, idx) => {
@@ -19,15 +22,20 @@ const TowersOfHanoiGame = (numDiscs) => {
         [],
         []
     ];
+
+    let logBoard = function() {
+        //create an array of three strings that hold the '--- ' prefix and the disc numbers
+        let pegStrings = board.map(peg => {
+            return '--- ' + peg.join('');
+        });
+        //print each of the peg strings to the console individually
+        pegStrings.forEach(peg => console.log(peg));
+    }
+
+    //log the board's state upon intialization of game
+    logBoard();
+
     return {
-        logBoard: function() {
-            //create an array of three strings that hold the '--- ' prefix and the disc numbers
-            let pegStrings = board.map(peg => {
-                return '--- ' + peg.join('');
-            });
-            //print each of the peg strings to the console individually
-            pegStrings.forEach(peg => console.log(peg));
-        },
         moveDisc: function(peg1, peg2) {
             //peg indexes in board are one less than the peg args provided
             let peg1Idx = peg1 - 1;
@@ -44,7 +52,7 @@ const TowersOfHanoiGame = (numDiscs) => {
                 console.log('You cannot move a larger disc on top of a smaller one; board is still:');  
             }
             //log the post-moveDisc state of the board
-            this.logBoard();
+            logBoard();
             //check to see if moving the disc to the new peg is a winning move
             this.checkWinner(peg2);
         },
@@ -58,7 +66,6 @@ const TowersOfHanoiGame = (numDiscs) => {
 }
 
 //create an instance of the game
-let game = TowersOfHanoiGame(64);
+let game = TowerOfHanoiGame(7);
 
-//log the starting position
-game.logBoard();
+
