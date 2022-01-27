@@ -5,9 +5,17 @@ alert("Welcome to Towers of Hanoi! Good luck!");
 //once a player ends the game should automatically win by announcing a winner (through console.log) and reset for a new game;
 
 //create game-creating module so the board is only accessible via the functions explicitly defined to interact with it
-const TowersOfHanoiGame = () => {
+const TowersOfHanoiGame = (numDiscs) => {
+    if(numDiscs === 64) {
+        numDiscs = 65;
+        console.log('Playing this game with 64 discs could cause the world to end; you can play with 65 instead');
+    }
+    let discCount = numDiscs || 5;
     let board = [
-        ["5", "4", "3", "2", "1"],
+        // ["5", "4", "3", "2", "1"],
+        Array.apply(null, Array(discCount)).map((element, idx) => {
+            return (idx + 1).toString();
+        }),
         [],
         []
     ];
@@ -42,15 +50,15 @@ const TowersOfHanoiGame = () => {
         },
         checkWinner(peg) {
             //player wins if a peg other than peg 1 contains five discs; unnecessary to check order of discs because they can never be placed out of increasing order
-            if(peg !== 1 && board[peg - 1].length === 5) {
-                console.log("Congratulations, you win! I hope there weren't 64 discs!")
+            if(peg !== 1 && board[peg - 1].length === discCount) {
+                console.log("Congratulations, you win!")
             }
         }
     }
 }
 
 //create an instance of the game
-let game = TowersOfHanoiGame();
+let game = TowersOfHanoiGame(64);
 
 //log the starting position
 game.logBoard();
