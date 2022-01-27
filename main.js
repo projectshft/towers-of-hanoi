@@ -22,7 +22,7 @@ const TowerOfHanoiGame = (numDiscs) => {
         //build array of size 5 prefilled with null values then map over it to give each element a string value of the index plus one
         Array.apply(null, Array(discCount)).map((element, idx) => {
             return (idx + 1).toString();
-        }),
+        }).reverse(),
         [],
         []
     ];
