@@ -6,6 +6,10 @@ alert("Welcome to Tower of Hanoi! Good luck!");
 
 //create game-creating module so the board is only accessible via the functions explicitly defined to interact with it
 const TowerOfHanoiGame = (numDiscs) => {
+    if(numDiscs < 5) {
+        numDiscs = 3;
+        console.log('This game must be played with at least 3 discs. Starting game with 3 discs');
+    }
     if(numDiscs === 64) {
         numDiscs = 65;
         console.log('Playing this game with 64 discs could cause the world to end; you can play with 65 instead');
@@ -22,7 +26,7 @@ const TowerOfHanoiGame = (numDiscs) => {
         [],
         []
     ];
-
+    //Logging function defined outside of module return object so the board can be logged immediately upon creation of a game instance
     let logBoard = function() {
         //create an array of three strings that hold the '--- ' prefix and the disc numbers
         let pegStrings = board.map(peg => {
@@ -36,19 +40,27 @@ const TowerOfHanoiGame = (numDiscs) => {
     logBoard();
 
     return {
+        //return value of discount (for testing purposes only)
+        getDiscCount: function() {
+            return discCount;
+        },
         //return value of top disc of selected peg
         getTopDisc: function(peg) {
-            return board[peg - 1][board[peg - 1].length - 1]
+            if(peg < 1 || peg > 3) {
+                console.log("This peg doesn't exist. The only peg options are 1, 2 & 3");
+                return undefined;
+            }
+            return board[peg - 1][board[peg - 1].length - 1];
         },
         moveDisc: function(peg1, peg2) {
             //peg indexes in board are one less than the peg args provided
             let peg1Idx = peg1 - 1;
             let peg2Idx = peg2 - 1;
             //if peg1 is empty move is unsuccessful
-            if(!board[peg1Idx].length) {
+            if(!this.getTopDisc(peg1)) {
                 console.log(`You cannot move a disc from ${peg1} because it doesn't have any pegs`);
               //if peg1 has a disc and peg2 doesn't or if the disc on peg1 is smaller the move is successful
-            } else if(!board[peg2Idx].length || Number(board[peg1Idx][board[peg1Idx].length - 1]) < Number(board[peg2Idx][board[peg2Idx].length - 1])) {
+            } else if(!this.getTopDisc(peg2)|| Number(this.getTopDisc(peg1)) < Number(this.getTopDisc(peg2))) {
                 board[peg2Idx].push(board[peg1Idx].pop());
                 console.log('That move was successfull; board is now:');
             } else {
