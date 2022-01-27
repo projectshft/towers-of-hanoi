@@ -6,7 +6,7 @@ alert("Welcome to Tower of Hanoi! Good luck!");
 
 //create game-creating module so the board is only accessible via the functions explicitly defined to interact with it
 const TowerOfHanoiGame = (numDiscs) => {
-    if(numDiscs < 5) {
+    if(numDiscs < 3) {
         numDiscs = 3;
         console.log('This game must be played with at least 3 discs. Starting game with 3 discs');
     }
