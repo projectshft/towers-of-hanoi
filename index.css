@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 10%;
+  height: 100%;
+  text-align: center;
+}
+
+ul {
+  display: inline-block;
+  text-align: left;
+}
