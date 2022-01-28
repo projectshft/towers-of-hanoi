@@ -40,11 +40,20 @@ const TowerOfHanoiGame = (numDiscs) => {
     logBoard();
 
     return {
+        checkWinner: function(peg) {
+            //player wins if a peg other than peg 1 contains five discs; unnecessary to check order of discs because they can never be placed out of increasing order
+            if(peg !== 1 && board[peg - 1].length === discCount) {
+                console.log("Congratulations, you win!");
+                this.resetBoard();
+                return true;
+            }
+            return false;
+        },
         //return value of discount (for testing purposes only)
         getDiscCount: function() {
             return discCount;
         },
-        //return value of top disc of selected peg
+        //return value of top disc of selected peg (for testing and code readability purposes only)
         getTopDisc: function(peg) {
             if(peg < 1 || peg > 3) {
                 console.log("This peg doesn't exist. The only peg options are 1, 2 & 3");
@@ -69,14 +78,17 @@ const TowerOfHanoiGame = (numDiscs) => {
             }
             //log the post-moveDisc state of the board
             logBoard();
-            //check to see if moving the disc to the new peg is a winning move
-            this.checkWinner(peg2);
+            //return result of checking winner to allow testing of the checkWinner function
+            return this.checkWinner(peg2);
         },
-        checkWinner(peg) {
-            //player wins if a peg other than peg 1 contains five discs; unnecessary to check order of discs because they can never be placed out of increasing order
-            if(peg !== 1 && board[peg - 1].length === discCount) {
-                console.log("Congratulations, you win!")
-            }
+        resetBoard: function() {
+            board = [
+                Array.apply(null, Array(discCount)).map((element, idx) => {
+                    return (idx + 1).toString();
+                }).reverse(),
+                [],
+                []
+            ];
         }
     }
 }
