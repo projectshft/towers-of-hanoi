@@ -1,9 +1,3 @@
-alert("Welcome to Tower of Hanoi! Good luck!");
-//must have object that maintains the state of the board
-//needs to be a way to move discs from one peg to another
-//checkWinner function will check to see if the player has won the game, which means putting all the discs back in the original order but on a new peg
-//once a player ends the game should automatically win by announcing a winner (through console.log) and reset for a new game;
-
 //create game-creating module so the board is only accessible via the functions explicitly defined to interact with it
 const TowerOfHanoiGame = (numDiscs) => {
     if(numDiscs < 3) {
