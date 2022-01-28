@@ -1,0 +1,5 @@
+/* Simple black background while I work in darkmode console */
+
+* {
+  background-color: #000;
+}
