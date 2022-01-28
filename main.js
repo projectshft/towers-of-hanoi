@@ -77,14 +77,24 @@ var moveDisc = function(src, dest) {
 
 // function that prints board Array to console
 var printBoard = function() {
-  this.boardAttributes.boardArr.map(function(peg) {
 
-    var strPeg = peg.reduce(function(accumulator, peg) {
-      return accumulator + peg + " "; 
-    }, "--- " )
-    console.log(strPeg);
-    return peg;
+  var unNestedBoard = this.boardAttributes.boardArr.map(function(peg) {
+    var strPeg = peg.reduce(function(acc, disc) {
+      return acc + disc;
+    }, "")
+
+    return '--- ' + strPeg;
   })
+
+  // make into one string
+  var strBoard = unNestedBoard.reduce(function(accumulator, peg) {
+    return accumulator + peg + '\n';
+  }, "")
+
+  console.log(strBoard);
+
+  //TODO: remove commas from print board
+
 };
 
 // function that checks if game has been won
@@ -119,43 +129,43 @@ var setAttribute = function(attribute, value) {
 };
 
 
-/*
-TESTS
+
+
 var board = new TowersOfHanoi(3, 5);
 
 
 // how to win
 board.moveDisc(1,2);
 board.moveDisc(1,3);
-board.moveDisc(2,3);
-board.moveDisc(1,2);
-board.moveDisc(3,1);
-board.moveDisc(3,2);
-board.moveDisc(1,2);
-board.moveDisc(1,3);
-board.moveDisc(2,3);
-board.moveDisc(2,1);
-board.moveDisc(3,1);
-board.moveDisc(2,3);
-board.moveDisc(1,2);
-board.moveDisc(1,3);
-board.moveDisc(2,3);
-board.moveDisc(1,2);
-board.moveDisc(3,1);
-board.moveDisc(3,2);
-board.moveDisc(1,2);
-board.moveDisc(3,1);
-board.moveDisc(2,3);
-board.moveDisc(2,1);
-board.moveDisc(3,1);
-board.moveDisc(3,2);
-board.moveDisc(1,2);
-board.moveDisc(1,3);
-board.moveDisc(2,3);
-board.moveDisc(1,2);
-board.moveDisc(3,1);
-board.moveDisc(3,2);
-board.moveDisc(1,2);
+// board.moveDisc(2,3);
+// board.moveDisc(1,2);
+// board.moveDisc(3,1);
+// board.moveDisc(3,2);
+// board.moveDisc(1,2);
+// board.moveDisc(1,3);
+// board.moveDisc(2,3);
+// board.moveDisc(2,1);
+// board.moveDisc(3,1);
+// board.moveDisc(2,3);
+// board.moveDisc(1,2);
+// board.moveDisc(1,3);
+// board.moveDisc(2,3);
+// board.moveDisc(1,2);
+// board.moveDisc(3,1);
+// board.moveDisc(3,2);
+// board.moveDisc(1,2);
+// board.moveDisc(3,1);
+// board.moveDisc(2,3);
+// board.moveDisc(2,1);
+// board.moveDisc(3,1);
+// board.moveDisc(3,2);
+// board.moveDisc(1,2);
+// board.moveDisc(1,3);
+// board.moveDisc(2,3);
+// board.moveDisc(1,2);
+// board.moveDisc(3,1);
+// board.moveDisc(3,2);
+// board.moveDisc(1,2);
 
 // OTHER
 // board.moveDisc(1,2);
@@ -166,7 +176,7 @@ board.moveDisc(1,2);
 // board.moveDisc(3,2);
 // board.moveDisc(1,2);
 // board.moveDisc(1,2);
-*/
+
 
 
 
