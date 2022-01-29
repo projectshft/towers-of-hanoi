@@ -35,14 +35,14 @@ const board = {
     const lastDiscOnEndPeg = endPeg[endPeg.length - 1];
    
     if (lastDiscOnStartPeg > lastDiscOnEndPeg) {
-     console.log('You cannot move a larger disc on top of a smaller one, board is still:');
-     this.printBoard();
-    } else {
-      endPeg.push(lastDiscOnStartPeg);
-      startPeg.pop(lastDiscOnStartPeg);
-      console.log('That move was successful, board is now:');
+      console.log('You cannot move a larger disc on top of a smaller one, board is still:');
       this.printBoard();
-      this.checkWinner();
+    } else {
+        endPeg.push(lastDiscOnStartPeg);
+        startPeg.pop(lastDiscOnStartPeg);
+        console.log('That move was successful, board is now:');
+        this.printBoard();
+        this.checkWinner();
     }
   },
  
