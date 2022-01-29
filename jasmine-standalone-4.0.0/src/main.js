@@ -79,6 +79,20 @@ const board = {
     })
   },
 
+  /* My code without forEach, doesn't work once you add more pegs or discs
+  checkWinner: function () {
+    let winningPeg = ['5', '4', '3', '2', '1'].toString();
+    let peg1 = this.gameBoard[0].toString();
+    let peg2 = this.gameBoard[1].toString();
+    let peg3 = this.gameBoard[2].toString();
+
+    if (peg2 === winningPeg || peg3 === winningPeg) {
+      console.log('You won!');
+      this.resetGame();
+    }
+  },
+  */
+
   resetGame: function () {
     this.gameBoard = originalBoard;
   },
