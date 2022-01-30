@@ -5,10 +5,15 @@ var Board = {
     []
   ],
 
+  pegs: {}, 
+
   printBoard: function () {
-    console.log('--- ' + this.board[0].join(' '));
-    console.log('--- ' + this.board[1].join(' '));
-    console.log('--- ' + this.board[2].join(' '));
+    for(var i = 0; i < this.board.length; i++) {
+      var peg = console.log('--- ' + this.board[i].join(' '));
+      this.pegs[peg] = peg;
+    };
+
+    return this.pegs;
   },
 
   startGame: function () {
@@ -22,7 +27,7 @@ var Board = {
     var endTopDisk = peg2[peg2.length - '1'];
 
     if(topDisk > endTopDisk) {
-      console.log('Error: Invalid move, try a different move');
+      console.log('Error: Invalid move, board is still:');
     } else {
       peg2.push(topDisk);
       peg1.pop();
@@ -84,4 +89,5 @@ Board.moveDisk(1, 2);
 Board.moveDisk(3, 1);
 Board.moveDisk(3, 2);
 Board.moveDisk(1, 2);
+
 
