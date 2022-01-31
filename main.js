@@ -1,5 +1,5 @@
 let pegs = [
-  {pegNumber: "1" , count: ["5", "4", "3", "2", "1"]},
+  {pegNumber: "1" , count: ["4", "3", "2", "1"]},
   {pegNumber: "2" , count: []},
   {pegNumber: "3" , count: []}
 
