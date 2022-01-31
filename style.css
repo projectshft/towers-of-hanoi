@@ -1,0 +1,45 @@
+body {
+  margin: 0 auto;
+  background-color: #dff0ff;
+  color: #031021;
+  font-family: "Verdana", sans-serif;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+h1 {
+  width: 60%;
+  margin: 3% auto;
+  font-size: 30px;
+  background-color: #031021;
+  color: #dff0ff;
+  padding: 2%;
+  border-radius: 20px;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+ol {
+  font-size: 22px;
+}
+
+ol li {
+  padding: 10px;
+}
+
+#welcome {
+  font-size: 18px;
+}
+
+#instructions {
+  margin: 0 auto;
+  width: 60%;
+  line-height: 200%;
+  border-bottom: 10px solid #031021;
+  border-radius: 3%;
+}
