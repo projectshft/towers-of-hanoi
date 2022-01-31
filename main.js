@@ -3,6 +3,7 @@ var board = {
   pegTwo: [],
   pegThree: [],
   moveDisc: function(peg1, peg2) {
+  // identify pegs
     if (peg1 === 1) {
       var firstMove = board.pegOne;
     } else if (peg1 === 2) {
@@ -17,37 +18,52 @@ var board = {
     } else {
       var secondMove = board.pegThree;
     }
-   
+  // move discs
     var disc = firstMove.pop();
     secondMove.push(disc);
+
+  // print board
+    var firstPeg = Object.values(board.pegOne);
+    var secondPeg = Object.values(board.pegTwo);
     var thirdPeg = Object.values(board.pegThree);
-    //console.log(thirdPeg);
-    //this.printBoard;
-    
-    this.checkWinner(board.pegTwo,thirdPeg);
-    //console.log(board.pegThree);
-    // var mapBoard = board.map(printBoard);
+
+    this.printBoard(firstPeg, secondPeg, thirdPeg);
+   
+  // check if won
+   
+    this.checkWinner(secondPeg,thirdPeg);
+;
   },
-  printBoard: function() {
+  printBoard: function(firstPeg, secondPeg, thirdPeg) {
+    console.log('--- ' + firstPeg.join(' '));
+    console.log('--- ' + secondPeg.join(' '));
+    console.log('--- ' + thirdPeg.join(' '));
+    var currentBoard = '--- ' + firstPeg.join(' ') + '--- ' + secondPeg.join(' ') + '--- ' + thirdPeg.join(' ');
+
+    // var currentBoard = firstPeg.map(function (num) {
+    //   //return num * 1;
+    //   return num;
+    // });
+    // currentBoard.toString();
+;
     
-    var currentBoard = board.map(function (boards) {
-      console.log(boards.pegOne);
-    });
-    //firstPeg.join('');
   },
   checkWinner: function(checkTwo,checkThree) {
     var winCondition = "5,4,3,2,1";
-    //var secondPeg = board.pegTwo;
-    //var thirdPeg = board.pegThree;
-    if(checkTwo === winCondition || checkThree.toString() === winCondition) {
+    if(checkTwo.toString() === winCondition || checkThree.toString() === winCondition) {
       result = 'You won!';
     } else {
       result = 'Keep going';
     }
     console.log(result);
+    if (result === 'You won!') {
+      this.resetGame(this.pegOne,this.pegTwo,this.pegThree);
+    }
   },
-  resetGame: function() {
-
+  resetGame: function(firstPeg, secondPeg, thirdPeg) {
+    firstPeg = ["5", "4", "3", "2", "1"];
+    secondPeg = [];
+    thirdPeg = [];
   }
 };
 
