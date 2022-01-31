@@ -17,40 +17,43 @@ var board = {
     } else {
       var secondMove = board.pegThree;
     }
-    // console.log([firstMove]);
+   
     var disc = firstMove.pop();
     secondMove.push(disc);
+    var thirdPeg = Object.values(board.pegThree);
+    //console.log(thirdPeg);
+    //this.printBoard;
+    
+    this.checkWinner(board.pegTwo,thirdPeg);
+    //console.log(board.pegThree);
     // var mapBoard = board.map(printBoard);
+  },
+  printBoard: function() {
+    
+    var currentBoard = board.map(function (boards) {
+      console.log(boards.pegOne);
+    });
+    //firstPeg.join('');
+  },
+  checkWinner: function(checkTwo,checkThree) {
+    var winCondition = "5,4,3,2,1";
+    //var secondPeg = board.pegTwo;
+    //var thirdPeg = board.pegThree;
+    if(checkTwo === winCondition || checkThree.toString() === winCondition) {
+      result = 'You won!';
+    } else {
+      result = 'Keep going';
+    }
+    console.log(result);
+  },
+  resetGame: function() {
+
   }
 };
 
-// var board =
-//  [["5", "4", "3", "2", "1"],
-//   [],
-//   []];
- 
-// var moveDisc = function(peg1, peg2) {
-//   var firstPeg = peg1 -= 1;
-//   var secondPeg = peg2 -= 1;
-//   var disc = board[firstPeg].pop();
-//   board[secondPeg].push(disc);
-//   var mapBoard = board.map(printBoard);
-// }
 
+board.moveDisc(1, 3);
 
-
-var printBoard = function() {
-  return board.join();
-}
-
-var checkWinner = function() {
-
-}
-
-//board.moveDisc(1,2);
-// moveDisc(1,3);
-
-board.moveDisc(1, 3)
 board.moveDisc(1, 2)
 board.moveDisc(3, 2)
 board.moveDisc(1, 3)
@@ -82,6 +85,3 @@ board.moveDisc(2, 1)
 board.moveDisc(2, 3)
 board.moveDisc(1, 3)
 
-
-
-//console.log(values);
