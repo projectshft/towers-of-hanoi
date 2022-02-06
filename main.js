@@ -21,7 +21,9 @@
         board.pegs = [["---", 5,4,3,2,1],["---"],["---"]];
         return;
       } 
-      else{board.printBoard(board.pegs); /* if move is allowed,prints message and logs board status"*/           
+      else{
+        console.log('That move was successful, board is now:');
+        board.printBoard(board.pegs); /* if move is allowed,prints message and logs board status"*/           
       }
         
     }else if /* if move is not allowed,prints  message and board status"*/  
@@ -33,12 +35,15 @@
   
 },
 
-printBoard (arr){ /*prints board in console.log */
-  for (var i = 0; i < arr.length; i++){
-    console.log (arr[i].join(" "));
-  }
+printBoard (arr) /*prints board in console.log */
+  {
+    console.log (arr[0].join(" "));
+    console.log (arr[1].join(" "));
+    console.log (arr[2].join(" "));
+   
+  },
 
-},
+
 
 
 checkWinner(arr) {
