@@ -5,6 +5,8 @@ let actualBoard = [
 ];
 let moves = 0;
 
+
+
 const move = function(disc, spot) {
   //Code for using valid pegs
   if (disc > 3 || disc < 1 || spot > 3 || spot < 1 || disc === spot ) {
@@ -56,37 +58,37 @@ const move = function(disc, spot) {
   };
   // debugger;
 };
-move(1, 2);
-move(1, 3);
-move(2, 3);
-move(1, 2);
-move(3, 1);
-move(3, 2);
-move(1, 2);
-move(1, 3);
-move(2, 3);
-move(2, 1);
-move(3, 1);
-move(2, 3);
-move(1, 2);
-move(1, 3);
-move(2, 3);
-move(1, 2);
-move(3, 1);
-move(3, 2);
-move(1, 2);
-move(3, 1);
-move(2, 3);
-move(2, 1);
-move(3, 1);
-move(3, 2);
-move(1, 2);
-move(1, 3);
-move(2, 3);
-move(1, 2);
-move(3, 1);
-move(3, 2);
-//move(1, 2)
+// move(1, 2);
+// move(1, 3);
+// move(2, 3);
+// move(1, 2);
+// move(3, 1);
+// move(3, 2);
+// move(1, 2);
+// move(1, 3);
+// move(2, 3);
+// move(2, 1);
+// move(3, 1);
+// move(2, 3);
+// move(1, 2);
+// move(1, 3);
+// move(2, 3);
+// move(1, 2);
+// move(3, 1);
+// move(3, 2);
+// move(1, 2);
+// move(3, 1);
+// move(2, 3);
+// move(2, 1);
+// move(3, 1);
+// move(3, 2);
+// move(1, 2);
+// move(1, 3);
+// move(2, 3);
+// move(1, 2);
+// move(3, 1);
+// move(3, 2);
+// move(1, 2)
 
 
 
