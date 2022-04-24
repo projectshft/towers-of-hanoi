@@ -1,14 +1,9 @@
-// starting board
-let board = [
-  [5, 4, 3, 2, 1], 
-  [], 
-  []
-];
-
-// console display for gameboard
-// --- 5 4 3 2 1
-// ---
-// ---
+const game = {
+  moves: 0,
+  board: [
+    [[5, 4, 3, 2, 1], [], []]
+  ]
+}
 
 const display = array => {
   return array
@@ -16,20 +11,38 @@ const display = array => {
     .join('\n')
 }
 
-// console.log(display(board))
+const currentState = () => game.board.at(-1);
 
-const moveDisc = (fromPeg, toPeg) => {
-  const disc = board[fromPeg -1][board[fromPeg -1].length - 1];
-  console.log(`Moved disc ${disc} from peg ${fromPeg} to peg ${toPeg}`);
-  return board = board
-    .map((peg, index, array) => {
-      return index === (fromPeg - 1) ? peg.slice(0, -1) : 
-             index === (toPeg - 1)   ? peg.concat(disc) :
-             /* otherwise */           peg;
-    })
+const moveUpdate = () => game.moves = game.board.length - 1;
+
+const nextState = (from, to) => {
+  const disc = currentState()[from - 1].at(-1);
+  return currentState().map((peg, index) => {
+    return index === (from - 1) ? peg.slice(0, -1) :
+           index === (to - 1)   ? peg.concat(disc) :
+                                  peg;
+  });
 }
 
-const move1 = moveDisc(1, 2);
-const move2 = moveDisc(1, 3);
+const moveDisc = (fromPeg, toPeg) => {
+  const stateUpdate = nextState(fromPeg, toPeg);
 
-console.log(display(move2));
+  game.board.push(stateUpdate);
+  moveUpdate();
+  console.log(`Moved disc from peg ${fromPeg} to peg ${toPeg}`)
+
+  return currentState()
+}
+
+console.log(display(game.board[0]))
+console.log(display(moveDisc(1, 2)));
+console.log(display(moveDisc(1, 3)));
+console.log(display(moveDisc(2, 3)));
+// console.log(display(moveDisc(1, 2)));
+// console.log(display(moveDisc(3, 2)));
+// console.log(display(moveDisc(3, 1)));
+// console.log(display(moveDisc(2, 3)));
+// console.log(display(moveDisc(1, 2)));
+// console.log(display(moveDisc(3, 2)));
+console.log(game.board)
+console.log(game.moves)
