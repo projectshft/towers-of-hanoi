@@ -1,4 +1,4 @@
-const ToHModule = () => {
+const towersOfHanoi = () => {
   let currentState = {};
 
   const resetState = (diskNum = 5, pegNum = 3) => {
@@ -121,50 +121,8 @@ const ToHModule = () => {
   }
 }
 
-towersOfHanoi = ToHModule();
-move = towersOfHanoi.moveDisk;
-start = towersOfHanoi.resetState;
-numMoves = towersOfHanoi.viewMovesMade;
-gameBoard = towersOfHanoi.viewBoard;
-// start()
-// start()
-// move(1, 2);
-// move(1, 3);
-// move(2, 3);
-// move(1, 2);
-// move(3, 2);
-// move(3, 1);
-// move(2, 3);
-// move(1, 2);
-// move(3, 2);
-// move(1, 3);
-// move(2, 3);
-// move(2, 1);
-// move(3, 1);
-// move(2, 3);
-// move(1, 2);
-// move(1, 3);
-// move(2, 3);
-// move(1, 2);
-// move(3, 1);
-// move(3, 2);
-// move(1, 2);
-// move(3, 1);
-// move(2, 3);
-// move(2, 1);
-// move(3, 1);
-// move(3, 2);
-// move(1, 3);
-// move(1, 2);
-// move(3, 1);
-// move(2, 3);
-// move(1, 3);
-// move(1, 2);
-// move(3, 1);
-// move(3, 2);
-// move(1, 2);
-
-start(2, 3)
-move(1, 2)
-move(1, 3)
-move(2, 3)
+toh = towersOfHanoi();
+move = toh.moveDisk;
+start = toh.resetState;
+numMoves = toh.viewMovesMade;
+gameBoard = toh.viewBoard;
