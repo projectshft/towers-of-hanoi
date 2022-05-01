@@ -5,20 +5,22 @@ const state = {
 };
 
 // Once user has entered in number of pegs and discs, build out the game board
-const createGame = function (pegs, discs) {
+const createGame = function () {
   const discArray = [];
-  if (Number.isNaN(pegs) || Number.isNaN(discs)) {
-    pegs = 3;
-    discs = 5;
-    console.log('Game defaulted to 3 pegs and 5 discs because you did not enter a number.');
+  state.board = [];
+  let numOfPegs = NaN;
+  let numOfDiscs = NaN;
+  while (Number.isNaN(numOfPegs) || Number.isNaN(numOfDiscs)) {
+    numOfPegs = parseInt(prompt("Please enter the number of pegs."));
+    numOfDiscs = parseInt(prompt("Plesae enter the number of discs."));
   }
-  state.pegNum = pegs;
-  state.discNum = discs;
-  for (let i = discs; i > 0; i -= 1) {
+  state.pegNum = numOfPegs;
+  state.discNum = numOfDiscs;
+  for (let i = numOfDiscs; i > 0; i -= 1) {
     discArray.push(i);
   }
   state.board.push(discArray);
-  for (let i = 1; i < pegs; i += 1) {
+  for (let i = 1; i < numOfPegs; i += 1) {
     state.board.push([]);
   }
 }
@@ -32,13 +34,12 @@ const printBoard = function (boardArr) {
 
 // Check to see if the user has won at the end of each move
 const checkWinner = function (array) {
-  array.forEach(function (peg) {
+  return array.find(function (peg) {
     if (array[0].length === 0 && peg.length === state.discNum) {
       console.log('Congratulations! You win!');
       return true;
     }
   });
-  return false;
 };
 
 // Moves the disc from peg to another and checks if move is allowed
@@ -53,12 +54,13 @@ const moveDisc = function (startingPeg, endingPeg) {
     discEnd.push(discStart.pop());
   }
   printBoard(state.board);
-  checkWinner(state.board);
+  if (checkWinner(state.board)) {
+    setTimeout(function () {
+      createGame();
+      return printBoard(state.board);
+    }, 3000);
+  };
 };
 
-// Get the number of pegs and discs from the user so the game can be created
-let numOfPegs = parseInt(prompt("Please enter the number of pegs."));
-let numOfDiscs = parseInt(prompt("Plesae enter the number of discs."));
-
-createGame(numOfPegs, numOfDiscs);
+createGame();
 printBoard(state.board);
