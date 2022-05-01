@@ -25,12 +25,8 @@ const createGame = function (pegs, discs) {
 
 // Displays the current state of the board in the console
 const printBoard = function (boardArr) {
-  return boardArr.forEach(function (peg) {
-    if (peg.length === 0) {
-      console.log(`---`);
-    } else {
-      console.log(`--- ${peg.join(' ')}`);
-    }
+  return boardArr.map(function (peg) {
+    console.log(`--- ${peg.join(' ')}`);
   });
 };
 
