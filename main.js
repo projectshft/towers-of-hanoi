@@ -1,8 +1,4 @@
-const state = {
-  board: [],
-  pegNum: 3,
-  discNum: 5,
-};
+const state = {};
 
 // Once user has entered in number of pegs and discs, build out the game board
 const createGame = function () {
@@ -55,6 +51,7 @@ const moveDisc = function (startingPeg, endingPeg) {
   }
   printBoard(state.board);
   if (checkWinner(state.board)) {
+    console.log(`Get ready to play again!`);
     setTimeout(function () {
       createGame();
       return printBoard(state.board);
