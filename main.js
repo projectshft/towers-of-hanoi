@@ -7,13 +7,16 @@ const state = {
 // Once user has entered in number of pegs and discs, build out the game board
 const createGame = function (pegs, discs) {
   const discArray = [];
+  if (Number.isNaN(pegs) || Number.isNaN(discs)) {
+    pegs = 3;
+    discs = 5;
+    console.log('Game defaulted to 3 pegs and 5 discs because you did not enter a number.');
+  }
   state.pegNum = pegs;
   state.discNum = discs;
-  // Build the disc array
   for (let i = discs; i > 0; i -= 1) {
     discArray.push(i);
   }
-  // Build the board with correct number of pegs
   state.board.push(discArray);
   for (let i = 1; i < pegs; i += 1) {
     state.board.push([]);
@@ -35,9 +38,11 @@ const printBoard = function (boardArr) {
 const checkWinner = function (array) {
   array.forEach(function (peg) {
     if (array[0].length === 0 && peg.length === state.discNum) {
-      return console.log('Congratulations! You win!');
+      console.log('Congratulations! You win!');
+      return true;
     }
   });
+  return false;
 };
 
 // Moves the disc from peg to another and checks if move is allowed
@@ -56,8 +61,8 @@ const moveDisc = function (startingPeg, endingPeg) {
 };
 
 // Get the number of pegs and discs from the user so the game can be created
-let numOfPegs = prompt("Please enter the number of pegs.");
-let numOfDiscs = prompt("Plesae enter the number of discs.");
+let numOfPegs = parseInt(prompt("Please enter the number of pegs."));
+let numOfDiscs = parseInt(prompt("Plesae enter the number of discs."));
 
 createGame(numOfPegs, numOfDiscs);
 printBoard(state.board);
