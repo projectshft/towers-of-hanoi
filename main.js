@@ -1,8 +1,8 @@
 const state = {
-  board: [[5, 4, 3, 2, 1], [], []]
+  board: [[1], [5, 4, 3, 2], []],
+  pegNum: 3,
+  discNum: 5,
 };
-
-//const board = [[5, 4, 3, 2, 1], [], []];
 
 const printBoard = function (boardArr) {
   return boardArr.forEach(function (peg) {
@@ -22,7 +22,16 @@ const moveDisc = function (startingPeg, endingPeg) {
   } else {
     discEnd.push(discStart.pop());
   }
-  return printBoard(state.board);
+  printBoard(state.board);
+  checkWinner(state.board);
+};
+
+const checkWinner = function (array) {
+  array.forEach(function (peg) {
+    if (array[0].length === 0 && peg.length === state.discNum) {
+      return console.log('Congratulations! You win!');
+    }
+  });
 };
 
 printBoard(state.board);
