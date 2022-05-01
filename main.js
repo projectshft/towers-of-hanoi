@@ -10,53 +10,90 @@ console.log('hello world');
 // 8: As a bonus no for loops.
 
 const towersOfHanoi = {
-  board: [[5, 4, 3, 2], [], [1]],
+  board: [[5, 4, 3, 2, 1], [], []],
 
   printBoard() {
     // displaying the board using map.
-    this.board.map((element) => {
+
+    const displayBoard = this.board.map((element) => {
       console.log(`--- ${element.join(' ')}`);
     });
+    return displayBoard;
   },
 
-  moveDisc(selected, moveTO) {
-    // nested for loop to access the disc and index.
-    this.board.forEach((element, index, array) => {
-      // console.log(index, 'index');
-      // console.log(array, 'array');
-      // console.log(element, 'peg');
+  moveDisc(move, moveTO) {
+    // Looping through the array to access the nested arrays.
+    // eslint-disable-next-line no-unreachable-loop
+    for (let i = 0; i < this.board.length; i++) {
+      // const pegArray = this.board[i];
 
-      // choosing the peg
-      const currentPeg = array[selected - 1];
-      const letsMove = array[moveTO - 1];
+      // console.log(pegArray, 'The Pegs at index I first loop');
 
-      console.log(currentPeg, 'currentPeg');
-      console.log(letsMove, 'where to move');
+      // Arguments assigned to the array at ___ index.
+      const chosenPeg = this.board[move - 1];
+      const moveToPeg = this.board[moveTO - 1];
 
-      // console.log(currentPeg[currentPeg.length - 1], 'cp last element');
-      // console.log(letsMove[letsMove.length - 1], 'Lm last element');
+      // Last element in each array.
+      let lastElementChosenPeg = chosenPeg[chosenPeg.length - 1];
+      let lastElementMoveToPeg = moveToPeg[moveToPeg.length - 1];
 
-      const currentPegLe = currentPeg[currentPeg.length - 1];
-      const letsMoveLe = letsMove[letsMove.length - 1];
-
-      console.log(currentPegLe, 'Current Peg Last Element');
-      console.log(letsMoveLe, 'Lets Move Last Element');
-
-      if (currentPegLe > letsMoveLe) {
-        const move = currentPeg.pop();
-        console.log(move, 'move');
-        letsMove.push(move);
+      // setting undefined arrays to 0;
+      if (lastElementChosenPeg === undefined) {
+        lastElementChosenPeg = 0;
       }
+      if (lastElementMoveToPeg === undefined) {
+        lastElementMoveToPeg = 0;
+      }
+      // Conditional statement for moving discs.
+      if (
+        lastElementMoveToPeg > lastElementChosenPeg ||
+        lastElementMoveToPeg === 0
+      ) {
+        const moveDisc = chosenPeg.pop();
+        moveToPeg.push(moveDisc);
+        console.log(
+          `That move was a success!!! The board is now: ${this.printBoard()}`
+        );
+        break;
+      } else {
+        console.log('That Move is Not Allowed');
+        break;
+      }
+    }
 
-      // peg.forEach((disc, index) => {
-      //   // console.log(index, 'index');
-      //   console.log(disc, 'disc');
-      // });
-    });
+    // Reset the Game if Winner
+    if (this.board[1].length === 5 || this.board[2].length === 5) {
+      alert('You have won!');
+      this.board = [[5, 4, 3, 2, 1], [], []];
+      this.printBoard();
+    }
   },
 
-  checkWinner() {},
+  checkWinner() {
+    if (this.board[1].length === 5 || this.board[2].length === 5) {
+      console.log('You have won!');
+    } else {
+      console.log('The Game is Not Over Yet');
+    }
+  },
 };
-console.log(towersOfHanoi.board);
+
 towersOfHanoi.printBoard();
 towersOfHanoi.moveDisc(1, 2);
+towersOfHanoi.moveDisc(2, 3);
+towersOfHanoi.moveDisc(1, 2);
+towersOfHanoi.moveDisc(3, 2);
+towersOfHanoi.moveDisc(2, 3);
+towersOfHanoi.moveDisc(3, 1);
+towersOfHanoi.moveDisc(2, 3);
+towersOfHanoi.moveDisc(1, 2);
+towersOfHanoi.moveDisc(2, 3);
+towersOfHanoi.moveDisc(1, 2);
+towersOfHanoi.moveDisc(3, 1);
+towersOfHanoi.moveDisc(2, 3);
+towersOfHanoi.moveDisc(1, 3);
+towersOfHanoi.moveDisc(3, 2);
+towersOfHanoi.moveDisc(3, 1);
+towersOfHanoi.checkWinner();
+towersOfHanoi.moveDisc(2, 3);
+towersOfHanoi.printBoard();
