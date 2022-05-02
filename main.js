@@ -1,5 +1,12 @@
 const state = {};
 
+// Displays the current state of the board in the console
+const printBoard = function (boardArr) {
+  return boardArr.map(function (peg) {
+    console.log(`--- ${peg.join(' ')}`);
+  });
+};
+
 // Once user has entered in number of pegs and discs, build out the game board
 const createGame = function () {
   const discArray = [];
@@ -19,14 +26,8 @@ const createGame = function () {
   for (let i = 1; i < numOfPegs; i += 1) {
     state.board.push([]);
   }
+  return printBoard(state.board);
 }
-
-// Displays the current state of the board in the console
-const printBoard = function (boardArr) {
-  return boardArr.map(function (peg) {
-    console.log(`--- ${peg.join(' ')}`);
-  });
-};
 
 // Check to see if the user has won at the end of each move
 const checkWinner = function (array) {
@@ -53,11 +54,9 @@ const moveDisc = function (startingPeg, endingPeg) {
   if (checkWinner(state.board)) {
     console.log(`Get ready to play again!`);
     setTimeout(function () {
-      createGame();
-      return printBoard(state.board);
+      return createGame();
     }, 3000);
   };
 };
 
 createGame();
-printBoard(state.board);
