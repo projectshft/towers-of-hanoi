@@ -30,11 +30,6 @@ const tester = (from, to) => {
   } 
 }
 
-const mover = (from, to) => {
-  let popped = from.pop()
-  to.push(popped)
-}
-
 const arrayMaker = (object) => {
   let newArray = [];
 
@@ -45,12 +40,18 @@ const arrayMaker = (object) => {
   return newArray
 }
 
-
 const mapper = (array) => {
   array.map(arr => {
     console.log(`---${arr}`)
     })
   
+}
+
+mapper(arrayMaker(boardState))
+
+const mover = (from, to) => {
+  let popped = from.pop()
+  to.push(popped)
 }
 
 
@@ -62,7 +63,8 @@ const mapper = (array) => {
   } else if (from === 3) {
     from = three;
   } else {
-    console.log('Arguments must equal 1, 2, or 3.')
+    from = [];
+    console.log('Arguments must equal 1, 2, or 3. Try again.')
   }
   
 
@@ -73,18 +75,24 @@ const mapper = (array) => {
   } else if (to === 3) {
     to = three;
   } else {
-    console.log('Arguments must equal 1, 2, or 3.')
+    from = [];
+    console.log('Arguments must equal 1, 2, or 3. Try again.')
   }
 
-  tester(from, to);
+  const test = tester(from, to);
 
-  mover(from, to);
+  if (test) {
+    mover(from, to);
 
+    const returnArray = arrayMaker(boardState);
 
-  const returnArray = arrayMaker(boardState);
+    mapper(returnArray)
+  } else {
+    return 'You cannot place a bigger number on top of a smaller number. Try again.'
+  }
 
-  mapper(returnArray)
+  
 
  }
 
- move(1, 2);
+ 
