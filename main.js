@@ -1,7 +1,7 @@
 const boardState = {
-  pegOne: [1],
-  pegTwo: [2],
-  pegThree: [3]
+  pegOne: [5, 4, 3, 2, 1],
+  pegTwo: [],
+  pegThree: []
 }
 
 const one = boardState.pegOne;
@@ -30,10 +30,11 @@ const tester = (from, to) => {
   } 
 }
 
+const mover = (from, to) => {
+  const popped = from.pop()
+  to.push(popped)
+}
 
-//create argument conv
-
-//mover – affects state of board object
 
 //array creator 
 
