@@ -83,12 +83,11 @@ mapper(arrayMaker(boardState));
 
     const returnArray = arrayMaker(boardState);
 
+    console.log('That move was successful. The board is now:')
     mapper(returnArray)
   } else {
     return 'You cannot place a bigger number on top of a smaller number. Try again.'
   }
-
-  
 
  }
 
