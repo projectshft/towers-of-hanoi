@@ -35,8 +35,16 @@ const mover = (from, to) => {
   to.push(popped)
 }
 
+const arrayMaker = (object) => {
+  let newArray = [];
 
-//array creator 
+  newArray.push(boardState.pegOne);
+  newArray.push(boardState.pegTwo);
+  newArray.push(boardState.pegThree);
+
+  return newArray
+}
+
 
 //console log
 
