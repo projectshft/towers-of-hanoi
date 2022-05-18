@@ -31,7 +31,7 @@ const tester = (from, to) => {
 }
 
 const mover = (from, to) => {
-  const popped = from.pop()
+  let popped = from.pop()
   to.push(popped)
 }
 
@@ -46,36 +46,45 @@ const arrayMaker = (object) => {
 }
 
 
-//console log
+const mapper = (array) => {
+  array.map(arr => {
+    console.log(`---${arr}`)
+    })
+  
+}
 
 
-// const move = () => {
-  // if (from === 1) {
-  //   from = one;
-  // } else if (from === 2) {
-  //   from = two
-  // } else if (from === 3) {
-  //   from = three;
-  // } else {
-  //   console.log('Arguments must equal 1, 2, or 3.')
-  // }
+ const move = (from, to) => {
+  if (from === 1) {
+    from = one;
+  } else if (from === 2) {
+    from = two
+  } else if (from === 3) {
+    from = three;
+  } else {
+    console.log('Arguments must equal 1, 2, or 3.')
+  }
+  
 
-  // if (to === 1) {
-  //   to = one;
-  // } else if (to === 2) {
-  //   to = two
-  // } else if (to === 3) {
-  //   to = three;
-  // } else {
-  //   console.log('Arguments must equal 1, 2, or 3.')
-  // }
+  if (to === 1) {
+    to = one;
+  } else if (to === 2) {
+    to = two
+  } else if (to === 3) {
+    to = three;
+  } else {
+    console.log('Arguments must equal 1, 2, or 3.')
+  }
 
-  // tester(from, to);
+  tester(from, to);
 
-//   tester;
+  mover(from, to);
 
-//   //mover
 
-//   array creator 
+  const returnArray = arrayMaker(boardState);
 
-// }
+  mapper(returnArray)
+
+ }
+
+ move(1, 2);
