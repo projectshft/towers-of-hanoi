@@ -9,16 +9,27 @@ const two = boardState.pegTwo;
 const three = boardState.pegThree;
 
 const tester = (from, to) => {
+  const fromLength = from.length;
+  const toLength = to.length;
 
+  let fromLastElement = 0;
+  let toLastElement = 0;
+
+  if (fromLength > 0) {
+    fromLastElement = from[fromLength - 1]
+  }
+
+  if (toLength > 0) {
+    toLastElement = to[toLength - 1]
+  }
+
+  if (fromLastElement < toLastElement || toLastElement === 0) {
+    return true;
+  } else {
+    return false;
+  } 
 }
 
-
-
-
-
-
-
-//tester: no effects / returns a boolean
 
 //mover – affects state of board object
 
