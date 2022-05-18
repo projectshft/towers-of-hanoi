@@ -4,17 +4,13 @@ const boardState = {
   pegThree: []
 }
 
+const one = boardState.pegOne;
+const two = boardState.pegTwo;
+const three = boardState.pegThree;
 
+const tester = (from, to) => {
 
-
-
-
-
-
-
-
-
-
+}
 
 
 
