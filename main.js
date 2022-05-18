@@ -41,18 +41,15 @@ const arrayMaker = (object) => {
 }
 
 const mapper = (array) => {
-  array.map(arr => {
-    console.log(`---${arr}`)
-    })
-  
+  array.map(arr => console.log(`---${arr}`));
 }
-
-mapper(arrayMaker(boardState))
 
 const mover = (from, to) => {
   let popped = from.pop()
   to.push(popped)
 }
+
+mapper(arrayMaker(boardState));
 
 
  const move = (from, to) => {
