@@ -33,9 +33,9 @@ const tester = (from, to) => {
 const arrayMaker = (object) => {
   let newArray = [];
 
-  newArray.push(boardState.pegOne);
-  newArray.push(boardState.pegTwo);
-  newArray.push(boardState.pegThree);
+  newArray.push(object.pegOne);
+  newArray.push(object.pegTwo);
+  newArray.push(object.pegThree);
 
   return newArray
 }
