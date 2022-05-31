@@ -35,10 +35,7 @@ const towersOfHanoi = {
     const displayBoard = this.board.map(
       (peg) => `--- ${peg.map((disc) => `${disc}`)}`
     );
-    for (let i = 0; i < displayBoard.length; i++) {
-      const displayConsole = displayBoard[i];
-      console.log(displayConsole.replace(/,/g, ' '));
-    }
+    displayBoard.map((i) => console.log(i.replace(/,/g, ' ')));
   },
   // Check Winner
   checkWinner() {
@@ -49,3 +46,4 @@ const towersOfHanoi = {
     }
   },
 };
+towersOfHanoi.moveDisc(1, 3);
