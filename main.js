@@ -64,6 +64,7 @@ console.log(gameMethods.boardState)
 console.log(gameMethods.renderBoardState())
 
 //THE WAY IT IS GETTING PUSHED TO THE ARRAYS IS KEEPING THEM FROM GETTING RENDERED
+//let the moveController move the indexes direction. Put the index converter in move()
 
 
  /*
