@@ -18,18 +18,19 @@ const gameMethods = {
       *) check to see if it is 1, 2, or 3 (create a function for it)
   */
 
-
     if (moveFrom != 1 && moveFrom != 2 && moveFrom != 3) {
       return 'number must be either 1, 2, or 3'
     }
+
+    this.removeTopDisc(baseArray)
 
     return 'good so far'
   }
 }
 
 
-
 console.log(gameMethods.moveController(boardState, 3))
+console.log(boardState)
 
  /*
 
