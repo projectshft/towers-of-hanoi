@@ -32,12 +32,23 @@ const gameMethods = {
     return newNum
   },
   moveController (moveFrom, moveTo) {
+  /*
+    $$$ a) what is the array in concern?
+    $$$ b) on which index of that array are we calling removeTopDisc?
+      $$$ *) check to see if num1 is 1, 2, or 3
+      $$$ *) create an index converter function
+    c) on which index are we calling addDiscToTop?
+      $$$ *) check to see if it is 1, 2, or 3 (create a function for it)
+      *) add it to the function
+  */
 
     if (!this.numberChecker(moveFrom) || !this.numberChecker(moveTo)) {
       return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
     }
 
     const moveFromConverted = this.indexConverter(moveFrom)
+    const moveToConverted = this.indexConverter(moveTo)
+    console.log(moveToConverted)
   
     this.removeTopDisc(this.boardState[moveFromConverted])
 
@@ -45,7 +56,7 @@ const gameMethods = {
   }
 }
 
-console.log(`moveController return: ${gameMethods.moveController(1, 2)}`)
+console.log(`moveController return: ${gameMethods.moveController(1, 3)}`)
 console.log(`board state: ${gameMethods.boardState}`)
 
  /*
