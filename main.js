@@ -4,11 +4,17 @@ testArray = [1, 2, 3]
 
 const gameMethods = {
   removeTopDisc (array) {
-    console.log(array)
     array.pop()
   },
   addDiscToTop (array, property) {
     array.push(property);
+  },
+  numberChecker (num) {
+    if (num != 1 && num != 2 && num != 3) {
+      return false;
+    } else {
+      return true;
+    }
   },
   indexConverter (num) {
     let newNum;
@@ -28,18 +34,17 @@ const gameMethods = {
   moveController (baseArray, moveFrom) {
   /*
     $$$ a) what is the array in concern?
-    b) on which index of that array are we calling removeTopDisc?
+    $$$ b) on which index of that array are we calling removeTopDisc?
       $$$ *) check to see if num1 is 1, 2, or 3
-      *) create an index converter function
+      $$$ *) create an index converter function
     c) on which index are we calling addDiscToTop?
       *) check to see if it is 1, 2, or 3 (create a function for it)
   */
 
-    if (moveFrom != 1 && moveFrom != 2 && moveFrom != 3) {
-      return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.'
+    if (!this.numberChecker(moveFrom)) {
+      return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
     }
 
-    //index converter here, after if statements
     const moveFromConverted = this.indexConverter(moveFrom)
   
 
