@@ -1,8 +1,4 @@
-const boardState = {
-  pegOne: [5, 4, 3, 2, 1],
-  pegTwo: [],
-  pegThree: []
-}
+const boardState = [[5, 4, 3, 2, 1], [],[]]
 
 const one = boardState.pegOne;
 const two = boardState.pegTwo;
