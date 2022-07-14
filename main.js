@@ -9,6 +9,21 @@ const gameMethods = {
   addDiscToTop (array, property) {
     array.push(property);
   },
+  indexConverter (num) {
+    let newNum;
+
+    if (num === 1) {
+      newNum = 0
+    } else if (num === 2) {
+      newNum = 1
+    } else if (num === 3) {
+      newNum = 2
+    } else {
+      newNum = 'Must insert either 1, 2, or 3 into argument gameMethods.indexConverter';
+    }
+
+    return newNum
+  },
   moveController (baseArray, moveFrom) {
   /*
     $$$ a) what is the array in concern?
@@ -19,21 +34,19 @@ const gameMethods = {
       *) check to see if it is 1, 2, or 3 (create a function for it)
   */
 
-    // if (moveFrom != 1 && moveFrom != 2 && moveFrom != 3) {
-    //   return 'number must be either 1, 2, or 3'
-    // }
+    if (moveFrom != 1 && moveFrom != 2 && moveFrom != 3) {
+      return 'number must be either 1, 2, or 3'
+    }
+
+    //index converter here, after if statements
 
     this.removeTopDisc(baseArray[moveFrom])
-
-    console.log(baseArray[moveFrom])
 
     return 'good so far'
   }
 }
 
 
-console.log(gameMethods.moveController(boardState, 0))
-console.log(boardState)
 
  /*
 
