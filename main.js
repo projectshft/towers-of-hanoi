@@ -1,8 +1,8 @@
-const boardState = [[5, 4, 3, 2, 1], [],[]]
 
 testArray = [1, 2, 3]
 
 const gameMethods = {
+  boardState: [[5, 4, 3, 2, 1], [],[]],
   removeTopDisc (array) {
     array.pop()
   },
@@ -31,33 +31,41 @@ const gameMethods = {
 
     return newNum
   },
-  moveController (baseArray, moveFrom) {
+  moveController (baseArray, moveFrom, moveTo) {
   /*
     $$$ a) what is the array in concern?
     $$$ b) on which index of that array are we calling removeTopDisc?
       $$$ *) check to see if num1 is 1, 2, or 3
       $$$ *) create an index converter function
     c) on which index are we calling addDiscToTop?
-      *) check to see if it is 1, 2, or 3 (create a function for it)
+      $$$ *) check to see if it is 1, 2, or 3 (create a function for it)
+      *) add it to the function
   */
 
     if (!this.numberChecker(moveFrom)) {
       return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
     }
 
+    if (!this.numberChecker(moveTo)) {
+      return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
+    }
+
     const moveFromConverted = this.indexConverter(moveFrom)
   
-
     this.removeTopDisc(baseArray[moveFromConverted])
 
     return 'good so far'
   }
 }
 
-console.log(gameMethods.moveController(boardState, 1))
-console.log(boardState)
+console.log(gameMethods.boardState)
 
  /*
+
+ ***
+  move boardstate to object
+  change baseArray in the object
+ ***
 
  $$$ 1) object that will hold all of the methods, called gameMethods
  $$$ 2) a function that pops the last index of an item from an array
