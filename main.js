@@ -4,6 +4,7 @@ testArray = [1, 2, 3]
 
 const gameMethods = {
   removeTopDisc (array) {
+    console.log(array)
     array.pop()
   },
   addDiscToTop (array, property) {
@@ -39,14 +40,16 @@ const gameMethods = {
     }
 
     //index converter here, after if statements
+    const moveFromConverted = this.indexConverter(moveFrom)
 
-    this.removeTopDisc(baseArray[moveFrom])
+
+    this.removeTopDisc(baseArray[moveFromConverted])
 
     return 'good so far'
   }
 }
 
-
+gameMethods.moveController(boardState, 2);
 
  /*
 
