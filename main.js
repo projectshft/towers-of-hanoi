@@ -42,11 +42,7 @@ const gameMethods = {
       *) add it to the function
   */
 
-    if (!this.numberChecker(moveFrom)) {
-      return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
-    }
-
-    if (!this.numberChecker(moveTo)) {
+    if (!this.numberChecker(moveFrom) || !this.numberChecker(moveTo)) {
       return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
     }
 
@@ -58,15 +54,10 @@ const gameMethods = {
   }
 }
 
-console.log(`moveController return: ${gameMethods.moveController(1, 3)}`)
+console.log(`moveController return: ${gameMethods.moveController(1, 2)}`)
 console.log(`board state: ${gameMethods.boardState}`)
 
  /*
-
- ***
-  $$$ move boardstate to object
-  change baseArray in the object
- ***
 
  $$$ 1) object that will hold all of the methods, called gameMethods
  $$$ 2) a function that pops the last index of an item from an array
