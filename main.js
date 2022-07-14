@@ -41,8 +41,6 @@ const gameMethods = {
     const moveToConverted = this.indexConverter(moveTo)
 
     let arrayPopped = this.removeTopDisc(this.boardState[moveFromConverted]);
-
-    this.removeTopDisc(this.boardState[moveFromConverted]);
     
     this.addDiscToTop(this.boardState[moveToConverted], this.boardState[arrayPopped])
 
@@ -52,7 +50,10 @@ const gameMethods = {
 
 console.log(gameMethods.moveController(1, 2))
 
+console.log(gameMethods.moveController(1, 3))
+
 console.log(gameMethods.boardState)
+
 
  /*
 
