@@ -36,12 +36,12 @@ const gameMethods = {
   */
 
     if (moveFrom != 1 && moveFrom != 2 && moveFrom != 3) {
-      return 'number must be either 1, 2, or 3'
+      return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.'
     }
 
     //index converter here, after if statements
     const moveFromConverted = this.indexConverter(moveFrom)
-
+  
 
     this.removeTopDisc(baseArray[moveFromConverted])
 
@@ -49,7 +49,8 @@ const gameMethods = {
   }
 }
 
-gameMethods.moveController(boardState, 2);
+console.log(gameMethods.moveController(boardState, 1))
+console.log(boardState)
 
  /*
 
