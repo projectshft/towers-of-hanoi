@@ -32,15 +32,6 @@ const gameMethods = {
     return newNum
   },
   moveController (moveFrom, moveTo) {
-  /*
-    $$$ a) what is the array in concern?
-    $$$ b) on which index of that array are we calling removeTopDisc?
-      $$$ *) check to see if num1 is 1, 2, or 3
-      $$$ *) create an index converter function
-    c) on which index are we calling addDiscToTop?
-      $$$ *) check to see if it is 1, 2, or 3 (create a function for it)
-      *) add it to the function
-  */
 
     if (!this.numberChecker(moveFrom) || !this.numberChecker(moveTo)) {
       return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
@@ -69,15 +60,12 @@ console.log(gameMethods.boardState)
  $$$ 1) object that will hold all of the methods, called gameMethods
  $$$ 2) a function that pops the last index of an item from an array
  $$$ 3) a function that places an index on the back of an array
- 4) a function that controls which arrays within boardState execute #s 2 & 3
+ $$$ 4) a function that controls which arrays within boardState execute #s 2 & 3
  5) a function that renders the board state to the console
  6) a function that renders the game instructions to the console
  7) a function that checks whether a move was legal and chooses to rerender  the move
-
- 
- function for moving pegs
- function for checking for valid moves
- function for checking winner checkWinner
- functino for resetting the game
-
+  a) whether the peg has a place to move
+  b) checks to be sure that the peg it is moving to isnt' smaller
+ 8) create a function that checks for a winner
+  a) this should reset after it checks
  */
