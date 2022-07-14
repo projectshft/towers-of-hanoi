@@ -18,7 +18,7 @@ const moveController = (baseArray, num1) => {
       *) check to see if num1 is 1, 2, or 3
     c) on which index are we calling addDiscToTop?
   */
-  if (num1 != 1 && num1 != 2) {
+  if (num1 != 1 && num1 != 2 && num1 != 3) {
     return 'number must be either 1, 2, or 3'
   }
   
@@ -26,7 +26,7 @@ const moveController = (baseArray, num1) => {
 
 }
 
-console.log(moveController(boardState, 2))
+console.log(moveController(boardState, 3))
 
  /*
 
