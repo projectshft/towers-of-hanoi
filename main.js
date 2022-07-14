@@ -45,14 +45,25 @@ const gameMethods = {
     this.addDiscToTop(this.boardState[moveToConverted], this.boardState[arrayPopped])
 
     return 'current state:'
+  },
+  renderBoardState () {
+    return (
+      `
+        ---${this.boardState[0]}
+        ---${this.boardState[1]}
+        ---${this.boardState[2]}
+      `
+    )
   }
 }
 
 console.log(gameMethods.moveController(1, 2))
 
-console.log(gameMethods.moveController(1, 3))
-
 console.log(gameMethods.boardState)
+
+console.log(gameMethods.renderBoardState())
+
+//THE WAY IT IS GETTING PUSHED TO THE ARRAYS IS KEEPING THEM FROM GETTING RENDERED
 
 
  /*
