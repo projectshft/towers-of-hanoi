@@ -45,14 +45,21 @@ const gameMethods = {
     this.removeTopDisc(this.boardState[moveFromConverted]);
     
     this.addDiscToTop(this.boardState[moveToConverted], this.boardState[arrayPopped])
-
-  
-
-    return 'good so far'
+  },
+  renderBoardState () {
+    return (
+      `
+        ---${this.boardState[0]}
+        ---${this.boardState[1]}
+        ---${this.boardState[2]}
+      `
+    )
   }
 }
 
-console.log(`moveController return: ${gameMethods.moveController(1, 3)}`)
+console.log(`moveController return: ${gameMethods.moveController(1, 2)}`)
+
+console.log(gameMethods.renderBoardState())
 console.log(gameMethods.boardState)
 
  /*
