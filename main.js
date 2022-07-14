@@ -11,17 +11,22 @@ const gameMethods = {
   }
 }
 
-const moveController = (baseArray) => {
+const moveController = (baseArray, num1) => {
   /*
-    a) what is the array in concern?
+    $$$ a) what is the array in concern?
     b) on which index of that array are we calling removeTopDisc?
+      *) check to see if num1 is 1, 2, or 3
     c) on which index are we calling addDiscToTop?
   */
+  if (num1 != 1) {
+    return 'number must be either 1, 2, or 3'
+  }
+  
+  return 'good so far'
 
-  console.log(baseArray)
 }
 
-moveController(boardState)
+console.log(moveController(boardState, 1))
 
  /*
 
