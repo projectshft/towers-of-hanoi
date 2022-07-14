@@ -68,4 +68,5 @@ console.log(gameMethods.boardState)
   b) checks to be sure that the peg it is moving to isnt' smaller
  8) create a function that checks for a winner
   a) this should reset after it checks
+ 9) create a move() function that executes the game for the user
  */
