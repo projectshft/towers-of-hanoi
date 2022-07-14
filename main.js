@@ -1,14 +1,19 @@
 const boardState = [[5, 4, 3, 2, 1], [],[]]
 
+testArray = [1, 2, 3]
+
 const gameMethods = {
-  
+  removeTopDisc (array) {
+    array.pop()
+  }
 }
+
 
 
  /*
 
  $$$ 1) object that will hold all of the methods, called gameMethods
- 2) a function that pops the last index of an item from an array
+ $$$ 2) a function that pops the last index of an item from an array
  3) a function that places an index on the back of an array
  4) a function that controls with arrays withing boardState execute #s 2 & 3
  5) a function that renders the board state to the console
