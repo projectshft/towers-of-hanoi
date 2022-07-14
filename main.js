@@ -4,7 +4,7 @@ testArray = [1, 2, 3]
 const gameMethods = {
   boardState: [[5, 4, 3, 2, 1], [],[]],
   removeTopDisc (array) {
-    array.pop()
+    return array.pop()
   },
   addDiscToTop (array, property) {
     array.push(property);
@@ -48,16 +48,21 @@ const gameMethods = {
 
     const moveFromConverted = this.indexConverter(moveFrom)
     const moveToConverted = this.indexConverter(moveTo)
-    console.log(moveToConverted)
+
+    let arrayPopped = this.removeTopDisc(this.boardState[moveFromConverted]);
+
+    this.removeTopDisc(this.boardState[moveFromConverted]);
+    
+    this.addDiscToTop(this.boardState[moveToConverted], this.boardState[arrayPopped])
+
   
-    this.removeTopDisc(this.boardState[moveFromConverted])
 
     return 'good so far'
   }
 }
 
 console.log(`moveController return: ${gameMethods.moveController(1, 3)}`)
-console.log(`board state: ${gameMethods.boardState}`)
+console.log(gameMethods.boardState)
 
  /*
 
