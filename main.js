@@ -31,7 +31,7 @@ const gameMethods = {
 
     return newNum
   },
-  moveController (baseArray, moveFrom, moveTo) {
+  moveController (moveFrom, moveTo) {
   /*
     $$$ a) what is the array in concern?
     $$$ b) on which index of that array are we calling removeTopDisc?
@@ -52,18 +52,19 @@ const gameMethods = {
 
     const moveFromConverted = this.indexConverter(moveFrom)
   
-    this.removeTopDisc(baseArray[moveFromConverted])
+    this.removeTopDisc(this.boardState[moveFromConverted])
 
     return 'good so far'
   }
 }
 
-console.log(gameMethods.boardState)
+console.log(`moveController return: ${gameMethods.moveController(1, 3)}`)
+console.log(`board state: ${gameMethods.boardState}`)
 
  /*
 
  ***
-  move boardstate to object
+  $$$ move boardstate to object
   change baseArray in the object
  ***
 
