@@ -14,22 +14,25 @@ const gameMethods = {
     $$$ a) what is the array in concern?
     b) on which index of that array are we calling removeTopDisc?
       $$$ *) check to see if num1 is 1, 2, or 3
+      *) create an index converter function
     c) on which index are we calling addDiscToTop?
       *) check to see if it is 1, 2, or 3 (create a function for it)
   */
 
-    if (moveFrom != 1 && moveFrom != 2 && moveFrom != 3) {
-      return 'number must be either 1, 2, or 3'
-    }
+    // if (moveFrom != 1 && moveFrom != 2 && moveFrom != 3) {
+    //   return 'number must be either 1, 2, or 3'
+    // }
 
-    this.removeTopDisc(baseArray)
+    this.removeTopDisc(baseArray[moveFrom])
+
+    console.log(baseArray[moveFrom])
 
     return 'good so far'
   }
 }
 
 
-console.log(gameMethods.moveController(boardState, 3))
+console.log(gameMethods.moveController(boardState, 0))
 console.log(boardState)
 
  /*
