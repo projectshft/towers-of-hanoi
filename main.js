@@ -88,6 +88,13 @@ const gameMethods = {
     } else {
       return false;
     }
+  },
+  smallerPegTester (moveFrom, moveTo) {
+    if (moveFrom > moveTo) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -116,8 +123,9 @@ const seeState = () => {
  $$$ 5) a function that renders the board state to the console
  $$$ 6) a function that renders the game instructions to the console
  7) a function that checks whether a move was legal and chooses to rerender  the move
-  a) whether there is a peg there to move
-  b) checks to be sure that the peg it is moving to isnt' smaller
+  $$$ a) whether there is a peg there to move
+  b) checks to be sure that the peg it is moving to isn't smaller
+    *should return true if so (it will be a test), false if not
  8) create a function that tests for a winner
   a) add an if statement in move() to either say 'Move again.' or announce a win
  9) create a function should reset after it checks (change gameMethods.boardState)
