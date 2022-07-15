@@ -85,6 +85,8 @@ const gameMethods = {
   }
 }
 
+console.log(gameMethods.renderSmallInstructions())
+
 const move = (num1, num2) => {
   console.log(gameMethods.moveController(num1, num2))
 }
