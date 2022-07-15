@@ -143,7 +143,7 @@ console.log(gameMethods.renderSmallInstructions())
 
 const move = (num1, num2) => {
   console.log(gameMethods.moveController(num1, num2))
-  if (!winTester()) {
+  if (!this.winTester) {
     return 'Move again.';
   } else {
     return 'You win!'
