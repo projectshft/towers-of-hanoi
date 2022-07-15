@@ -92,6 +92,11 @@ const instructions = () => {
   return 'Good luck!';
 }
 
+const seeState = () => {
+  gameMethods.renderBoardState();
+  return 'Choose your next move carefully!';
+}
+
 
 //find a way to render initial state ("type seeState() to see the initial state")
 
