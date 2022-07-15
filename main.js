@@ -85,9 +85,6 @@ const gameMethods = {
   }
 }
 
-
-
-
 console.log(gameMethods.moveController(1, 2));
 
 
