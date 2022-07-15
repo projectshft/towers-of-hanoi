@@ -132,10 +132,10 @@ const seeState = () => {
  $$$ 4) a function that controls which arrays within boardState execute #s 2 & 3
  $$$ 5) a function that renders the board state to the console
  $$$ 6) a function that renders the game instructions to the console
- 7) a function that checks whether a move was legal and chooses to rerender  the move
+ $$$ 7) a function that checks whether a move was legal and chooses to rerender  the move
   $$$ a) whether there is a peg there to move
-  b) checks to be sure that the peg it is moving to isn't smaller
-    *should return true if so (it will be a test), false if not
+  $$$ b) checks to be sure that the peg it is moving to isn't smaller
+    $$$ *should return true if so (it will be a test), false if not
  8) create a function that tests for a winner
   a) add an if statement in move() to either say 'Move again.' or announce a win
  9) create a function should reset after it checks (change gameMethods.boardState)
