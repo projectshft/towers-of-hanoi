@@ -112,6 +112,7 @@ const seeState = () => {
   a) whether there is a peg there to move
   b) checks to be sure that the peg it is moving to isnt' smaller
  8) create a function that tests for a winner
+  a) add an if statement in move() to either say 'Move again.' or announce a win
  9) create a function should reset after it checks (change gameMethods.boardState)
  9) create a move() function that executes the game for the user
  */
