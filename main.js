@@ -71,7 +71,9 @@ const gameMethods = {
   },
   renderSmallInstructions () {
     return `
-    Enter 'move()' with the pegs to want to move to and from as arguments. 
+    Enter 'move()' with the pegs to want to move to and from as arguments.
+    
+    To see the starting state, type 'seeState()'.
 
     For for detailed instructions, type 'instructions()'.
     `
@@ -90,9 +92,7 @@ const instructions = () => {
   return 'Good luck!';
 }
 
-console.log(gameMethods.renderBoardState());
 
-//change renderBoardState to be a .map()
 //find a way to render initial state ("type seeState() to see the initial state")
 
  /*
