@@ -4,7 +4,8 @@ lastElement = testArray[testArray.length - 1]
 
 
 const gameMethods = {
-  boardState: [[5, 4, 3, 2, 1], [],[]],
+  // boardState: [[5, 4, 3, 2, 1], [],[]],
+  boardState: [[1], [],[5, 4, 3, 2]],
   removeTopDisc (array) {
     return array.pop()
   },
@@ -143,12 +144,11 @@ console.log(gameMethods.renderSmallInstructions())
 
 const move = (num1, num2) => {
   console.log(gameMethods.moveController(num1, num2))
-  if (!this.winTester) {
+  if (!gameMethods.winTester()) {
     return 'Move again.';
   } else {
     return 'You win!'
   }
-  
 }
 
 const instructions = () => {
@@ -160,6 +160,7 @@ const seeState = () => {
   gameMethods.renderBoardState();
   return 'Choose your next move carefully!';
 }
+
  /*
 
  $$$ 1) object that will hold all of the methods, called gameMethods
