@@ -100,7 +100,7 @@ console.log(gameMethods.moveController(1, 2));
  $$$ 5) a function that renders the board state to the console
  $$$ 6) a function that renders the game instructions to the console
  7) a function that checks whether a move was legal and chooses to rerender  the move
-  a) whether the peg has a place to move
+  a) whether there is a peg there to move
   b) checks to be sure that the peg it is moving to isnt' smaller
  8) create a function that checks for a winner
   a) this should reset after it checks
