@@ -146,6 +146,10 @@ const gameMethods = {
 
     For for detailed instructions, type 'instructions()'.
     `
+  },
+  winWithoutTrying () {
+    this.boardState = [[1], [5, 4, 3, 2],[]];
+    this.moveController(1, 2);
   }
 }
 
