@@ -151,6 +151,7 @@ const move = (num1, num2) => {
   if (!gameMethods.winTester()) {
     return 'Move again.';
   } else {
+    gameMethods.resetBoardState();
     return 'You win!'
   }
 }
