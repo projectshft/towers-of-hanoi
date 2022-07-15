@@ -130,6 +130,8 @@ const gameMethods = {
     For example, 'move(1, 2)' will move the topmost disc from the first peg to the second peg. 'move(3, 1)' will move from the third peg to the first peg.
     
     To view the game's starting point, type 'seeState()'.
+
+    If you need to start over, type 'gameMethods.resetBoardState()'.
     `
   },
   renderSmallInstructions () {
