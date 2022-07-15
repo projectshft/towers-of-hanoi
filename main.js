@@ -126,6 +126,8 @@ const gameMethods = {
   },
   renderSmallInstructions () {
     return `
+    TOWERS OF HANOI
+    
     Enter 'move()' with the pegs to want to move to and from as arguments.
     
     To see the starting state, type 'seeState()'.
