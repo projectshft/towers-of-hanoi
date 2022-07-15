@@ -121,7 +121,7 @@ const gameMethods = {
     
     (For example, 2 is larger than 1, but smaller than 3. 3 is larger than 2, but smaller than 4. etc.)
     
-    The goal is to re-stack the discs so that they are all on the same peg, but a different one than the one on which they started. 
+    The goal is to re-stack the discs from the first peg so that they are all on the same peg, but a different one than the one on which they started. 
     
     The catch is that a larger peg can never go on top of a smaller peg. 
     
