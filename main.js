@@ -42,7 +42,8 @@ const gameMethods = {
 
     let arrayPopped = this.removeTopDisc(this.boardState[moveFromConverted]);
     
-    this.addDiscToTop(this.boardState[moveToConverted], this.boardState[arrayPopped])
+    this.addDiscToTop(this.boardState[moveToConverted], arrayPopped)
+
 
     return 'current state:'
   },
