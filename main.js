@@ -59,13 +59,13 @@ const gameMethods = {
 }
 
 console.log(gameMethods.moveController(1, 2))
+console.log(gameMethods.moveController(1, 3))
+console.log(gameMethods.moveController(2, 3))
+console.log(gameMethods.moveController(1, 2))
 
-console.log(gameMethods.boardState)
+
 
 console.log(gameMethods.renderBoardState())
-
-//THE WAY IT IS GETTING PUSHED TO THE ARRAYS IS KEEPING THEM FROM GETTING RENDERED
-//let the moveController move the indexes direction. Put the index converter in move()
 
 
  /*
