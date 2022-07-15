@@ -153,7 +153,7 @@ const move = (num1, num2) => {
     return 'Move again.';
   } else {
     gameMethods.resetBoardState();
-    return 'You win!'
+    return 'You win! Play again below!'
   }
 }
 
