@@ -50,6 +50,8 @@ const gameMethods = {
   renderBoardState () {
     return (
       `
+      Current board state:
+
         ---${this.boardState[0]}
         ---${this.boardState[1]}
         ---${this.boardState[2]}
@@ -74,16 +76,20 @@ const gameMethods = {
 
     Good luck!
     `
+  },
+  renderSmallInstructions () {
+    return `
+    Enter 'move()' with the pegs to want to move to and from as arguments. 
+
+    For for detailed instructions, type '${this.renderFullInstructions.name}()'.
+    `
   }
 }
 
-console.log(gameMethods.moveController(1, 2))
-console.log(gameMethods.moveController(1, 3))
-console.log(gameMethods.moveController(2, 3))
-console.log(gameMethods.moveController(1, 2))
 
 
-console.log(gameMethods.renderFullInstructions())
+
+console.log(gameMethods.renderSmallInstructions())
 console.log(gameMethods.renderBoardState())
 
 
