@@ -40,6 +40,10 @@ const gameMethods = {
     const moveFromConverted = this.indexConverter(moveFrom)
     const moveToConverted = this.indexConverter(moveTo)
 
+    if (this.emptyPegTester(this.boardState[moveFromConverted])) {
+      return 'There are no discs on that peg. Try another.'
+    }
+
     let arrayPopped = this.removeTopDisc(this.boardState[moveFromConverted]);
     
     this.addDiscToTop(this.boardState[moveToConverted], arrayPopped)
@@ -77,6 +81,13 @@ const gameMethods = {
 
     For for detailed instructions, type 'instructions()'.
     `
+  }, 
+  emptyPegTester (array) {
+    if (array.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -96,7 +107,6 @@ const seeState = () => {
   gameMethods.renderBoardState();
   return 'Choose your next move carefully!';
 }
-
  /*
 
  $$$ 1) object that will hold all of the methods, called gameMethods
