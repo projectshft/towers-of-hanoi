@@ -132,8 +132,6 @@ const gameMethods = {
     To view the game's starting point, type 'seeState()'.
 
     If you need to start over, type 'gameMethods.resetBoardState()'.
-
-    *** cheat code: tooEasy() ***
     `
   },
   renderSmallInstructions () {
@@ -175,10 +173,4 @@ const instructions = () => {
 const seeState = () => {
   gameMethods.renderBoardState();
   return 'Choose your next move carefully!';
-}
-
-const tooEasy = () => {
-  gameMethods.winWithoutTrying();
-  move(1, 2);
-  return 'Wanna try for real now?'
 }
