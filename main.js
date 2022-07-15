@@ -127,7 +127,10 @@ const gameMethods = {
     
     To move, type 'move()' with two arguments. The first argument will be the peg you are moving from, the second will be the peg you are moving to. You can only move the topmost disc.
     
-    For example, 'move(1, 2)' will move the topmost disc from the first peg to the second peg. 'move(3, 1)' will move from the third peg to the first peg.`
+    For example, 'move(1, 2)' will move the topmost disc from the first peg to the second peg. 'move(3, 1)' will move from the third peg to the first peg.
+    
+    To view the game's starting point, type 'seeState()'.
+    `
   },
   renderSmallInstructions () {
     return `
