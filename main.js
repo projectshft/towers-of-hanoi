@@ -47,15 +47,11 @@ const gameMethods = {
     return this.renderBoardState()
   },
   renderBoardState () {
-    return (
-      `
-      Current board state:
+    this.boardState.map(index => {
+      console.log(`---${index}`);
+    })
 
-        ---${this.boardState[0]}
-        ---${this.boardState[1]}
-        ---${this.boardState[2]}
-      `
-    )
+    return 'What will you move next?'
   },
   renderFullInstructions () {
     return `
@@ -94,6 +90,7 @@ const instructions = () => {
   return 'Good luck!';
 }
 
+console.log(gameMethods.renderBoardState());
 
 //change renderBoardState to be a .map()
 //find a way to render initial state ("type seeState() to see the initial state")
