@@ -92,7 +92,7 @@ const move = (num1, num2) => {
 }
 
 
-
+//change 'renderFullInstructions' in renderSmall instructions text to refer to a function outside of the method that renders gameMethods.renderFullInstructions()
 
  /*
 
