@@ -56,7 +56,7 @@ const gameMethods = {
       `
     )
   },
-  renderInstructions () {
+  renderFullInstructions () {
     return `
     Welcome to Towers of Hanoi!
     
@@ -83,7 +83,7 @@ console.log(gameMethods.moveController(2, 3))
 console.log(gameMethods.moveController(1, 2))
 
 
-console.log(gameMethods.renderInstructions())
+console.log(gameMethods.renderFullInstructions())
 console.log(gameMethods.renderBoardState())
 
 
