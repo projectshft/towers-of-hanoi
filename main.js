@@ -105,6 +105,32 @@ const gameMethods = {
     } else {
       return false;
     }
+  },
+  arrayEquals (!arr1, arr2) {
+    if (!arr1 || !arr2) {
+      return false
+    }
+  
+    if (arr1.length != arr2.length) {
+      return false;
+    }
+  
+    let tester = true;
+  
+    arr1.map((post, i) => {
+      if (post != arr2[i]) {
+        tester = false;
+      }
+    })
+  
+    if (tester) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  winTester () {
+    //how to test equality of arrays
   }
 }
 
@@ -137,6 +163,8 @@ const seeState = () => {
   $$$ b) checks to be sure that the peg it is moving to isn't smaller
     $$$ *should return true if so (it will be a test), false if not
  8) create a function that tests for a winner
+  b) make it a true false logic
+  c) insert into move()
   a) add an if statement in move() to either say 'Move again.' or announce a win
  9) create a function should reset after it checks (change gameMethods.boardState)
  9) create a move() function that executes the game for the user
