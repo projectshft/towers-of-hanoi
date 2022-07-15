@@ -7,13 +7,6 @@ const gameMethods = {
   addDiscToTop (array, property) {
     array.push(property);
   },
-  numberTester (num) {
-    if (num != 1 && num != 2 && num != 3) {
-      return false;
-    } else {
-      return true;
-    }
-  },
   indexConverter (num) {
     let newNum;
 
@@ -88,6 +81,13 @@ const gameMethods = {
     For for detailed instructions, type 'instructions()'.
     `
   }, 
+  numberTester (num) {
+    if (num != 1 && num != 2 && num != 3) {
+      return false;
+    } else {
+      return true;
+    }
+  },
   emptyPegTester (array) {
     if (array.length === 0) {
       return true;
