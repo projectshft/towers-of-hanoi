@@ -51,7 +51,7 @@ const gameMethods = {
       console.log(`---${index}`);
     })
 
-    return 'What will you move next?'
+    return 'Choose your next move carefully?'
   },
   renderFullInstructions () {
     return `
