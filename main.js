@@ -1,7 +1,6 @@
 //DEVELOPER LOGIC
 const gameMethods = {
-  // boardState: [[5, 4, 3, 2, 1], [],[]],
-  boardState: [[1], [5, 4, 3, 2],[]],
+  boardState: [[5, 4, 3, 2, 1], [],[]],
   resetBoardState () {
     this.boardState = [[5, 4, 3, 2, 1], [],[]];
     this.renderBoardState()
