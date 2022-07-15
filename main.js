@@ -7,21 +7,6 @@ const gameMethods = {
   addDiscToTop (array, property) {
     array.push(property);
   },
-  indexConverter (num) {
-    let newNum;
-
-    if (num === 1) {
-      newNum = 0
-    } else if (num === 2) {
-      newNum = 1
-    } else if (num === 3) {
-      newNum = 2
-    } else {
-      newNum = 'Must insert either 1, 2, or 3 into argument gameMethods.indexConverter';
-    }
-
-    return newNum
-  },
   moveController (moveFrom, moveTo) {
 
     if (!this.numberTester(moveFrom) || !this.numberTester(moveTo)) {
@@ -48,6 +33,21 @@ const gameMethods = {
     this.addDiscToTop(this.boardState[moveToConverted], arrayPopped)
 
     return this.renderBoardState()
+  },
+  indexConverter (num) {
+    let newNum;
+
+    if (num === 1) {
+      newNum = 0
+    } else if (num === 2) {
+      newNum = 1
+    } else if (num === 3) {
+      newNum = 2
+    } else {
+      newNum = 'Must insert either 1, 2, or 3 into argument gameMethods.indexConverter';
+    }
+
+    return newNum
   },
   numberTester (num) {
     if (num != 1 && num != 2 && num != 3) {
