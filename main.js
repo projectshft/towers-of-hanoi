@@ -106,7 +106,7 @@ const gameMethods = {
       return false;
     }
   },
-  arrayEquals (!arr1, arr2) {
+  arrayEquals (arr1, arr2) {
     if (!arr1 || !arr2) {
       return false
     }
@@ -130,7 +130,12 @@ const gameMethods = {
     }
   },
   winTester () {
-    //how to test equality of arrays
+    const testState = [5, 4, 3, 2, 1];
+    if (this.arrayEquals(this.boardState[1], testState) || this.arrayEquals(this.boardState[2], testState)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
