@@ -80,7 +80,7 @@ const gameMethods = {
     return `
     Enter 'move()' with the pegs to want to move to and from as arguments. 
 
-    For for detailed instructions, type '${this.renderFullInstructions.name}()'.
+    For for detailed instructions, type 'instructions()'.
     `
   }
 }
@@ -92,8 +92,13 @@ const move = (num1, num2) => {
   return 'Move again.';
 }
 
+// const instructions = () => {
+  
+// }
 
-//change 'renderFullInstructions' in renderSmall instructions text to refer to a function outside of the method that renders gameMethods.renderFullInstructions()
+
+//change 'renderFullInstructions' in renderSmall instructions text to refer to a function outside of the method (instructions()) that renders gameMethods.renderFullInstructions()
+//change renderBoardState to be a .map()
 
  /*
 
@@ -106,7 +111,7 @@ const move = (num1, num2) => {
  7) a function that checks whether a move was legal and chooses to rerender  the move
   a) whether there is a peg there to move
   b) checks to be sure that the peg it is moving to isnt' smaller
- 8) create a function that checks for a winner
-  a) this should reset after it checks
+ 8) create a function that tests for a winner
+ 9) create a function should reset after it checks (change gameMethods.boardState)
  9) create a move() function that executes the game for the user
  */
