@@ -49,27 +49,6 @@ const gameMethods = {
 
     return newNum
   },
-  numberTester (num) {
-    if (num != 1 && num != 2 && num != 3) {
-      return false;
-    } else {
-      return true;
-    }
-  },
-  emptyPegTester (array) {
-    if (array.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  smallerPegTester (moveFrom, moveTo) {
-    if (moveFrom[moveFrom.length - 1] > moveTo[moveTo.length - 1]) {
-      return true;
-    } else {
-      return false;
-    }
-  },
   arrayEquals (arr1, arr2) {
     if (!arr1 || !arr2) {
       return false
@@ -88,6 +67,27 @@ const gameMethods = {
     })
   
     if (tester) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  numberTester (num) {
+    if (num != 1 && num != 2 && num != 3) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+  emptyPegTester (array) {
+    if (array.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  smallerPegTester (moveFrom, moveTo) {
+    if (moveFrom[moveFrom.length - 1] > moveTo[moveTo.length - 1]) {
       return true;
     } else {
       return false;
