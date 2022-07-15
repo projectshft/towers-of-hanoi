@@ -131,7 +131,7 @@ const gameMethods = {
     
     To view the game's starting point, type 'seeState()'.
 
-    If you need to start over, type 'gameMethods.resetBoardState()'.
+    If you need to start over, type 'reset()'.
     `
   },
   renderSmallInstructions () {
@@ -144,10 +144,6 @@ const gameMethods = {
 
     For for detailed instructions, type 'instructions()'.
     `
-  },
-  winWithoutTrying () {
-    this.boardState = [[1], [5, 4, 3, 2],[]];
-    return 'Easy peasy!'
   }
 }
 
