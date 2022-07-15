@@ -117,7 +117,7 @@ const gameMethods = {
     return `
     Welcome to Towers of Hanoi! 
     
-    There are 3 pegs and 5 discs. The disks are represented by the numbers. The pegs are represented by three horizontal lines. Each disc is relative in size to the others based on it's number. 
+    There are 3 pegs and 5 discs. The disks are represented by the numbers. The pegs are represented by three horizontal lines. Each disc is relative in size to the others based on its number. 
     
     (For example, 2 is larger than 1, but smaller than 3. 3 is larger than 2, but smaller than 4. etc.)
     
