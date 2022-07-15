@@ -51,7 +51,7 @@ const gameMethods = {
       console.log(`---${index}`);
     })
 
-    return 'State rendered'
+    return 'Board state rendered'
   },
   renderFullInstructions () {
     return `
