@@ -133,7 +133,7 @@ const gameMethods = {
 
     If you need to start over, type 'gameMethods.resetBoardState()'.
 
-    *** cheat code: gameMethods.winWithoutTrying() ***
+    *** cheat code: tooEasy() ***
     `
   },
   renderSmallInstructions () {
@@ -149,7 +149,7 @@ const gameMethods = {
   },
   winWithoutTrying () {
     this.boardState = [[1], [5, 4, 3, 2],[]];
-    this.moveController(1, 2);
+    return 'Easy peasy!'
   }
 }
 
@@ -175,4 +175,10 @@ const instructions = () => {
 const seeState = () => {
   gameMethods.renderBoardState();
   return 'Choose your next move carefully!';
+}
+
+const tooEasy = () => {
+  gameMethods.winWithoutTrying();
+  move(1, 2);
+  return 'Wanna try for real now?'
 }
