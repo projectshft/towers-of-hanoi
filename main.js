@@ -2,11 +2,8 @@
 const gameMethods = {
   boardState: [[5, 4, 3, 2, 1], [],[]],
   resetBoardState () {
-    //reset
     this.boardState = [[5, 4, 3, 2, 1], [],[]];
-    //print
     this.renderBoardState()
-    //return message that it is reset
     return 'Board reset'
   },
   removeTopDisc (array) {
