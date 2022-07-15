@@ -96,7 +96,7 @@ const instructions = () => {
 
 
 //change renderBoardState to be a .map()
-//find a way to render initial state
+//find a way to render initial state ("type seeState() to see the initial state")
 
  /*
 
