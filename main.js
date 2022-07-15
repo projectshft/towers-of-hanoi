@@ -143,7 +143,12 @@ console.log(gameMethods.renderSmallInstructions())
 
 const move = (num1, num2) => {
   console.log(gameMethods.moveController(num1, num2))
-  return 'Move again.';
+  if (!winTester()) {
+    return 'Move again.';
+  } else {
+    return 'You win!'
+  }
+  
 }
 
 const instructions = () => {
