@@ -170,3 +170,8 @@ const seeState = () => {
   gameMethods.renderBoardState();
   return 'Choose your next move carefully!';
 }
+
+const reset = () => {
+  gameMethods.resetBoardState();
+  return 'Game reset. Try again!'
+}
