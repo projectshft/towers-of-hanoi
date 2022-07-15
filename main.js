@@ -1,8 +1,3 @@
-
-testArray = [1, 2, 3]
-lastElement = testArray[testArray.length - 1]
-
-
 const gameMethods = {
   boardState: [[5, 4, 3, 2, 1], [],[]],
   removeTopDisc (array) {
