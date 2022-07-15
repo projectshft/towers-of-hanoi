@@ -58,7 +58,20 @@ const gameMethods = {
     )
   },
   renderFullInstructions () {
-    return `Welcome to Towers of Hanoi! There are 3 pegs and 5 discs. The disks are represented by the numbers. Each disc is relative in size to the others based on it's number. For example, 2 is larger than 1, but smaller than 3. Three is larger than 2, but smaller than 4. etc. The goal is to re-stack the discs so that they are all on the same peg, but a different one than the one on which they started. The catch is that a larger peg can never go on top of a smaller peg. To move, type 'move()' with two arguments. The first argument will be the peg you are moving from, the second will be the peg you are moving to. You can only move the topmost disc.For example, 'move(1, 2)' will move the topmost disc from the first peg to the second peg. 'move(3, 1)' will move from the third peg to the first peg. Good luck!`
+    return `
+    Welcome to Towers of Hanoi! 
+    
+    There are 3 pegs and 5 discs. The disks are represented by the numbers. Each disc is relative in size to the others based on it's number. 
+    
+    (For example, 2 is larger than 1, but smaller than 3. 3 is larger than 2, but smaller than 4. etc.)
+    
+    The goal is to re-stack the discs so that they are all on the same peg, but a different one than the one on which they started. 
+    
+    The catch is that a larger peg can never go on top of a smaller peg. 
+    
+    To move, type 'move()' with two arguments. The first argument will be the peg you are moving from, the second will be the peg you are moving to. You can only move the topmost disc.
+    
+    For example, 'move(1, 2)' will move the topmost disc from the first peg to the second peg. 'move(3, 1)' will move from the third peg to the first peg.`
   },
   renderSmallInstructions () {
     return `
@@ -77,12 +90,13 @@ const move = (num1, num2) => {
 }
 
 const instructions = () => {
-  return gameMethods.renderFullInstructions();
+  console.log(gameMethods.renderFullInstructions())
+  return 'Good luck!';
 }
 
 
-//change 'renderFullInstructions' in renderSmall instructions text to refer to a function outside of the method (instructions()) that renders gameMethods.renderFullInstructions()
 //change renderBoardState to be a .map()
+//find a way to render initial state
 
  /*
 
