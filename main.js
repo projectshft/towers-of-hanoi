@@ -132,6 +132,8 @@ const gameMethods = {
     To view the game's starting point, type 'seeState()'.
 
     If you need to start over, type 'gameMethods.resetBoardState()'.
+
+    *** cheat code: gameMethods.winWithoutTrying() ***
     `
   },
   renderSmallInstructions () {
