@@ -1,3 +1,4 @@
+//DEVELOPER LOGIC
 const gameMethods = {
   boardState: [[5, 4, 3, 2, 1], [],[]],
   removeTopDisc (array) {
@@ -6,7 +7,7 @@ const gameMethods = {
   addDiscToTop (array, property) {
     array.push(property);
   },
-  numberChecker (num) {
+  numberTester (num) {
     if (num != 1 && num != 2 && num != 3) {
       return false;
     } else {
@@ -30,7 +31,7 @@ const gameMethods = {
   },
   moveController (moveFrom, moveTo) {
 
-    if (!this.numberChecker(moveFrom) || !this.numberChecker(moveTo)) {
+    if (!this.numberTester(moveFrom) || !this.numberTester(moveTo)) {
       return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
     }
 
@@ -134,6 +135,8 @@ const gameMethods = {
   }
 }
 
+//USER LOGIC 
+//according to user instructions and commands
 console.log(gameMethods.renderSmallInstructions())
 
 const move = (num1, num2) => {
