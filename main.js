@@ -4,8 +4,7 @@ lastElement = testArray[testArray.length - 1]
 
 
 const gameMethods = {
-  // boardState: [[5, 4, 3, 2, 1], [],[]],
-  boardState: [[1], [],[5, 4, 3, 2]],
+  boardState: [[5, 4, 3, 2, 1], [],[]],
   removeTopDisc (array) {
     return array.pop()
   },
