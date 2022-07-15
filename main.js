@@ -1,6 +1,9 @@
 //DEVELOPER LOGIC
 const gameMethods = {
   boardState: [[5, 4, 3, 2, 1], [],[]],
+  resetBoardState () {
+
+  },
   removeTopDisc (array) {
     return array.pop()
   },
@@ -177,5 +180,8 @@ const seeState = () => {
   $$$ c) insert into move()
   $$$ a) add an if statement in move() to either say 'Move again.' or announce a win
  9) create a function should reset after it checks (change gameMethods.boardState)
+  a) place with the win logic of move()
+  b) test
+  c) return boardState out of test mode
  9) create a move() function that executes the game for the user
  */
