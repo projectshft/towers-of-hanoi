@@ -49,13 +49,6 @@ const gameMethods = {
 
     return this.renderBoardState()
   },
-  renderBoardState () {
-    this.boardState.map(index => {
-      console.log(`---${index}`);
-    })
-
-    return 'Board state rendered'
-  },
   numberTester (num) {
     if (num != 1 && num != 2 && num != 3) {
       return false;
@@ -107,6 +100,13 @@ const gameMethods = {
     } else {
       return false;
     }
+  },
+  renderBoardState () {
+    this.boardState.map(index => {
+      console.log(`---${index}`);
+    })
+
+    return 'Board state rendered'
   },
   renderFullInstructions () {
     return `
