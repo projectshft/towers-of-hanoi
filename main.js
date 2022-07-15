@@ -1,5 +1,7 @@
 
 testArray = [1, 2, 3]
+lastElement = testArray[testArray.length - 1]
+
 
 const gameMethods = {
   boardState: [[5, 4, 3, 2, 1], [],[]],
@@ -42,6 +44,14 @@ const gameMethods = {
 
     if (this.emptyPegTester(this.boardState[moveFromConverted])) {
       return 'There are no discs on that peg. Try another.'
+    }
+
+    if (this.smallerPegTester(this.boardState[moveFromConverted], this.boardState[moveToConverted])) {
+      return `
+      You cannot move a larger disc on top of a smaller one.
+      Try again.
+      If you need further clarification on the rules, type 'instructions()'.
+      `
     }
 
     let arrayPopped = this.removeTopDisc(this.boardState[moveFromConverted]);
@@ -90,7 +100,7 @@ const gameMethods = {
     }
   },
   smallerPegTester (moveFrom, moveTo) {
-    if (moveFrom > moveTo) {
+    if (moveFrom[moveFrom.length - 1] > moveTo[moveTo.length - 1]) {
       return true;
     } else {
       return false;
