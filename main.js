@@ -44,8 +44,7 @@ const gameMethods = {
     
     this.addDiscToTop(this.boardState[moveToConverted], arrayPopped)
 
-
-    return 'current state:'
+    return this.renderBoardState()
   },
   renderBoardState () {
     return (
@@ -89,8 +88,7 @@ const gameMethods = {
 
 
 
-console.log(gameMethods.renderSmallInstructions())
-console.log(gameMethods.renderBoardState())
+console.log(gameMethods.moveController(1, 2));
 
 
  /*
