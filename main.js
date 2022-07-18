@@ -15,7 +15,7 @@ const gameMethods = {
   moveController (moveFrom, moveTo) {
 
     if (!this.numberTester(moveFrom) || !this.numberTester(moveTo)) {
-      return 'Numbers inserted into the argument of gameMethods.moveController must be either 1, 2, or 3.' 
+      return 'Numbers inserted into the argument of move() must be either 1, 2, or 3.' 
     }
 
     const moveFromConverted = this.indexConverter(moveFrom)
