@@ -13,7 +13,7 @@
 
 var board = {
                 state: [[],[],[]],
-                start: [[3,2,1],[],[]],
+                startingPeg: [3,2,1],
                 
                 printBoard: function() {
                     this.state.forEach(function(peg) {
@@ -22,10 +22,15 @@ var board = {
                 },
 
                 startGame: function() {
-                    var copyOfStart = this.start.map(function(peg) {
-                        return peg;
+                    //clear board
+                    this.state.forEach(function(peg) {
+                        while (peg[peg.length-1]) {
+                            peg.pop(peg[peg.length-1]);
+                        }
                     });
-                    this.state = copyOfStart;
+                    //"clone" starting peg onto the first peg of the board state
+                    this.state[0] = this.startingPeg.slice();
+                    this.printBoard();
                 },
                 
                 winGame: function() {
@@ -34,15 +39,16 @@ var board = {
                     this.printBoard();
                 },
 
-                //checkWinner: function() {
-                //    var winningPeg = this.start[0];
-                //    console.log(winningPeg);
-                //    this.state.forEach(function(peg) {
-                //        if (peg === winningPeg) {
-                //            board.winGame();
-                //        }
-                //    });
-                //}
+                checkWinner: function() {
+                    var winningPeg = this.start[0];
+                    console.log(winningPeg);
+                    this.state.forEach(function(peg) {
+                        console.log(peg)
+                        //if (peg === winningPeg) {
+                        //    board.winGame();
+                        //}
+                    });
+                }
             };
 
 var moveDisc = function(pos1, pos2) {
@@ -64,5 +70,3 @@ var moveDisc = function(pos1, pos2) {
 }
 
 board.startGame();
-
-board.printBoard();
