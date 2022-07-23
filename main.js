@@ -1,15 +1,3 @@
-//var board = [[5,4,3,2,1],
-//            [],
-//            []];
-//
-//var moveDisc = function (pos1, pos2) {
-//    var startingPeg = board[pos1-1];
-//    var endingPeg = board[pos2-1];
-//    var disc = startingPeg[startingPeg.length -1];
-//    endingPeg.push(disc);
-//    startingPeg.pop(disc);
-//    console.log(board);
-//};
 
 var board = {
                 state: [[],[],[]],
@@ -36,18 +24,21 @@ var board = {
                 winGame: function() {
                     console.log("Congratulations! You won!\nHere's a fresh board to start over with:");
                     this.startGame();
-                    this.printBoard();
                 },
 
                 checkWinner: function() {
-                    var winningPeg = this.start[0];
-                    console.log(winningPeg);
-                    this.state.forEach(function(peg) {
-                        console.log(peg)
-                        //if (peg === winningPeg) {
-                        //    board.winGame();
-                        //}
+                    this.state.forEach(function(peg, i) {
+                        //assuming starting position is always the first peg
+                        if (peg.length === board.startingPeg.length && i) {
+                            var check = peg.every(function(disc, i) {
+                                return disc === board.startingPeg[i];
+                            });
+                            if (check) {
+                                board.winGame();
+                            }
+                        }
                     });
+                    return false;
                 }
             };
 
@@ -66,7 +57,7 @@ var moveDisc = function(pos1, pos2) {
     }
 
     board.printBoard();
-    //board.checkWinner();
+    board.checkWinner();
 }
 
 board.startGame();
