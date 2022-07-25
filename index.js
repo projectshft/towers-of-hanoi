@@ -13,6 +13,18 @@ class Board {
   }
 
   initBoard() {
+    if (!isInputNumber(this.discs) || this.discs < 0) {
+      this.discs = 5;
+      console.log(
+        'Error: Discs have been set to 5. Minimum disc in this game is 1 disc'
+      );
+    }
+    if (!isInputNumber(this.pegs) || this.pegs < 2) {
+      this.pegs = 3;
+      console.log(
+        'Error: Pegs have been set to 3. Minimum pegs in this game are 3 pegs'
+      );
+    }
     const firstPeg = [];
     const gameArray = [firstPeg];
     for (let i = this.discs; i > 0; i -= 1) {
