@@ -12,21 +12,17 @@ var board = {
                     });
                 },
 
-                //clearBoard: function() {
-                //    this.state.forEach(function(peg)) {
-                //        while (peg[peg.length-1]) {
-                //            peg.pop();
-                //        }
-                //    }
-                //},
-
-                startGame: function() {
-                    //clear board
+                clearBoard: function() {
                     this.state.forEach(function(peg) {
                         while (peg[peg.length-1]) {
                             peg.pop();
                         }
                     });
+                },
+
+                startGame: function() {
+                    //clear board
+                    this.clearBoard();
                     //"clone" starting peg onto the first peg of the board state
                     this.state[0] = this.startingPeg.map((disc => disc));
                     this.printBoard();
