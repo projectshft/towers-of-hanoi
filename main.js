@@ -4,10 +4,21 @@ var board = {
                 startingPeg: [3,2,1],
                 
                 printBoard: function() {
-                    this.state.forEach(function(peg) {
+                    //this.state.forEach(function(peg) {
+                    //    console.log(`--${peg}`);
+                    //});
+                    var print = this.state.map(function (peg) {
                         console.log(`--${peg}`);
                     });
                 },
+
+                //clearBoard: function() {
+                //    this.state.forEach(function(peg)) {
+                //        while (peg[peg.length-1]) {
+                //            peg.pop();
+                //        }
+                //    }
+                //},
 
                 startGame: function() {
                     //clear board
@@ -17,7 +28,7 @@ var board = {
                         }
                     });
                     //"clone" starting peg onto the first peg of the board state
-                    this.state[0] = this.startingPeg.slice();
+                    this.state[0] = this.startingPeg.map((disc => disc));
                     this.printBoard();
                 },
                 
