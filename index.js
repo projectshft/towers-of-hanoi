@@ -32,7 +32,7 @@ class Board {
   }
 
   validateInput(initial, final) {
-    // check if input are numbers
+    // check if input are whole numbers
     if (
       isInputNumber(initial) &&
       isInputNumber(final) &&
@@ -75,11 +75,11 @@ class Board {
   }
 
   moveDisc(initial, final) {
-    const startIndex = initial - 1;
-    const endIndex = final - 1;
     console.log(`Move: ${initial}, ${final}`);
     // completes all input checks
     if (this.validateInput(initial, final)) {
+      const startIndex = initial - 1;
+      const endIndex = final - 1;
       this.boardArray[endIndex].push(this.boardArray[startIndex].pop());
       console.log('That move was successful, board is now:');
       console.log(this.stateStr);
