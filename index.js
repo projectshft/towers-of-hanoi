@@ -1,5 +1,12 @@
+function isInputNumber(num) {
+  if (Number.isInteger(num)) {
+    return true;
+  }
+  return false;
+}
+
 class Board {
-  constructor(discs, pegs) {
+  constructor(discs = 5, pegs = 3) {
     this.discs = discs;
     this.pegs = pegs;
     this.boardArray = this.initBoard();
@@ -24,41 +31,63 @@ class Board {
     console.log(this.stateStr);
   }
 
+  validateInput(initial, final) {
+    // check if input are numbers
+    if (
+      isInputNumber(initial) &&
+      isInputNumber(final) &&
+      initial % 1 === 0 &&
+      final % 1 === 0
+    ) {
+      // check if input are in the range of the boardArray
+      const startIndex = initial - 1;
+      const endIndex = final - 1;
+      if (
+        startIndex < this.getState.length &&
+        endIndex < this.getState.length &&
+        startIndex > -1 &&
+        endIndex > -1
+      ) {
+        //  check if there is a peg at the designated starting index
+        if (this.getState[startIndex].length !== 0) {
+          // check if there is a disc at all on the peg or if the disk on the peg is larger than the peg we're trying to move
+          if (
+            this.getState[endIndex][this.getState[endIndex].length - 1] ===
+              undefined ||
+            this.getState[startIndex][this.getState[startIndex].length - 1] <
+              this.getState[endIndex][this.getState[endIndex].length - 1]
+          ) {
+            return true;
+          }
+          console.log('Error: cannot move a larger disc onto a smaller disc');
+          return false;
+        }
+        console.log('Error: There is no disc at the start index');
+        return false;
+      }
+      console.log(
+        'Error: Please make sure your inputs are in the range of the number of pegs'
+      );
+      return false;
+    }
+    console.log('Error: Please make sure inputs are whole numbers');
+    return false;
+  }
+
   moveDisc(initial, final) {
     const startIndex = initial - 1;
     const endIndex = final - 1;
-    // check if startIndex is inside boardArray and if endIndex is inside boardArray
-    if(startIndex < this.getState.length && endIndex < this.getState.length){
-      if (this.getState[startIndex].length === 0) {
-        console.log('Error: There is no peg at the start index');
-      } else if (
-        this.getState[endIndex][this.getState[endIndex].length - 1] ===
-          undefined ||
-        this.getState[startIndex][this.getState[startIndex].length - 1] <
-          this.getState[endIndex][this.getState[endIndex].length - 1]
-      ) {
-        // this.setState = [startIndex, endIndex];
-        this.boardArray[endIndex].push(this.boardArray[startIndex].pop());
-        console.log('That move was successful, board is now:');
-        console.log(this.stateStr);
-        if (this.checkWinner()) {
-          console.log('YOU WON!\n\n\n');
-          this.restartGame();
-        }
-      } else {
-        console.log('Error: cannot move a larger disc onto a smaller disc');
-        // console.log(
-        //   this.getState[startIndex][this.getState[startIndex].length - 1]
-        // );
-        // console.log(this.getState[endIndex][this.getState[endIndex].length - 1]);
+    console.log(`Move: ${initial}, ${final}`);
+    // completes all input checks
+    if (this.validateInput(initial, final)) {
+      this.boardArray[endIndex].push(this.boardArray[startIndex].pop());
+      console.log('That move was successful, board is now:');
+      console.log(this.stateStr);
+      if (this.checkWinner()) {
+        console.log('YOU WON!\n\n\n');
+        this.restartGame();
       }
     }
-    else{
-        console.log(`Error: Make sure your input is between 1 and ${this.discs}`)
-    }
-      
-
-    // console.log(this.state);
   }
 
   get stateStr() {
@@ -71,10 +100,6 @@ class Board {
   get getState() {
     return this.boardArray;
   }
-
-  // set setState([initial, final]) {
-  //   this.boardArray[final].push(this.boardArray[initial].pop());
-  // }
 
   checkWinner() {
     const isWinner = this.getState.some((elem, index) => {
@@ -208,4 +233,17 @@ board.moveDisc(3, 1);
 board.moveDisc(3, 2);
 board.moveDisc(1, 2); // winning move
 
-
+// Edge case and error testing
+board.moveDisc(0, 2);
+board.moveDisc(-10, 4);
+board.moveDisc(-10, 1);
+board.moveDisc(4, 4);
+board.moveDisc(6, 1);
+board.moveDisc(1, 10);
+board.moveDisc('a', 4);
+board.moveDisc(1, 3);
+board.moveDisc('a', 4);
+board.moveDisc();
+board.moveDisc(2, 1);
+board.moveDisc(3, 1);
+board.moveDisc(3, 1);
