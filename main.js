@@ -27,29 +27,36 @@ class Board {
   moveDisc(initial, final) {
     const startIndex = initial - 1;
     const endIndex = final - 1;
-    if (this.getState[startIndex].length === 0) {
-      console.log('Error: There is no peg at the start index');
-    } else if (
-      this.getState[endIndex][this.getState[endIndex].length - 1] ===
-        undefined ||
-      this.getState[startIndex][this.getState[startIndex].length - 1] <
-        this.getState[endIndex][this.getState[endIndex].length - 1]
-    ) {
-      // this.setState = [startIndex, endIndex];
-      this.boardArray[endIndex].push(this.boardArray[startIndex].pop());
-      console.log('That move was successful, board is now:');
-      console.log(this.stateStr);
-      if (this.checkWinner()) {
-        console.log('YOU WON!\n\n\n');
-        this.restartGame();
+    // check if startIndex is inside boardArray and if endIndex is inside boardArray
+    if(startIndex < this.getState.length && endIndex < this.getState.length){
+      if (this.getState[startIndex].length === 0) {
+        console.log('Error: There is no peg at the start index');
+      } else if (
+        this.getState[endIndex][this.getState[endIndex].length - 1] ===
+          undefined ||
+        this.getState[startIndex][this.getState[startIndex].length - 1] <
+          this.getState[endIndex][this.getState[endIndex].length - 1]
+      ) {
+        // this.setState = [startIndex, endIndex];
+        this.boardArray[endIndex].push(this.boardArray[startIndex].pop());
+        console.log('That move was successful, board is now:');
+        console.log(this.stateStr);
+        if (this.checkWinner()) {
+          console.log('YOU WON!\n\n\n');
+          this.restartGame();
+        }
+      } else {
+        console.log('Error: cannot move a larger disc onto a smaller disc');
+        // console.log(
+        //   this.getState[startIndex][this.getState[startIndex].length - 1]
+        // );
+        // console.log(this.getState[endIndex][this.getState[endIndex].length - 1]);
       }
-    } else {
-      console.log('Error: cannot move a larger disc onto a smaller disc');
-      // console.log(
-      //   this.getState[startIndex][this.getState[startIndex].length - 1]
-      // );
-      // console.log(this.getState[endIndex][this.getState[endIndex].length - 1]);
     }
+    else{
+        console.log(`Error: Make sure your input is between 1 and ${this.discs}`)
+    }
+      
 
     // console.log(this.state);
   }
