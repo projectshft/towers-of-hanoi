@@ -4,7 +4,12 @@ function isInputNumber(num) {
   }
   return false;
 }
-
+function validNumberPegs(pegNum) {
+  return isInputNumber(pegNum) && pegNum > 2;
+}
+function validNumberDiscs(discNum) {
+  return isInputNumber(discNum) && discNum > 0;
+}
 class Board {
   constructor(discs = 5, pegs = 3) {
     this.discs = discs;
@@ -13,13 +18,13 @@ class Board {
   }
 
   initBoard() {
-    if (!isInputNumber(this.getDiscs) || this.getDiscs < 0) {
+    if (!validNumberDiscs(this.getDiscs)) {
       this.discs = 5;
       console.log(
         'Error: Discs have been set to 5. Minimum disc in this game is 1 disc'
       );
     }
-    if (!isInputNumber(this.getPegs) || this.getPegs < 2) {
+    if (!validNumberPegs(this.getPegs)) {
       this.pegs = 3;
       console.log(
         'Error: Pegs have been set to 3. Minimum pegs in this game are 3 pegs'
@@ -34,6 +39,18 @@ class Board {
       gameArray.push([]);
     }
     return gameArray;
+  }
+
+  changeGamePieces(discs, pegs) {
+    if (validNumberDiscs(discs) && validNumberPegs(pegs)) {
+      this.discs = discs;
+      this.pegs = pegs;
+      this.restartGame();
+    } else {
+      console.log(
+        'Please enter a valid number of discs and pegs to change the board type'
+      );
+    }
   }
 
   restartGame() {
@@ -133,6 +150,7 @@ class Board {
 }
 
 const board = new Board(5, 3);
+
 // Move the disc from peg 1 to peg 2
 board.moveDisc(1, 2);
 // That move was successful, board is now:
