@@ -13,13 +13,13 @@ class Board {
   }
 
   initBoard() {
-    if (!isInputNumber(this.discs) || this.discs < 0) {
+    if (!isInputNumber(this.getDiscs) || this.getDiscs < 0) {
       this.discs = 5;
       console.log(
         'Error: Discs have been set to 5. Minimum disc in this game is 1 disc'
       );
     }
-    if (!isInputNumber(this.pegs) || this.pegs < 2) {
+    if (!isInputNumber(this.getPegs) || this.getPegs < 2) {
       this.pegs = 3;
       console.log(
         'Error: Pegs have been set to 3. Minimum pegs in this game are 3 pegs'
@@ -27,10 +27,10 @@ class Board {
     }
     const firstPeg = [];
     const gameArray = [firstPeg];
-    for (let i = this.discs; i > 0; i -= 1) {
+    for (let i = this.getDiscs; i > 0; i -= 1) {
       firstPeg.push(i);
     }
-    for (let i = 0; i < this.pegs - 1; i += 1) {
+    for (let i = 0; i < this.getPegs - 1; i += 1) {
       gameArray.push([]);
     }
     return gameArray;
@@ -113,9 +113,17 @@ class Board {
     return this.boardArray;
   }
 
+  get getDiscs() {
+    return this.discs;
+  }
+
+  get getPegs() {
+    return this.pegs;
+  }
+
   checkWinner() {
     const isWinner = this.getState.some((elem, index) => {
-      if (index !== 0 && elem.length === this.discs) {
+      if (index !== 0 && elem.length === this.getDiscs) {
         return true;
       }
       return false;
