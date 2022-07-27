@@ -1,40 +1,53 @@
-let board = { a: [5, 4, 3, 2, 1], b: [], c: [] };
-let a = board.a;
-let b = board.b;
-let c = board.c;
+let board = [[5, 4, 3, 2, 1], [], []];
+let [a, b, c] = board;
 let moves = 0;
-renderBoard(a, b, c);
 
-function move(oldPeg, newPeg) {
-  if (newPeg.length === 0) {
-    moveDisc(oldPeg, newPeg);
-  } else if (oldPeg.slice(-1) > newPeg.slice(-1)) {
+// renderBoard(a, b, c);
+renderBoard(board);
+
+function move(oldTower, newTower) {
+  if (newTower.length === 0) {
+    moveDisc(oldTower, newTower);
+  } else if (oldTower.slice(-1) > newTower.slice(-1)) {
     console.log("You can't make that move right now");
     console.log(`The board still looks like this: `);
-    renderBoard(a, b, c);
+    // renderBoard(a, b, c);
+    renderBoard(board);
     console.log(`moves: ${moves}`);
   } else {
-    moveDisc(oldPeg, newPeg);
-
-    if (a.length === 0 && (b.length === 5 || c.length === 5)) {
-      console.log(
-        `Great job! you won the game in ${moves} moves! That must be some kind of record!`
-      );
-    }
+    moveDisc(oldTower, newTower);
+    checkWinner(board);
   }
 }
-function moveDisc(moveOldPeg, moveNewPeg) {
-  let currentDisc = moveOldPeg.pop();
+function moveDisc(moveOldTower, moveNewTower) {
+  let currentDisc = moveOldTower.pop();
   moves++;
-  moveNewPeg.push(currentDisc);
+  moveNewTower.push(currentDisc);
   console.log(`That move was successful. The board looks like this: `);
-  renderBoard(a, b, c);
+  // renderBoard(a, b, c);
+  renderBoard(board);
   console.log(`moves: ${moves}`);
-  // console.log(moves);
 }
 
-function renderBoard(a, b, c) {
-  console.log(`---${a}`);
-  console.log(`---${b}`);
-  console.log(`---${c}`);
+function renderBoard(obj) {
+  board.map((obj, number) => {
+    console.log(`Tower ${number} --- ${obj.join(' ')}`);
+  });
+}
+
+// function renderBoard(board) {
+//   console.log(`Tower a: ---${board[0].join(' ')}`);
+//   console.log(`Tower b: ---${board[1].join(' ')}`);
+//   console.log(`Tower c: ---${board[2].join(' ')}`);
+// }
+
+function checkWinner() {
+  if (
+    board[0].length === 0 &&
+    (board[1].length === 5 || board[2].length === 5)
+  ) {
+    console.log(
+      `Great job! you won the game in ${moves} moves! That must be some kind of record!`
+    );
+  }
 }
