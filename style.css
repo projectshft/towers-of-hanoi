@@ -1,0 +1,22 @@
+.tower {
+  display: inline-block;
+  background-color: green;
+}
+#towers-container {
+  margin: auto;
+}
+#tower0 {
+  background-color: red;
+  width: 25vw;
+}
+#tower1 {
+  background-color: blue;
+  width: 25vw;
+}
+#tower2 {
+  background-color: green;
+  width: 25vw;
+}
+.rings li {
+  background-color: black;
+}

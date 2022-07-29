@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="main.js"></script>
+    <!-- <script src="main.js"></script> -->
+    <script src="mainOOP.js" defer></script>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>T O W E R S ~ O F ~ H A N O I</title>
   </head>
   <body>
     <h1>Please open your console to play the game</h1>
     <h3>Type 'move(a,b)' to move a disc from tower a to tower b</h3>
+    <button id="startBtn">Start A New Game</button>
+    <div id="towersDiv">
+      <div class="tower">
+        <ul class="rings">
+          <li class="ring"></li>
+        </ul>
+        <!-- .rings -->
+        <button id="up">Pick Up</button>
+        <button id="down">Put Down</button>
+      </div>
+      <!-- .tower -->
+    </div>
+    <!-- #towersDiv -->
   </body>
 </html>
