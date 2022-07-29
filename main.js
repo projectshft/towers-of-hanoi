@@ -67,7 +67,10 @@ const checkWinner = () => {
     state.peg3.toString() === resultCheck.toString()
   ) {
     console.log("You win!");
-    console.log("Refresh the page to start a new game!");
+    let userInput = prompt("Play another game? Y/N");
+    if (userInput.toUpperCase() === "Y") {
+      window.location.reload();
+    }
   } else {
     console.log("Keep going!");
   }
