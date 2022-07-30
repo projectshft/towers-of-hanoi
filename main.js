@@ -3,8 +3,8 @@
 var game = {
 board: [
 [5, 4, 3, 2, 1],
-[null],
-[null]
+[],
+[]
 ],
 move: function(from, to) {
   var fromDisc = this.board[from - 1][this.board[from - 1].length - 1];
@@ -12,7 +12,7 @@ move: function(from, to) {
   if(fromDisc > toDisc) {
     console.log('You Cannot move a larger disc on top of a smaller one, board is still:');
     this.boardStatus();
-  } else if(fromDisc < toDisc) {
+  } else if(fromDisc < toDisc || toDisc === undefined) {
     this.board[to - 1].push(fromDisc);
     this.board[from - 1].pop();
     console.log('That move was successful, board is now:');
