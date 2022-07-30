@@ -2,7 +2,7 @@ let Board = () => {
   // let board = [[3, 2, 1], [], []];
   let board = [];
   let moves = 0;
-  let [a, b, c] = board;
+  // let [a, b, c] = board;
 
   // resetBoard();
   // resetBoard(board, moves);
@@ -40,9 +40,9 @@ let Board = () => {
     console.log(`moves: ${moves}`);
   };
 
-  let renderBoard = (obj) => {
+  let renderBoard = () => {
     board.map((obj, number) => {
-      console.log(`Tower ${number} --- ${obj.join(' ')}`);
+      console.log(`Tower ${number + 1} --- ${obj.join(' ')}`);
     });
   };
 
@@ -59,20 +59,10 @@ let Board = () => {
     }
   };
   resetBoard();
-  // renderBoard();
-  // move(a, b);
-  // console.log(move(a, c));
-  // console.log(move(b, c));
-  // console.log(move(a, b));
-  // console.log(move(c, a));
-  // console.log(move(c, b));
-  // console.log(move(a, b));
-  // console.log(move(a, b));
 };
 let board = Board();
-// let [a, b, c] = board;
 
-// console.log(board.move(board[0], board[1]));
+console.log(board.move(board[0], board[1]));
 // console.log(move(a, c));
 // console.log(move(b, c));
 // console.log(move(a, b));

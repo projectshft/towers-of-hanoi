@@ -1,74 +1,136 @@
-let Game = () => {
-  let moves = 0;
-  let towersArray = [];
-  let userTowers = parseInt(
-    prompt('How many towers do you want to play with? ')
-  );
-  let userRings = parseInt(
-    prompt('How many rings do you want to be on the first tower? ')
-  );
-  // let userTowers = 3;
-  // let userRings = 3;
+class Tower {
+  constructor(rings) {
+    this.rings = rings;
+    this.array = [];
+  }
+  setUpForNewGame() {
+    for (let index = 1; index <= this.rings; index++) {
+      let array = this.array;
+      const element = index;
+      array.push(element);
+    }
 
-  let setUpTowers = () => {
-    for (let index = 0; index < userTowers; index++) {
-      towersArray.push([]);
+    return this.array;
+  }
+  subtractRing() {
+    let currentRing = this.array.pop();
+    return currentRing;
+  }
+  addRing(newRing) {
+    this.array.push(newRing);
+  }
+  topRing() {
+    return this.array.slice(-1);
+  }
+  displayRings() {
+    return this.array.reverse();
+  }
+}
+
+class Game {
+  constructor() {
+    this.towersArray = [];
+    this.rings = 3;
+    this.moves = 0;
+  }
+
+  setUpForNewGame() {
+    this.towersArray = [[], [], []];
+    for (let index = 1; index <= this.rings; index++) {
+      let array = this.towersArray[0];
+      const element = index;
+      array.push(element);
     }
-    for (let jindex = 1; jindex <= userRings; jindex++) {
-      towersArray[0].push(jindex);
+  }
+  newGame() {
+    console.log('starting a new game');
+
+    for (let index = 1; index <= this.towerQty; index++) {
+      let name = `tower${index}`;
+      if (index === 1) {
+        name = new Tower(this.rings);
+        name.setUpForNewGame();
+        this.towersArray.push(name);
+        console.log(name);
+      } else {
+        name = new Tower(0);
+        name.setUpForNewGame();
+        this.towersArray.push(name);
+        console.log(name);
+      }
     }
-  };
-  let renderBoard = () => {
-    towersArray.map((obj, num) => {
-      console.log(`Tower${num + 1} |>==== ${obj.join(' ')}`);
+  }
+
+  displayRings() {
+    return this.towersArray.reverse();
+  }
+  move(from, to) {
+    if (from.topRing() < to.topRing() ? false : true) {
+      let movingRing = from.subtractRing();
+      to.addRing(movingRing);
+      this.moves++;
+      this.displayRings();
+      this.stillPlaying(to);
+    } else {
+      console.error('nope!');
+
+      this.displayRings();
+      this.stillPlaying(to);
+    }
+  }
+  displayRings() {
+    this.towersArray.map((obj, number) => {
+      console.log(`${number + 1} ===== ${obj.array.join(' ')}`);
     });
-  };
+    console.log(`<<===========>>`);
+    console.log(`Moves: ${this.moves}`);
+  }
 
-  let moveDisc = (from, to) => {
-    if (to.length === 0 || from.slice(-1) > to.slice(-1)) {
-      let currentDisc = from.pop();
-      moves++;
-      to.push(currentDisc);
-      renderBoard();
+  moveValidation(from, to) {
+    from.topRing > to.topRing ? false : true;
+  }
+  stillPlaying(to) {
+    if (towerOne.topRing().length === 0 && to.topRing()[0] === 3) {
+      console.log(`winner`);
+      console.log(`---------------`);
+      this.replayGame();
     } else {
-      console.log(`Sorry, that move isn't allowed`);
+      console.log(`keep going!`);
+      console.log(`---------------`);
     }
-    gameEnd();
-  };
-
-  let gameEnd = () => {
-    if (
-      towersArray[0].length === 0 &&
-      (towersArray[1].length === userRings ||
-        towersArray[2].length === userRings)
-    ) {
-      console.log(`game end if`);
-      console.log(`Great job! You finished the game in ${moves} moves!`);
-      console.log(`See if you can beat your score next time!`);
-    } else {
-      console.log('game end else');
-      console.log(`Moves: ${moves}`);
-      console.log(`----------`);
+  }
+  replayGame() {
+    let replay = prompt(
+      'Great job! Would you like to play again? Enter Yes or No: '
+    );
+    if (replay.toLowerCase === `y` || `yes`) {
+      // console.clear();
+      // this.newGame;y
+      let towerOne = new Tower(3);
+      towerOne.setUpForNewGame();
+      let towerTwo = new Tower();
+      let towerThree = new Tower();
+      let game = new Game([towerOne, towerTwo, towerThree]);
+      this.newGame();
+      this.displayRings();
     }
-  };
-
-  return {
-    towers: towersArray,
-    moves: moves,
-    setup: setUpTowers,
-    render: renderBoard,
-    move: moveDisc,
-  };
+  }
+  // startGame;
+}
+const gameStarter = function () {
+  let towerOne = new Tower(3);
+  towerOne.setUpForNewGame();
+  let towerTwo = new Tower(0);
+  let towerThree = new Tower(0);
+  let game = new Game([towerOne, towerTwo, towerThree]);
+  game.displayRings();
 };
+gameStarter();
 
-let game = Game();
-
-game.setup();
-
-game.move(game.towers[0], game.towers[1]);
-game.move(game.towers[0], game.towers[2]);
-game.move(game.towers[1], game.towers[2]);
-game.move(game.towers[0], game.towers[1]);
-game.move(game.towers[2], game.towers[0]);
-game.move(game.towers[2], game.towers[1]);
-game.move(game.towers[0], game.towers[1]);
+// game.move(towerOne, towerTwo);
+// game.move(towerOne, towerThree);
+// game.move(towerTwo, towerThree);
+// game.move(towerOne, towerTwo);
+// game.move(towerThree, towerOne);
+// game.move(towerThree, towerTwo);
+// game.move(towerOne, towerTwo);

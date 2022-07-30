@@ -5,16 +5,16 @@
 #towers-container {
   margin: auto;
 }
-#tower0 {
-  background-color: red;
-  width: 25vw;
-}
 #tower1 {
   background-color: blue;
   width: 25vw;
 }
 #tower2 {
   background-color: green;
+  width: 25vw;
+}
+#tower3 {
+  background-color: red;
   width: 25vw;
 }
 .rings li {

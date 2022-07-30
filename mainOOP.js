@@ -1,10 +1,9 @@
 class Tower {
-  constructor(rings) {
-    this.rings = rings;
+  constructor() {
     this.array = [];
   }
   setUpForNewGame() {
-    for (let index = 1; index <= this.rings; index++) {
+    for (let index = 1; index <= 3; index++) {
       let array = this.array;
       const element = index;
       array.push(element);
@@ -29,27 +28,30 @@ class Tower {
 
 class Game {
   constructor(towers, rings) {
-    this.towerQty = towers;
-    this.towersArray = [];
+    this.towersArray = towers;
     this.rings = rings;
     this.moves = 0;
-    this.playing = true;
   }
+
   newGame() {
-    for (let index = 1; index <= this.towerQty; index++) {
-      let name = `tower${index}`;
-      if (index === 1) {
-        name = new Tower(this.rings);
-        name.setUpForNewGame();
-        this.towersArray.push(name);
-        console.log(name);
-      } else {
-        name = new Tower(0);
-        name.setUpForNewGame();
-        this.towersArray.push(name);
-        console.log(name);
-      }
-    }
+    console.log('starting a new game');
+
+    // for (let index = 1; index <= 3; index++) {
+    //   let name = `tower${index}`;
+    //   if (index === 1) {
+    //     name = new Tower(3);
+    //     name.setUpForNewGame();
+    //     this.towersArray.push(name);
+    //     console.log(name);
+    //   } else {
+    //     name = new Tower(0);
+    //     name.setUpForNewGame();
+    //     this.towersArray.push(name);
+    //     console.log(name);
+    //   }
+    // }
+
+    this.displayRings();
   }
 
   move(from, to) {
@@ -58,9 +60,12 @@ class Game {
       to.addRing(movingRing);
       this.moves++;
       this.displayRings();
-      this.stillPlaying(from, to);
+      this.stillPlaying(to);
     } else {
       console.error('nope!');
+
+      this.displayRings();
+      this.stillPlaying(to);
     }
   }
   displayRings() {
@@ -73,44 +78,53 @@ class Game {
   moveValidation(from, to) {
     from.topRing > to.topRing ? false : true;
   }
-  stillPlaying(from, to) {
-    if (tower1.topRing().length === 0 && to.topRing()[0] === 3) {
+  stillPlaying(to) {
+    console.log(to);
+    if (towerOne.array.length === 0 && to.topRing()[0] === 3) {
+      // if (to.topRing()[0] === 3) {
       console.log(`winner`);
       console.log(`---------------`);
-      this.stillPlaying = false;
+      this.replayGame();
     } else {
       console.log(`keep going!`);
       console.log(`---------------`);
     }
   }
-  // newGame;
+  replayGame() {
+    let replay = prompt(
+      'Great job! Would you like to play again? Enter Yes or No: '
+    );
+    if (replay.toLowerCase === `y` || `yes`) {
+      // console.clear();
+      // this.newGame;y
+      let towerOne = new Tower(3);
+      towerOne.setUpForNewGame();
+      let towerTwo = new Tower();
+      let towerThree = new Tower();
+      game = new Game([towerOne, towerTwo, towerThree]);
+      this.newGame();
+      // this.displayRings();
+    }
+  }
+  // startGame;
 }
 
-// let towerOne = new Tower(3);
-// let towerTwo = new Tower(0);
-// let towerThree = new Tower(0);
-// towerOne.setUpForNewGame();
-// let game = new Game([towerOne, towerTwo, towerThree], true);
-// console.log(towerThree.topRing().length);
+// const gameStarter = function () {
+let towerOne = new Tower(3);
+towerOne.setUpForNewGame();
+let towerTwo = new Tower(0);
+let towerThree = new Tower(0);
+let game = new Game([towerOne, towerTwo, towerThree]);
+game.displayRings();
+game.move(towerOne, towerTwo);
+// game.replayGame();
+//   console.log(game.towerOne);
+// };
+// gameStarter();
+
+game.move(towerOne, towerThree);
+game.move(towerTwo, towerThree);
+game.move(towerOne, towerTwo);
+game.move(towerThree, towerOne);
+game.move(towerThree, towerTwo);
 // game.move(towerOne, towerTwo);
-// game.move(towerOne, towerThree);
-// game.move(towerTwo, towerThree);
-// game.move(towerOne, towerTwo);
-// game.move(towerThree, towerOne);
-// game.move(towerThree, towerTwo);
-// game.move(towerOne, towerTwo);
-// game.displayRings();
-// game.move(towerOne, towerTwo);
-// game.newGame();
-// game.displayRings();
-let game = new Game(3, 3);
-let domTowers = document.querySelectorAll('.tower');
-const newGameButton = document.getElementById('startBtn');
-const domRing = document.querySelectorAll('.ring');
-const newTowerCreator = () => {};
-const newLiCreator = () => {};
-newGameButton.addEventListener('click', function () {
-  domRing.insertAdjacentElement('afterbegin', 'li');
-  // newTowerCreator();
-  newLiCreator();
-});
