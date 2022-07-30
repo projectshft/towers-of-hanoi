@@ -12,11 +12,13 @@ move: function(from, to) {
   if(fromDisc > toDisc) {
     console.log('You Cannot move a larger disc on top of a smaller one, board is still:');
     this.boardStatus();
+    this.checkWinner();
   } else if(fromDisc < toDisc || toDisc === undefined) {
     this.board[to - 1].push(fromDisc);
     this.board[from - 1].pop();
     console.log('That move was successful, board is now:');
     this.boardStatus()
+    this.checkWinner();
   }
 },
   boardStatus: function() {
@@ -32,6 +34,11 @@ move: function(from, to) {
       console.log('--- ' + pegOne.join(' '));
       console.log('--- ' + pegTwo.join(' '));
       console.log('--- ' + pegThree.join(' '));
+  },
+  checkWinner: function() {
+    if(this.board[1].length === 5 || this.board[2].length === 5) {
+      console.log('YOU WON!!!!');
+    }
   },
   start: function() {
     console.log('Welcome to the Towers of Hanoi game! the board looks like:');
