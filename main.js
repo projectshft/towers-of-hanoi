@@ -37,11 +37,17 @@ move: function(from, to) {
   },
   checkWinner: function() {
     if(this.board[1].length === 5 || this.board[2].length === 5) {
-      console.log('YOU WON!!!!');
+      console.log('YOU WON!!!! The board has reset for a new game :)');
+      this.board = [
+        [5, 4, 3, 2, 1],
+        [],
+        []
+        ];
+        this.boardStatus();
     }
   },
   start: function() {
     console.log('Welcome to the Towers of Hanoi game! the board looks like:');
     this.boardStatus();
   }
-}
+};
