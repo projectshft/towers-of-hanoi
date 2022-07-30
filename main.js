@@ -20,7 +20,7 @@ const rules = function () {
 const start = function () {
   board = new GameBoard ();
 
-  console.log("Type 'board.moveDisc(x,y)' and input 1, 2, or 3 for x and y then press enter to move the peg. \nx = donor peg \ny = donee peg.");
+  console.log("Type 'board.moveDisc(x,y)' and input 1, 2, or 3 for x and y then press enter to move the peg. \nx = donor peg \ny = donee peg");
 
   board.printState();
 };
