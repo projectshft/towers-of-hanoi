@@ -52,7 +52,6 @@ GameBoard.prototype.moveDisc = function (pegDonor,pegDonee) {
 
   this.printState();
   this.checkWinner(pegDonee);
-
 };
 
 //Print to console state of board
@@ -78,6 +77,4 @@ GameBoard.prototype.checkWinner = function (donee) {
    console.log('===========================================================================================');
    start();
   };
-
-
 };
