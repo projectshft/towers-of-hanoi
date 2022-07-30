@@ -131,11 +131,19 @@ class Board {
   }
 
   get getDiscs() {
-    return this.discs;
+    return this._discs;
   }
 
   get getPegs() {
-    return this.pegs;
+    return this._pegs;
+  }
+
+  set discs(disc) {
+    this._discs = disc;
+  }
+
+  set pegs(pegs) {
+    this._pegs = pegs;
   }
 
   checkWinner() {
