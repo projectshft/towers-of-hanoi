@@ -11,7 +11,7 @@ const setGame = (numPegs, numDiscs) => {
 const showBoard = function () {
   boardOrig
     .map((boa) => boa.join(" "))
-    .forEach((boa) => console.log(`--- ${boa}\n`));
+    .forEach((boa) => console.log(`--- ${boa}`));
 };
 
 let numPegs = prompt("Enter the number of pegs: ");
