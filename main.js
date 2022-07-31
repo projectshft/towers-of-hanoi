@@ -8,6 +8,11 @@ const setGame = (numPegs, numDiscs) => {
     boardOrig[0].push(j);
   }
 };
+const showBoard = function () {
+  boardOrig
+    .map((boa) => boa.join(" "))
+    .forEach((boa) => console.log(`--- ${boa}\n`));
+};
 
 let numPegs = prompt("Enter the number of pegs: ");
 let numDiscs = prompt("Enter the number of discs: ");
@@ -18,9 +23,7 @@ setGame(numPegs, numDiscs);
 const resultCheck = structuredClone(boardOrig[0]);
 
 console.log("Game start: ");
-boardOrig
-  .map((boa) => boa.join(" "))
-  .forEach((boa) => console.log(`--- ${boa}`));
+showBoard();
 
 const state = {
   peg1: boardOrig[0],
@@ -43,9 +46,7 @@ const moveDisc = (moveFrom, moveTo) => {
     state[pegFrom].pop(lastEleFrom);
     console.log("That move was successful, board is now:\n");
 
-    boardOrig
-      .map((boa) => boa.join(" "))
-      .forEach((boa) => console.log(`--- ${boa}`));
+    showBoard();
   }
 
   if (lastEleFrom > lastEleTo) {
@@ -53,9 +54,7 @@ const moveDisc = (moveFrom, moveTo) => {
       "You cannot move a larger disc on top of a smaller one, board is still:\n"
     );
 
-    boardOrig
-      .map((boa) => boa.join(" "))
-      .forEach((boa) => console.log(`--- ${boa}`));
+    showBoard();
   }
 
   checkWinner();
