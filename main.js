@@ -21,7 +21,7 @@
 // reset the game to initial state
 */
 
-var board = [[5, 4, 3, 2, 1], [], []];
+var board = [[], [1], [5, 4, 3, 2]];
 var checkWinner = function () {
   board.map(function (peg) {
     if (board[0].length == 0 && board[1].length == 0) {
