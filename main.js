@@ -1,8 +1,36 @@
-//First of all it will need a board. We'll utilize a 2D array to do this.We'll use your Chrome Browser JavaScript Console to play the game. We'll want to be able to print the board horizontally. You MUST utilize a map function at least once to accomplish this part of the assignment. The starting board will log the 2D array to the console
+/**Towers of Hanoi outline
+ * 
+// establish initial board state, a 2d array of pegs with discs
+// print board
+// function that loops through the pegs (using array helper methods only)
+// function that loops through each disc of each peg (using array helper methods only)
+// take each disc and add to a string
+// print the string to console
+// end function
+// function that takes in an argument for the source peg and target peg...
+// and moves discs FROM a peg TO a peg
+// test if the source peg has a disc
+// test if target peg can accept that peg (validate move)
+// if valid, move the disc from source to target
+// (manipulate the board state directly)
+// print message accordingly
+// test valid move
+// test multiple invalid moves
+// function to determine if it's a winner, printing message accordingly
+// reset the game to initial state
+*/
 
-var board = [[5, 4, 3, 2, 1], [], []];
+var board = [[], [1], [5, 4, 3, 2]];
+var checkWinner = function () {
+  if (board[0].length == 0 && board[1].length == 0) {
+    console.log(
+      "You have conquered the Towers of Hanoi, and hereby are declared a winner. According to Brahmin priests, the world will end now. But if you are still here, try the game again and see if you can win using just 31 moves."
+    );
+    // console.log(); print initial state of board
+  }
+};
 
-var print = function () {
+var printUpdate = function () {
   board.map(function (peg) {
     let line = "--- ";
     peg.forEach(function (disc) {
@@ -13,60 +41,29 @@ var print = function () {
   });
 };
 
-print();
-
-// // why does this block result in print dialogue??
-// function Board(peg1, peg2, peg3) {
-//   this.peg1 = [];
-//   this.peg2 = [];
-//   this.peg3 = [];
-//   this.print = function () {
-//     this.map(function (peg) {
-//       let line = "--- ";
-//       peg.forEach(function (disc) {
-//         line += disc + " ";
-//       });
-
-//       console.log(line);
-//     });
-//   };
-// }
-
-// Our game will progress with the player submitting moves to the game and the game accepting or rejecting the move and updating the board if the move is allowed. Remember, you must only move the top disc from the peg and you can't move a disc on top of another if it is bigger than that disc.
-
-var isAcceptable = function (fromPeg, toPeg) {
-  if (
+// write a function that takes in two arguments- one for the source peg and one for the target peg; 'fromPeg' and 'toPeg' must be numbers in the interval I=[1,3]; test if the source peg has a disc; test if target peg can accept that peg (validate move); print message and board according to how the conditions are met/not met
+var moveDisc = function (fromPeg, toPeg) {
+  if (fromPeg <= 0 || toPeg <= 0 || fromPeg > 3 || toPeg > 3) {
+    console.log("Please choose peg numbers between 1 and 3, inclusive");
+    console.log(printUpdate());
+  } else if (
     fromPeg >= 1 &&
     fromPeg <= 3 &&
     toPeg >= 1 &&
-    fromPeg <= 3 &&
-    fromPeg[fromPeg.length - 1] < toPeg[toPeg.length - 1]
+    toPeg <= 3 &&
+    (board[fromPeg[fromPeg.length - 1]] < board[toPeg[[toPeg.length - 1]]] ||
+      board[toPeg[[toPeg.length - 1]]] == null)
   ) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-var message = function () {
-  if ((isAcceptable = true)) {
+    let addedDisc = board[fromPeg - 1].pop();
+    board[toPeg - 1].push(addedDisc);
     console.log("That move was successful, board is now:");
-    print();
-  } else if ((isAcceptable = false)) {
+    console.log(printUpdate());
+  } else {
     console.log(
-      "You cannot move a larger disc on top of a smaller one, board is still: "
+      "You cannot move a larger disc on top of a smaller one, board is still:"
     );
-    print();
+    console.log(printUpdate());
   }
 };
 
-//There should be a way to move discs from one peg to another
-
-var moveDiscs = function (fromPeg, toPeg) {
-  var fromPeg = [];
-  var toPeg = [];
-  return toPeg.push(fromPeg[fromPeg.length - 1]);
-
-  console.log(message);
-};
-moveDiscs();
+// write a function that tests for 'winner'... in the case that there's a winner, print the appropriate message and end the game immediately w/console log.Reset the board to initial conditions
