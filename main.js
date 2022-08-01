@@ -18,22 +18,27 @@
 // test multiple invalid moves
 // function to determine if it's a winner, printing message accordingly
 // reset the game to initial state
+//restructure 'return' and 'printUpdate'
+//create a reset function that is called by 'board'
+//test dozens of moveDisc pairs
 
-// var NewGameBoard = [[5, 4, 3, 2, 1], [], []];
-var board = [[], [1], [5, 4, 3, 2]];
+var reset = function () {
+  return [[5, 4, 3, 2, 1], [], []];
+};
+
+var board = reset();
 
 var checkWinner = function () {
-  board.map(function (peg) {
-    if (board[0].length == 0 && board[1].length == 0) {
-      console.log(
-        "You have conquered the Towers of Hanoi, and hereby are declared a winner. According to Brahmin priests, the world will end now. But if remain in existence, try the game again and see if you can win by using no more than 31 moves."
-      );
-      return true;
-    } else {
-      return false;
-    }
-  });
-  // printNewGame();
+  if (board[0].length == 0 && board[1].length == 0) {
+    console.log(
+      "You have conquered the Towers of Hanoi, and hereby are declared a winner. According to Brahmin priests, the world will end now. But if remain in existence, try the game again and see if you can win by using no more than 31 moves."
+    );
+    board = reset();
+    printUpdate();
+    return true;
+  } else {
+    return false;
+  }
 };
 
 var printUpdate = function () {
@@ -42,21 +47,10 @@ var printUpdate = function () {
     peg.forEach(function (disc) {
       line += disc + " ";
     });
+    return console.log(line);
   });
 };
 printUpdate();
-
-var printNewGame = function () {
-  NewGameBoard.map(function (peg) {
-    let line = "--- ";
-    peg.forEach(function (disc) {
-      line += disc + " ";
-    });
-
-    // return console.log(line);
-  });
-};
-// printNewGame();
 
 var getTopDisc = function (peg) {
   var pegLength = board[peg - 1].length;
@@ -67,8 +61,9 @@ var moveDisc = function (fromPeg, toPeg) {
   //arguments must be in the interval I= [1,3]
   if (fromPeg <= 0 || toPeg <= 0 || fromPeg > 3 || toPeg > 3) {
     console.log("Please choose peg numbers between 1 and 3, inclusive");
-    return;
+    return printUpdate();
   }
+
   if (
     getTopDisc(toPeg) === undefined ||
     getTopDisc(fromPeg) < getTopDisc(toPeg)
@@ -76,13 +71,13 @@ var moveDisc = function (fromPeg, toPeg) {
     let disc = board[fromPeg - 1].pop();
     board[toPeg - 1].push(disc);
     console.log("That move was successful, board is now: ");
-    printUpdate();
   } else {
     console.log(
       "You cannot move a larger disc on top of a smaller one, board is still: "
     );
-    printUpdate();
   }
+
+  printUpdate();
   checkWinner();
   return;
 };
