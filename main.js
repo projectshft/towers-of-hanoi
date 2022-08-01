@@ -64,11 +64,9 @@ var Game = function(board){
     };
        
   Game.prototype.resetGame = function(){
-   this.changeTowers();
-   this.changeDiscs();
     this.moveCount = 0;
     console.log(`current number of moves: ${this.moveCount}`);
-    return this.displayBoard();
+    this.startGame();
   };
   
   Game.prototype.changeTowers = function(userInputTowers){
@@ -85,7 +83,6 @@ var Game = function(board){
       break;
     }
   }
-  return this.displayBoard();
   };
   
   Game.prototype.changeDiscs = function(userInputDiscs){
@@ -102,11 +99,15 @@ var Game = function(board){
         break;
       }
     }
-    this.discs = userInputDiscs; 
-    console.log('this.discs' + this.discs);
+    this.discs = userInputDiscs;
+  };
+
+  Game.prototype.startGame = function () {
+    this.changeTowers();
+    this.changeDiscs();
     return this.displayBoard();
   }
   
   var myGame = new Game(board);
   
-  myGame.displayBoard();
+  myGame.startGame();
