@@ -1,13 +1,10 @@
 let boardOrig = [];
 const setGame = (numPegs, numDiscs) => {
-  for (let i = 0; i < numPegs; i++) {
-    boardOrig.push([]);
-  }
-  boardOrig.map;
-
-  for (let j = numDiscs; j > 0; j--) {
-    boardOrig[0].push(j);
-  }
+  let arr1 = Array.from({ length: numPegs }, (_, i) => i + 1);
+  let arr2 = Array.from({ length: numDiscs }, (_, i) => i + 1);
+  boardOrig.push(arr2.reverse());
+  arr1.forEach((ele) => boardOrig.push([]));
+  boardOrig.pop();
 };
 
 const showBoard = function () {
