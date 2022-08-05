@@ -1,17 +1,18 @@
-const boardOrig = [];
+let boardOrig = [];
 const setGame = (numPegs, numDiscs) => {
   for (let i = 0; i < numPegs; i++) {
     boardOrig.push([]);
   }
+  boardOrig.map;
 
   for (let j = numDiscs; j > 0; j--) {
     boardOrig[0].push(j);
   }
 };
+
 const showBoard = function () {
-  boardOrig
-    .map((boa) => boa.join(" "))
-    .forEach((boa) => console.log(`--- ${boa}`));
+  const board = boardOrig.map((boa) => "--- " + boa.join(" ")).join("\n");
+  console.log(board);
 };
 
 let numPegs = prompt("Enter the number of pegs: ");
