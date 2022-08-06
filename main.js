@@ -11,35 +11,41 @@ const board = [
 const boardState = {
   peg1: board[0],
   peg2: board[1],
-  peg3: board[2]
+  peg3: board[2],
 }
 
-//when using the move function, it needs to be able to see what disc is on the peg of the 'from' and 'to' peg, and if it is a valid move or not. 
 
 const moveDiscValidator = function(from, to) {
-  // if(from === to) {
-  //   console.log('you must move the disc to a different peg than the current')
-  //   return false;
-  // } 
-  // if(boardState[`peg${from}`].length  === 0) {
-  //   console.log('you must move from a peg that has a disc')
-  //   return false;
-  // }
-  return true;
-
-
+  const fromPeg = boardState[`peg${from}`]
+  const toPeg = boardState[`peg${to}`]
+  if(toPeg.length === 0) {
+    console.log('you moved to an empty peg.  The updated board is:')
+    return true;
+  } else if(from === to) {
+    console.log('you must move the disc to a different peg than the current')
+    return false;
+  } else if(fromPeg.length  === 0) {
+    console.log('you must move from a peg that has a disc')
+    return false;
+  } else if(fromPeg[fromPeg.length - 1] < toPeg[toPeg.length -1]) {
+    console.log('That move is valid.  The updated board is:')
+    return true;
+  } else {
+    console.log('You cannot move a larger disc onto a smaller')
+    return false;
+  }
 }
 
 const moveDisc = function(from, to) {
-  if (moveDiscValidator(from, to)) {
+  if(moveDiscValidator(from, to)) {
     let disc = boardState[`peg${from}`].pop();
     boardState[`peg${to}`].push(disc);
   }
-
-  let printedBoard = board.map(element => {
-    
+  board.forEach(element => {
+    let printArray = element.map(e => `${e}`)
+    console.log(`--- ${printArray.join(' ')}`)
   })
-  console.log(printedBoard)
+  checkWinner(); 
 }
 
 const checkWinner = function() {
@@ -53,10 +59,11 @@ const checkWinner = function() {
   }
 }
 
-console.log(moveDisc(1, 2))
+
 
 /* conditions of moves:
---you must move from a peg that actually has a disc, can't be empty
---you can move a smaller disc onto a larger disc or an empty peg
+--can move a smaller disc onto a larger disc or an empty peg
+--cannot move from and empty peg.  
+--cannot move a larger disc onta a smaller disc
 --cannot move from and to the same peg
 */
