@@ -1,22 +1,20 @@
 //Towers of Hanoi Parsity Eval
 
+let numOfPegs = 5
+let numOfDiscs = 6
 
-const buildBoard = function () {
-  
-}
-//initial board setup
-const board = [
-  [5, 4, 3, 2, 1],
-  [],
-  []
-]
+//dynamically create board based on user input
+const board = [...Array(numOfPegs)].map((e, i) => {
+  if(i === 0) {
+    return Array.from(Array(numOfDiscs).keys()).map(x => x + 1).sort((a,b) => b - a);;
+  } else {
+    return Array()
+  }
+})
 
-//object to track current state of board
-const boardState = {
-  peg1: board[0],
-  peg2: board[1],
-  peg3: board[2],
-}
+//dynamically create boardState obj based on size of board
+const boardState = {}
+board.forEach((e ,index) => boardState[`peg${index + 1}`] = board[index]);
 
 
 const moveDiscValidator = function(from, to) {
