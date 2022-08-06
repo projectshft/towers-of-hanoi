@@ -4,7 +4,7 @@ larger disc on top of a smaller one.*/
 
 //board object
 const GameBoard = function () {
-  this.pegs = [[5, 4, 3, 2, 1],[],[]];
+  this.pegs = [[1],[5, 4, 3, 2,],[]];
 };
 
 //Prints when opening the program
@@ -17,6 +17,8 @@ const rules = function () {
 }
 
 //starts the game by creating new instance of GameBoard, prints instructions, and prints state of board.
+
+
 const start = function () {
   board = new GameBoard ();
 
