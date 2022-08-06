@@ -4,7 +4,7 @@ larger disc on top of a smaller one.*/
 
 //board object
 const GameBoard = function () {
-  this.pegs = [[1],[5, 4, 3, 2,],[]];
+  this.pegs = [[5, 4, 3, 2, 1],[],[]];
 };
 
 //Prints when opening the program
