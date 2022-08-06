@@ -1,5 +1,9 @@
 //Towers of Hanoi Parsity Eval
 
+
+const buildBoard = function () {
+  
+}
 //initial board setup
 const board = [
   [5, 4, 3, 2, 1],
@@ -18,6 +22,7 @@ const boardState = {
 const moveDiscValidator = function(from, to) {
   const fromPeg = boardState[`peg${from}`]
   const toPeg = boardState[`peg${to}`]
+  //add more rigid testing for parameters 
   if(toPeg.length === 0) {
     console.log('you moved to an empty peg.  The updated board is:')
     return true;
