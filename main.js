@@ -21,6 +21,16 @@ const moveDiscValidator = function(from, to) {
   const fromPeg = boardState[`peg${from}`]
   const toPeg = boardState[`peg${to}`]
   //add more rigid testing for parameters 
+  if(typeof(from) !== 'number' || typeof(to) !== 'number') {
+    console.log('Only number accepted')
+    return false;
+  } else if (from % 1 !== 0 || to % 1 !== 0) {
+    console.log('Please only whole numbers')
+    return false;
+  } else if (from < 1 || from > numOfPegs || to < 1 || to > numOfPegs) {
+    console.log(`Please only choose pegs within the range of 1 - ${numOfPegs}.`)
+    return false;
+  }
   if(toPeg.length === 0) {
     console.log('you moved to an empty peg.  The updated board is:')
     return true;
@@ -69,4 +79,7 @@ const checkWinner = function() {
 --cannot move from and empty peg.  
 --cannot move a larger disc onta a smaller disc
 --cannot move from and to the same peg
+--must be within the range of the size of the board
+--must only be a number
+--must be whole number
 */
