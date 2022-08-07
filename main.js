@@ -50,8 +50,6 @@ Game.prototype.move = function(moveFrom, moveTo){
       this.winCheck();
       console.log(`current number of moves: ${moveCount}`);
       console.log(`That move was successful. Here is what the board looks like now:`);
-      console.log(this.board[toTower].length);
-      console.log(this.discs);
       return this.displayBoard();
     };
 };
