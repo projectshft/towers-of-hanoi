@@ -1,22 +1,30 @@
 //Towers of Hanoi Parsity Eval
 
-let numOfPegs = 5
-let numOfDiscs = 6
+let numOfPegs = 3
+let numOfDiscs = 3
 
-//dynamically create board based on user input
-const board = [...Array(numOfPegs)].map((e, i) => {
-  if(i === 0) {
-    return Array.from(Array(numOfDiscs).keys()).map(x => x + 1).sort((a,b) => b - a);;
-  } else {
-    return Array()
-  }
-})
+//create board array dynamically
+const createBoard = function() {
+  const board = [...Array(numOfPegs)].map((e, i) => {
+    if(i === 0) {
+      return Array.from(Array(numOfDiscs).keys()).map(x => x + 1).sort((a,b) => b - a);;
+    } else {
+      return Array()
+    }
+  })
+  return board;
+}
+
+let board = createBoard();
+
+
 
 //dynamically create boardState obj based on size of board
 const boardState = {}
 board.forEach((e ,index) => boardState[`peg${index + 1}`] = board[index]);
 
 
+//function to validate whether moves are valid
 const moveDiscValidator = function(from, to) {
   const fromPeg = boardState[`peg${from}`]
   const toPeg = boardState[`peg${to}`]
@@ -49,6 +57,7 @@ const moveDiscValidator = function(from, to) {
   }
 }
 
+//function to play the game
 const moveDisc = function(from, to) {
   if(moveDiscValidator(from, to)) {
     let disc = boardState[`peg${from}`].pop();
@@ -61,16 +70,22 @@ const moveDisc = function(from, to) {
   checkWinner(); 
 }
 
+
 const checkWinner = function() {
-  if(boardState.peg2 === [5, 4, 3, 2, 1] || boardState.peg3 === [5, 4, 3, 2, 1]) {
-    console.log('Winner Winner Chicken Dinner!!');
-    board = [
-      [5, 4, 3, 2, 1],
-      [],
-      []
-    ]
+  const completedPeg = Array.from(Array(numOfDiscs).keys()).map(x => x + 1).sort((a, b) => b - a).join();
+  for(peg in boardState) {
+    if(peg !== 'peg1' && boardState[peg].join() === completedPeg) {
+      console.log('Winner Winner Chicken Dinner!!');
+      board = createBoard();
+    }
+    
   }
 }
+
+
+// const solveTower = function() {
+
+// }
 
 
 
