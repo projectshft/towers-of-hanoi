@@ -123,16 +123,16 @@ describe('getPegs for Board', () => {
     expect(board3.getPegs).toEqual(3);
   });
 });
-describe('checkWinner for Board', () => {
-  it('returns if the player has won or not', () => {
-    const boardExample = [[], [], [5, 4, 3, 2, 1], []];
-    const board = new Board(5, 3);
-    board.boardArray = boardExample;
-    expect(board.checkWinner()).toEqual(true);
-    const board2 = new Board(17, 100);
-    expect(board2.checkWinner()).toEqual(false);
-  });
-});
+// describe('checkWinner for Board', () => {
+//   it('returns if the player has won or not', () => {
+//     const boardExample = [[], [], [5, 4, 3, 2, 1], []];
+//     const board = new Board(5, 3);
+//     board.boardArray = boardExample;
+//     expect(board.checkWinner()).toEqual(true);
+//     const board2 = new Board(17, 100);
+//     expect(board2.checkWinner()).toEqual(false);
+//   });
+// });
 describe('changeGamePieces for Board', () => {
   it('changes the number of discs and pegs in the game while restarting the game', () => {
     const boardExample = [[10, 9, 8, 7, 6, 5, 4, 3, 2, 1], [], [], []];

@@ -10,6 +10,13 @@ function validNumberPegs(pegNum) {
 function validNumberDiscs(discNum) {
   return isInputNumber(discNum) && discNum > 0;
 }
+
+function validateWholeNumber(num) {
+  if (isInputNumber(num) && num % 1 === 0) return true;
+  console.log('Error: Please make sure inputs are whole numbers');
+  return false;
+}
+
 class Board {
   constructor(discs = 5, pegs = 3) {
     this.discs = discs;
@@ -30,14 +37,19 @@ class Board {
         'Error: Pegs have been set to 3. Minimum pegs in this game are 3 pegs'
       );
     }
-    const firstPeg = [];
-    const gameArray = [firstPeg];
-    for (let i = this.getDiscs; i > 0; i -= 1) {
-      firstPeg.push(i);
-    }
-    for (let i = 0; i < this.getPegs - 1; i += 1) {
-      gameArray.push([]);
-    }
+    // Creates array from 1 to N
+    const firstPeg = Array.from({ length: this.getDiscs }, (_, i) => i + 1);
+    // Makes the array from N to 1 for the game
+    firstPeg.reverse();
+    // Create an array of N empty arrays to simulate the pegs in the game
+    const gameArray = Array.from(
+      {
+        length: this.getPegs,
+      },
+      () => []
+    );
+    // Change first peg to have discs on it
+    gameArray[0] = firstPeg;
     return gameArray;
   }
 
@@ -60,46 +72,52 @@ class Board {
     console.log(this.stateStr);
   }
 
-  validateInput(initial, final) {
-    // check if input are whole numbers
-    if (
-      isInputNumber(initial) &&
-      isInputNumber(final) &&
-      initial % 1 === 0 &&
-      final % 1 === 0
-    ) {
-      // check if input are in the range of the boardArray
-      const startIndex = initial - 1;
-      const endIndex = final - 1;
-      if (
-        startIndex < this.getState.length &&
-        endIndex < this.getState.length &&
-        startIndex > -1 &&
-        endIndex > -1
-      ) {
-        //  check if there is a peg at the designated starting index
-        if (this.getState[startIndex].length !== 0) {
-          // check if there is a disc at all on the peg or if the disk on the peg is larger than the peg we're trying to move
-          if (
-            this.getState[endIndex][this.getState[endIndex].length - 1] ===
-              undefined ||
-            this.getState[startIndex][this.getState[startIndex].length - 1] <
-              this.getState[endIndex][this.getState[endIndex].length - 1]
-          ) {
-            return true;
-          }
-          console.log('Error: cannot move a larger disc onto a smaller disc');
-          return false;
-        }
-        console.log('Error: There is no disc at the start index');
-        return false;
-      }
-      console.log(
-        'Error: Please make sure your inputs are in the range of the number of pegs'
-      );
-      return false;
+  isInRange(num) {
+    const index = num - 1;
+    if (index < this.getState.length && index > -1) {
+      return true;
     }
-    console.log('Error: Please make sure inputs are whole numbers');
+    console.log(
+      'Error: Please make sure your inputs are in the range of the number of pegs'
+    );
+    return false;
+  }
+
+  pegExists(num) {
+    const index = num - 1;
+    if (this.getState[index].length !== 0) {
+      return true;
+    }
+    console.log('Error: There is no disc at the start index');
+    return false;
+  }
+
+  isPegLarger(initial, final) {
+    const startIndex = initial - 1;
+    const endIndex = final - 1;
+    if (
+      this.getState[endIndex][this.getState[endIndex].length - 1] ===
+        undefined ||
+      this.getState[startIndex][this.getState[startIndex].length - 1] <
+        this.getState[endIndex][this.getState[endIndex].length - 1]
+    ) {
+      return true;
+    }
+    console.log('Error: cannot move a larger disc onto a smaller disc');
+    return false;
+  }
+
+  validateInput(initial, final) {
+    if (
+      validateWholeNumber(initial) &&
+      validateWholeNumber(final) &&
+      this.isInRange(initial) &&
+      this.isInRange(final) &&
+      this.pegExists(initial) &&
+      this.isPegLarger(initial, final)
+    ) {
+      return true;
+    }
     return false;
   }
 
@@ -107,15 +125,16 @@ class Board {
     console.log(`Move: ${initial}, ${final}`);
     // completes all input checks
     if (this.validateInput(initial, final)) {
+      // convert user input to array indeces
       const startIndex = initial - 1;
       const endIndex = final - 1;
-      this.boardArray[endIndex].push(this.boardArray[startIndex].pop());
+      // Remove disc from the top of the peg
+      const movedDisc = this.boardArray[startIndex].pop();
+      // Add disc to the new peg
+      this.boardArray[endIndex].push(movedDisc);
       console.log('That move was successful, board is now:');
       console.log(this.stateStr);
-      if (this.checkWinner()) {
-        console.log('YOU WON!\n\n\n');
-        this.restartGame();
-      }
+      this.checkWinner();
     }
   }
 
@@ -153,6 +172,14 @@ class Board {
       }
       return false;
     });
-    return isWinner;
+
+    if (isWinner) {
+      this.dealWithWinner();
+    }
+  }
+
+  dealWithWinner() {
+    console.log('YOU WON!\n\n\n');
+    this.restartGame();
   }
 }
