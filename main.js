@@ -1,34 +1,29 @@
 //initial 2d Array of the 'board'
 var Game = function(board){
   this.board = board;
-  this.discs = discs;
-  };
-this.board = [[], [], []];
+  this.startBoard = startBoard;
+  this.moveCount = moveCount;
+  this.toTower = toTower;
+  this.defaultBoard = defaultBoard;
+};
+
+var defaultBoard = [[5, 4, 3, 2, 1], [], []];
+var board = [];
+var startBoard = [];
 var moveCount = 0;
-var discs = null;
 var toTower = null;
   
   //create a horizontal display of the current board
 Game.prototype.displayBoard = function(){
-  this.board.forEach(tower => {
-      //utilize .map at least once
-    tower
-        .sort(function(a, b){
-          if (a > b){
-            return -1
-          } else {
-            return 1;
-          }})
-        .forEach(function (disc){
-          if(disc === undefined){
-             return disc = '';
-          } else {
-          return disc.toString()}
-          });
-          //display board in the chrome browser console
-    console.log(`Tower ${this.board.indexOf(tower) +1} --- ${tower.join(' ')}`);
-  });
-};
+  var printedBoard = this.board.map(tower=>{
+    return `Tower ${this.board.indexOf(tower) +1} --- ${tower.map(disc =>{return `${disc}`}).join(' ')}`;
+   });
+  var loggedBoard = printedBoard.reduce(function (acc, arr){
+     var str = acc;
+     return (str += `${arr}\n`)
+  }, "")
+  console.log(loggedBoard);
+  };
       
     //create a move function that moves disc from one tower to another
 Game.prototype.move = function(moveFrom, moveTo){
@@ -38,10 +33,12 @@ Game.prototype.move = function(moveFrom, moveTo){
   var toValue = this.board[moveTo -1][toIndex];
   toTower = moveTo -1;
     if(fromValue === undefined){
+      moveCount++;
       console.log(`That is not a valid move. Please move one of the discs to a new tower.`);
       return this.displayBoard();
     }
     if(fromValue > toValue){
+      moveCount++;
       console.log(`You can only move smaller discs onto larger discs. Please try another move.`);
       return this.displayBoard();
     } else {
@@ -55,7 +52,7 @@ Game.prototype.move = function(moveFrom, moveTo){
 };
       
 Game.prototype.winCheck = function(){
-  if(this.board[toTower].length === this.discs && toTower !== 0) {
+  if(this.startBoard[0].length === this.board[this.board.length-1].length) {
     alert `You have won the game! Way to go! Game will now reset.`;
     this.displayBoard();
     return this.resetGame();
@@ -66,50 +63,55 @@ Game.prototype.winCheck = function(){
        
 Game.prototype.resetGame = function(){
   this.moveCount = 0;
-  this.board = [[],[],[]];
+  this.board = this.startBoard;
   console.log(`current number of moves: ${this.moveCount}`);
-  this.startGame();
+  this.displayBoard();
 };
-  
-Game.prototype.changeTowers = function(userInputTowers){
+
+Game.prototype.generateBoard = function(userInputTowers, userInputDiscs){
   userInputTowers = prompt `Please enter the number of towers you would like to play with:`;
-  while(this.board.length < userInputTowers){
-    this.board.push([]);
-    if(this.board.length === userInputTowers){
-      break;
-    }
+
+  for(i = 0; i < userInputTowers; i++){
+    this.board.push([]); 
   };
-  while(this.board.length > userInputTowers){
-    this.board.pop();
-    if(this.board.length === userInputTowers){
-      break;
-    }
-  }
-};
-  
-Game.prototype.changeDiscs = function(userInputDiscs){
+
   userInputDiscs = prompt `Please enter the number of discs you would like to play with:`;
-  while(this.board[0].length < userInputDiscs){
-    this.board[0].push(this.board[0].length +1);
-    if(this.board[0].length === userInputDiscs){
-      break;
-    }
-  };
-  while(this.board[0].length > userInputDiscs){
-    this.board[0].shift();
-    if(this.board[0].length === userInputDiscs){
-      break;
-    }
-  }
-  this.discs = parseInt(userInputDiscs);
+  var totalDiscs = Array.from({length:parseInt(userInputDiscs)}, (_,i) => i + 1 );
+  var orderedDiscs = totalDiscs.sort((a,b) => {
+    if(a > b){
+      return -1
+    } else {
+      return 1;
+    };
+  });
+
+  board[0] = orderedDiscs;
+ 
+  this.board = board;
+  this.startBoard = this.createStartBoard();
+};
+
+Game.prototype.createStartBoard = function(){
+  return this.board.map(tower =>{
+    return tower.map(disc => {
+      return disc;
+    })
+  })
 };
 
 Game.prototype.startGame = function () {
-  this.changeTowers();
-  this.changeDiscs();
-  return this.displayBoard();
+  userInputStart = prompt `Would you like to set your own number of towers and discs? Please Type 'yes' or 'no'.`;
+  if(userInputStart === 'yes'){
+  this.generateBoard();
+  return this.displayBoard()
+  } else if(userInputStart === 'no') {
+    this.moveCount = 0;
+    this.board = this.defaultBoard;
+    this.startBoard = this.defaultBoard;
+    return this.displayBoard();
+  }
 };
   
-var myGame = new Game(board);
-  
-myGame.startGame();
+var my = new Game(this.board);
+
+my.startGame();
