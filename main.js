@@ -71,16 +71,14 @@ Game.prototype.resetGame = function(){
 Game.prototype.generateBoard = function(userInputTowers, userInputDiscs){
   userInputTowers = prompt `Please enter the number of towers you would like to play with:`;
 
-  for(i = 0; i < userInputTowers; i++){
-    this.board.push([]); 
-  };
+  board = Array.from({length:parseInt(userInputTowers)}, (i)=> i = []);
 
   userInputDiscs = prompt `Please enter the number of discs you would like to play with:`;
   var totalDiscs = Array.from({length:parseInt(userInputDiscs)}, (_,i) => i + 1 );
   var orderedDiscs = totalDiscs.sort((a,b) => {
     if(a > b){
       return -1
-    } else {
+    } else {s
       return 1;
     };
   });
