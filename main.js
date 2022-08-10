@@ -1,11 +1,15 @@
 
 let winner
+let board = [[],[],[]]
 function newGame (){
-  console.log("Let's play Towers of Hanoi, make your first move. Here is a starting position of the board : " + "\n 1 --- 5 4 3 2 1 \n 2 --- \n 3 --- ")
+  console.log("Let's play Towers of Hanoi, make your first move. Here is a starting position of the board : ")
   winner=false
-  return board = [
-  [5,4,3,2,1],[],[]]
+  board = [
+    [5,4,3,2,1],[],[]
+  ]
+  displayBoard()
 }
+
 newGame()
 function displayBoard(){
   board.map(function(peg,i) {
@@ -14,32 +18,35 @@ function displayBoard(){
 }
 function moveDisc(from,to){
   if (winner==false){
-  const disc =board[from-1][board[from-1].length-1]
-  const discTo=board[to-1][board[to-1].length-1]
   const arrayFrom=board[from-1]
-
+  const disc =arrayFrom[arrayFrom.length-1]
+  
   function checkDisc(){
+    const discTo=board[to-1][board[to-1].length-1]
     if (!discTo || discTo>disc) {
       return true
     }
-    else {console.log(`Disc ${disc} is bigger then disc ${discTo}, you can't move a bigger disc on top of a smaller one. The board is still:`)
-    displayBoard()
-    return false}}
+    else {
+      console.log(`Disc ${disc} is bigger then disc ${discTo}, you can't move a bigger disc on top of a smaller one. The board is still:`)
+      displayBoard()
+      return false
+    }
+  }
   
   function checkPeg(){
     if (arrayFrom.length==0){
       console.log('There is no disc on this peg. The board is still:')
       displayBoard()
-      return false}
+      return false
+    }
       else return true
   }
-  var playing = checkDisc()
-  var playing1 = checkPeg()
-  if (playing&&playing1){
-  board[from-1].pop()
-  board[to-1].push(disc)
-  console.log('That move was sucssesful, the board is now :')
-  displayBoard()
+
+  if (checkPeg() && checkDisc()){
+    board[from-1].pop()
+    board[to-1].push(disc)
+    console.log('That move was sucssesful, the board is now :')
+    displayBoard()
   }
 }
 checkWinner()
@@ -50,9 +57,41 @@ checkWinner()
       return newGame()
     }
     else { 
-     return winner=false
+     return !winner
     }
   }
 }
 
-
+moveDisc(1,2)
+moveDisc(1,2)
+moveDisc(2,3)
+moveDisc(1,2)
+moveDisc(3,2)
+moveDisc(1,3)
+moveDisc(2,1)
+moveDisc(2,3)
+moveDisc(1,3)
+moveDisc(1,2)
+moveDisc(3,2)
+moveDisc(3,1)
+moveDisc(2,1)
+moveDisc(3,2)
+moveDisc(1,3)
+moveDisc(1,2)
+moveDisc(3,2)
+moveDisc(1,3)
+moveDisc(2,1)
+moveDisc(2,3)
+moveDisc(1,3)
+moveDisc(2,1)
+moveDisc(3,2)
+moveDisc(3,1)
+moveDisc(2,1)
+moveDisc(2,3)
+moveDisc(1,3)
+moveDisc(1,2)
+moveDisc(3,2)
+moveDisc(1,3)
+moveDisc(2,1)
+moveDisc(2,3)
+moveDisc(1,3)
