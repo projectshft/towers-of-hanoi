@@ -24,7 +24,7 @@ board.forEach((e ,i) => boardState[`peg${i + 1}`] = board[i]);
 const moveDiscValidator = function(from, to) {
   const fromPeg = boardState[`peg${from}`]
   const toPeg = boardState[`peg${to}`]
-  //add more rigid testing for parameters 
+
   if(typeof(from) !== 'number' || typeof(to) !== 'number') {
     console.log('Only number accepted')
     return false;
@@ -58,6 +58,8 @@ const moveDisc = function(from, to) {
   if(moveDiscValidator(from, to)) {
     let disc = boardState[`peg${from}`].pop();
     boardState[`peg${to}`].push(disc);
+    console.log(board)
+    draw();
   }
   board.forEach(element => {
     let printArray = element.map(e => `${e}`)
@@ -79,18 +81,50 @@ const checkWinner = function() {
 }
 
 
-// const solveTower = function() {
-
-// }
+const buttonArrayDiv = document.getElementById('button-array')
 
 
 
-/* conditions of moves:
---can move a smaller disc onto a larger disc or an empty peg
---cannot move from and empty peg.  
---cannot move a larger disc onta a smaller disc
---cannot move from and to the same peg
---must be within the range of the size of the board
---must only be a number
---must be whole number
-*/
+
+
+
+
+let width = 1000;
+let height = 300;
+
+
+
+
+
+function setup() {
+  createCanvas(width, height);
+  noLoop();
+}
+
+function draw() {
+  background(220);
+
+  push()
+  translate(0, height/2); 
+  scale(1,-1)
+
+
+
+  for(i=0; i<board.length; i++) {
+    rect((i*150) + (width/(numOfPegs + 1)) - 5, -40, 10, 75)
+  }
+
+  for (i=0; i<board.length; i++){
+    for(j=board[i].length; j>=0; j--) {
+      if (typeof(board[i][j]) === 'number') {
+        const discWidth = ((board[i][j]+1) * 20)
+        const discHeight = 10;
+        console.log(discWidth)
+        rect((((i*150)+(150 - (discWidth/2))) - 150) + width/(numOfPegs + 1), ((j+1) * 10) - 50, discWidth, discHeight, 4)
+      }  
+    }
+  }
+  pop()
+  
+
+}
