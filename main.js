@@ -1,5 +1,7 @@
 //Towers of Hanoi Parsity Eval
 
+//need to add limits to the size of board and number of pegs
+
 let numOfPegs = 3
 let numOfDiscs = 5
 
@@ -80,47 +82,36 @@ const checkWinner = function() {
   }
 }
 
-
-const buttonArrayDiv = document.getElementById('button-array')
-
-
-
-
-
-
-
-let width = 1000;
-let height = 300;
-
-
-
-
+//p5 canvas drawing of game
+const canvasWidth = 200 * numOfPegs;
+const canvasHeight = 200;
 
 function setup() {
-  createCanvas(width, height);
+  const canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.parent('p5-canvas')
   noLoop();
 }
 
 function draw() {
-  background(220);
-
+  background('#C4D7E0');
+  /* need to push and pop each time the function is called 
+  so the translate gets reset each call*/
   push()
-  translate(0, height/2); 
-  scale(1,-1)
 
+  translate(0, canvasHeight/2); 
+  scale(1,-1) //needed to flip the disc orientation horizontally
 
-
-  for(i=0; i<board.length; i++) {
-    rect((i*150) + (width/(numOfPegs + 1)) - 5, -40, 10, 75)
-  }
-
+  // for loop drawing the discs and pegs
   for (i=0; i<board.length; i++){
+    //creates pegs
+    rectMode(CENTER)
+    rect((i+1)*200-100, 0, 10, numOfDiscs*15, 2)
     for(j=board[i].length; j>=0; j--) {
+      //creates discs
       if (typeof(board[i][j]) === 'number') {
         const discWidth = ((board[i][j]+1) * 20)
-        const discHeight = 10;
-        console.log(discWidth)
-        rect((((i*150)+(150 - (discWidth/2))) - 150) + width/(numOfPegs + 1), ((j+1) * 10) - 50, discWidth, discHeight, 4)
+        rect((i+1)*200-100, (j * 10) - 33, discWidth, 10, 4)
+        
       }  
     }
   }
