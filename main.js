@@ -19,8 +19,14 @@ const createBoard = function() {
 let board = createBoard();
 
 //dynamically create boardState obj based on size of board
-const boardState = {}
+let boardState = {}
 board.forEach((e ,i) => boardState[`peg${i + 1}`] = board[i]);
+
+const resetBoard = function() {
+  board = createBoard();
+  boardState = {}
+  board.forEach((e ,i) => boardState[`peg${i + 1}`] = board[i]);
+}
 
 //function to validate whether moves are valid
 const moveDiscValidator = function(from, to) {
@@ -79,18 +85,34 @@ const checkWinner = function() {
   for(peg in boardState) {
     if(peg !== 'peg1' && boardState[peg].join() === completedPeg) {
       console.log('Winner Winner Chicken Dinner!!');
-      board = createBoard();
+      resetBoard();
     }
     
   }
 }
+
+
+function selectPegsDiscs(selectObject) {
+  if(selectObject.name === 'pegs') {
+    numOfPegs = +selectObject.value
+    resetBoard();
+    setup();
+    draw();
+  } else if(selectObject.name === 'discs') {
+    numOfDiscs = +selectObject.value
+    resetBoard();
+    setup();
+    draw();
+  }
+}
+
 
 //p5 canvas drawing of game
 const canvasWidth = 200 * numOfPegs;
 const canvasHeight = 200;
 
 function setup() {
-  const canvas = createCanvas(canvasWidth, canvasHeight);
+  const canvas = createCanvas(200*numOfPegs, canvasHeight);
   canvas.parent('p5-canvas')
   noLoop();
 }
@@ -108,7 +130,7 @@ function draw() {
   for (i=0; i<board.length; i++){
     //creates pegs
     rectMode(CENTER)
-    rect((i+1)*200-100, 0, 10, numOfDiscs*15, 2)
+    rect((i+1)*200-100, 0, 10, 75, 2)
     for(j=board[i].length; j>=0; j--) {
       //creates discs
       if (typeof(board[i][j]) === 'number') {
