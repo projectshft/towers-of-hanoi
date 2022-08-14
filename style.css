@@ -4,3 +4,39 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+}
+
+header {
+  display: flex;
+  text-align: center;
+  background-color: #4abdac;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+#game-area {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#select-area {
+  display: flex;
+}
+
+.selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}

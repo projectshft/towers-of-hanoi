@@ -27,6 +27,7 @@ const moveDiscValidator = function(from, to) {
   const fromPeg = boardState[`peg${from}`]
   const toPeg = boardState[`peg${to}`]
 
+  //input validations
   if(typeof(from) !== 'number' || typeof(to) !== 'number') {
     console.log('Only number accepted')
     return false;
@@ -37,6 +38,8 @@ const moveDiscValidator = function(from, to) {
     console.log(`Please only choose pegs within the range of 1 - ${numOfPegs}.`)
     return false;
   }
+
+  //move type validations
   if(toPeg.length === 0) {
     console.log('you moved to an empty peg.  The updated board is:')
     return true;
@@ -93,7 +96,7 @@ function setup() {
 }
 
 function draw() {
-  background('#C4D7E0');
+  background('#DFDCE3');
   /* need to push and pop each time the function is called 
   so the translate gets reset each call*/
   push()

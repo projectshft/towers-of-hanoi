@@ -11,13 +11,46 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Tower of Hanoi</title>
   </head>
   <body>
-    <h1>Tower of Hanoi</h1>
-    <div id="p5-canvas"></div>
-    <div id="button-array">
-      <button>hello</button>
+    <header id="header">
+      <h1>Tower of Honai</h1>
+    </header>
+    <div id="game-area">
+      <p><em>Selecting new board size will reset game!</em></p>
+      <div id="select-area">
+        <div class="selection">
+          <h5>Number of Pegs</h5>
+          <select name="pegs" id="pegs" onChange="selectPegs(this)">
+            <option value="1">1</option>
+            <option value="1">2</option>
+            <option value="1" selected>3</option>
+            <option value="1">4</option>
+            <option value="1">5</option>
+          </select>
+        </div>
+        <div class="selection">
+          <h5>Number of Pegs</h5>
+          <select name="discs" id="discs" onChange="selectDiscs(this)">
+            <option value="1">1</option>
+            <option value="1">2</option>
+            <option value="1">3</option>
+            <option value="1">4</option>
+            <option value="1" selected>5</option>
+          </select>
+        </div>
+        <div id="select-discs"></div>
+      </div>
+      <div id="p5-canvas"></div>
+      <div id="button-array"></div>
     </div>
   </body>
 </html>
