@@ -206,13 +206,17 @@ const moveDiscButton = function() {
   
   
   for(let i of gameButton) {
+  
     i.addEventListener('click', function(){
       if(buttonCounter === 1){
         from = +i.id
         buttonCounter++;
+        console.log('first', from)
       } else if (buttonCounter === 2) {
         to = +i.id;
+        console.log('first', from, to);
         buttonCounter = 1;
+        moveDisc(from, to);
       }
     })
   }
