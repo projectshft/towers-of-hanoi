@@ -122,11 +122,15 @@ function selectPegsDiscs(selectObject) {
     resetBoard();
     setup();
     draw();
+    createGameButtons();
+    moveDiscButton()
   } else if(selectObject.name === 'discs') {
     numOfDiscs = +selectObject.value
     resetBoard();
     setup();
     draw();
+    createGameButtons();
+    moveDiscButton()
   }
 }
 
@@ -166,3 +170,52 @@ function draw() {
 }
 
 
+//buttons to play game 
+
+const buttonAreaDiv = document.getElementById('button-area');
+
+let createGameButtons = function() {
+    for(i=0; i<5; i++) {
+      let pegButton = document.querySelector('.peg-button');
+      if (pegButton !== null) {
+        pegButton.remove();
+      }
+    }
+  
+
+  for(i=1; i<=numOfPegs; i++){
+    let pegButton = document.createElement('button');
+    pegButton.classList.add(`peg-button`)
+    pegButton.setAttribute('id', i)
+    pegButton.innerHTML = `PEG ${i}`
+    buttonAreaDiv.appendChild(pegButton)
+  }
+}
+
+createGameButtons();
+
+
+
+
+const moveDiscButton = function() {
+  let buttonCounter = 1;
+  let from = null;
+  let to = null;
+  
+  let gameButton = document.querySelectorAll('.peg-button');
+  
+  
+  for(let i of gameButton) {
+    i.addEventListener('click', function(){
+      if(buttonCounter === 1){
+        from = +i.id
+        buttonCounter++;
+      } else if (buttonCounter === 2) {
+        to = +i.id;
+        buttonCounter = 1;
+      }
+    })
+  }
+}
+
+moveDiscButton()

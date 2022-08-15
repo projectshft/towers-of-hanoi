@@ -8,12 +8,12 @@ body {
 body {
   height: 100vh;
   font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
 }
 
 header {
   display: flex;
   text-align: center;
+  text-transform: uppercase;
   background-color: #4abdac;
   justify-content: center;
 }
@@ -43,4 +43,14 @@ h1 {
 
 #reset-button {
   margin: 2rem;
+}
+
+.peg-button {
+  margin: 2rem 75px;
+}
+
+.move-button-color {
+  background-color: #fc4a1a;
+  color: white;
+  border: none;
 }
