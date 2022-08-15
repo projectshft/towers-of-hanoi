@@ -40,3 +40,7 @@ h1 {
   align-items: center;
   margin: 2rem;
 }
+
+#reset-button {
+  margin: 2rem;
+}

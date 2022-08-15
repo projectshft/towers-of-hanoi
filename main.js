@@ -1,9 +1,20 @@
-//Towers of Hanoi Parsity Eval
+//TOWER OF HONAI PARSITY EVAL #1 | RYAN ROBERTSON | AUG 14, 2022
 
-//need to add limits to the size of board and number of pegs
 
-let numOfPegs = 3
-let numOfDiscs = 5
+/*
+
+ - Want to add functionality to make moves in the UI of the webpage, but ran out of time.
+ - Would like to add color to discs.  Having trouble the color stick to the disc whenver a move is made
+ 
+ */
+
+ 
+
+
+//initial values that will populate the board
+let numOfPegs = 3;
+let numOfDiscs = 5; 
+
 
 //create board array dynamically
 const createBoard = function() {
@@ -18,15 +29,26 @@ const createBoard = function() {
 }
 let board = createBoard();
 
+
 //dynamically create boardState obj based on size of board
 let boardState = {}
 board.forEach((e ,i) => boardState[`peg${i + 1}`] = board[i]);
 
+
+//function to reset state of game
 const resetBoard = function() {
   board = createBoard();
   boardState = {}
   board.forEach((e ,i) => boardState[`peg${i + 1}`] = board[i]);
+  draw();
 }
+
+
+//reset button
+const resetButton = document.getElementById('reset-button')
+resetButton.addEventListener('click', function() {
+  resetBoard();
+})
 
 //function to validate whether moves are valid
 const moveDiscValidator = function(from, to) {
@@ -47,7 +69,7 @@ const moveDiscValidator = function(from, to) {
 
   //move type validations
   if(toPeg.length === 0) {
-    console.log('you moved to an empty peg.  The updated board is:')
+    // console.log('you moved to an empty peg.  The updated board is:')
     return true;
   } else if(from === to) {
     console.log('you must move the disc to a different peg than the current')
@@ -56,7 +78,7 @@ const moveDiscValidator = function(from, to) {
     console.log('you must move from a peg that has a disc')
     return false;
   } else if(fromPeg[fromPeg.length - 1] < toPeg[toPeg.length -1]) {
-    console.log('That move is valid.  The updated board is:')
+    // console.log('That move is valid.  The updated board is:')
     return true;
   } else {
     console.log('You cannot move a larger disc onto a smaller')
@@ -64,12 +86,13 @@ const moveDiscValidator = function(from, to) {
   }
 }
 
+
+
 //function to play the game
 const moveDisc = function(from, to) {
   if(moveDiscValidator(from, to)) {
     let disc = boardState[`peg${from}`].pop();
     boardState[`peg${to}`].push(disc);
-    console.log(board)
     draw();
   }
   board.forEach(element => {
@@ -80,6 +103,8 @@ const moveDisc = function(from, to) {
 }
 
 
+
+//will run at the end of each move to determine if game is complete
 const checkWinner = function() {
   const completedPeg = [...Array(numOfDiscs).keys()].map(x => x + 1).sort((a,b) => b - a).join();
   for(peg in boardState) {
@@ -87,11 +112,10 @@ const checkWinner = function() {
       console.log('Winner Winner Chicken Dinner!!');
       resetBoard();
     }
-    
   }
 }
 
-
+//theres a better way to do this.. need to work on
 function selectPegsDiscs(selectObject) {
   if(selectObject.name === 'pegs') {
     numOfPegs = +selectObject.value
@@ -107,23 +131,22 @@ function selectPegsDiscs(selectObject) {
 }
 
 
+
 //p5 canvas drawing of game
 const canvasWidth = 200 * numOfPegs;
-const canvasHeight = 200;
 
 function setup() {
-  const canvas = createCanvas(200*numOfPegs, canvasHeight);
+  const canvas = createCanvas(200*numOfPegs, 200);
   canvas.parent('p5-canvas')
   noLoop();
 }
 
 function draw() {
-  background('#DFDCE3');
   /* need to push and pop each time the function is called 
   so the translate gets reset each call*/
+  background('#DFDCE3');
   push()
-
-  translate(0, canvasHeight/2); 
+  translate(0, 200/2); 
   scale(1,-1) //needed to flip the disc orientation horizontally
 
   // for loop drawing the discs and pegs
@@ -136,11 +159,10 @@ function draw() {
       if (typeof(board[i][j]) === 'number') {
         const discWidth = ((board[i][j]+1) * 20)
         rect((i+1)*200-100, (j * 10) - 33, discWidth, 10, 4)
-        
       }  
     }
   }
   pop()
-  
-
 }
+
+
