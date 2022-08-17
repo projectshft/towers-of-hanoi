@@ -206,17 +206,26 @@ const moveDiscButton = function() {
   
   
   for(let i of gameButton) {
-  
     i.addEventListener('click', function(){
+
       if(buttonCounter === 1){
         from = +i.id
-        buttonCounter++;
-        console.log('first', from)
-      } else if (buttonCounter === 2) {
-        to = +i.id;
+        buttonCounter = 2;
+        i.classList.add('move-button-color')
         console.log('first', from, to);
-        buttonCounter = 1;
-        moveDisc(from, to);
+      } else if (buttonCounter === 2) {
+        if(from === +i.id) {
+          document.querySelector('.move-button-color').classList.remove('move-button-color');
+          buttonCounter = 1;
+        } else {
+          to = +i.id;
+          console.log('second', from, to);
+          buttonCounter = 1;
+          document.querySelector('.move-button-color').classList.remove('move-button-color')
+          $('peg-button').animate({backgroundColor: '#FF0000'}, 'slow');          
+          moveDisc(from, to);
+
+        }
       }
     })
   }
