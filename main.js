@@ -1,16 +1,6 @@
 //TOWER OF HONAI PARSITY EVAL #1 | RYAN ROBERTSON | AUG 14, 2022
 
 
-/*
-
- - Want to add functionality to make moves in the UI of the webpage, but ran out of time.
- - Would like to add color to discs.  Having trouble the color stick to the disc whenver a move is made
- 
- */
-
- 
-
-
 //initial values that will populate the board
 let numOfPegs = 3;
 let numOfDiscs = 5; 
@@ -101,7 +91,6 @@ const moveDisc = function(from, to) {
   })
   checkWinner(); 
 }
-
 
 
 //will run at the end of each move to determine if game is complete
@@ -196,7 +185,7 @@ createGameButtons();
 
 
 
-
+//function to run the moveDisc function with button clicks
 const moveDiscButton = function() {
   let buttonCounter = 1;
   let from = null;
@@ -214,15 +203,14 @@ const moveDiscButton = function() {
         i.classList.add('move-button-color')
         console.log('first', from, to);
       } else if (buttonCounter === 2) {
-        if(from === +i.id) {
+        if(from === +i.id) { //condition if selected button is clicked again
           document.querySelector('.move-button-color').classList.remove('move-button-color');
           buttonCounter = 1;
         } else {
           to = +i.id;
           console.log('second', from, to);
           buttonCounter = 1;
-          document.querySelector('.move-button-color').classList.remove('move-button-color')
-          $('peg-button').animate({backgroundColor: '#FF0000'}, 'slow');          
+          document.querySelector('.move-button-color').classList.remove('move-button-color')       
           moveDisc(from, to);
 
         }
