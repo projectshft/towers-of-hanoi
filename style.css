@@ -1,0 +1,57 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  display: flex;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #4abdac;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+
+#game-area {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#select-area {
+  display: flex;
+}
+
+.selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem;
+}
+
+#reset-button {
+  margin: 2rem;
+}
+
+.peg-button {
+  margin: 2rem 75px;
+}
+
+.move-button-color {
+  background-color: #fc4a1a;
+  color: white;
+  border: 1px solid black;
+  border-radius: 2px;
+}

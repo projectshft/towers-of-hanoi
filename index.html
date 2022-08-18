@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="p5.min.js" defer></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="main.js" defer></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Tower of Hanoi</title>
+  </head>
+  <body>
+    <header id="header">
+      <h1>Tower of Honai</h1>
+    </header>
+    <div id="game-area">
+      <p><em>Selecting new board size will reset game!</em></p>
+      <div id="select-area">
+        <div class="selection">
+          <h5>Number of Pegs</h5>
+          <select name="pegs" id="pegs" onChange="selectPegsDiscs(this)">
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="selection">
+          <h5>Number of Discs</h5>
+          <select name="discs" id="discs" onChange="selectPegsDiscs(this)">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected>5</option>
+          </select>
+        </div>
+        <div id="select-discs"></div>
+      </div>
+      <div id="p5-canvas"></div>
+      <div id='button-area'></div>
+      <p>Select PEG to move from, then PEG to move to</p>
+      <button id='reset-button'>RESET GAME</button>
+      </div>
+    </div>
+  </body>
+</html>
