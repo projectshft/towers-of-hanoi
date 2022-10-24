@@ -104,7 +104,6 @@ function NewGameToH (pegs, disks) {
  }
 
   function isMoveValid(from, to, board) {
-    // console.logl errors and successe
     if(from === to) {
       console.log("INVALID MOVE :(")
       console.log("You must move from one disk to another")
@@ -140,26 +139,33 @@ function NewGameToH (pegs, disks) {
       //sets the gameboard back to the initial value
     }
 
-  function checkWinner(board) {
-    //if won
-      //console.log("Yay you win");
-      //resetBoard();
-      //else do nothing? return false?
+  function checkWinner() {
+    let winner = null;
+
+    let firstPegEmpty = gameboard[0].length === 0;
+
+    if(firstPegEmpty) {
+      winner = gameboard.some((peg) => {
+        return peg.length === disks
+      })
+    }
+
+    return winner;
   }
 
-  function updateBoard(from, to, board) {
+  function updateBoard(from, to) {
     let diskMoved = gameboard[from].pop()
     gameboard[to].push(diskMoved);
   }
 
   function moveDisk(from, to) {
-    if(isMoveValid(from - 1, to - 1, board)){
+    if(isMoveValid(from - 1, to - 1)){
       console.log("This move is allowed.");
-      updateBoard(from - 1, to - 1, board);
-      checkWinner(board);
+      updateBoard(from - 1, to - 1);
+      checkWinner();
     } else {
       console.log("Invalid Move");
-      displayBoard(board)
+      displayBoard()
     }
   }
 
