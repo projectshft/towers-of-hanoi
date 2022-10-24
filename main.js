@@ -70,6 +70,105 @@
 
 //constuctor function to put it all into and make instances of the game
 
-function NewGameToH () {
-  
+function NewGameToH (pegs, disks) {
+  function getNumberOfPegs() {
+    console.log(this.pegs);
+    return this.pegs;
+  }
+
+  function getNumberOfDisks() {
+    console.log(this.disks);
+    return this.disks;
+  }
+
+  let startingArray = [];
+  for (let i = disks; i > 0; i--) {
+    startingArray.push(i);
+  }
+
+  let gameboard = [startingArray];
+
+  for (let i = 1; i < pegs; i++) {
+    gameboard.push([]);
+  }
+
+  function displayBoard() {
+    gameboard.forEach((peg) => {
+      let outputStr = '----- ';
+      peg.forEach((disk) => {
+        outputStr += disk + ' ';
+      })
+      console.log(outputStr)
+      console.log('')//so that the console does not group outputs
+    })
+ }
+
+  function isMoveValid(from, to, board) {
+    // console.logl errors and successe
+    if(from === to) {
+      console.log("INVALID MOVE :(")
+      console.log("You must move from one disk to another")
+      console.log("Make sure you only put smaller disks on top of larger ones")
+      return false;
+    }
+
+    if( (gameboard[from].length !== 0) && //if peg that is being moved from has disks and 
+        (gameboard[to].length === 0) ){   //the peg we are moving to has no disk its valid
+      return true;
+    }
+
+    if (gameboard[from].length === 0) { //the peg we are moving from is empty
+      console.log("INVALID MOVE :(");
+      console.log("The peg you are trying to move from is currently empty.")
+      return false;
+    }
+
+    let diskFrom = gameboard[from]
+                                  .at(gameboard[from].length - 1);
+    let diskTo = gameboard[to]
+                              .at(gameboard[to].length - 1);
+    if(diskFrom < diskTo) {
+      return true;
+    }else {
+      console.log("INVALID MOVE :(");
+      console.log("You can only put smaller disks on to larger disks")
+      return false;
+    }
+    }
+    
+    function resetBoard() {
+      //sets the gameboard back to the initial value
+    }
+
+  function checkWinner(board) {
+    //if won
+      //console.log("Yay you win");
+      //resetBoard();
+      //else do nothing? return false?
+  }
+
+  function updateBoard(from, to, board) {
+    let diskMoved = gameboard[from].pop()
+    gameboard[to].push(diskMoved);
+  }
+
+  function moveDisk(from, to) {
+    if(isMoveValid(from - 1, to - 1, board)){
+      console.log("This move is allowed.");
+      updateBoard(from - 1, to - 1, board);
+      checkWinner(board);
+    } else {
+      console.log("Invalid Move");
+      displayBoard(board)
+    }
+  }
+
+  return {
+    getNumberOfDisks: getNumberOfDisks,
+    getNumberOfPegs: getNumberOfPegs,
+    moveDisk: moveDisk
+  }
 }
+
+
+let newGame = NewGameToH(3, 5);
