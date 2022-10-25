@@ -101,14 +101,12 @@ TowersGame.prototype.updateBoard = function (from, to, gameboard) {
 TowersGame.prototype.checkWinner = function (gameboard, disks) {
   let winner = false;
   let firstPegEmpty = gameboard[0].length === 0;
-  console.log(firstPegEmpty);
 
   if (firstPegEmpty) {
     winner = gameboard.some((peg) => {
       return peg.length === disks;
     });
   }
-  console.log("Is winner? " + winner);
   return winner;
 };
 
