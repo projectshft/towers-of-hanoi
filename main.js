@@ -157,6 +157,7 @@ function NewGameToH(pegs, disks) {
 
 let TowersGame = function(pegs, disks) {
   this.gameboard = this.createFreshBoard(pegs, disks)
+  this.startGame(this.createFreshBoard, this.displayBoard);
 }
 
 TowersGame.prototype.createFreshBoard = function (pegs, disks) {
@@ -181,6 +182,42 @@ TowersGame.prototype.displayBoard = function (gameboard) {
     console.log(outputStr);
     console.log(""); //so that the console does not group outputs
   });
+}
+
+TowersGame.prototype.startGame = function (createFreshBoard, displayBoard) {
+  console.log("Welcome to the Towers of Hanoi!");
+  console.log("The rules of the game are simple: ");
+  console.log("   1. You can only move one disk at a time.");
+  console.log(
+    "   2. Disks must be smallest on the bottom, largest on the top. ie you cannot put larger disks on top of smaller ones."
+  );
+  console.log(
+    "   3. The goal of the game is to move the tower, one disk at a time, from one peg to another."
+  );
+  console.log("LET THE GAMES BEGIN");
+
+  createFreshBoard(this.pegs, this.disks);
+  displayBoard(this.gameboard);
+  totalMoves = 0;
+
+  console.log(
+    `The name of your game is 'g1'. Move disks by typing g1.move(from, to).`
+  );
+  console.log(
+    "   'from' represents the peg you are moving from, and 'to' represents the peg you are moving to."
+  );
+  console.log(
+    "    Disks are denoted by numbers. Larger numbers represent larger disks."
+  );
+}
+
+TowersGame.prototype.isMoveValid = function(from, to) {
+  if (from === to) {
+    console.log("INVALID MOVE :(");
+    console.log("You must move from one disk to another");
+    console.log("Make sure you only put smaller disks on top of larger ones");
+    return false;
+  }
 }
 
 let gameObj = new TowersGame(3,3);
