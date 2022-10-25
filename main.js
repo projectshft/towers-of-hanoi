@@ -172,4 +172,15 @@ TowersGame.prototype.createFreshBoard = function (pegs, disks) {
    return gameboard;
 }
 
+TowersGame.prototype.displayBoard = function (gameboard) {
+  gameboard.forEach((peg) => {
+    let outputStr = "----- ";
+    peg.forEach((disk) => {
+      outputStr += disk + " ";
+    });
+    console.log(outputStr);
+    console.log(""); //so that the console does not group outputs
+  });
+}
+
 let gameObj = new TowersGame(3,3);
