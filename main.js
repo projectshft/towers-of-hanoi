@@ -155,4 +155,21 @@ function NewGameToH(pegs, disks) {
   };
 }
 
-let g1 = NewGameToH(3, 3);
+let TowersGame = function(pegs, disks) {
+  this.gameboard = this.createFreshBoard(pegs, disks)
+}
+
+TowersGame.prototype.createFreshBoard = function (pegs, disks) {
+  let gameboard = [];
+  let startingArray = [];
+  for (let i = disks; i > 0; i--) {
+    startingArray.push(i);
+  }
+  gameboard = [startingArray];
+  for (let i = 1; i < pegs; i++) {
+    gameboard.push([]);
+  }
+   return gameboard;
+}
+
+let gameObj = new TowersGame(3,3);
