@@ -19,7 +19,7 @@ function NewGameToH(pegs, disks) {
     for (let i = 1; i < pegs; i++) {
       gameboard.push([]);
     }
-     console.log(gameboard)
+    console.log(gameboard);
   }
 
   let totalMoves;
@@ -155,10 +155,12 @@ function NewGameToH(pegs, disks) {
   };
 }
 
-let TowersGame = function(pegs, disks) {
-  this.gameboard = this.createFreshBoard(pegs, disks)
+let TowersGame = function (pegs, disks) {
+  this.pegs = pegs;
+  this.disks = disks;
+  this.gameboard = this.createFreshBoard(pegs, disks);
   this.startGame(this.createFreshBoard, this.displayBoard);
-}
+};
 
 TowersGame.prototype.createFreshBoard = function (pegs, disks) {
   let gameboard = [];
@@ -170,19 +172,22 @@ TowersGame.prototype.createFreshBoard = function (pegs, disks) {
   for (let i = 1; i < pegs; i++) {
     gameboard.push([]);
   }
-   return gameboard;
-}
+  return gameboard; //2D array of length === pegs
+};
 
 TowersGame.prototype.displayBoard = function (gameboard) {
+  let pegNum = 1;
   gameboard.forEach((peg) => {
-    let outputStr = "----- ";
+
+    let outputStr = pegNum + "----- ";
+    pegNum++;
     peg.forEach((disk) => {
       outputStr += disk + " ";
     });
-    console.log(outputStr);
-    console.log(""); //so that the console does not group outputs
+    console.log(outputStr, "\n");
+    // console.log(""); //so that the console does not group outputs
   });
-}
+};
 
 TowersGame.prototype.startGame = function (createFreshBoard, displayBoard) {
   console.log("Welcome to the Towers of Hanoi!");
@@ -209,9 +214,9 @@ TowersGame.prototype.startGame = function (createFreshBoard, displayBoard) {
   console.log(
     "    Disks are denoted by numbers. Larger numbers represent larger disks."
   );
-}
+};
 
-TowersGame.prototype.isMoveValid = function(from, to) {
+TowersGame.prototype.isMoveValid = function (from, to, gameboard) {
   if (from === to) {
     console.log("INVALID MOVE :(");
     console.log("You must move from one disk to another");
@@ -243,6 +248,43 @@ TowersGame.prototype.isMoveValid = function(from, to) {
     console.log("You can only put smaller disks on to larger disks");
     return false;
   }
-}
+};
 
-let gameObj = new TowersGame(3,3);
+TowersGame.prototype.updateBoard = function (from, to, gameboard) {
+  let diskMoved = gameboard[from].pop();
+  gameboard[to].push(diskMoved);
+};
+
+TowersGame.prototype.checkWinner = function (gameboard, disks) {
+  let winner = null;
+  let firstPegEmpty = gameboard[0].length === 0;
+  console.log(firstPegEmpty);
+
+  if (firstPegEmpty) {
+    winner = gameboard.some((peg) => {
+      return peg.length === disks;
+    });
+  }
+  console.log("Is winner? " + winner);
+  return winner;
+};
+
+TowersGame.prototype.moveDisk = function (from, to) {
+  totalMoves++;
+  console.log("Total Moves: " + totalMoves);
+  if (this.isMoveValid(from - 1, to - 1, this.gameboard)) {
+    this.updateBoard(from - 1, to - 1, this.gameboard);
+  } else {
+    this.displayBoard(this.gameboard);
+  }
+
+  if (this.checkWinner(this.gameboard, this.disks)) {
+    console.log("Winner, winner, chicken dinner!");
+    this.resetBoard();
+  } else {
+    console.log("Please make another move.");
+    this.displayBoard(this.gameboard);
+  }
+};
+
+let gameObj = new TowersGame(3, 3);
