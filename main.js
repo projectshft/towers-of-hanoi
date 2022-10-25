@@ -218,6 +218,31 @@ TowersGame.prototype.isMoveValid = function(from, to) {
     console.log("Make sure you only put smaller disks on top of larger ones");
     return false;
   }
+
+  if (
+    gameboard[from].length !== 0 && //if peg that is being moved from has disks and
+    gameboard[to].length === 0
+  ) {
+    //the peg we are moving to has no disk its valid
+    return true;
+  }
+
+  if (gameboard[from].length === 0) {
+    //the peg we are moving from is empty
+    console.log("INVALID MOVE :(");
+    console.log("The peg you are trying to move from is currently empty.");
+    return false;
+  }
+
+  let diskFrom = gameboard[from].at(gameboard[from].length - 1);
+  let diskTo = gameboard[to].at(gameboard[to].length - 1);
+  if (diskFrom < diskTo) {
+    return true;
+  } else {
+    console.log("INVALID MOVE :(");
+    console.log("You can only put smaller disks on to larger disks");
+    return false;
+  }
 }
 
 let gameObj = new TowersGame(3,3);
