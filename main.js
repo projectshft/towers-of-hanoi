@@ -86,10 +86,30 @@ function NewGameToH (pegs, disks) {
     startingArray.push(i);
   }
 
-  let gameboard = [startingArray];
+  let gameboard;
+  function createFreshBoard() {
+    gameboard = [startingArray];
+    for (let i = 1; i < pegs; i++) {
+     gameboard.push([]);
+  }
+}
 
-  for (let i = 1; i < pegs; i++) {
-    gameboard.push([]);
+let totalMoves;
+  function startGame() {
+    console.log("Welcome to the Towers of Hanoi!");
+    console.log("The rules of the game are simple: ")
+    console.log("   1. You can only move one disk at a time.")
+    console.log("   2. Disks must be smallest on the bottom, largest on the top. ie you cannot put larger disks on top of smaller ones.")
+    console.log("   3. The goal of the game is to move the tower, one disk at a time, from one peg to another.")
+    console.log("LET THE GAMES BEGIN");
+
+    createFreshBoard();
+    displayBoard();
+    totalMoves = 0;
+
+    console.log(`The name of your game is ${this}. Move disks by typing ${this}.move(from, to).`);
+    console.log("   'from' represents the peg you are moving from, and 'to' represents the peg you are moving to.");
+    console.log("    Disks are denoted by numbers. Larger numbers represent larger disks.")
   }
 
   function displayBoard() {
@@ -103,7 +123,9 @@ function NewGameToH (pegs, disks) {
     })
  }
 
-  function isMoveValid(from, to, board) {
+
+
+  function isMoveValid(from, to) {
     if(from === to) {
       console.log("INVALID MOVE :(")
       console.log("You must move from one disk to another")
@@ -135,13 +157,20 @@ function NewGameToH (pegs, disks) {
     }
     }
     
+
     function resetBoard() {
-      //sets the gameboard back to the initial value
+      let playAgain = prompt("Would you like to play again? \n \"Y\" or \"N\"")
+      if(playAgain === "Y" || playAgain === "y" || playAgain ==="Yes" || playAgain === "yes") {
+        startGame();
+        console.log("The gameboard has been reset")
+      }else {
+        console.log("Thanks for playing!");
+      }
     }
+
 
   function checkWinner() {
     let winner = null;
-
     let firstPegEmpty = gameboard[0].length === 0;
 
     if(firstPegEmpty) {
@@ -159,16 +188,26 @@ function NewGameToH (pegs, disks) {
   }
 
   function moveDisk(from, to) {
+    totalMoves ++;
+    console.log("Total Moves: ")
     if(isMoveValid(from - 1, to - 1)){
       console.log("This move is allowed.");
       updateBoard(from - 1, to - 1);
-      checkWinner();
     } else {
-      console.log("Invalid Move");
+      displayBoard();
+    }
+
+    if(checkWinner()) {
+      console.log("Winner, winner, chicken dinner!");
+      resetBoard();
+    }else {
+      console.log("Please make another move.")
       displayBoard()
     }
   }
 
+  startGame();
+  
   return {
     getNumberOfDisks: getNumberOfDisks,
     getNumberOfPegs: getNumberOfPegs,
@@ -177,4 +216,4 @@ function NewGameToH (pegs, disks) {
 }
 
 
-let newGame = NewGameToH(3, 5);
+let g1 = NewGameToH(3, 3);
