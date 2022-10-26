@@ -58,20 +58,19 @@ else {
 }
 }
 
-
 function logGame(){
 var viz = board.map((a)=>{
     return '---' + a
 })
 console.table(viz)
 }
+
 function checkWinner(){
     if(board[2].length === 5 || board[1].length === 4){
         alert('You won! Omg so good! Wow..')
         location.reload()
     }
 }
-
 
 console.log('Welcome to the Towers of Hanoi. Use the moveDisc(disc, peg) function to play. Good luck.. ')
 logGame();
