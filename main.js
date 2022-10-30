@@ -4,59 +4,57 @@ var board = [
     [],
 ]
 
+function findDiscArr(disc, trueIndex) {
+    //find which array the users disc comes from
+    emptyArr = [];
+    board.forEach((arr)=>{
+    var index = arr.indexOf(disc)
+    emptyArr.push(index)
+    if (index !== -1){
+        trueIndex = index
+    }   
+    })
+    var discArrIndex= emptyArr.indexOf(trueIndex)
+    discArr=board[discArrIndex]
+    }
+
+function isValidMove(disc, peg, discArr, topDisc) {
+    // Determining if the move is valid 
+    if(isNaN(peg) || peg<1 || peg>3){ 
+       return false
+    }
+    if(isNaN(disc) || disc<1 || disc>5){
+        return false
+    }
+    if (disc !== discArr[discArr.length-1]){
+        return false
+    }
+    if(topDisc<=disc){
+        return false
+    }
+    return true 
+}
+
 function moveDisc(disc, peg){
-if(isNaN(peg) || peg<1 || peg>3){
-    console.log('Peg must be a value between 1-3.')
+    var pegNum = peg-1
+    var pegArr = board[pegNum]
+    var topDisc = pegArr[pegArr.length-1]
+    var trueIndex;
+    findDiscArr(disc, trueIndex)
+    var isValid = isValidMove(disc, peg, discArr, topDisc);
+    if (!isValid) { 
+    console.log('Invalid move!! ILLEGAL ')
     logGame()
     return
+    // continue
 }
-else if(isNaN(disc) || disc<1 || disc>5){
-    console.log('Disc must be a value between 1-5.')
-    logGame()
-    return
-}
-var pegNum = peg-1
-var pegArr = board[pegNum]
-var topDisc = pegArr[pegArr.length-1]
-var trueIndex;
-emptyArr = [];
-function findDiscArr() {
-board.forEach((arr)=>{
-var index = arr.indexOf(disc)
-emptyArr.push(index)
-if (index !== -1){
-    trueIndex = index
-}   
-})
-var discArrIndex= emptyArr.indexOf(trueIndex)
-discArr=board[discArrIndex]
-}
-findDiscArr()
-if (disc !== discArr[discArr.length-1]){
-    console.log('You can only move the last ring on each peg.')
-    logGame()
-    return
-}
-if(topDisc===undefined || topDisc>disc){
     pegArr.push(disc)
     discArr.splice(discArr.length-1,1)
     console.log('Succesful move. The board is now:')
     logGame()
     checkWinner()
-    return
 }
 
-else if(topDisc<=disc){
-    console.log('You cannot move a larger disc on top of a smaller one.')
-    logGame()
-    return
-}
-else {
-    console.log('What did you even just do? No..')
-    logGame()
-    return
-}
-}
 
 function logGame(){
 var viz = board.map((a)=>{
@@ -74,5 +72,3 @@ function checkWinner(){
 
 console.log('Welcome to the Towers of Hanoi. Use the moveDisc(disc, peg) function to play. Good luck.. ')
 logGame();
-
-
