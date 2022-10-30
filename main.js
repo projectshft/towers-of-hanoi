@@ -58,11 +58,12 @@ const towersOfHanoi = {
 const victory = towersOfHanoi.board[0].length;
 let count = 0;
 
-towersOfHanoi.startGame();
-towersOfHanoi.moveDisc(1, 3);
-towersOfHanoi.moveDisc(1, 2);
-towersOfHanoi.moveDisc(3, 2);
-towersOfHanoi.moveDisc(1, 3);
-towersOfHanoi.moveDisc(2, 1);
-towersOfHanoi.moveDisc(2, 3);
-towersOfHanoi.moveDisc(1, 3);
+// Example of a victorious game.
+// towersOfHanoi.startGame();
+// towersOfHanoi.moveDisc(1, 3);
+// towersOfHanoi.moveDisc(1, 2);
+// towersOfHanoi.moveDisc(3, 2);
+// towersOfHanoi.moveDisc(1, 3);
+// towersOfHanoi.moveDisc(2, 1);
+// towersOfHanoi.moveDisc(2, 3);
+// towersOfHanoi.moveDisc(1, 3);
