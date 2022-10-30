@@ -1,0 +1,206 @@
+body{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: Inter;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.gameboard{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+h1{
+  padding-left: 30px;
+  align-items: center;
+}
+p:first-child:first-letter {
+  float: left;
+  line-height: 40px;
+  font-size: 50px;
+  font-family: Inter;
+  padding-right: 8px;
+  padding-bottom: 0px;
+}
+.instructions{
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 14px;
+}
+.game{
+  padding: 0px 30px 0px 30px;
+}
+#text{
+  color: orangered;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.pegs{
+  display: flex;
+  flex: row;
+  width: 100%;
+  padding-top: 10px;
+} 
+.pegOne, 
+.pegTwo, 
+.pegThree{
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 50px;
+  height: 150px;
+  line-height: 50px;
+  border: 2px solid black;
+  text-align: center;
+  vertical-align: center;
+}
+.starting-numbers{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding-left: 0;
+  font-size: 16px;
+  line-height: 16px;
+}
+li{
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  align-items: center;
+  list-style: none;
+  margin: 0 auto;
+}
+input{
+  width: 55px;
+  padding: 5px 15px;
+  font-size: 11px;
+}
+.move{
+  font-size: 12px;
+}
+#reset{
+  background-color: gainsboro;
+}
+#go{
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  font-weight: bolder;
+  padding: 5px;
+  text-transform: uppercase;
+}
+.move-message{
+  color: orangered;
+  font-size: 14px;
+}
+button{
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: black;
+  margin: 30px auto;
+  cursor: pointer;
+}
+button:hover{
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  font-weight: bolder; 
+}
+.buttons{
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ---------- cheer modal ----------- */
+#cheer{
+  font-size: 20px;
+  background-color: black;
+}
+.cheer-modal{
+  display: none;
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0%;
+  margin: auto 0;
+  background-color: white;
+}
+.cheer-modal p{
+  font-size: 30px;
+}
+.cheer-content{
+  width: 80%;
+  height: 60%;
+  position: fixed;
+  z-index: 1;
+  top: 10%;
+  left: 5%;
+  background-color: white;
+  color: black;
+  border-radius: 25px;
+}
+.cheer-modal .citation{
+  font-size: 14px;
+  font-style: italic;
+  float: right;
+  padding-top: 20%;
+}
+img{
+  float: right;
+  border-radius: 40%;
+  background-color: aquamarine;
+}
+
+/* ---------- solution modal ----------- */
+.solution-modal{
+  width:100%;
+  height: 100%;
+  overflow: auto;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+}
+.solution-modal-content{
+  background-color:  white;
+  margin: 0px auto;
+  width: 100%;
+  height: 100%;
+  color: black;
+  font-size: 12px;
+  display: flex;
+  position: absolute;
+}
+.steps{
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.solution-modal-content h1{
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: bolder;
+  background-color: turquoise;
+}
+#close{
+  font-size: 30px;
+  top: 0;
+  right: 0;
+  position: relative;
+  cursor: pointer;
+}
+#close:hover{
+  cursor: pointer;
+  color: hotpink;
+}

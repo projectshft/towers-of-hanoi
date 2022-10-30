@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Eval 1: Tower of Hanoi</title>
+</head>
+<body>
+
+  <h1>Tower of Hanoi 🗼</h1>  
+
+  <div class="gameboard">
+    <div class="game">
+      <div class="instructions">
+        <p>Welcome to the <span id="text">Tower of Hanoi</span> game. The rectangles below represent three pegs. Each number represents a disc with the smallest disc = 1 and the largest = 5. Move all five discs from the first peg to the third peg by entering the number of the peg you want the disc to move from, and the peg you want it to move to. Only the top disc will be moved and you can not place a larger disc (number) on top of a smaller one.  </p>
+      </div>
+
+      <div class="move">Move from
+        <input type="text" placeholder="1, 2, 3, 4, 5" class="input" id="fromPeg input">
+         to 
+         <input type="text" placeholder="1, 2, 3, 4, 5" class="input" id="toPeg input">
+         <button id="go">GO</button>
+      </div>
+
+      <div class="pegs">
+        <div class="pegOne">
+          <div class="pegOneContent"></div>
+          <ul class="starting-numbers">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>  
+          </ul>
+        </div>
+        <div class="pegTwo">
+          <div class="pegTwoContent"></div>
+        </div>
+        <div class="pegThree">
+          <div class="pegThreeContent"></div>
+        </div>
+      </div>
+
+      <div class="move-message"></div>
+
+<!--------------- cheer modal ------------------->
+    <div class="cheer-modal">
+      <div class="cheer-content">
+        <span id="close">&times;</span>
+        <p>"Keep going! 🏃🏽 Just a few more steps to solve the puzzle!" </p>
+        <img src="inventor.png" width="150px" height="200px">
+        <p class="citation">- Édouard Lucas, Tower of Hanoi inventor</p>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button id="cheer">👏</button>
+      <button id="add">&#8593 discs</button>
+      <button id="remove">&#8595 discs</button>
+      <button id="answer">answer</button>
+      <button id="reset"><img src="reset.jpg" width="25px" height="25px"></button>
+    </div>
+    
+<!--------------- solution modal ------------------->
+    <div class="solution-modal">
+      <div class="solution-modal-content">
+        <div class="steps">
+          <h1>solution</h1>
+            <p>Step 1:  Move disc from peg 1 to peg 3</p> 
+            <p>Step 2:  Move disc from peg 1 to peg 2</p>
+            <p>Step 3:  Move disc from peg 3 to peg 2</p>
+            <p>Step 4:  Move disc from peg 1 to peg 3</p>
+            <p>Step 5:  Move disc from peg 2 to peg 1</p> 
+            <p>Step 6:  Move disc from peg 2 to peg 3</p>
+            <p>Step 7:  Move disc from peg 1 to peg 3</p>
+            <p>Step 8:  Move disc from peg 1 to peg 2</p> 
+            <p>Step 9:  Move disc from peg 3 to peg 2</p> 
+            <p>Step 10: Move disc from peg 3 to peg 1</p>
+            <p>Step 11: Move disc from peg 2 to peg 1</p>
+            <p>Step 12: Move disc from peg 3 to peg 2</p>
+            <p>Step 13: Move disc from peg 1 to peg 3</p> 
+            <p>Step 14: Move disc from peg 1 to peg 2</p>
+            <p>Step 15: Move disc from peg 3 to peg 2</p>
+            <p>Step 16: Move disc from peg 1 to peg 3</p>
+            <p>Step 17: Move disc from peg 2 to peg 1</p>  
+            <p>Step 18: Move disc from peg 2 to peg 3</p>
+            <p>Step 19: Move disc from peg 1 to peg 3</p>
+            <p>Step 20: Move disc from peg 2 to peg 1</p>
+            <p>Step 21: Move disc from peg 3 to peg 2</p> 
+            <p>Step 22: Move disc from peg 3 to peg 1</p>
+            <p>Step 23: Move disc from peg 2 to peg 1</p>
+            <p>Step 24: Move disc from peg 2 to peg 3</p>
+            <p>Step 25: Move disc from peg 1 to peg 3</p> 
+            <p>Step 26: Move disc from peg 1 to peg 2</p>
+            <p>Step 27: Move disc from peg 3 to peg 2</p>
+            <p>Step 28: Move disc from peg 1 to peg 3</p>
+            <p>Step 29: Move disc from peg 2 to peg 1</p>
+            <p>Step 30: Move disc from peg 2 to peg 3</p> 
+            <p>Step 31: Move disc from peg 1 to peg 3</p>
+          </div>
+        </div>
+    </div>
+
+  <script src="main.js"></script> 
+ 
+</body>
+</html>
