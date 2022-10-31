@@ -2,14 +2,25 @@ var board = [[5, 4, 3, 2, 1],
 [],
 []];
 
+// var printBoard = board.forEach(element => {
+//   console.log("--- " + element.join(' '));
+// });
+
+// we want to be able to print the board horizontally.  You MUST use a map function at least once to accomplish this part of the assignment.
+var stringBoard = board.map(element => {
+  return "--- " + element.join(' ');
+})
+
+var printBoard = stringBoard.forEach(element => console.log(element));
+
+console.log(printBoard);
+
 var currentBoard = {
   pegOne: board[0],
   pegTwo: board[1],
   pegThree: board[2]
 }
 
-console.log(currentBoard);
-// we want to be able to print the board horizontally.  You MUST use a map function at least once to accomplish this part of the assignment.
 
 function moveDisc(disc, peg) {
   // if disc is larger than the last disc on the peg, throw error - "you cannot move a larger disc on top of a smaller one, board is still:" + show board
