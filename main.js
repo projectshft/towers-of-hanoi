@@ -2,37 +2,30 @@
 
 class Game {
   constructor() {
-    this.peg1 = [5, 4, 3, 2, 1];
-    this.peg2 = [];
-    this.peg3 = [];
+    this.pegs = [[5, 4, 3, 2, 1],[],[]];
   }
 
   logBoard() {
-    console.log("--- " + this.peg1.join(" "));
-    console.log("--- " + this.peg2.join(" "));
-    console.log("--- " + this.peg3.join(" "));
+    this.pegs.map((peg) => { 
+      console.log("--- " + peg.join(" "));
+    })
   }
 
   moveDisk(fromPeg, toPeg) {
-    let pegs = {
-      1: this.peg1,
-      2: this.peg2,
-      3: this.peg3
-    }
-    if (pegs[fromPeg].length === 0) {
+    if (this.pegs[fromPeg - 1].length === 0) {
       console.log("That peg is empty!");
       console.log("The board is still:");
       return this.logBoard();
-    } else if (pegs[fromPeg] === pegs[toPeg]) {
+    } else if (this.pegs[fromPeg - 1] === this.pegs[toPeg - 1]) {
       console.log("Same peg!");
       console.log("The board is still:");
       return this.logBoard();
-    } else if (pegs[fromPeg][pegs[fromPeg].length - 1] > pegs[toPeg][pegs[toPeg].length - 1] && pegs[toPeg].length !== 0) { 
+    } else if (this.pegs[fromPeg - 1][this.pegs[fromPeg - 1].length - 1] > this.pegs[toPeg - 1][this.pegs[toPeg - 1].length - 1] && this.pegs[toPeg - 1].length !== 0) { 
       console.log("Cannot move a larger disc on top of a smaller one, board is still:")
       return this.logBoard()
     } else {
-      let disk = pegs[fromPeg].pop()
-      pegs[toPeg].push(disk)
+      let disk = this.pegs[fromPeg - 1].pop()
+      this.pegs[toPeg - 1].push(disk)
       if (this.checkWinner()) {
         console.log("Congrats! You Win! Play again.")
         return this.logBoard()
@@ -53,10 +46,8 @@ class Game {
   }
 
   checkWinner() {
-    if (this.peg2.toString() === "5,4,3,2,1" || this.peg3.toString() == "5,4,3,2,1") {
-      this.peg1 = [5, 4, 3, 2, 1]
-      this.peg2 = []
-      this.peg3 = []
+    if (this.pegs[1].toString() === "5,4,3,2,1" || this.pegs[2].toString() == "5,4,3,2,1") {
+      this.pegs = [[5, 4, 3, 2, 1],[],[]]
       return true
     } else {
       return false
@@ -67,3 +58,4 @@ class Game {
 let Towers = new Game;
 Towers.logBoard()
 Towers.solution()
+
