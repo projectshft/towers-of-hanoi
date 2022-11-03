@@ -74,7 +74,19 @@ function moveDisc(disc, peg) {
       } 
       }
     }
-    console.log(checkWinner());
+    checkWinner();
+    if (currentBoard.hasWinner) {
+      console.log("Victory!")
+      board = [
+        [5, 4, 3, 2, 1],
+        [],
+        []
+      ];
+      currentBoard.numberOfPegs = 3;
+      currentBoard.numberOfDiscs = 5;
+      currentBoard.hasGameStarted = false;
+      currentBoard.hasWinner = false;
+    }
   }
 
 
@@ -88,10 +100,4 @@ function checkWinner() {
     currentBoard.hasWinner = true;
   }
   });
-  
-  if (currentBoard.hasWinner) {
-    console.log("Victory!")
-  } else {
-    console.log("The game has not been won, keep going!");
-  }
 }
