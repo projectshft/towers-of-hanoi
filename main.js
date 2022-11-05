@@ -46,3 +46,19 @@ console.log(gameState.board[2]); // peg3
 
  // test function
 console.log("Function Test: ", gameState.moveDisc(1, 2));
+
+
+// USING MAP FOR PEG ARRAYS OR FOR BOARD ARRAY??
+
+// new var to test output with map (use [i] for nested arrays, remove for board array)
+// var testOutputMap = gameState.board.map(function () {
+//   return testOutputMap;
+// });
+
+// working on using map for pegs (nest in boards array... [0] SHOULD refer to peg1 array and map over that length to get length of peg2 and peg3 arrays? use '-' for blank)
+// [0].map((index) => {
+//   return '-';
+//   // if (typeof(index) === 'string') {
+//     // }
+//   //   return 'index';
+// });
