@@ -4,30 +4,55 @@ var board = [
   []
 ];
 
-function addPeg() {
-  // if game has not started
+function addPeg(num) {
   if (!stateOfBoard.hasGameStarted) {
-    // add new peg (array) to board
-    board.push([]);
-    // add 1 to stateOfBoard.numberOfPegs
-    stateOfBoard.numberOfPegs += 1;
-    console.log("The peg was successfully added, the board is now:\n" + showBoard());
+    if (num === 1) {
+      // add peg (empty array) to the board array
+      board.push([]);
+      // log message and show board
+      console.log("The peg was successfully added, the board is now:\n" + showBoard());
+      return;
+    } else {
+      let i = 0;
+      // if num > 1, add pegs until i is equal to num
+      while (i < num) {
+      board.push([]);
+      i++;
+      }
+      // log message and show board
+      console.log(num + " pegs were successfully added, the board is now:\n" + showBoard());
+    }
   } else {
+    // log message that pegs cannot be added because game has already started
     console.log("The game has already started, you cannot add any more pegs to the board.");
   }
+  // add num to update numberOfPegs on stateOfBoard
+  stateOfBoard.numberOfPegs += num;
 }
 
-function addDisc() {
-  // if game has not started
+function addDisc(num) {
   if (!stateOfBoard.hasGameStarted) {
-    // add numbered disc to the front of the first peg
-    board[0].unshift(board[0].length + 1);
-    // update stateOfBoard.numberOfDiscs by 1
-    stateOfBoard.numberOfDiscs += 1;
-    console.log("The disc was successfully added, the board is now:\n" + showBoard());
+    if (num === 1) {
+      // add numbered disc to the front of the first peg
+      board[0].unshift(board[0].length + 1);
+      // log message and show board
+      console.log("The disc was successfully added, the board is now:\n" + showBoard());
+    } else {
+      let i = 0;
+      // if num > 1, add discs until i is equal to num
+      while (i < num) {
+        board[0].unshift(board[0].length + 1);
+        i++;
+      }
+      // log message and show board
+      console.log(num + " discs were successfully added, the board is now:\n" + showBoard());
+    } 
   } else {
+    // log message that pegs cannot be added because game has already started
     console.log("The game has already started, you cannot add any more discs to the board.");
   }
+  // add num to update numberOfDiscs on stateOfBoard
+  stateOfBoard.numberOfDiscs += num;
 }
 
 function stringBoard(board) {
@@ -51,9 +76,7 @@ var stateOfBoard = {
 }
 
 
-
 function moveDisc(disc, peg) {
-  // toggle hasGameStarted to true
   stateOfBoard.hasGameStarted = true;
   // locate peg in array (index of board)
   var destinationPeg = board[peg - 1]; 
@@ -63,20 +86,22 @@ function moveDisc(disc, peg) {
   if (disc > lastDiscOnDestinationPeg) {
     console.log("You cannot move a larger disc on top of a smaller one, board is still:\n" + showBoard());
   } else {
-    for (var i = 0; i < board.length; i++) {
-      var currentPeg = board[i];
-      var topDisc = currentPeg[currentPeg.length - 1];
+    var discMoved = false;
+    board.forEach(peg => {
+      var topDisc = peg[peg.length - 1];
       // if disc is not equal to top disc on peg return no value
-      if (disc !== topDisc) {
+      if (discMoved) {
         return;
-      } else {
+      } else if (disc === topDisc) {
         // remove the topDisc and push it to the destinationPeg
-        destinationPeg.push(currentPeg.pop());
+        destinationPeg.push(peg.pop());
         // log that the move was successful and show the board
         console.log("That move was successful, board is now:\n" + showBoard());
+        // toggle discMoved to true
+        discMoved = true;
         return;
       } 
-      };
+      });
     }
 
     checkWinner();
@@ -84,16 +109,20 @@ function moveDisc(disc, peg) {
     if (stateOfBoard.hasWinner) {
       // if stateOfBoard.hasWinner = true, log victory message and reset board and stateOfBoard values to starting values
       console.log("Victory! Congratulations, the board has now reset.")
-      board = [
-        [5, 4, 3, 2, 1],
-        [],
-        []
-      ];
-      stateOfBoard.numberOfPegs = 3;
-      stateOfBoard.numberOfDiscs = 5;
-      stateOfBoard.hasGameStarted = false;
-      stateOfBoard.hasWinner = false;
+      resetBoard();
     }
+  }
+
+  function resetBoard() {
+    board = [
+      [5, 4, 3, 2, 1],
+      [],
+      []
+    ];
+    stateOfBoard.numberOfPegs = 3;
+    stateOfBoard.numberOfDiscs = 5;
+    stateOfBoard.hasGameStarted = false;
+    stateOfBoard.hasWinner = false;
   }
 
   function checkWinner() {
