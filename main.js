@@ -1,9 +1,11 @@
+// Game board array
 var array = [
   [5, 4, 3, 2, 1],
   [],
   [],
 ];
 
+// Game board object
 var gameBoardObj = {
   peg1: array[0],
   peg2: array[1],
@@ -12,8 +14,10 @@ var gameBoardObj = {
   turnNumber: 1,
 };
 
+// Start game statement
 console.log( `To start a new game of Towers of Hanoi type startGame() into the console and press enter`);
 
+// Function to start a new game
 var startGame = function() {
   console.log('Instructions for Towers of Hanoi: The goal of Towers of Hanoi is to move a set of discs from one peg to another while only moving one disc at a time and not placing a larger disc on top of a smaller disc. Discs range in size from 1 - 5 with 5 being the largest disc and 1 being the smallest disc.To move a disc from a peg, type moveDisc(Number1, Number2) in the console. Number1 is the peg you wish to remove a disc from and number2 is the peg you wish to place the current disc you just removed. (Example: moveDisc(1, 3) means I wish to remove the top disk from peg 1 and place it at the top of peg 3)You can only remove a disk from the top of the stack of discs on a peg. Larger discs cannot be placed on smaller discs. A player wins when all discs are assembled in order of size on a different peg than the one the discs started on. Good luck.');
   newGame(array, gameBoardObj);
@@ -22,6 +26,7 @@ var startGame = function() {
   return gameBoardObj;
 };
 
+// Function to convert game board array to game board string
 var convertArray = function(array) {
   var convertArray = array.map(function(item) {
     return `--- ${item}`;
@@ -30,6 +35,7 @@ var convertArray = function(array) {
   return string.replaceAll(',', ' ');
 };
 
+// Function for logic to move discs to different pegs
 var moveDisc = function(parameter1, parameter2) {
   p1 = array[parameter1 - 1];
   p2 = array[parameter2 - 1];
@@ -39,6 +45,7 @@ var moveDisc = function(parameter1, parameter2) {
     console.log(convertArray(array));
     return gameBoardObj;
   }
+
   if (p2.length === 0) {
     var disc = p1.pop();
     array[parameter2 - 1].push(disc);
@@ -47,6 +54,7 @@ var moveDisc = function(parameter1, parameter2) {
     console.log(convertArray(array));
     return gameBoardObj;
   } else {
+    
     if (p1[p1.length - 1] > p2[p2.length - 1]) {
       console.log(`You cannot move a larger disc on top of a smaller one, you are still on turn number ${(gameBoardObj.turnNumber )}, and the board is still: `);
       console.log(convertArray(array));
@@ -61,6 +69,7 @@ var moveDisc = function(parameter1, parameter2) {
   }
 };
 
+// Function that resets the game board array and the game board object
 var newGame = function(array, object) {
   array[0] = [5, 4, 3, 2, 1];
   array[1] = [];
@@ -72,12 +81,13 @@ var newGame = function(array, object) {
   object.peg3 = array[2];
 };
 
+// Function to check if the user has won the game
 var checkWinner = function() {
   if ((array[0].length === 0 && array[1].length === 0) || (array[0].length === 0 && array[2].length === 0)) {
     console.log(`Winner, Winner, Chicken Dinner! It took you ${gameBoardObj.turnNumber} turns to complete the Towers of Hanoi game`);
     console.log(convertArray(array));
     gameBoardObj.isWinner = true;
-    // newGame(array, gameBoardObj);
+    // newGame(array, gameBoardObj); Starts a new game automatically
     return gameBoardObj;
   } else {
   console.log(`That move was successful, you are now on turn number ${(gameBoardObj.turnNumber)}, and the board is now:`);
