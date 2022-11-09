@@ -1,7 +1,6 @@
 /* NEXT STEPS: 
-- remove else logic on line 41-44
-- fix if logic on line 32
-- use .map() to create peg arrays of same size (empty values) on lines 16 & 17
+- remove else logic on line 32-36
+- fix if logic on line 24
 */
 
 
@@ -9,6 +8,7 @@
 var gameState = {
   moveOutcome: '',
   errorMsg: '',
+  checkWinner: function () {}, // check if player won game, if true, announce winner and reset game
 
   // Have to use .map() at least once to set up board?
   board: [
@@ -17,60 +17,40 @@ var gameState = {
     [],
   ],
   
-  testBoard: [
-    ['---', 5, 4],
-    ['---', 3,],
-    ['---', 2, 1],
-  ],
-  
   // move discs from one peg to another (use array helper methods, not for loops)
   moveDisc: function (disc, peg) {
-    // check for valid move
-    gameState.board[peg - 1].forEach(function (element) {
+    gameState.board[peg - 1].forEach(function (element) { // check for valid move
       console.log("el: " + element);
-      // -- valid move --
-      if (typeof(element) != 'number') {
-        if (element > disc) {  // if true, add element to end of array
+      if (typeof(element) != 'number') { // -- valid move --
+        if (element > disc) {  // if true, add element to end of peg array
           gameState.moveOutcome = 'valid';
           gameState.board[peg - 1].push(disc);
-          } else { // -- invalid move, disc can't go on top of bigger disc --
+          } else { // -- invalid move --
             gameState.moveOutcome = 'invalid';
             gameState.errorMsg = 'Disc can\'t go on top of smaller disc.';
           };
           
-      } else { // -- invalid move, disc can't go on base of peg (type mismatch) --
+      } else { // -- invalid move, disc can't go on base of peg --
         gameState.moveOutcome = 'invalid';
-        gameState.errorMsg = 'Disc can\'t go on base of peg (type mismatch).';
+        gameState.errorMsg = 'Disc can\'t go on base of peg.';
       };
       
     });
     console.log(`That move was ${gameState.moveOutcome}. ${this.errorMsg} Board is now:`);
     gameState.moveOutcome = '';
+
+    // Use .map() to setup/return board?
+    var testOutputMap = gameState.board.map(function (element) {
+      return element;
+    });
+    console.log(testOutputMap);
+    
     // console.log(gameState.board);
-    console.log(`--- ${gameState.board[0].join(' ')}`); // peg1
-    console.log(`--- ${gameState.board[1].join(' ')}`); // peg2
-    console.log(`--- ${gameState.board[2].join(' ')}`); // peg3
+    // console.log(`--- ${gameState.board[0].join(' ')}`); // peg1
+    // console.log(`--- ${gameState.board[1].join(' ')}`); // peg2
+    // console.log(`--- ${gameState.board[2].join(' ')}`); // peg3
   },
-  
-  // check if player won game, if true, announce (clog) winner and reset game
-  checkWinner: function () {},
 };
 
- // test function
+// test function
 console.log("Function Test: ", gameState.moveDisc(1, 2));
-
-
-// USING MAP FOR PEG ARRAYS OR FOR BOARD ARRAY??
-
-// new var to test output with map (use [i] for nested arrays, remove for board array)
-// var testOutputMap = gameState.board.map(function () {
-//   return testOutputMap;
-// });
-
-// working on using map for pegs (nest in boards array... [0] SHOULD refer to peg1 array and map over that length to get length of peg2 and peg3 arrays? use '-' for blank)
-// [0].map((index) => {
-//   return '-';
-//   // if (typeof(index) === 'string') {
-//     // }
-//   //   return 'index';
-// });
