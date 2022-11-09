@@ -6,9 +6,9 @@ var gameState = {
 
   // Have to use .map() at least once to set up board?
   board: [
-    [5, 4, 3],
-    [1],
-    [2],
+    [5, 4, 3, 2, 1],
+    [],
+    [],
   ],
   
   // move discs from one peg to another (use array helper methods, not for loops)
@@ -41,4 +41,4 @@ var gameState = {
 };
 
 // test function
-console.log("Function Test: ", gameState.moveDisc(3, 2));
+console.log("Function Test: ", gameState.moveDisc(1, 2));
