@@ -3,8 +3,6 @@ var gameState = {
   moveOutcome: '',
   errorMsg: '',
   checkWinner: function () {}, // check if player won game, if true, announce winner and reset game
-
-  // Have to use .map() at least once to set up board?
   board: [
     [5, 4, 3, 2, 1],
     [],
@@ -12,15 +10,20 @@ var gameState = {
   ],
   
   // move discs from one peg to another (use array helper methods, not for loops)
-  moveDisc: function (disc, peg) {
-    if (gameState.board[peg - 1].length === 0) { // check if array is empty. if true, move is valid -> move disc
+  moveDisc: function (fromPeg, toPeg) {
+    var newFromPeg = fromPeg -1;
+    var newToPeg = toPeg - 1;
+    var disc = gameState.board[newFromPeg][gameState.board[newFromPeg].length - 1]
+    if (gameState.board[newToPeg].length === 0) { // if toPeg is empty, move is valid -> push disc to toPeg array & pop disc off of fromPeg array
       gameState.moveOutcome = 'valid';
-      gameState.board[peg - 1].push(disc);
+      gameState.board[newToPeg].push(disc);
+      gameState.board[newFromPeg].pop();
     } else {
-      gameState.board[peg - 1].forEach(function (element) { // check each element (disc) on a given peg
-        if (element > disc) {  // check if disc will fit on peg. if true, move is valid -> add element to end of peg array
+      gameState.board[newToPeg].forEach(function (element) {
+        if (element > disc) {  // if disc will fit on toPeg, move is valid -> push disc to toPeg array & pop disc off of fromPeg array
           gameState.moveOutcome = 'valid';
-          gameState.board[peg - 1].push(disc);
+          gameState.board[newToPeg].push(disc);
+          gameState.board[newFromPeg].pop();
           } else { // -- invalid move --
             gameState.moveOutcome = 'invalid';
             gameState.errorMsg = 'Disc can\'t go on top of smaller disc.';
@@ -29,11 +32,12 @@ var gameState = {
     };
     
     console.log(`That move was ${this.moveOutcome}. ${this.errorMsg} Board is now:`);
+    
     // reset props after evaluating conditionals
     gameState.moveOutcome = '';
     gameState.errorMsg = '';
 
-    // Use .map() to setup/return board?
+    // Use .map() to return board
     var testOutputMap = gameState.board.map(function (element) {
       console.log(`--- ${element.join(' ')}`)
     });
@@ -41,4 +45,9 @@ var gameState = {
 };
 
 // test function
-console.log("Function Test: ", gameState.moveDisc(1, 2));
+console.log(gameState.moveDisc(1, 2), "Next Move?");
+console.log(gameState.moveDisc(1, 3), "Next Move?");
+console.log(gameState.moveDisc(2, 3), "Next Move?");
+console.log(gameState.moveDisc(1, 2), "Next Move?");
+console.log(gameState.moveDisc(1, 2), "Next Move?"); // error works correctly
+console.log(gameState.moveDisc(3, 1), "Next Move?"); // pops and pushes too many times, use something like break? move out of forEach loops?
