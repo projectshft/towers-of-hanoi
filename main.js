@@ -5,9 +5,9 @@ var gameState = {
 
   // Have to use .map() at least once to set up board?
   board: [
-    ['---', 5, 4, 3, 2, 1],
-    ['---'],
-    ['---'],
+    [5, 4, 3, 2, 1],
+    [],
+    [],
   ],
   
   testBoard: [
@@ -40,9 +40,9 @@ var gameState = {
     console.log(`That move was ${gameState.moveOutcome}. ${this.errorMsg} Board is now:`);
     gameState.moveOutcome = '';
     // console.log(gameState.board);
-    console.log(gameState.board[0]); // peg1
-    console.log(gameState.board[1]); // peg2
-    console.log(gameState.board[2]); // peg3
+    console.log(`--- ${gameState.board[0].join(' ')}`); // peg1
+    console.log(`--- ${gameState.board[1].join(' ')}`); // peg2
+    console.log(`--- ${gameState.board[2].join(' ')}`); // peg3
   },
   
   // check if player won game, if true, announce (clog) winner and reset game
