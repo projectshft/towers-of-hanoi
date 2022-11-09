@@ -1,3 +1,10 @@
+/* NEXT STEPS: 
+- remove else logic on line 41-44
+- fix if logic on line 32
+- use .map() to create peg arrays of same size (empty values) on lines 16 & 17
+*/
+
+
 // object responsible for maintaining the state of the board
 var gameState = {
   moveOutcome: '',
@@ -20,12 +27,12 @@ var gameState = {
   moveDisc: function (disc, peg) {
     // check for valid move
     gameState.board[peg - 1].forEach(function (element) {
+      console.log("el: " + element);
       // -- valid move --
-      if (typeof(element) === 'number') {
-        gameState.moveOutcome = 'valid';
-        if (element > disc) {  // if true, add element to array and remove first index
+      if (typeof(element) != 'number') {
+        if (element > disc) {  // if true, add element to end of array
+          gameState.moveOutcome = 'valid';
           gameState.board[peg - 1].push(disc);
-          gameState.board[peg - 1].shift();
           } else { // -- invalid move, disc can't go on top of bigger disc --
             gameState.moveOutcome = 'invalid';
             gameState.errorMsg = 'Disc can\'t go on top of smaller disc.';
