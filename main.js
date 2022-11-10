@@ -9,7 +9,6 @@ var stateOfBoard = {
   numberOfDiscs: 5,
   hasGameStarted: false,
   hasWinner: false,
-  numberOfMoves: 0
 }
 
 var messages = {
@@ -24,7 +23,7 @@ var messages = {
   pegIsNotANumber: "Pegs can only be identified by their numeral value - please resubmit your request.  The board is still:\n",
   pegsAdded: "The pegs were successfully added, the board is now:\n",
   success: "That move was successful, board is now:\n",
-  victory: "Victory!\n\nYou won that game in " + stateOfBoard.numberOfMoves + " moves.\n\nCan you do better?\n\nThe board has been reset for your next attempt:\n"
+  victory: "Victory!\n\nThe board has been reset for your next attempt:\n"
 }
 
 function addDisc(num) {
@@ -76,9 +75,7 @@ function addPeg(num) {
 
 function checkWinner() {
   // check board to see if a complete array of discs is on a peg that is not board[0]
- board.forEach((peg, index) => {
-   // edge case to eliminate checking board[0]
-  if (index === 0) return;
+ board.slice(1).forEach((peg, index) => {
    // if the length of the peg is equal to number of discs in the game, toggle value of .hasWinner to true
   if (peg.length === stateOfBoard.numberOfDiscs) {
      stateOfBoard.hasWinner = true;
@@ -118,7 +115,6 @@ function moveDisc(origin, destination) {
     destinationPeg.push(originPeg.pop());
     showBoard(messages.success);
     stateOfBoard.hasGameStarted = true;
-    stateOfBoard.numberOfMoves++;
   }    
   checkWinner();
 }
