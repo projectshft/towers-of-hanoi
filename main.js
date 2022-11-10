@@ -12,25 +12,27 @@ var stateOfBoard = {
   numberOfMoves: 0
 }
 
-var cannotAddItemsMessage = "The game has already started, you cannot add any more items to the board. The board is still:\n"
-var discIsTooLargeMessage = "You cannot move a larger disc on top of a smaller one, board is still:\n";
-var discMustMoveMessage = "In order to move a disc, it must actually move to a different peg.  Please try again.  The board is still:\n";
-var discsAddedMessage = "The discs were successfully added, the board is now:\n";
-var originPegIsEmptyMessage = "There are no discs on this peg. Please try again. The board is still:\n";
-var oneDiscAddedMessage = "The disc was successfully added, the board is now:\n";
-var onePegAddedMessage = "The peg was successfully added, the board is now:\n";
-var pegDoesNotExistMessage = "You can only move discs to/from pegs that exist on the board.  Please try again.  The board is still:\n";
-var pegIsNotANumberMessage = "Pegs can only be identified by their numeral value - please resubmit your request.  The board is still:\n";
-var pegsAddedMessage = "The pegs were successfully added, the board is now:\n";
-var successMessage = "That move was successful, board is now:\n";
-var victoryMessage = "Victory!\n\nYou won that game in " + stateOfBoard.numberOfMoves + " moves.\n\nCan you do better?\n\nThe board has been reset for your next attempt:\n";
+var messages = {
+  cannotAddItems: "The game has already started, you cannot add any more items to the board. The board is still:\n",
+  discIsTooLarge: "You cannot move a larger disc on top of a smaller one, board is still:\n",
+  discMustMove: "In order to move a disc, it must actually move to a different peg.  Please try again.  The board is still:\n",
+  discsAdded: "The discs were successfully added, the board is now:\n",
+  originPegIsEmpty: "There are no discs on this peg. Please try again. The board is still:\n",
+  oneDiscAdded: "The disc was successfully added, the board is now:\n",
+  onePegAdded: "The peg was successfully added, the board is now:\n",
+  pegDoesNotExist: "You can only move discs to/from pegs that exist on the board.  Please try again.  The board is still:\n",
+  pegIsNotANumber: "Pegs can only be identified by their numeral value - please resubmit your request.  The board is still:\n",
+  pegsAdded: "The pegs were successfully added, the board is now:\n",
+  success: "That move was successful, board is now:\n",
+  victory: "Victory!\n\nYou won that game in " + stateOfBoard.numberOfMoves + " moves.\n\nCan you do better?\n\nThe board has been reset for your next attempt:\n"
+}
 
 function addDisc(num) {
   if (!stateOfBoard.hasGameStarted) {
     if (num === 1) {
       // add numbered disc to the front of the first peg
       board[0].unshift(board[0].length + 1);
-      showBoard(oneDiscAddedMessage);
+      showBoard(messages.oneDiscAdded);
     } else {
       let i = 0;
       // if num > 1, add discs until i is equal to num
@@ -38,10 +40,10 @@ function addDisc(num) {
         board[0].unshift(board[0].length + 1);
         i++;
       }
-      showBoard(discsAddedMessage);
+      showBoard(messages.discsAdded);
     } 
   } else {
-    showBoard(cannotAddItemsMessage);
+    showBoard(messages.cannotAddItems);
   }
   // add num to update numberOfDiscs on stateOfBoard
   stateOfBoard.numberOfDiscs += num;
@@ -53,7 +55,7 @@ function addPeg(num) {
       // add peg (empty array) to the board array
       board.push([]);
       // log message and show board
-      showBoard(onePegAddedMessage);
+      showBoard(messages.onePegAdded);
       return;
     } else {
       let i = 0;
@@ -63,10 +65,10 @@ function addPeg(num) {
       i++;
       }
       // log message and show board
-      showBoard(pegsAddedMessage);
+      showBoard(messages.pegsAdded);
     }
   } else {
-    showBoard(cannotAddItemsMessage);
+    showBoard(messages.cannotAddItems);
   }
   // add num to update numberOfPegs on stateOfBoard
   stateOfBoard.numberOfPegs += num;
@@ -81,24 +83,24 @@ function checkWinner() {
   if (peg.length === stateOfBoard.numberOfDiscs) {
      stateOfBoard.hasWinner = true;
      resetBoard();
-     showBoard(victoryMessage);
+     showBoard(messages.victory);
    } 
  });
 }
 
 function moveDisc(origin, destination) {
   if (origin === destination) {
-    showBoard(discMustMoveMessage);
+    showBoard(messages.discMustMove);
     return;
   }
   // if origin or destination does not exist on the board, log message and showBoard
   if ((origin > board.length || destination > board.length) || (origin <= 0 || destination <= 0)) {
-    showBoard(pegDoesNotExistMessage);
+    showBoard(messages.pegDoesNotExist);
     return; 
   }
   // if origin or destination is not a number, log message and showBoard
   if (typeof(origin) !== 'number' || typeof(destination) !== 'number') {
-    showBoard(pegIsNotANumberMessage);
+    showBoard(messages.pegIsNotANumber);
     return;
   }
   var originPeg = board[origin - 1];
@@ -109,12 +111,12 @@ function moveDisc(origin, destination) {
   var destinationPegDisc = destinationPeg[destinationPeg.length - 1]; 
   // if originPeg is empty, log message and showBoard
   if (originPeg.length === 0) {
-    showBoard(originPegIsEmptyMessage);
+    showBoard(messages.originPegIsEmpty);
   } else if (originPegDisc > destinationPegDisc) {
-      showBoard(discIsTooLargeMessage);
+      showBoard(messages.discIsTooLarge);
   } else {
     destinationPeg.push(originPeg.pop());
-    showBoard(successMessage);
+    showBoard(messages.success);
     stateOfBoard.hasGameStarted = true;
     stateOfBoard.numberOfMoves++;
   }    
