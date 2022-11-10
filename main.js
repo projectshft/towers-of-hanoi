@@ -132,6 +132,7 @@ function resetBoard() {
   stateOfBoard.hasGameStarted = false;
   stateOfBoard.hasWinner = false;
 }
+
 function showBoard(message) {
   // display message with stringBoard elements as one string with a line break to separate each row on the console
   console.log(message + stringBoard(board).join("\n"));
