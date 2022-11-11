@@ -2,15 +2,23 @@
 var gameState = {
   moveOutcome: '',
   errorMsg: '',
-  isWinner: false,
   board: [
     [5, 4, 3, 2, 1],
     [],
     [],
   ],
-
+  
   // check if player won game, if true, announce winner and reset game
-  checkWinner: function () {},
+  checkWinner: function () {
+    if (gameState.board[1].length === 5 || gameState.board[2].length === 5 ) {
+      console.log('Congratulations, you win!')
+      gameState.board = [
+        [5, 4, 3, 2, 1],
+        [],
+        [],
+      ]
+    }
+  },
   
   // check if move is valid
   checkMove: function (fromPeg, toPeg) {
@@ -28,7 +36,7 @@ var gameState = {
         };
       });
     };
-    gameState.moveDisc(newFromPeg, newToPeg)
+    gameState.moveDisc(newFromPeg, newToPeg);
     },
     
     // move discs from one peg to another (use array helper methods, not for loops)
@@ -50,6 +58,8 @@ var gameState = {
       var testOutputMap = gameState.board.map(function (element) {
         console.log(`--- ${element.join(' ')}`)
       });
+
+      gameState.checkWinner();
     },
 };
 
@@ -85,4 +95,4 @@ console.log(gameState.checkMove(2, 3), "Next Move?");
 console.log(gameState.checkMove(1, 2), "Next Move?");
 console.log(gameState.checkMove(3, 1), "Next Move?");
 console.log(gameState.checkMove(3, 2), "Next Move?");
-console.log(gameState.checkMove(1, 2), "Next Move?");
+console.log(gameState.checkMove(1, 2));
