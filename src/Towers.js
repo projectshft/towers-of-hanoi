@@ -1,6 +1,6 @@
 var board = [
-  [5, 4, 3, 2, 1],
-  [],
+  [2, 1],
+  [5, 4, 3],
   []
 ];
 
@@ -8,7 +8,7 @@ var stateOfBoard = {
   numberOfPegs: 3,
   numberOfDiscs: 5,
   hasGameStarted: false,
-  hasWinner: false,
+  hasWinner: false
 }
 
 var messages = {
