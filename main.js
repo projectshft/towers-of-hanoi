@@ -1,8 +1,8 @@
 // Game board array
 var gameBoardArray = [
+  [5, 4, 3, 2, 1],
   [],
   [],
-  [1, 2, 3, 4, 5],
 ];
 
 // Game board object
@@ -18,21 +18,31 @@ var gameBoardObject = {
 
 // Function to add more pegs to the game
 var addPeg = function() {
-  gameBoardArray.push([]);
-  gameBoardObject.numberOfPegs++;
-  gameBoardObject[`peg${gameBoardArray.length}`] = gameBoardArray[gameBoardArray.length - 1];
-  console.log(`There are now ${gameBoardArray.length} pegs and the current board looks like this: `);
-  console.log(convertArray(gameBoardArray));
-  return gameBoardObject;
-};
+  if (gameBoardObject.turnNumber === 1) {
+    gameBoardArray.push([]);
+    gameBoardObject.numberOfPegs++;
+    gameBoardObject[`peg${gameBoardArray.length}`] = gameBoardArray[gameBoardArray.length - 1];
+    console.log(`There are now ${gameBoardArray.length} pegs and the current board looks like this: `);
+    console.log(convertArray(gameBoardArray));
+    return gameBoardObject;
+  } else {
+    console.log(`You cannot add a peg after the game has started. You are on turn number ${(gameBoardObject.turnNumber)}, and the board is still:`);
+    return gameBoardObject;
+  }
+}; 
 
 // Function to add more discs to the first peg
 var addDisk = function() {
-  gameBoardArray[0].unshift(gameBoardArray[0].length + 1);
-  gameBoardObject.numberOfDiscs++;
-  console.log(`There are now ${gameBoardArray[0].length} discs and the current board looks like this: `);
-  console.log(convertArray(gameBoardArray));
-  return gameBoardObject;
+  if (gameBoardObject.turnNumber === 1) {
+      gameBoardArray[0].unshift(gameBoardArray[0].length + 1);
+      gameBoardObject.numberOfDiscs++;
+      console.log(`There are now ${gameBoardArray[0].length} discs and the current board looks like this: `);
+      console.log(convertArray(gameBoardArray));
+      return gameBoardObject;
+  } else {
+    console.log(`You cannot add a disc after the game has started. You are on turn number ${(gameBoardObject.turnNumber)}, and the board is still:`);
+    return gameBoardObject;
+  }
 };
 
 // Start game statement
@@ -52,7 +62,7 @@ var gameReset = function(array, object) {
 
 // Function to start a new game
 var startGame = function() {
-  console.log('Instructions for Towers of Hanoi: The goal of Towers of Hanoi is to move a set of discs from one peg to another while only moving one disc at a time and not placing a larger disc on top of a smaller disc. To move a disc from a peg, type moveDisc(Number1, Number2) in the console. Number1 is the peg you wish to remove a disc from and number2 is the peg you wish to place the current disc you just removed on. (Example: moveDisc(1, 3) means I wish to remove the top disk from peg 1 and place it at the top of peg 3. You can only remove a disk from the top of the stack of discs on a peg. A player wins when all discs are assembled in order of size on a different peg than the one the discs started on. If you would like to make the game more difficult you can add pegs by typing addPeg() and add discs by typing addDisc() into the console. Good luck!');
+  console.log('Instructions for Towers of Hanoi: The goal of Towers of Hanoi is to move a set of discs from one peg to another while only moving one disc at a time and not placing a larger disc on top of a smaller disc. You can only move a disk from the top of the stack of discs on a peg. To move a disc from a peg, type moveDisc(Number1, Number2) in the console. The parameter Number1 signifies the peg you wish to remove a disc from and the parameter number2 signifies the peg you wish to place that disc on. (Example: moveDisc(1, 3) means I wish to remove the top disk from peg 1 and place it at the top of peg 3.  A player wins when all discs are assembled in descending order on a different peg other than the one the discs started on. If you would like to make the game more difficult you can add pegs by typing addPeg() and add discs by typing addDisc() into the console but you cannot add a disc or a peg after you have started the game. Good luck!');
   gameReset(gameBoardArray, gameBoardObject);
   console.log(`Round ${gameBoardObject.turnNumber}, Fight!`);
   console.log(convertArray(gameBoardArray));
