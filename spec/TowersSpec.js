@@ -37,7 +37,14 @@ describe('TowersOfHanoi', function(){
 
 
   describe('stringBoard', function(){
-   
+    beforeEach(function(){
+      board = [
+        [5, 4, 3, 2, 1],
+        [],
+        []
+      ];
+    });
+
     it('should return an array of 3 string elements', function() {
       
       expect(stringBoard(board)).toEqual(['--- 5 4 3 2 1', '--- ', '--- ']);
@@ -54,7 +61,6 @@ describe('TowersOfHanoi', function(){
     });
   
     it('should be able to add discs to the starting peg stack', function() {
-      expect(board[0].length).toBe(5);
 
       addDisc(3);
       
@@ -72,8 +78,6 @@ describe('TowersOfHanoi', function(){
     });
 
     it('should add pegs to the board', function() {
-      
-      expect(board.length).toEqual(3);
       
       addPeg(2);
       
@@ -105,6 +109,9 @@ describe('TowersOfHanoi', function(){
       expect(stateOfBoard.hasWinner).toBe(false);
     });
   })
+
+ 
+
 })
 
 
