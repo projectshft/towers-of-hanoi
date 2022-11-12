@@ -12,82 +12,93 @@ var gameState = {
   
   // check if player won game, if true, announce winner and reset game
   checkWinner: function () {
-    if (gameState.board[1].length === 5 || gameState.board[2].length === 5 ) {
+    if (this.board[1].length === 5 || this.board[2].length === 5 ) {
       console.log("🎉 Congratulations, you win! 🎉")
       startGame();
     }
   },
   
-  // check if move is valid
+  // check if move is valid, set moveOutcome and errorMsg, call moveDisc
   checkMove: function (fromPeg, toPeg) {
     var newFromPeg = fromPeg -1;
     var newToPeg = toPeg - 1;
-    var disc = gameState.board[newFromPeg][gameState.board[newFromPeg].length - 1]
-    if (gameState.board[newToPeg].length === 0) { // if toPeg is empty, move is valid
-      gameState.moveOutcome = 'valid';
-    } else {
-      gameState.board[newToPeg].forEach(function (element) {
-        if (element > disc) {  // if disc will fit on toPeg, move is valid
-          gameState.moveOutcome = 'valid';
-        } else { // invalid move
-          gameState.moveOutcome = 'invalid';
-        };
-      });
+    // check that arguments are ints
+    if (typeof(fromPeg) != 'number' || typeof(toPeg) != 'number') {
+      this.moveOutcome = 'invalid';
+      this.errorMsg = 'Please enter a number.';
+      this.moveDisc(newFromPeg, newToPeg);
+    // check that arguments are greater than 0
+    } else if (fromPeg <= 0 || toPeg <= 0) {
+      this.moveOutcome = 'invalid';
+      this.errorMsg = 'Please enter a number greater than 0.';
+      this.moveDisc(newFromPeg, newToPeg);
+    // check that arguments are within number of pegs
+    } else if (fromPeg < 1 || fromPeg > 3 || toPeg < 1 || toPeg > 3) {
+      this.moveOutcome = 'invalid';
+      this.errorMsg = 'Please select a a number between 1 and 3.';
+      this.moveDisc(newFromPeg, newToPeg);
+    // check if fromPeg array is empty
+    } else if (this.board[newFromPeg].length === 0) {
+      this.moveOutcome = 'invalid';
+      this.errorMsg = 'There are no more discs to move from this peg.';
+      this.moveDisc(newFromPeg, newToPeg);
+    // check if toPeg is empty -> move is valid
+    } else if (this.board[newToPeg].length === 0) {
+      this.moveOutcome = 'valid';
+      this.moveDisc(newFromPeg, newToPeg);
+    // check if topmost disc on fromPeg will fit on toPeg -> move is valid
+    } else if (this.board[newToPeg][this.board[newToPeg].length -1] > this.board[newFromPeg][this.board[newFromPeg].length -1]) {
+      this.moveOutcome = 'valid';
+      this.moveDisc(newFromPeg, newToPeg);
+    } else { // disc is too big to fit on peg -> invalid move
+      this.moveOutcome = 'invalid';
+      this.errorMsg = 'Disc can\'t go on top of smaller disc.';
+      this.moveDisc(newFromPeg, newToPeg);
     };
-    gameState.moveDisc(newFromPeg, newToPeg);
-    },
+  },
     
-    // move discs from one peg to another (use array helper methods, not for loops)
+    // move disc from one peg to another (use array helper methods, not for loops)
     moveDisc: function (moveFromPeg, moveToPeg) {
-      if (gameState.moveOutcome === 'valid') {
-        gameState.board[moveToPeg].push(gameState.board[moveFromPeg].at(-1));
-        gameState.board[moveFromPeg].pop();
-      } else {
-      gameState.errorMsg = 'Disc can\'t go on top of smaller disc.';
-    };
+      if (this.moveOutcome === 'valid') {
+        this.board[moveToPeg].push(this.board[moveFromPeg].at(-1));
+        this.board[moveFromPeg].pop();
+      };
     
+      // log move and reset props after evaluating conditionals
       console.log(`That move was ${this.moveOutcome}. ${this.errorMsg} Board is now:`);
-      
-      // reset props after evaluating conditionals
-      gameState.moveOutcome = '';
-      gameState.errorMsg = '';
+      this.moveOutcome = '';
+      this.errorMsg = '';
 
       // Use .map() to return board
-      var testOutputMap = gameState.board.map(function (element) {
+      this.board.map(function (element) {
         console.log(`--- ${element.join(' ')}`)
       });
       
-      gameState.checkWinner();
-      // return testOutputMap
+      this.checkWinner();
     },
 };
 
-// var for user to easily interact with
-var move = gameState.checkMove;
-
-// use to start new game and to reset game after win
+// var to start new game and to reset game after win
 var startGame = function () {
-  gameState.board = [
+  this.board = [
     [5, 4, 3, 2, 1],
     [],
     [],
   ]
-  console.log("---------- NEW GAME ----------")
-  console.log("** OBJECTIVE: The goal of the game is to move a set of discs of different sizes (5, 4, 3, 2, 1) from one peg to another while only moving the topmost disc off each peg and not putting a larger disc on top of a smaller one. ")
-  console.log("** INSTRUCTIONS: in order to make a move, please type 'move(X,Y)' below, where X is the peg to move from and Y is the peg to move to. Good luck!")
-  console.log(`--- ${gameState.board[0].join(' ')}`) // oops I hard coded this because it was easier 🫣
-  console.log(`--- ${gameState.board[1].join(' ')}`)
-  console.log(`--- ${gameState.board[2].join(' ')}`)
+  console.log(`---------- NEW GAME ---------- \n \n ** OBJECTIVE: The goal of the game is to move a set of discs of different sizes (5, 4, 3, 2, 1) from one peg to another while only moving the topmost disc off each peg and not putting a larger disc on top of a smaller one. \n \n ** INSTRUCTIONS: in order to make a move, please type 'gameState.checkMove(X,Y)' below, where X is the peg to move a disc from and Y is the peg to move the disc to. Good luck! \n \n Starting game board is:`)
+  this.board.map(function (element) {
+    console.log(`--- ${element.join(' ')}`)
+    console.log(`\n`)
+  });
 };
 
-
-// test game
-// console.log(gameState.checkMove(1, 2), "Next Move?");
+// // un-comment to test game play
+// startGame();
 // console.log(gameState.checkMove(1, 2), "Next Move?");
 // console.log(gameState.checkMove(1, 3), "Next Move?");
 // console.log(gameState.checkMove(2, 3), "Next Move?");
 // console.log(gameState.checkMove(1, 2), "Next Move?");
-// // console.log(gameState.checkMove(1, 2), "Next Move?"); // error works correctly
+// console.log(gameState.checkMove(1, 2), "Next Move?"); // error works correctly
 // console.log(gameState.checkMove(3, 1), "Next Move?");
 // console.log(gameState.checkMove(3, 2), "Next Move?");
 // console.log(gameState.checkMove(1, 2), "Next Move?");
@@ -114,4 +125,4 @@ var startGame = function () {
 // console.log(gameState.checkMove(1, 2), "Next Move?");
 // console.log(gameState.checkMove(3, 1), "Next Move?");
 // console.log(gameState.checkMove(3, 2), "Next Move?");
-// console.log(gameState.checkMove(1, 2));
+// // console.log(gameState.checkMove(1, 2));
