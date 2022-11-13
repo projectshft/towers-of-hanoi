@@ -1,6 +1,15 @@
+// STRARTING: Please enter playGame.startGame(x, y). Enter in a starting Peg and a peg you'd like to move a disc to. 
+// Example: playGame.startGame(1, 2) this would move the top disc from the 1 peg to the 2 peg.
+
+// CONTINUAL PLAY: Once you've moved the first disc, you'll now use playGame.moveDisc(x, y) to make the remainder of your moves. 
+// Example: playGame.moveDisc(x, y) the first argument is the current peg and the second is your future peg.
 
 
 playGame = {
+
+  startGame: function(startPeg, futPeg){
+    console.log(playGame.moveDisc(startPeg, futPeg));
+  },
 
    board: [
     [5, 4, 3, 2, 1],
@@ -55,38 +64,34 @@ playGame = {
   
 
   checkWinner: function(){
-    reducer = this.board.reduce(function(accumulator,peg){
-
-      accumulator[this.board.indexOf(peg)] = peg.length;
-  
+    // this will return the length of each array and reduce it into an object.
+    reducer = playGame.board.reduce(function(accumulator,peg){
+      accumulator[playGame.board.indexOf(peg)] = peg.length;
       return accumulator
     },
       {0: 0, 1: 0, 2: 0}
-      )
-      return reducer;
-  },
+      ); 
+
+    // If the new move is equal to an object that has all the discs on either index 1 or 2, you win. Otherwise it's false.
+      if(JSON.stringify(reducer) === JSON.stringify({0: 0, 1: 5, 2: 0}) || JSON.stringify(reducer) === JSON.stringify({0: 0, 1: 0, 2: 5})){
+        console.log(`You Won the game!!!`);
+        console.log(`${this.formatter()}`);
+      } else {
+        console.log(`Win:`)
+        return false;
+      };
+
+    //if the overall function returns true we'll restart for a new game, using resetGame()
+
+      return this.resetGame();
+    },
+
+
+  resetGame: function(){
+     console.log(`Time for a new game! Make your first Move!`)
+      this.board = [ [5, 4, 3, 2, 1], [], [] ];
+    return this.formatter();
+    }, // Resets the game to it's orginal game play position, and prompts the user to make the first move. No need to go back to startGame().
 };
 
-
- console.log(playGame.moveDisc(1,2));
-
-
-
- let board = [
-  [5, 4, 3, 2, 1],
-  [],
-  []
-]
-
-function testing (){
-  reducer = board.reduce(function(accumulator,peg){
-    accumulator[board.indexOf(peg)] = peg.length;
-
-    return accumulator
-  },
-    {0: 0, 1: 0, 2: 0}
-    )
-    return reducer;
-}
-
-console.log(testing())
+// there's defintely an easier way to do checkwinner but I wanted to use reduce for practice.

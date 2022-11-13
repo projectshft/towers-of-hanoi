@@ -38,3 +38,5 @@
 
 
 // playGame.moveDisc(1,3), playGame.moveDisc(2,3), playGame.moveDisc(1,2), playGame.moveDisc(3,1), playGame.moveDisc(3,2), playGame.moveDisc(1,2), playGame.moveDisc(1,3), playGame.moveDisc(2,1), playGame.moveDisc(2,3), playGame.moveDisc(1,2), playGame.moveDisc(3,1), playGame.moveDisc(2,1), playGame.moveDisc(2,3), playGame.moveDisc(1,2), playGame.moveDisc(1,3), playGame.moveDisc(2,3), playGame.moveDisc(1,2), playGame.moveDisc(3,2), playGame.moveDisc(3,1), playGame.moveDisc(2,1), playGame.moveDisc(1,3), playGame.moveDisc(1,2), playGame.moveDisc(3,2), playGame.moveDisc(3,1), playGame.moveDisc(2,3), playGame.moveDisc(2,1), playGame.moveDisc(3,1), playGame.moveDisc(3,2), playGame.moveDisc(1,2), playGame.moveDisc(1,3), playGame.moveDisc(2,3), playGame.moveDisc(1,2), playGame.moveDisc(3,2), playGame.moveDisc(2,1), playGame.moveDisc(3,2), playGame.moveDisc(1,2)
+
+//These are the moves to play the game after the initial start of console.log(playGame.moveDisc(1,2));
