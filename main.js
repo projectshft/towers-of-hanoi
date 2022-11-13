@@ -95,3 +95,6 @@ playGame = {
 };
 
 // there's defintely an easier way to do checkwinner but I wanted to use reduce for practice.
+
+
+// Final note. Some of these things are hardcoded, so they won't scale if we try to make new pegs or discs. If you come back to this, beware of this bad practice.
