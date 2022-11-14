@@ -4,85 +4,107 @@
 //There should be a way to move discs from one peg to another.
 //There should be a checkWinner function that checks to see if the player has won the game. You win the game by putting all the discs back in the original order but on a new peg.
 //Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
-//As a bonus, any time you iterate through an array, try and refrain from using for or while loops - instead try to use the Array helper methods.
-
-
-
-var peg1 = board[0];
-var peg2 = board[1];
-var peg3 = board[2];
-
-
-const game = { board: [[5, 4, 3, 2, 1], [], []],
-               
-              moveDisc: function (startPeg, endPeg) {
-                if (board[0].length === 5) {
-                  console.log('Please move top disk to empty peg')
-                }
-
-                if (disk == 1) {
-                  this.board[0].pop;
-                  this.board[3].push
-                }
-
-                return this.board;
-              },
-               
-              
-              
-              printBoard: function (board) { 
-                
-
-
-
-
-              },
-            
-             checkWinner: function () {
-                if(board[1].length === 5) {
-                  console.log ('you are a winner!');
-                }
-
-             }
-            
-            }
  
+  // takes last number off of first array (start peg) and pushed it into end peg 
+  // start peg has to have at least one number (disk) 
+  // if start peg length is zero. reject that move
+  // if length equals zero on end peg. move is valid
+  // compare last number of start peg (const = ) with last number of end peg
+  // if last number of start peg is less than last number of last peg. move is valid
+  // if last number of start peg is more that last number of last peg. move is invalid
+  // when start peg is empty and end peg is full of discs in original order from largest to smallest player has won
+  
+  
+  
+  
+  
+  var Game = {
+   
+    board : [['5','4','3','2','1'],[],[]], 
+    
+    
+    peg1 : this.board[0],
+    peg2 : this.board[1],
+    peg3 : this.board[2],
+   
+    
+
+  
+  
+    moveDisc : function (startPeg, endPeg) {
+       //  check if discs available to move
+      if (startPeg.length === 0) {
+        console.log('No more discs on peg');
+      };
+      //  check if start peg has discs and endpeg doesnt have any
+      if (startPeg.length > 0 && endPeg.length === 0) {
+        endPeg.push(startPeg.pop());
+        console.log('Valid Move');
+      };
+    
+
+      //  move disc
+      if(startPeg.value < endPeg.value ) {
+        endPeg.push(startPeg.pop());
+        console.log('valid move');
+      };
+
+        //  check if disc being moved is larger than disc it is placed on
+      if(endPeg.length > 0 && startPeg.value > endPeg.value) {
+        console.log('cant move larger disc onto smaller disc');
+      };
+    },
+  
+  
+  
+    printBoard : function (board) {
+      return board.map(function(board) {
+        console.log(`--- ${board.join(' ')}`);
+        return
+      });
+    },
+
+    
+    
+    checkWinner : function (board) {
+        if(this.peg2.length === 5 || this.peg3.length === 5) {
+          console.log ('you are a winner!');
+        }
+        return this.printBoard;
+      } 
+  };
+
+
+  // Solution
+Game.moveDisc(1,2);
+Game.moveDisc(1,3);
+Game.moveDisc(2,3);
+Game.moveDisc(1,2);
+Game.moveDisc(3,1);
+Game.moveDisc(3,2);
+Game.moveDisc(1,2);
+Game.moveDisc(1,3);
+Game.moveDisc(2,3);
+Game.moveDisc(2,1);
+Game.moveDisc(3,1);
+Game.moveDisc(2,3);
+Game.moveDisc(1,2);
+Game.moveDisc(1,3);
+Game.moveDisc(2,3);
+Game.moveDisc(1,2);
+Game.moveDisc(3,1);
+Game.moveDisc(3,2);
+Game.moveDisc(1,2);
+Game.moveDisc(3,1);
+Game.moveDisc(2,3);
+Game.moveDisc(2,1);
+Game.moveDisc(3,1);
+Game.moveDisc(3,2);
+Game.moveDisc(1,2);
+Game.moveDisc(1,3);
+Game.moveDisc(2,3);
+Game.moveDisc(1,2);
+Game.moveDisc(3,1);
+Game.moveDisc(3,2);
+Game.moveDisc(1,2);
  
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Move the disc from peg 1 to peg 2
-moveDisc(1, 2);
-That move was successful, board is now:
---- 5 4 3 2
---- 1
----
-
-// Move disc from peg 1 to peg 3
-moveDisc(1, 3);
-That move was successful, board is now:
---- 5 4 3
---- 1
---- 2
-
-// Move disc from peg 1 to peg 2
-moveDisc(1, 2);
-You cannot move a larger disc on top of a smaller one, board is still:
---- 5 4 3
---- 1
---- 2
