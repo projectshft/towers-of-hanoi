@@ -13,6 +13,16 @@
 //once game is won the game should automatically end by announcing the winner(though console.log) and reset for a new game
 //BONUS:  any tiem you iterate through the array, try and refrain from using for or while loops - try using helper methods
 
-[[5, 4, 3, 2, 1],
-[],
-[]]
+var line1 = ['-', '-', '-', 5, 4, 3, 2, 1];
+var line2 = ['-', '-', '-'];
+var line3 = ['-', '-', '-'];
+
+console.log(line1, line2, line3);
+
+var board = {
+  line1: ['-', '-', '-', 5, 4, 3, 2, 1],
+  line2: ['-', '-', '-'],
+  line3: ['-', '-', '-']
+};
+
+console.log(board);
