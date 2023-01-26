@@ -4,9 +4,12 @@ let board = {
   tower3: []
 }
 
+let discTower1 = board.tower1[board.tower1.length - 1];
+let discTower2 = board.tower2[board.tower2.length - 1];
+let discTower3 = board.tower3[board.tower3.length - 1];
 
 const moveDisc = (oldTower, newTower) => {
-  // need code to set arguemnts to arrays in board (maybe use switch statement?)
+  // set arguemnts to arrays in board
   switch (oldTower) {
     case 1:
       oldTower = board.tower1;
@@ -37,14 +40,8 @@ const moveDisc = (oldTower, newTower) => {
       break;
   }
 
-
-  
-
-
   // conditional to check if move can be done
-  oldTower.forEach(function (disc) {
-    console.log(disc);
-  })
+  
 }
 
-console.log(moveDisc(1, 2));
+console.log(moveDisc(1, 3));
