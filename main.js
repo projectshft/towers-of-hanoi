@@ -1,5 +1,5 @@
 let board = {
-  tower1: [1, 2, 3, 4, 5],
+  tower1: [5, 4, 3, 2, 1],
   tower2: [],
   tower3: []
 }
@@ -43,21 +43,30 @@ const moveDisc = (oldTower, newTower) => {
   // conditional to check if move can be done
   if (newTower.length == 0) {
     // Move disc
-    //newTower.push(discOldTower);
-    console.log(`Disc has been moved`);
+    newTower.push(discOldTower);
+    oldTower.pop();
+
+    console.log(`Disc has been moved:`);
+    console.log(board);
   } else if (newTower.length) {
     // check if last element from oldTower is smaller than last element in newTower
     if (discOldTower < discNewTower) {
       // Move disc
-      console.log(`Disc has been moved`);
+      newTower.push(discOldTower);
+      oldTower.pop();
+
+      console.log(`Disc has been moved:`);
+      console.log(board);
     } else {
       // move can't be done, print board
       console.log(`You cannot move a larger disc on top of a smaller one.`)
+      console.log(board);
     }
   } else {
     // move can't be done, print board
     console.log(`You cannot move a larger disc on top of a smaller one.`)
+    console.log(board);
   }
 }
 
-console.log(moveDisc(1, 3));
+//console.log(moveDisc(1, 3));
