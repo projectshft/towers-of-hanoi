@@ -1,7 +1,19 @@
 let board = {
-  tower1: [5, 4, 3, 2, 1],
+  tower1: [3, 2, 1],
   tower2: [],
   tower3: []
+}
+
+let numOfDiscs = board.tower1.length;
+
+// check winner
+const checkWinner = () => {
+  // check if all the discs are in tower3
+  if (board.tower3.length == numOfDiscs) {
+    console.log(`You won!`);
+    // reset game > call reset game function
+
+  }
 }
 
 const moveDisc = (oldTower, newTower) => {
@@ -45,6 +57,7 @@ const moveDisc = (oldTower, newTower) => {
     // Move disc
     newTower.push(discOldTower);
     oldTower.pop();
+    checkWinner();
 
     console.log(`Disc has been moved:`);
     console.log(board);
@@ -54,6 +67,7 @@ const moveDisc = (oldTower, newTower) => {
       // Move disc
       newTower.push(discOldTower);
       oldTower.pop();
+      checkWinner()
 
       console.log(`Disc has been moved:`);
       console.log(board);
@@ -69,4 +83,3 @@ const moveDisc = (oldTower, newTower) => {
   }
 }
 
-//console.log(moveDisc(1, 3));
