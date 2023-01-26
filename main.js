@@ -11,8 +11,17 @@ const checkWinner = () => {
   // check if all the discs are in tower3
   if (board.tower3.length == numOfDiscs) {
     console.log(`You won!`);
-    // reset game > call reset game function
+    // reset game 
+    resetGame();
+  }
+}
 
+// reset game 
+const resetGame = () => {
+  board = {
+    tower1: [3, 2, 1],
+    tower2: [],
+    tower3: []
   }
 }
 
