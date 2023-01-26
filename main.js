@@ -28,19 +28,64 @@
 
 // console.log(map.gameBoard())
 
-var gameBoard2 = [
-  { title: "---", line: [5, 4, 3, 2, 1]},
-  { title: "---", line: new Array(5)},
-  { title: "---", line: new Array(5)},
+// var gameBoard2 = [
+//   {  line: [5, 4, 3, 2, 1]},
+//   {  line: new Array(5)},
+//   {  line: new Array(5)},
   
-];
+// ];
 
-var officialBoard = gameBoard2.map(function (key) {
-  return key.title && key.line;
+// // var officialBoard = gameBoard2.map(function (key) {
+// //   console.table(key.title && key.line);
 
-})
+// var mapped = gameBoard2.map(function(select) {
+//  return select.line;
+// });
 
-console.table(officialBoard)
+//I need 3 array
+var line1 = [5, 4, 3, 2, 1];
+var line2 = new Array();
+var line3 = new Array();
+
+var board = [line1, line2, line3];
+
+// var game = board.map(function (array) {
+//   return array;
+// });
+
+console.table(board);
+// console.table(game[0]);
+
+// var moveFunction = function(array, index, )
+
+// game[1].push(game[0].pop(1));
+
+//when mod args that are sent insdie func you can have uninted side effect could change board
+//arr and obj are pass by reference
+
+function arrMove(arr, oldIndex, newIndex) {
+  var newBoard = arr.map( function (someVar){
+    return someVar.map(function(arr2) {
+      return arr2;
+    });
+  });
+
+  newBoard[newIndex].push(newBoard[oldIndex].pop(1));
+
+  board  = newBoard;
+};
+
+//To add function for win
 
 
-// Array.apply(null, Array(5)).map(function () {})
+//To add func to resetBoard Helpful to have gameboard and original board arrMov
+
+arrMove(board, 0, 1)
+arrMove(board, 0, 1)
+console.table(board);
+
+
+//need to create a way to move numbers from one index to the other without putting a larger number on top of a smaller one
+
+
+//I need a function to check winner and reset game 
