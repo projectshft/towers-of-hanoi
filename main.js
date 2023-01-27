@@ -69,19 +69,28 @@ function arrMove(arr, oldIndex, newIndex) {
       return arr2;
     });
   });
-
-  newBoard[newIndex].push(newBoard[oldIndex].pop(1));
-
-  board  = newBoard;
+function moveRule() {
+  if (newBoard.slice([oldIndex] -1) > newBoard.slice([newIndex] - 1)) {
+    alert ("Illegal Move");
+  } else {
+    newBoard[newIndex].push(newBoard[oldIndex].pop(1));
+  }
 };
 
-//To add function for win
+moveRule();
 
 
-//To add func to resetBoard Helpful to have gameboard and original board arrMov
-
+  board  = newBoard;
+}
+arrMove(board, 0, 2)
 arrMove(board, 0, 1)
-arrMove(board, 0, 1)
+arrMove(board, 2, 1)
+// arrMove(board, 0, 2)
+
+
+
+
+
 console.table(board);
 
 
@@ -89,3 +98,19 @@ console.table(board);
 
 
 //I need a function to check winner and reset game 
+//arrMove will modify game board meaning original board will never change.
+// and then the resetBoard function can just be
+// gameBoard = originalBoard
+//To add func to resetBoard Helpful to have gameboard and original board arrMov
+
+//To add function for win
+
+// var checkWin = function (arr) {
+//   if () {
+
+//   }
+// }
+
+// var resetBoard = function (arr)  {
+//   gameBoard = originalBoard;
+// }
