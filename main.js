@@ -1,10 +1,10 @@
 let board = [
-  [3, 2, 1],
+  [5, 4, 3, 2, 1],
   [],
   []
 ];
 
-
+// get number of discs in the game
 let numOfDiscs = board[0].length;
 
 // check winner
@@ -20,12 +20,16 @@ const checkWinner = () => {
 // reset game 
 const resetGame = () => {
   board = [
-    [3, 2, 1],
+    [5, 4, 3, 2, 1],
     [],
     []
   ];
+
+  console.log(`Game has reset. This is the starting board:`)
+  printBoard();
 }
 
+// prints board in a readable format
 const printBoard = () => {
   board.map(tower => console.log('---', tower.join(' ')));
 }
@@ -68,7 +72,7 @@ const moveDisc = (oldTower, newTower) => {
 
   // conditional to check if move can be done
   if (newTower.length == 0) {
-    // Move disc
+    // move disc
     newTower.push(discOldTower);
     oldTower.pop();
 
@@ -78,7 +82,7 @@ const moveDisc = (oldTower, newTower) => {
   } else if (newTower.length) {
     // check if last element from oldTower is smaller than last element in newTower
     if (discOldTower < discNewTower) {
-      // Move disc
+      // move disc
       newTower.push(discOldTower);
       oldTower.pop();
 
@@ -87,12 +91,16 @@ const moveDisc = (oldTower, newTower) => {
       checkWinner()
     } else {
       // move can't be done, print board
-      console.log(`You cannot move a larger disc on top of a smaller one.`)
+      console.log(`You cannot move a larger disc on top of a smaller one, board is still:`)
       printBoard();
     }
   } else {
     // move can't be done, print board
-    console.log(`You cannot move a larger disc on top of a smaller one.`)
+    console.log(`You cannot move a larger disc on top of a smaller one, board is still:`)
     printBoard();
   }
 }
+
+// log starting board
+console.log(`This is the starting board:`)
+printBoard();
