@@ -47,6 +47,8 @@ var line1 = [5, 4, 3, 2, 1];
 var line2 = new Array();
 var line3 = new Array();
 
+var winningArray = [5, 4, 3, 2, 1];
+
 var board = [line1, line2, line3];
 
 // var game = board.map(function (array) {
@@ -63,12 +65,17 @@ console.table(board);
 //when mod args that are sent insdie func you can have uninted side effect could change board
 //arr and obj are pass by reference
 
+//Function to create board, move piece and throw error if a larger number is placed on top of another
+// var orgiginalBoard = [...arr];
 function arrMove(arr, oldIndex, newIndex) {
+
+  
   var newBoard = arr.map( function (someVar){
     return someVar.map(function(arr2) {
       return arr2;
     });
   });
+
 
   function moveRule() {
     newBoard[newIndex].push(newBoard[oldIndex].pop(1));
@@ -78,30 +85,73 @@ function arrMove(arr, oldIndex, newIndex) {
     alert ("Illegal Move");
   } else {
     moveRule();
-  }
-
-
+  };
+  // console.table(newBoard[newIndex])
   board  = newBoard;
-};
 
+};
 
 arrMove(board, 0, 2)
 arrMove(board, 0, 1);
-// arrMove(board, 1, 2);
 arrMove(board, 2, 1)
 arrMove(board, 0, 2)
 arrMove(board, 1, 0)
 arrMove(board, 1, 2)
-// arrMove(board, 0, 2)
-
-
-
+arrMove(board, 0, 2)
+arrMove(board, 0, 1);
+arrMove(board, 2, 0)
+arrMove(board, 0, 1);
+arrMove(board, 2, 0)
+arrMove(board, 1, 0)
+arrMove(board, 2, 1)
+arrMove(board, 0, 2)
+arrMove(board, 0, 1);
+arrMove(board, 2, 0)
+arrMove(board, 0, 1);
+arrMove(board, 0, 2)
+arrMove(board, 1, 2)
+arrMove(board, 1, 0)
+arrMove(board, 2, 0)
+arrMove(board, 1, 2)
+arrMove(board, 0, 1)
+arrMove(board, 0, 2)
+arrMove(board, 1, 2)
+arrMove(board, 2, 0)
+arrMove(board, 2, 1)
+arrMove(board, 0, 2)
+arrMove(board, 2, 1)
+arrMove(board, 2, 0)
+arrMove(board, 1, 2)
+arrMove(board, 2, 0)
+arrMove(board, 0, 2)
+arrMove(board, 1, 0)
+arrMove(board, 2, 0)
+arrMove(board, 1, 2)
+arrMove(board, 0, 2)
+arrMove(board, 0, 1);
+arrMove(board, 2, 1)
+arrMove(board, 0, 2)
+arrMove(board, 1, 0)
+arrMove(board, 1, 2)
+arrMove(board, 0, 2)
 
 
 console.table(board);
+console.log(board[2]);
 
 
-//need to create a way to move numbers from one index to the other without putting a larger number on top of a smaller one
+
+// var sam21 = board.map(function(arr) {
+//   return arr.indexOf(3)
+// });
+//  console.log(sam21);
+
+
+// console.log(winningArray);
+// console.log(board[2]);
+// if (board[2] == winningArray) {
+//   alert("Congrats youve won");
+// }
 
 
 //I need a function to check winner and reset game 
