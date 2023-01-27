@@ -27,9 +27,7 @@ const resetGame = () => {
 }
 
 const printBoard = () => {
-  for (let i=0; i < board.length; i++) {
-    console.log('---', board[i].join(' '))
-  }
+  board.map(tower => console.log('---', tower.join(' ')));
 }
 
 const moveDisc = (oldTower, newTower) => {
