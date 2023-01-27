@@ -1,15 +1,16 @@
-let board = {
-  tower1: [3, 2, 1],
-  tower2: [],
-  tower3: []
-}
+let board = [
+  [3, 2, 1],
+  [],
+  []
+];
 
-let numOfDiscs = board.tower1.length;
+
+let numOfDiscs = board[0].length;
 
 // check winner
 const checkWinner = () => {
   // check if all the discs are in tower3
-  if (board.tower3.length == numOfDiscs) {
+  if (board[board.length - 1].length == numOfDiscs) {
     console.log(`You won!`);
     // reset game 
     resetGame();
@@ -18,10 +19,16 @@ const checkWinner = () => {
 
 // reset game 
 const resetGame = () => {
-  board = {
-    tower1: [3, 2, 1],
-    tower2: [],
-    tower3: []
+  board = [
+    [3, 2, 1],
+    [],
+    []
+  ];
+}
+
+const printBoard = () => {
+  for (let i=0; i < board.length; i++) {
+    console.log('---', board[i].join(' '))
   }
 }
 
@@ -29,13 +36,13 @@ const moveDisc = (oldTower, newTower) => {
   // set arguemnts to arrays in board
   switch (oldTower) {
     case 1:
-      oldTower = board.tower1;
+      oldTower = board[0];
       break;
     case 2:
-      oldTower = board.tower2;
+      oldTower = board[1];
       break;
     case 3:
-      oldTower = board.tower3;
+      oldTower = board[2];
       break;
     default:
       console.log(`Invalid First Tower. Pick a number between 1 and 3.`)
@@ -44,13 +51,13 @@ const moveDisc = (oldTower, newTower) => {
 
   switch (newTower) {
     case 1:
-      newTower = board.tower1;
+      newTower = board[0];
       break;
     case 2:
-      newTower = board.tower2;
+      newTower = board[1];
       break;
     case 3:
-      newTower = board.tower3;
+      newTower = board[2];
       break;
     default:
       console.log(`Invalid Second Tower. Pick a number between 1 and 3.`)
@@ -66,29 +73,28 @@ const moveDisc = (oldTower, newTower) => {
     // Move disc
     newTower.push(discOldTower);
     oldTower.pop();
-    checkWinner();
 
     console.log(`Disc has been moved:`);
-    console.log(board);
+    printBoard();
+    checkWinner();
   } else if (newTower.length) {
     // check if last element from oldTower is smaller than last element in newTower
     if (discOldTower < discNewTower) {
       // Move disc
       newTower.push(discOldTower);
       oldTower.pop();
-      checkWinner()
 
       console.log(`Disc has been moved:`);
-      console.log(board);
+      printBoard();
+      checkWinner()
     } else {
       // move can't be done, print board
       console.log(`You cannot move a larger disc on top of a smaller one.`)
-      console.log(board);
+      printBoard();
     }
   } else {
     // move can't be done, print board
     console.log(`You cannot move a larger disc on top of a smaller one.`)
-    console.log(board);
+    printBoard();
   }
 }
-
