@@ -69,22 +69,29 @@ function arrMove(arr, oldIndex, newIndex) {
       return arr2;
     });
   });
-function moveRule() {
-  if (newBoard.slice([oldIndex] -1) > newBoard.slice([newIndex] - 1)) {
+
+  function moveRule() {
+    newBoard[newIndex].push(newBoard[oldIndex].pop(1));
+  };
+
+  if (newBoard[oldIndex][newBoard[oldIndex].length - 1] > newBoard[newIndex][newBoard[newIndex].length - 1] ) {
     alert ("Illegal Move");
   } else {
-    newBoard[newIndex].push(newBoard[oldIndex].pop(1));
+    moveRule();
   }
-};
-
-moveRule();
 
 
   board  = newBoard;
-}
+};
+
+
 arrMove(board, 0, 2)
-arrMove(board, 0, 1)
+arrMove(board, 0, 1);
+// arrMove(board, 1, 2);
 arrMove(board, 2, 1)
+arrMove(board, 0, 2)
+arrMove(board, 1, 0)
+arrMove(board, 1, 2)
 // arrMove(board, 0, 2)
 
 
