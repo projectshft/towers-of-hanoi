@@ -8,7 +8,6 @@
 //once game is won the game should automatically end by announcing the winner(though console.log) and reset for a new game
 //BONUS:  any tiem you iterate through the array, try and refrain from using for or while loops - try using helper methods
 
-
 //I need 3 array
 var line1 = [5, 4, 3, 2, 1];
 var line2 = new Array();
@@ -17,6 +16,18 @@ var line3 = new Array();
 var winningArray = [5, 4, 3, 2, 1];
 
 var board = [line1, line2, line3];
+
+function arrayEquals(a, b) {
+  return Array.isArray(a) &&
+    Array.isArray(b) &&
+    a.length === b.length &&
+    a.every((val, index) => val === b[index]);
+};
+
+function winAndReset() {
+  alert("You have won");
+}
+
 
 
 console.table(board);
@@ -33,7 +44,7 @@ function arrMove(arr, oldIndex, newIndex) {
     });
   });
 
-
+  
   function moveRule() {
     newBoard[newIndex].push(newBoard[oldIndex].pop(1));
   };
@@ -44,11 +55,21 @@ function arrMove(arr, oldIndex, newIndex) {
     moveRule();
   };
 
+  if (arrayEquals(newBoard[1], winningArray)) {
+    winAndReset();
+  } else if(arrayEquals(newBoard[2], winningArray)) {
+    winAndReset();
+  };
+
+
   board  = newBoard;
+
+
 };
 
 //Winning Moves
 arrMove(board, 0, 2)
+
 arrMove(board, 0, 1);
 arrMove(board, 2, 1)
 arrMove(board, 0, 2)
@@ -96,20 +117,11 @@ arrMove(board, 0, 2)
 console.table(board);
 console.log(board[2]);
 
-
-
-// var sam21 = board.map(function(arr) {
-//   return arr.indexOf(3)
-// });
-//  console.log(sam21);
-
-
-// console.log(winningArray);
-// console.log(board[2]);
-// if (board[2] == winningArray) {
-//   alert("Congrats youve won");
+// if (arrayEquals(board[1], winningArray)) {
+//   winAndReset();
+// } else if(arrayEquals(board[2], winningArray)) {
+//   winAndReset();
 // }
-
 
 //I need a function to check winner and reset game 
 //arrMove will modify game board meaning original board will never change.
