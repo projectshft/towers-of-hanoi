@@ -8,32 +8,61 @@
 //once game is won the game should automatically end by announcing the winner(though console.log) and reset for a new game
 //BONUS:  any tiem you iterate through the array, try and refrain from using for or while loops - try using helper methods
 
-//I need 3 array
+//GameBoard
 var line1 = [5, 4, 3, 2, 1];
 var line2 = new Array();
 var line3 = new Array();
-
-var winningArray = [5, 4, 3, 2, 1];
-
 var board = [line1, line2, line3];
 
-function arrayEquals(a, b) {
-  return Array.isArray(a) &&
-    Array.isArray(b) &&
-    a.length === b.length &&
-    a.every((val, index) => val === b[index]);
-};
-
-function winAndReset() {
-  alert("You have won");
-}
-
-
-
+//Solution to the game invoke function to win or peak to cheat
+var winningMoves =  function () {
+  arrMove(board, 0, 2)
+  arrMove(board, 0, 1);
+  arrMove(board, 2, 1)
+  arrMove(board, 0, 2)
+  arrMove(board, 1, 0)
+  arrMove(board, 1, 2)
+  arrMove(board, 0, 2)
+  arrMove(board, 0, 1);
+  arrMove(board, 2, 0)
+  arrMove(board, 0, 1);
+  arrMove(board, 2, 0)
+  arrMove(board, 1, 0)
+  arrMove(board, 2, 1)
+  arrMove(board, 0, 2)
+  arrMove(board, 0, 1);
+  arrMove(board, 2, 0)
+  arrMove(board, 0, 1);
+  arrMove(board, 0, 2)
+  arrMove(board, 1, 2)
+  arrMove(board, 1, 0)
+  arrMove(board, 2, 0)
+  arrMove(board, 1, 2)
+  arrMove(board, 0, 1)
+  arrMove(board, 0, 2)
+  arrMove(board, 1, 2)
+  arrMove(board, 2, 0)
+  arrMove(board, 2, 1)
+  arrMove(board, 0, 2)
+  arrMove(board, 2, 1)
+  arrMove(board, 2, 0)
+  arrMove(board, 1, 2)
+  arrMove(board, 2, 0)
+  arrMove(board, 0, 2)
+  arrMove(board, 1, 0)
+  arrMove(board, 2, 0)
+  arrMove(board, 1, 2)
+  arrMove(board, 0, 2)
+  arrMove(board, 0, 1);
+  arrMove(board, 2, 1)
+  arrMove(board, 0, 2)
+  arrMove(board, 1, 0)
+  arrMove(board, 1, 2)
+  arrMove(board, 0, 2)
+  };
+  
+//Displays Original Board
 console.table(board);
-
-//when mod args that are sent insdie func you can have uninted side effect could change board
-//arr and obj are pass by reference
 
 //Function to create board, move piece and throw error if a larger number is placed on top of another
 
@@ -43,6 +72,17 @@ function arrMove(arr, oldIndex, newIndex) {
       return arr2;
     });
   });
+
+  function winAndReset() {
+    alert("You have won");
+  };
+
+  function arrayEquals(a, b) {
+    return Array.isArray(a) &&
+      Array.isArray(b) &&
+      a.length === b.length &&
+      a.every((val, index) => val === b[index]);
+  };
 
   
   function moveRule() {
@@ -55,88 +95,27 @@ function arrMove(arr, oldIndex, newIndex) {
     moveRule();
   };
 
-  if (arrayEquals(newBoard[1], winningArray)) {
+  if (arrayEquals(newBoard[1], line1)) {
     winAndReset();
-  } else if(arrayEquals(newBoard[2], winningArray)) {
+  } else if(arrayEquals(newBoard[2], line1)) {
     winAndReset();
   };
 
-
   board  = newBoard;
-
 
 };
 
-//Winning Moves
-arrMove(board, 0, 2)
 
-arrMove(board, 0, 1);
-arrMove(board, 2, 1)
-arrMove(board, 0, 2)
-arrMove(board, 1, 0)
-arrMove(board, 1, 2)
-arrMove(board, 0, 2)
-arrMove(board, 0, 1);
-arrMove(board, 2, 0)
-arrMove(board, 0, 1);
-arrMove(board, 2, 0)
-arrMove(board, 1, 0)
-arrMove(board, 2, 1)
-arrMove(board, 0, 2)
-arrMove(board, 0, 1);
-arrMove(board, 2, 0)
-arrMove(board, 0, 1);
-arrMove(board, 0, 2)
-arrMove(board, 1, 2)
-arrMove(board, 1, 0)
-arrMove(board, 2, 0)
-arrMove(board, 1, 2)
-arrMove(board, 0, 1)
-arrMove(board, 0, 2)
-arrMove(board, 1, 2)
-arrMove(board, 2, 0)
-arrMove(board, 2, 1)
-arrMove(board, 0, 2)
-arrMove(board, 2, 1)
-arrMove(board, 2, 0)
-arrMove(board, 1, 2)
-arrMove(board, 2, 0)
-arrMove(board, 0, 2)
-arrMove(board, 1, 0)
-arrMove(board, 2, 0)
-arrMove(board, 1, 2)
-arrMove(board, 0, 2)
-arrMove(board, 0, 1);
-arrMove(board, 2, 1)
-arrMove(board, 0, 2)
-arrMove(board, 1, 0)
-arrMove(board, 1, 2)
-arrMove(board, 0, 2)
+
+
+winningMoves();
+
 
 
 console.table(board);
 console.log(board[2]);
 
-// if (arrayEquals(board[1], winningArray)) {
-//   winAndReset();
-// } else if(arrayEquals(board[2], winningArray)) {
-//   winAndReset();
-// }
-
-//I need a function to check winner and reset game 
-//arrMove will modify game board meaning original board will never change.
+//I need a function to reset game 
 // and then the resetBoard function can just be
 // gameBoard = originalBoard
 //To add func to resetBoard Helpful to have gameboard and original board arrMov
-
-//To add function for win
-
-// var checkWin = function (arr) {
-//   if () {
-
-//   }
-// }
-
-// var resetBoard = function (arr)  {
-//   gameBoard = originalBoard;
-// }
