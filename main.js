@@ -102,18 +102,16 @@ function arrMove(arr, oldIndex, newIndex) {
   };
 
   board  = newBoard;
+  console.table(board);
+
 
 };
 
 
-
-
 winningMoves();
 
+// console.table(board);
 
-
-console.table(board);
-console.log(board[2]);
 
 //I need a function to reset game 
 // and then the resetBoard function can just be
