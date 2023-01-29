@@ -1,7 +1,7 @@
 // We'll want to be able to print the board horizontally. You MUST utilize a map function at least once
 
-const board = {peg1: [1],
-peg2: [5, 4, 3, 2],
+const board = {peg1: [5, 4, 3, 2, 1],
+peg2: [],
 peg3: []};
 
 const moveDisc = function (start, end) {
