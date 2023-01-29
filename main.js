@@ -36,35 +36,8 @@ const printBoard = () => {
 
 const moveDisc = (oldTower, newTower) => {
   // set arguemnts to arrays in board
-  switch (oldTower) {
-    case 1:
-      oldTower = board[0];
-      break;
-    case 2:
-      oldTower = board[1];
-      break;
-    case 3:
-      oldTower = board[2];
-      break;
-    default:
-      console.log(`Invalid First Tower. Pick a number between 1 and 3.`)
-      break;
-  }
-
-  switch (newTower) {
-    case 1:
-      newTower = board[0];
-      break;
-    case 2:
-      newTower = board[1];
-      break;
-    case 3:
-      newTower = board[2];
-      break;
-    default:
-      console.log(`Invalid Second Tower. Pick a number between 1 and 3.`)
-      break;
-  }
+  oldTower = board[oldTower - 1];
+  newTower = board[newTower - 1];
 
   // declared variables for top discs in towers
   let discOldTower = oldTower[oldTower.length - 1];
