@@ -1,19 +1,23 @@
-//Requirements: 
-//We will need a board and will tilize a 2D array
-
-//Must utilize a map function at least once to accomplish this part of the assignment.  The starting board will log the 2D array to the console like:
-
-
-//There should be a behckWinner function that checks to see if the player has won the game(disc in original order but on different peg)
-//once game is won the game should automatically end by announcing the winner(though console.log) and reset for a new game
-//BONUS:  any tiem you iterate through the array, try and refrain from using for or while loops - try using helper methods
+//Welcome to towers of hanoi type arrMove(board, "from Index (0,1,2)", or "from index(0,1,2)"
+//example arrMove(board, 0, 2)
+//type "winningMoves()" in console to automatically win
 
 //GameBoard
 var line1 = [5, 4, 3, 2, 1];
 var line2 = new Array();
 var line3 = new Array();
 var board = [line1, line2, line3];
+var board2 = [line1, line2, line3];
 
+var setToOriginal = function (arr) {
+  var newBoard2 = arr.map( function (someVar){
+    return someVar.map(function(arr2) {
+      return arr2;
+    });
+  });
+  board2 = newBoard2
+  console.table(board2);
+}
 //Solution to the game invoke function to win or peak to cheat
 var winningMoves =  function () {
   arrMove(board, 0, 2)
@@ -72,10 +76,13 @@ function arrMove(arr, oldIndex, newIndex) {
       return arr2;
     });
   });
+  board  = newBoard;
+
 
   function winAndReset() {
     alert("You have won");
-  };
+    setToOriginal(board2);
+    };
 
   function arrayEquals(a, b) {
     return Array.isArray(a) &&
@@ -95,25 +102,14 @@ function arrMove(arr, oldIndex, newIndex) {
     moveRule();
   };
 
+  console.table(board);
+
   if (arrayEquals(newBoard[1], line1)) {
     winAndReset();
   } else if(arrayEquals(newBoard[2], line1)) {
     winAndReset();
   };
-
-  board  = newBoard;
-  console.table(board);
-
-
 };
 
 
-winningMoves();
-
-// console.table(board);
-
-
-//I need a function to reset game 
-// and then the resetBoard function can just be
-// gameBoard = originalBoard
-//To add func to resetBoard Helpful to have gameboard and original board arrMov
+// winningMoves();
