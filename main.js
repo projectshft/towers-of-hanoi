@@ -1,11 +1,40 @@
-let board = [
-  [5, 4, 3, 2, 1],
-  [],
-  []
-];
+let board = [];
 
 // get number of discs in the game
-let numOfDiscs = board[0].length;
+let numOfTowers;
+let numOfDiscs;
+
+// function to start game
+const startGame = () => {
+numOfTowers = prompt("Choose the number of towers: ");
+numOfDiscs = prompt("Choose the number of discs: ");
+
+// check if numOfTowers is at least 3
+if (numOfTowers < 3) {
+  numOfTowers = prompt("Invalid number of towers. Please choose at least 3 towers.")
+
+  setUpBoard();
+  console.log(`This is the starting board:`)
+  printBoard();
+} else {
+  setUpBoard();
+  console.log(`This is the starting board:`)
+  printBoard();
+}
+}
+
+// set up board based on user inputs (towers & discs)
+const setUpBoard = () => {
+  // push numOfTowers as empty arrays into board
+  for (let i=0; i < numOfTowers; i++) {
+    board.push([]);
+  }
+
+  // push numOfDiscs as elements into first tower
+  for (let i=numOfDiscs; i > 0; i--) {
+    board[0].push(i)
+  }
+}
 
 // check winner
 const checkWinner = () => {
@@ -19,13 +48,12 @@ const checkWinner = () => {
 
 // reset game 
 const resetGame = () => {
-  board = [
-    [5, 4, 3, 2, 1],
-    [],
-    []
-  ];
+
+  // clear board
+  board = [];
 
   console.log(`Game has reset. This is the starting board:`)
+  setUpBoard();
   printBoard();
 }
 
@@ -74,6 +102,4 @@ const moveDisc = (oldTower, newTower) => {
   }
 }
 
-// log starting board
-console.log(`This is the starting board:`)
-printBoard();
+startGame();
