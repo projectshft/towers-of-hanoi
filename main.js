@@ -1,6 +1,6 @@
 //Towers of Hanoi Eval
 console.log("Please refer to instructions above");
-console.log("Starter code moveArr(board, 0, 0)");
+console.log("Starter code arrMove(board, 0, 0)");
 console.log("Cheat code winningMoves()");
 //Gameboards
 var gameBoard = board2
