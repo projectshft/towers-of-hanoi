@@ -1,12 +1,15 @@
-//Welcome to towers of hanoi type arrMove(board, "from Index (0,1,2)", or "from index(0,1,2)"
-//example arrMove(board, 0, 2)
-//type "winningMoves()" in console to automatically win
+//Towers of Hanoi Eval
+console.log("Please refer to instructions above");
+console.log("Starter code moveArr(board, 0, 0)");
+console.log("Cheat code winningMoves()");
+//Gameboards
 var gameBoard = board2
-//GameBoard
-var line1 = [5, 4, 3, 2, 1]; 
-var line2 = new Array();
-var line3 = new Array();
-var board = [line1, line2, line3];
+
+var board = [
+  [5, 4, 3, 2, 1], 
+  new Array(), 
+  new Array()
+];
 
 var board2 = [
   [5, 4, 3, 2, 1], 
@@ -14,16 +17,7 @@ var board2 = [
   new Array()
 ];
 
-var setToOriginal = function (arr) {
-  var newBoard2 = arr.map( function (someVar){
-    return someVar.map(function(arr2) {
-      return arr2;
-    });
-  });
-  newBoard2 = gameBoard
-  console.table(gameBoard);
-}
-//Solution to the game invoke function to win or peak to cheat
+//Cheat Code
 var winningMoves =  function () {
   arrMove(board, 0, 2)
   arrMove(board, 0, 1);
@@ -74,7 +68,7 @@ var winningMoves =  function () {
 console.table(board);
 
 
-//Function to create board, move piece and throw error if a larger number is placed on top of another
+//Function to map board play by play, move pieces, throw error if a larger number is placed on top of another and reset board
 
 function arrMove(arr, oldIndex, newIndex) {
   var newBoard = arr.map( function (someVar){
@@ -84,14 +78,13 @@ function arrMove(arr, oldIndex, newIndex) {
   });
   board  = newBoard;
 
-
+//Reset Function
   function winAndReset() {
-    alert("You have won");
+    alert("You have won!  Hit ok to reset board");
    console.table(board2);
    board = board2
-
     };
-
+//Comparison function used to check winner
   function arrayEquals(a, b) {
     return Array.isArray(a) &&
       Array.isArray(b) &&
@@ -99,26 +92,23 @@ function arrMove(arr, oldIndex, newIndex) {
       a.every((val, index) => val === b[index]);
   };
 
-  
+  //Function to move pieces depending on rules
   function moveRule() {
     newBoard[newIndex].push(newBoard[oldIndex].pop(1));
   };
-
+//Rules
   if (newBoard[oldIndex][newBoard[oldIndex].length - 1] > newBoard[newIndex][newBoard[newIndex].length - 1] ) {
     alert ("Illegal Move");
   } else {
     moveRule();
   };
-
+//Tracks moves
   console.table(board);
+//If Statement to check if game is won and then reset
+  if (arrayEquals(newBoard[1], board[0])) {
+    winAndReset();
+  } else if(arrayEquals(newBoard[2], board[0])) {
+    winAndReset();
 
-  if (arrayEquals(newBoard[1], line1)) {
-    winAndReset();
-  } else if(arrayEquals(newBoard[2], line1)) {
-    winAndReset();
-    // console.table(board)
   };
 };
-
-
-// winningMoves();
