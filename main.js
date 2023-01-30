@@ -1,11 +1,19 @@
+// This program utilizes the module design for the game logic,
+// which incorporates the returned object in towersOfHanoi() to
+// maintain the state of the board. Notice also that there are
+// no 'for' or 'while' loops being used to iterate through arrays.
+
 var towersOfHanoi = function () {
   var board   = [[5, 4, 3, 2, 1], [], []];
-  var checkBoard = [[5, 4, 3, 2, 1], [], []]
+  var numDiscs = 5;
   var startingBoard = function () {
     board.map(function (pegs) {
     return console.log(`--- ${pegs.join(' ')}`);
   })};
-
+// Please note: showLastDisc() does not get used when playing the game.
+// It was added and used as a tool to test what the last
+// elements in the peg arrays were when testing the moveDisc() function.
+// Figured I would leave it to highlight my thought process!
   var showLastDisc = function(pegA, pegB) {
     var peg1 = pegA - 1;
     var peg2 = pegB - 1;
@@ -28,73 +36,73 @@ var towersOfHanoi = function () {
     board[peg2].push(board[peg1].pop());
     console.log('That move was successful, board is now: ');
     startingBoard();
-    // showLastDisc(pegA, pegB);
-    // checkWinner();
+    checkWinner();
     }
   }
-  
+  //checkWinner needs to check 1. if starting peg (board[0]) is an empty array/undefined, then
+  // 2. if 1 is true, check if the Array.length() of the 2nd or 3rd pegs is equal to the number of discs in the game, defined by numDiscs  
   var checkWinner = function() {
-    console.log(board);
-    console.log(checkBoard);
-    // if (startingBoard() !== checkBoard) {
-    // } else {
-    //   return console.log('You Won!');
-    // }
+    if (board[0] === undefined || board[0].length == 0 ) {
+      if (numDiscs === board[1].length || numDiscs === board[2].length) {
+        alert('Congratulations, you beat Towers of Hanoi!!! Click \'OK\' to play again!');
+        resetBoard();
+      }
+    } 
   };
+  
+  var resetBoard = function() {
+    board = [[5, 4, 3, 2, 1], [], []];
+    console.log('Play again below!');
+    startingBoard();
+  }
+
   return {
     startingBoard: startingBoard,
     moveDisc: moveDisc,
     showLastDisc: showLastDisc,
-    checkWinner: checkWinner
+    checkWinner: checkWinner,
+    resetBoard: resetBoard
   }
 };
 
 var game = towersOfHanoi();
-game.startingBoard();
-game.moveDisc(1, 2);
-game.moveDisc(1, 3);
-game.moveDisc(2,3);
-game.moveDisc(1,2);
-game.moveDisc(3,1);
-game.moveDisc(3,2);
-game.moveDisc(1,3);
-game.moveDisc(2,1);
-game.moveDisc(1,2);
-game.moveDisc(3,2);
-game.moveDisc(1,3);
-game.moveDisc(2,3);
-game.moveDisc(2,1);
-game.moveDisc(3,1);
-game.moveDisc(2,3);
-game.moveDisc(1,2);
-game.moveDisc(1,3);
-game.moveDisc(2,3);
-game.moveDisc(1,2);
-game.moveDisc(3,1);
-game.moveDisc(3,2);
-game.moveDisc(1,2);
-game.moveDisc(3,1);
-game.moveDisc(2,3);
-game.moveDisc(2,1);
-game.moveDisc(3,1);
-game.moveDisc(3,2);
-game.moveDisc(1,2);
-game.moveDisc(1,3);
-game.moveDisc(2,3);
-game.moveDisc(1,2);
-game.moveDisc(3,1);
-game.moveDisc(3,2);
-game.moveDisc(1,2);
-console.log('Winning Board below: ');
+
 game.startingBoard();
 
-
-
-// game.checkWinner();
-
-
-
-// game.moveDisc
-// game.showLastDisc(1, 2);
-// game.moveDisc(1, 2);
-// game.checkWinner();
+var winningScenario = function () {
+game.moveDisc(1,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,3);
+game.moveDisc(2,1);
+game.moveDisc(1,2);
+game.moveDisc(3,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(2,1);
+game.moveDisc(3,1);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(2,3);
+game.moveDisc(2,1);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,2);
+game.moveDisc(1,3);
+game.moveDisc(2,3);
+game.moveDisc(1,2);
+game.moveDisc(3,1);
+game.moveDisc(3,2);
+game.moveDisc(1,2);
+};
+// winningScenario();
