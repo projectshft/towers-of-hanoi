@@ -1,13 +1,18 @@
 //Welcome to towers of hanoi type arrMove(board, "from Index (0,1,2)", or "from index(0,1,2)"
 //example arrMove(board, 0, 2)
 //type "winningMoves()" in console to automatically win
-
+var gameBoard = board2
 //GameBoard
-var line1 = [5, 4, 3, 2, 1];
+var line1 = [5, 4, 3, 2, 1]; 
 var line2 = new Array();
 var line3 = new Array();
 var board = [line1, line2, line3];
-var board2 = [line1, line2, line3];
+
+var board2 = [
+  [5, 4, 3, 2, 1], 
+  new Array(), 
+  new Array()
+];
 
 var setToOriginal = function (arr) {
   var newBoard2 = arr.map( function (someVar){
@@ -15,8 +20,8 @@ var setToOriginal = function (arr) {
       return arr2;
     });
   });
-  board2 = newBoard2
-  console.table(board2);
+  newBoard2 = gameBoard
+  console.table(gameBoard);
 }
 //Solution to the game invoke function to win or peak to cheat
 var winningMoves =  function () {
@@ -68,11 +73,12 @@ var winningMoves =  function () {
 //Displays Original Board
 console.table(board);
 
+
 //Function to create board, move piece and throw error if a larger number is placed on top of another
 
 function arrMove(arr, oldIndex, newIndex) {
   var newBoard = arr.map( function (someVar){
-    return someVar.map(function(arr2) {
+    return someVar.map (function(arr2) {
       return arr2;
     });
   });
@@ -81,7 +87,9 @@ function arrMove(arr, oldIndex, newIndex) {
 
   function winAndReset() {
     alert("You have won");
-    setToOriginal(board2);
+   console.table(board2);
+   board = board2
+
     };
 
   function arrayEquals(a, b) {
@@ -108,6 +116,7 @@ function arrMove(arr, oldIndex, newIndex) {
     winAndReset();
   } else if(arrayEquals(newBoard[2], line1)) {
     winAndReset();
+    // console.table(board)
   };
 };
 
