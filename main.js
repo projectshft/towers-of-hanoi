@@ -1,84 +1,85 @@
- const board = {
-  pegs : [[5,4,3,2,1], [], []], 
+let numPegs  = prompt('Enter the number of pegs: '); 
+let numDiscs  = prompt('Enter the number of discs: '); 
+
+const board = {
+  pegs : [],
   plays: 0,
   peg : '---', 
-  pegsLength : function() {
-    return this.pegs.length //3
-  }, //does not work without the function 
+ 
+    pegsLength() {
+      return this.pegs.length 
+    },  
 
-  // when this code is finish, maybe seperate the discs and disc postion
-  discs : function(pegNum) { 
-    //no var? 
-    discPosition = this.pegs[pegNum].length - 1; 
-    lastNum = this.pegs[pegNum][discPosition]; 
-    return lastNum
-  }, 
+    lastNumOf(pegNum) { 
+      discPosition = this.pegs[pegNum].length - 1; 
+      lastNum = this.pegs[pegNum][discPosition]; 
+      return lastNum
+    }, 
 
-  pushDics : function(popOut, pushIn){  
-    debugger;    
-    pop = this.pegs[popOut].length - 1; 
-    lastNumStartArray = this.pegs[popOut][pop]; 
-    endArray = this.pegs[pushIn]; 
-    startArray = this.pegs[popOut]; 
+    pushDics(popOut, pushIn){  
+      endArray = this.pegs[pushIn]; 
+      startArray = this.pegs[popOut]; 
+      endArray.push(this.lastNumOf(popOut)); 
+      startArray.pop();  
+    }, 
 
-    endArray.push(this.discs(popOut)); 
-    startArray.pop();  
+    moveDisc(startPeg, endPeg) {
+      startArrayPos = startPeg - 1; 
+      endArrayPos = endPeg - 1; 
 
-  }, 
+      if (startPeg > board.pegsLength() || endPeg > board.pegsLength() || this.lastNumOf(startArrayPos) === undefined) {
+        alert('illegal move'); 
+        return false
+      } 
 
-  moveDisc : function (startPeg, endPeg) {
-    startArrayPos = startPeg - 1; 
-    endArrayPos = endPeg - 1; 
-
-    if (startPeg >= board.pegsLength() && endPeg >= board.pegsLength()) {
-      alert( 'This Peg does not exist'); 
-      return false
-    } 
-
-    if (this.discs(startArrayPos) === undefined && this.discs(endArrayPos) === undefined ) {
-      alert('There is no disc inside either of the pegs what are you doing??')
-      return false 
-    }
-
-    if (this.discs(startArrayPos) <= this.discs(endArrayPos) || this.discs(endArrayPos) === undefined ) {
-        this.pushDics(startArrayPos, endArrayPos); 
-        this.plays += 1 ; 
-        this.checkWinner(); 
-        alert('This peg exist'); 
-        // this.printBoard; 
-        return true
-      }
-  },
+      if (this.lastNumOf(startArrayPos) <= this.lastNumOf(endArrayPos) || this.lastNumOf(endArrayPos) === undefined ) {
+          this.pushDics(startArrayPos, endArrayPos); 
+          this.plays += 1 ;  
+          console.log('That move was successful, board is now:')
+          this.printBoard(this.pegs, this.peg); 
+          this.checkWinner(this.pegs); 
+          return true
+        } else {
+          alert('You cannot put the bigger disc on top of the smaller one! Try again!')
+          return false; 
+        }
+    
+    },
   
-  // printBoard : this.pegs.map(function(print) {
-  //   return board.this.peg; 
+    printBoard() {
+        debugger; 
+        return console.log(this.pegs.map((allPegs) => { 
+          let resultBoard = allPegs.map((allDisc) => `${allDisc}`).join(' ');
+          return `${this.peg} ${resultBoard}`;
+        }).join('\n')
+        )
 
-  // }),
+    },
 
-  checkWinner : function(){
-    if (this.pegs[0].length === 0 ) {
-      alert('You won!'); 
+    checkWinner(pegs){ 
+        debugger;
+        for (let i = 0; i < this.pegs.length; i++) { 
+          if (i !== 0 && this.pegs[i].length === parseInt(numDiscs)) {
+            console.log('You won! It only took ' + this.plays +' attempts!');
+            this.plays = 0; 
+            this.pegs = [];  
+            return true
+          }
+        } 
+        return false
+    },
+        
+    change : function (pegsNum, dicsNum) {
+          for (let i = 0; i < pegsNum; i++) {
+              this.pegs.push([]); 
+          }
+          for (let j = 0; j < dicsNum; j++) {
+              this.pegs[0].push(dicsNum - j); 
+          }
+
+          this.printBoard();
     }
-
-  },
-
-  printBoard : this.pegs.map(function (print) {
-    return this.print
-
-  })
-
 }; 
 
-
-
-
-// // var change = function (pegs, dics) {
-// //     var peg = ['---'];
-     
-// //     for (let i = 0; i < pegs; i++) {
-// //         emptyBoard.push(peg); 
-// //     }
-// //     for (let j = 0; j < dics; j++) {
-// //         emptyBoard[0].push(dics - j); 
-// //     }
-// // };
+board.change(numPegs, numDiscs); 
+  
