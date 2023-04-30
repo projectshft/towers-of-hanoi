@@ -115,3 +115,41 @@ var moveDisc = function (fromPeg, toPeg) {
   }
 };
 
+var checkWinner = function () {
+  if (boardObj.board[1].includes(1, 4)) {
+    console.log("Congratulations! You are the winner!");
+    console.log("The board is ready for a new game.")
+
+    //since this win condition knows the discs are on peg 2
+    //the function removes the empty array and index 0 
+    //then it adds a new empty array to the end of the array of arrays
+    //creating a new set of 3 pegs with the discs all on the new peg 1
+    boardObj.board.shift();
+    boardObj.board.push([]);
+
+    boardObj.board.map(function (arr) {
+      console.log('--- ' + arr.join(' '))
+    });
+
+  } else if (boardObj.board[2].includes(1, 4)) {
+    console.log("Winner! You have brought the world to an end!");
+    console.log("Can you do it again?")
+
+    //Same idea as above but this win is on peg 3
+    //two empty array removed from the beginning and 2 empty arrays added to end
+    boardObj.board.shift();
+    boardObj.board.shift();
+    boardObj.board.push([]);
+    boardObj.board.push([]);
+
+    boardObj.board.map(function (arr) {
+      console.log('--- ' + arr.join(' '))
+    });
+  } else { 
+    console.log("Sorry, You have not won yet! Keep going!")
+
+    boardObj.board.map(function (arr) {
+      console.log('--- ' + arr.join(' '))
+    });    
+  }
+}
