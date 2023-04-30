@@ -40,15 +40,57 @@ var boardObj = {
     [5, 4, 3, 2, 1],
     [],
     []
-  ], 
-  //?? Maybe add a method that can be invoked to print the current board ??
-  // Then could add the method below in the moveDisc function. maybe have to use 'this'
-};
+  ],
+  winCondition: [5, 4, 3, 2, 1], 
+  printBoard: function () {
+    this.board.map(function (arr) {
+      console.log('--- ' + arr.join(' '));
+    });
+  },
+  resetBoard: function () {
+    this.board = [
+      [5, 4, 3, 2, 1],
+      [],
+      []
+    ];
+    this.winCondition = [5, 4, 3, 2, 1];
+    this.printBoard();
+    //resetBoard will just reset to the default of 3 pegs and 5 discs
+  },
+  createBoard: function (numPegs, numDiscs) {
+    this.board = [];
+  
+    for (var i = 0; i < numPegs; i++) {
+      this.board.push([]);
+    }
+  
+    for (var j = numDiscs; j > 0; j--) {
+    this.board[0].push(j);
+    }
+  
+    this.winCondition = this.board[0];
+  
+    this.printBoard();
+  },
+  checkWinner: function () {
+    var solutionCheck = boardObj.board.slice(1);
 
-//prints boardObj horizontally. Able to use map here
-boardObj.board.map(function (arr) {
-  console.log('--- ' + arr.join(' '))
-});
+    if (solutionCheck.some(function(arr) {
+      return arr.toString() === boardObj.winCondition.toString();
+    })) {
+      console.log("Congratulations! You are the winner!");
+      console.log("The board is ready for a new game.")
+  
+      boardObj.resetBoard();
+    } else {
+      console.log("Sorry, you have not won yet! Keep going!")
+
+      boardObj.printBoard();
+    }
+  }
+};
+//Print board to see the starting board.
+boardObj.printBoard();
 
 //move function with 2 arguments. fromPeg & toPeg (moving disc from 'fromPeg' to 'toPeg')
 var moveDisc = function (fromPeg, toPeg) {
@@ -76,80 +118,35 @@ var moveDisc = function (fromPeg, toPeg) {
      
   //boardObj.board[fromPeg - 1][fromArr.length - 1]; === disc to be moved
   //boardObj.board[toPeg - 1][toArr.length - 1]; === disc that will be below the disc being moved
-
+/*
   boardObj.board.map(function (arr) {
     console.log('--- ' + arr.join(' '))
-  });
+  }); */
+
+  boardObj.printBoard();
 
   // need to add condition to announce winner and reset board
-  //boardObj.board[1].includes(1, boardObj.board[1].length - 1)
-  if (boardObj.board[1].includes(1, 4)) {
+  // this will automatically end the game, announce the winner and reset the board for a new game
+  for (var i = 1; i < boardObj.board.length; i++) {
+    if (boardObj.board[i].toString() === boardObj.winCondition.toString()) {
+      console.log("Congratulations! You are the winner!");
+      console.log("The board is ready for a new game.")
+      
+      boardObj.resetBoard();
+    }
+  }
+
+  //old code. Longer but made it possible to have multiple winning announcments.
+  /* if (boardObj.board[1].toString() === [5, 4, 3, 2, 1].toString()) {
     console.log("Congratulations! You are the winner!");
     console.log("The board is ready for a new game.")
+    
+    boardObj.resetBoard();
 
-    //since this win condition knows the discs are on peg 2
-    //the function removes the empty array and index 0 
-    //then it adds a new empty array to the end of the array of arrays
-    //creating a new set of 3 pegs with the discs all on the new peg 1
-    boardObj.board.shift();
-    boardObj.board.push([]);
-
-    boardObj.board.map(function (arr) {
-      console.log('--- ' + arr.join(' '))
-    });
-
-  } else if (boardObj.board[2].includes(1, 4)) {
+  } else if (boardObj.board[1].toString() === [5, 4, 3, 2, 1].toString()) {
     console.log("Winner! You have brought the world to an end!");
     console.log("Can you do it again?")
 
-    //Same idea as above but this win is on peg 3
-    //two empty array removed from the beginning and 2 empty arrays added to end
-    boardObj.board.shift();
-    boardObj.board.shift();
-    boardObj.board.push([]);
-    boardObj.board.push([]);
-
-    boardObj.board.map(function (arr) {
-      console.log('--- ' + arr.join(' '))
-    });
-  }
+    boardObj.resetBoard();
+  } */
 };
-
-var checkWinner = function () {
-  if (boardObj.board[1].includes(1, 4)) {
-    console.log("Congratulations! You are the winner!");
-    console.log("The board is ready for a new game.")
-
-    //since this win condition knows the discs are on peg 2
-    //the function removes the empty array and index 0 
-    //then it adds a new empty array to the end of the array of arrays
-    //creating a new set of 3 pegs with the discs all on the new peg 1
-    boardObj.board.shift();
-    boardObj.board.push([]);
-
-    boardObj.board.map(function (arr) {
-      console.log('--- ' + arr.join(' '))
-    });
-
-  } else if (boardObj.board[2].includes(1, 4)) {
-    console.log("Winner! You have brought the world to an end!");
-    console.log("Can you do it again?")
-
-    //Same idea as above but this win is on peg 3
-    //two empty array removed from the beginning and 2 empty arrays added to end
-    boardObj.board.shift();
-    boardObj.board.shift();
-    boardObj.board.push([]);
-    boardObj.board.push([]);
-
-    boardObj.board.map(function (arr) {
-      console.log('--- ' + arr.join(' '))
-    });
-  } else { 
-    console.log("Sorry, You have not won yet! Keep going!")
-
-    boardObj.board.map(function (arr) {
-      console.log('--- ' + arr.join(' '))
-    });    
-  }
-}
