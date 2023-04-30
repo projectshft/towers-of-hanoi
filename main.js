@@ -1,45 +1,10 @@
-//creating pegs then the board. Wonder if this matters. 
-/*
-var peg1 = [5, 4, 3, 2, 1];
-var peg2 = [];
-var peg3 = [];
-
-var board1 = [peg1, peg2, peg3];
-
-board1.map(arr => console.log('--- ' + arr));
-*/
-
-// 2D array as the board without creating peg variables
-/*
-var board = [
-  [5, 4, 3, 2, 1],
-  [],
-  []
-];
-
-//prints the board horizontally to the console
-board.map(arr => console.log('--- ' + arr));
-*/
 
 // setting up the board as an object
-/*
-var boardObj = {
-  peg1: [5, 4, 3, 2, 1],
-  peg2: [],
-  peg3: []
-};
-
-//prints boardObj horizontally. Does not use map though
-for (prop in boardObj) {
-  console.log('--- ' + boardObj[prop]);
-} */
-
-// setting up the board as an object (object of objects in an array??)
 var boardObj = {
   board: [
     [5, 4, 3, 2, 1],
     [],
-    []
+    [],
   ],
   winCondition: [5, 4, 3, 2, 1], 
   printBoard: function () {
@@ -64,11 +29,12 @@ var boardObj = {
       this.board.push([]);
     }
   
+    this.winCondition = [];
+
     for (var j = numDiscs; j > 0; j--) {
     this.board[0].push(j);
+    this.winCondition.push(j);
     }
-  
-    this.winCondition = this.board[0];
   
     this.printBoard();
   },
@@ -115,13 +81,6 @@ var moveDisc = function (fromPeg, toPeg) {
 
     console.log('Disc moves to peg ' + toPeg + '. The board is now:');
     }
-     
-  //boardObj.board[fromPeg - 1][fromArr.length - 1]; === disc to be moved
-  //boardObj.board[toPeg - 1][toArr.length - 1]; === disc that will be below the disc being moved
-/*
-  boardObj.board.map(function (arr) {
-    console.log('--- ' + arr.join(' '))
-  }); */
 
   boardObj.printBoard();
 
