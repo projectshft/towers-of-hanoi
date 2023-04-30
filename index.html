@@ -10,5 +10,55 @@
   <body>
     <h1>Towers of Hanoi</h1>
     <h3>William Ashley</h3>
+    <h4>Instructions:</h4>
+    <ol>
+      <li>Open the JS console in your browser. (alt-command-J)</li>
+      <li>
+        There is a board consisting of 3 pegs. The first peg contains 5 discs
+        stacked from largest on bottom to smallest on top.
+      </li>
+      <li>
+        The goal is to move the discs and create the same largest to smallest
+        stack on one of the other pegs.
+      </li>
+    </ol>
+    <h4>Rules:</h4>
+    <ul>
+      <li>Only one disc can be moved at a time.</li>
+      <li>Only the top disc on the peg can be moved.</li>
+      <li>A larger disc cannot be placed on top of a smaller disc.</li>
+    </ul>
+    <h4>Controls:</h4>
+    <ul>
+      <li>
+        Use the 'moveDisc(fromPeg, toPeg);' function to move the discs around
+        the board.
+        <ul>
+          <li>
+            Ex: moveDisc(1, 2); //Will move the top disc from Peg 1 to Peg 2
+          </li>
+        </ul>
+      </li>
+      <li>
+        To play with more pegs and/or discs, create a new board by using
+        'boardObj.createBoard(numPegs, numDiscs);'
+        <ul>
+          <li>
+            Ex: boardObj.createBoard(4, 7); //Creates a board with 4 pegs and 7
+            discs
+          </li>
+        </ul>
+      </li>
+      <li>
+        If you get stuck or would like to start over, type
+        'boardObj.resetBoard();'
+        <ul>
+          <li>
+            This will start the game over and reset the board back to the
+            default 3 pegs with 5 discs board.
+          </li>
+        </ul>
+      </li>
+    </ul>
   </body>
 </html>

@@ -63,23 +63,26 @@ var moveDisc = function (fromPeg, toPeg) {
   //defining the peg arrays that will be used
   var fromArr = boardObj.board[fromPeg - 1];
   var toArr = boardObj.board[toPeg - 1];
-  
+  var numOfPegs = boardObj.board.length;
+
   //need to create conditional statement. A disc cannot be placed on a smaller disc than itself
   //need to also create conditional for if there are no discs on the toPeg
-  if (!fromArr[0]) {
-    console.log('There is no disc on this peg. Please try again. The board is still:')
+  if (fromPeg < 1 || fromPeg > numOfPegs || !Number.isInteger(fromPeg) || toPeg < 1 || toPeg > numOfPegs || !Number.isInteger(toPeg)) {
+      console.log("THE PEG YOU ENTERED DOES NOT EXIST. PLEASE TRY AGAIN.");
+    } else if (!fromArr[0]) {
+      console.log('There is NO disc on this peg. Please try again. The board is still:')
     } else if (!toArr[0]) {
   
-    toArr.push(fromArr.pop()); 
+      toArr.push(fromArr.pop()); 
 
-    console.log('Disc moves to empty peg ' + toPeg + '. The board is now:');
+      console.log('Disc moves to empty peg ' + toPeg + '. The board is now:');
     } else if (fromArr[fromArr.length - 1] > toArr[toArr.length - 1]) {
     
-    console.log('You cannot move a larger disc on top of a smaller one, board is still:');
+      console.log('You CANNOT move a larger disc on top of a smaller one, board is still:');
     } else if (fromArr[fromArr.length - 1] < toArr[toArr.length - 1]) {
-    toArr.push(fromArr.pop()); 
+      toArr.push(fromArr.pop()); 
 
-    console.log('Disc moves to peg ' + toPeg + '. The board is now:');
+      console.log('Disc moves to peg ' + toPeg + '. The board is now:');
     }
 
   boardObj.printBoard();
