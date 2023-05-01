@@ -51,11 +51,6 @@ const TowersOfHanoi = function() {
             return false
         }
 
-        if(currentPeg < 1 || currentPeg > this.board.length || newPeg < 1 || newPeg > this.board.length){
-            console.log('There is no peg there. Board is still:');
-            return false
-        }
-
         console.log('That move was successful. Board is now:');
         return true
     }
