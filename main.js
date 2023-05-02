@@ -1,4 +1,4 @@
-const towerOfHanoi = function () {
+const towersOfHanoi = function () {
   var board = [
     [5, 4, 3, 2, 1],
     [],
@@ -59,7 +59,7 @@ const towerOfHanoi = function () {
 };
 
 
-const game = towerOfHanoi();
+const game = towersOfHanoi();
 
 game.startingBoard();
 
