@@ -34,6 +34,7 @@ function moveDisc(startPeg, endPeg) { //Because this function doesnt return anyt
   if(endPegLength === 0) { //if the destination peg is empty, move the last item in the array of the start peg onto the end peg
     boardState[endPeg].push(boardState[startPeg].pop());
     console.log('That move was successful, board is now:');
+    logBoard();
   }
   if(endPegLength !== 0) { // if the dest. peg is not empty
     //Set the value of the disc thats moving and the value of the top disc on the dest. peg
@@ -43,25 +44,27 @@ function moveDisc(startPeg, endPeg) { //Because this function doesnt return anyt
     if(destDisc > movingDisc) {
       boardState[endPeg].push(boardState[startPeg].pop());
       console.log('That move was successful, board is now:');
+      logBoard();
     } else {
       console.log('You cannot move a larger disc on top of a smaller one, board is still:');
+      logBoard();
     }
   }
-  
-  logBoard();
+  checkWinner();
 } 
 
 // There should be a checkWinner function that checks to see if the player has won the game. 
 // You win the game by putting all the discs back in the original order but on a new peg.
 // Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
 function checkWinner() {
-  let winningArr = [5, 4, 3, 2, 1];
-  if(boardState['2'] === winningArr || boardState['3'] === winningArr) {
+  if(JSON.stringify(boardState['2']) === JSON.stringify([5, 4, 3, 2, 1]) || JSON.stringify(boardState['3']) === JSON.stringify([5, 4, 3, 2, 1])) {
     console.log('You Win! Lets play again:')
-    boardState['1'] = winningArr;
+    boardState['1'] = [5, 4, 3, 2, 1];
     boardState['2'] = [];
     boardState['3'] = [];
-    logBoard;
+    logBoard();
+  } else {
+    console.log('Not a winner');
   }
 }
 
