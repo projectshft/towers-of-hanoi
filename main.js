@@ -63,8 +63,6 @@ function checkWinner() {
     boardState['2'] = [];
     boardState['3'] = [];
     logBoard();
-  } else {
-    console.log('Not a winner');
   }
 }
 
