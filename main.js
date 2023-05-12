@@ -1,33 +1,37 @@
 // First of all it will need a board. We'll utilize a 2D array to do this
 // There should be an object responsible for maintaining the state of the board.
 let boardState = {};
+var numPegs;
+var numDiscs;
 
-// Build the ability to change the number of pegs/discs and update the game board and playing style.
-var numPegs = parseInt(prompt('How many pegs?'));
-var numDiscs = parseInt(prompt('How many discs?'));
 
-// We'll use your Chrome Browser JavaScript Console to play the game. We'll want to be able to print the board horizontally. 
-// You MUST utilize a map function at least once to accomplish this part of the assignment. 
-
-function logBoard() {
-  //I MUST to use MAP -_-
-  console.log("--- " + boardState['1'].map(x => x).join(' '));//Log peg one of the board (Map does nothing)
-  console.log("--- " + boardState['2'].map(x => x).join(' '));//Log peg two of the board on a new line (Map does nothing)
-  console.log("--- " + boardState['3'].map(x => x).join(' '));//Log peg three of the board on a new line (Map does nothing)
-
-  // The code below also works but at the start of the game it doesnt print the empty pegs twice which is why im using the code above instead.
-  // [boardState['1'], boardState['2'], boardState['3']].map(section => {
-  //   if(section.length === 0) {
-  //     console.log('---');
-  //   } else {
-  //     console.log('---', ...section);
-  //   }
-  // })
+function startGame() {
+  // Build the ability to change the number of pegs/discs and update the game board and playing style.
+  numPegs = parseInt(prompt('How many pegs?'));
+  numDiscs = parseInt(prompt('How many discs?'));
+  for(let i = 1; i <= numPegs; i++) {
+    if(i === 1) {
+      boardState[i] = [];
+      for(let j = numDiscs; j > 0; j--) {
+        boardState[i].push(j);
+      }
+    } else {
+      boardState[i] = [];
+    }
+  }
+  logBoard();
 }
 
-// Our game will progress with the player submitting moves to the game and the game accepting or rejecting the move and updating the board if the move is allowed. Remember, you must only move the top disc from the peg and you can't move a disc on top of another if it is bigger than that disc. For example, with moves originating from the above starting board:
+//Log the state of the board to the console
+function logBoard() {
+  //dynamic for any number of pegs
+  for(i = 1; i <= numPegs; i++) {
+    console.log("--- " + boardState[i].map(x => x).join(' '));
+  }
+}
 
-function moveDisc(startPeg, endPeg) { //Because this function doesnt return anything, im getting 'undefined' everytime I move a disc. Need to fix this...
+//Function to move the discs
+function moveDisc(startPeg, endPeg) { 
   //only move the last item in the array (array.length -1)
   //can't move a disc on top of another if it is bigger than that disc.
   let endPegLength = boardState[endPeg].length;
@@ -53,17 +57,26 @@ function moveDisc(startPeg, endPeg) { //Because this function doesnt return anyt
   checkWinner();
 } 
 
-// There should be a checkWinner function that checks to see if the player has won the game. 
-// You win the game by putting all the discs back in the original order but on a new peg.
-// Once a player wins, the game should automatically end by announcing the winner (through a console log) and reset for a new game.
+function setWinningCondition(peg) {
+  // check if a specified peg has all the games discs in order
+  for(let i = 0; i < numDiscs; i++) {
+    if(peg[i] !== numDiscs - i) { // example: if(peg[0] !== numDiscs - 0)
+      return false;
+    } 
+  }
+  return true;
+}
+
+// Function to check if the game has been won and then starts a new game!
 function checkWinner() {
-  if(JSON.stringify(boardState['2']) === JSON.stringify([5, 4, 3, 2, 1]) || JSON.stringify(boardState['3']) === JSON.stringify([5, 4, 3, 2, 1])) {
-    console.log('You Win! Lets play again:')
-    boardState['1'] = [5, 4, 3, 2, 1];
-    boardState['2'] = [];
-    boardState['3'] = [];
-    logBoard();
+ 
+  for(let i = 2; i <= numPegs; i++) {
+    if(setWinningCondition(boardState[i])) {
+      console.log('You Win! Lets play again:')
+      boardState = {};
+      startGame();
+    }
   }
 }
 
-logBoard(); //Log the board to start the game when the page loads.
+startGame();
