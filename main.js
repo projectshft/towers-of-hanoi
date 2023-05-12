@@ -1,10 +1,10 @@
 // First of all it will need a board. We'll utilize a 2D array to do this
 // There should be an object responsible for maintaining the state of the board.
-let boardState = {
-  1: [5, 4, 3, 2, 1],
-  2: [],
-  3: []
-};
+let boardState = {};
+
+// Build the ability to change the number of pegs/discs and update the game board and playing style.
+var numPegs = parseInt(prompt('How many pegs?'));
+var numDiscs = parseInt(prompt('How many discs?'));
 
 // We'll use your Chrome Browser JavaScript Console to play the game. We'll want to be able to print the board horizontally. 
 // You MUST utilize a map function at least once to accomplish this part of the assignment. 
