@@ -1,0 +1,12 @@
+#gameBoard {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.peg {
+  background-color: black;
+  height: 40%;
+  width: 0.5%;
+}

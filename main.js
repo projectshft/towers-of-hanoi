@@ -79,4 +79,4 @@ function checkWinner() {
   }
 }
 
-startGame();
+// startGame();
