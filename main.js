@@ -13,6 +13,7 @@ Board.prototype.startNewGame = function () {
     this.board[0].push(i);
   }
 
+  console.log('Starting a new game...');
   this.displayBoard();
 }
 
@@ -54,6 +55,7 @@ Board.prototype.moveDisc = function (pegMoveFrom, pegMoveTo) {
       if (this.checkWinner()) {
         console.log('You win! Here is the final board:');
         console.log(this.displayBoard());
+        this.startNewGame();
       } else {
         console.log('That move was successful. Board is now:');
         console.log(this.displayBoard());
@@ -63,21 +65,32 @@ Board.prototype.moveDisc = function (pegMoveFrom, pegMoveTo) {
 }
 
 Board.prototype.checkWinner = function () {
-  var winner = false;
   var pegsToCheck = this.board.slice(1);
+  var maxDisc = this.discs;
+  var winner = false;
 
   pegsToCheck.forEach(function (peg) {
-    winner = peg.reduce(function (acc, disc) {
-      if (acc - disc === 1) {
-        return true;
-      } else {
-        return false;
+    var bottomDisc = Number(peg.slice(0, 1));
+    var discsToCheck = peg.slice(1);
+
+    if (bottomDisc === maxDisc) {
+      var result = bottomDisc;
+      discsToCheck.forEach(function (disc) {
+        if (result - 1 === disc) {
+          result = disc;
+        }
+      })
+      if (result === 1) {
+        winner = true;
       }
-    }, this.discs + 1);
+    }
   })
 
   return winner;
 }
+
+
+
 
 var board = new Board(3, 5);
 
