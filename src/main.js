@@ -5,6 +5,8 @@ var Board = function (pegs, discs) {
 }
 
 Board.prototype.startNewGame = function () {
+  this.board = [];
+
   for (var i = 0; i < this.pegs; i++) {
     this.board.push([]);
   }
