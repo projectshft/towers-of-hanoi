@@ -15,6 +15,7 @@ Board.prototype.startNewGame = function () {
 
   console.log('Starting a new game...');
   this.displayBoard();
+  return this.board.board;
 }
 
 Board.prototype.displayBoard = function () {
@@ -30,35 +31,37 @@ Board.prototype.displayBoard = function () {
 Board.prototype.moveDisc = function (pegMoveFrom, pegMoveTo) {
   if (!this.board[pegMoveFrom - 1]) {
     console.log('The peg you want to move a disc from doesn\'t exist! Board is still:');
-    console.log(this.displayBoard());
+    this.displayBoard();
+    return 'The peg you want to move a disc from doesn\'t exist! Board is still:';
   } else if (!this.board[pegMoveTo - 1]) {
     console.log('The peg you want to move a disc to doesn\'t exist! Board is still:');
-    console.log(this.displayBoard());
+    this.displayBoard();
+    return 'The peg you want to move a disc to doesn\'t exist! Board is still:';
   } else if (this.board[pegMoveFrom - 1].length === 0) {
     console.log('There aren\'t any discs on that peg! Board is still:');
-    console.log(this.displayBoard());
-  } 
-  
-  if (this.board[pegMoveTo - 1].length === 0) {
+    this.displayBoard();
+    return 'There aren\'t any discs on that peg! Board is still:';
+  } else if (this.board[pegMoveTo - 1].length === 0) {
     var discToMove = this.board[pegMoveFrom - 1].pop();
     this.board[pegMoveTo - 1].push(discToMove);
     console.log('That move was successful. Board is now:');
-    console.log(this.displayBoard());
+    this.displayBoard();
   } else {
     if (this.board[pegMoveFrom - 1].slice(-1) > this.board[pegMoveTo - 1].slice(-1)) { 
       console.log('You cannot move a larger disc on top of a smaller one. Board is still:');
-      console.log(this.displayBoard());
+      this.displayBoard();
+      return 'You cannot move a larger disc on top of a smaller one. Board is still:';
     } else {
       var discToMove = this.board[pegMoveFrom - 1].pop();
       this.board[pegMoveTo - 1].push(discToMove);
 
       if (this.checkWinner()) {
         console.log('You win! Here is the final board:');
-        console.log(this.displayBoard());
+        this.displayBoard();
         this.startNewGame();
       } else {
         console.log('That move was successful. Board is now:');
-        console.log(this.displayBoard());
+        this.displayBoard();
       }
     }
   }
@@ -89,8 +92,8 @@ Board.prototype.checkWinner = function () {
   return winner;
 }
 
-var board = new Board(3, 5);
-board.startNewGame();
+// var board = new Board(3, 5);
+// board.startNewGame();
 
 // Solution for 3 pegs/5 discs
 // board.moveDisc(1, 2);
