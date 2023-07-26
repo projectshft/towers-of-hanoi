@@ -92,7 +92,7 @@ Board.prototype.checkWinner = function () {
 var board = new Board(3, 5);
 board.startNewGame();
 
-// Solution
+// Solution for 3 pegs/5 discs
 // board.moveDisc(1, 2);
 // board.moveDisc(1, 3);
 // board.moveDisc(2, 3);
