@@ -2,11 +2,13 @@ var Board = function (pegs, discs) {
   this.board = [];
   this.pegs = pegs;
   this.discs = discs;
+
+  this.startNewGame();
 }
 
 Board.prototype.startNewGame = function () {
   this.board = [];
-
+  
   for (var i = 0; i < this.pegs; i++) {
     this.board.push([]);
   }
@@ -85,38 +87,42 @@ Board.prototype.checkWinner = function () {
   return winner;
 }
 
-var board = new Board(3, 5);
-board.startNewGame();
+function createNewBoard(pegs, discs) {
+  return new Board(pegs, discs);
+}
+
+var myBoard = createNewBoard(3, 5);
+// createNewBoard(5, 7);
 
 // Solution for 3 pegs/5 discs
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(3, 1);
-board.moveDisc(3, 2);
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-board.moveDisc(2, 1);
-board.moveDisc(3, 1);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(3, 1);
-board.moveDisc(3, 2);
-board.moveDisc(1, 2);
-board.moveDisc(3, 1);
-board.moveDisc(2, 3);
-board.moveDisc(2, 1);
-board.moveDisc(3, 1);
-board.moveDisc(3, 2);
-board.moveDisc(1, 2);
-board.moveDisc(1, 3);
-board.moveDisc(2, 3);
-board.moveDisc(1, 2);
-board.moveDisc(3, 1);
-board.moveDisc(3, 2);
-board.moveDisc(1, 2);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(1, 3);
+myBoard.moveDisc(2, 3);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(3, 1);
+myBoard.moveDisc(3, 2);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(1, 3);
+myBoard.moveDisc(2, 3);
+myBoard.moveDisc(2, 1);
+myBoard.moveDisc(3, 1);
+myBoard.moveDisc(2, 3);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(1, 3);
+myBoard.moveDisc(2, 3);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(3, 1);
+myBoard.moveDisc(3, 2);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(3, 1);
+myBoard.moveDisc(2, 3);
+myBoard.moveDisc(2, 1);
+myBoard.moveDisc(3, 1);
+myBoard.moveDisc(3, 2);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(1, 3);
+myBoard.moveDisc(2, 3);
+myBoard.moveDisc(1, 2);
+myBoard.moveDisc(3, 1);
+myBoard.moveDisc(3, 2);
+myBoard.moveDisc(1, 2);
