@@ -74,56 +74,47 @@ Board.prototype.checkWinner = function () {
 
   pegsToCheck.forEach(function (peg) {
     var bottomDisc = Number(peg.slice(0, 1));
-    var discsToCheck = peg.slice(1);
 
-    if (bottomDisc === maxDisc) {
-      var result = bottomDisc;
-      discsToCheck.forEach(function (disc) {
-        if (result - 1 === disc) {
-          result = disc;
-        }
-      })
-      if (result === 1) {
-        winner = true;
-      }
+    if (bottomDisc === maxDisc && peg.length === maxDisc) {
+      winner = true;
     }
   })
 
   return winner;
 }
 
-// var board = new Board(3, 5);
-// board.startNewGame();
+var board = new Board(3, 5);
+board.startNewGame();
 
 // Solution for 3 pegs/5 discs
-// board.moveDisc(1, 2);
-// board.moveDisc(1, 3);
-// board.moveDisc(2, 3);
-// board.moveDisc(1, 2);
-// board.moveDisc(3, 1);
-// board.moveDisc(3, 2);
-// board.moveDisc(1, 2);
-// board.moveDisc(1, 3);
-// board.moveDisc(2, 3);
-// board.moveDisc(2, 1);
-// board.moveDisc(3, 1);
-// board.moveDisc(2, 3);
-// board.moveDisc(1, 2);
-// board.moveDisc(1, 3);
-// board.moveDisc(2, 3);
-// board.moveDisc(1, 2);
-// board.moveDisc(3, 1);
-// board.moveDisc(3, 2);
-// board.moveDisc(1, 2);
-// board.moveDisc(3, 1);
-// board.moveDisc(2, 3);
-// board.moveDisc(2, 1);
-// board.moveDisc(3, 1);
-// board.moveDisc(3, 2);
-// board.moveDisc(1, 2);
-// board.moveDisc(1, 3);
-// board.moveDisc(2, 3);
-// board.moveDisc(1, 2);
-// board.moveDisc(3, 1);
-// board.moveDisc(3, 2);
-// board.moveDisc(1, 2);
+board.moveDisc(1, 2);
+board.moveDisc(1, 3);
+board.moveDisc(2, 3);
+board.moveDisc(1, 2);
+board.moveDisc(3, 1);
+board.moveDisc(3, 2);
+board.moveDisc(1, 2);
+board.moveDisc(1, 3);
+board.moveDisc(2, 3);
+board.moveDisc(2, 1);
+board.moveDisc(3, 1);
+board.moveDisc(2, 3);
+board.moveDisc(1, 2);
+board.moveDisc(1, 3);
+board.moveDisc(2, 3);
+board.moveDisc(1, 2);
+board.moveDisc(3, 1);
+board.moveDisc(3, 2);
+board.moveDisc(1, 2);
+board.moveDisc(3, 1);
+board.moveDisc(2, 3);
+board.moveDisc(2, 1);
+board.moveDisc(3, 1);
+board.moveDisc(3, 2);
+board.moveDisc(1, 2);
+board.moveDisc(1, 3);
+board.moveDisc(2, 3);
+board.moveDisc(1, 2);
+board.moveDisc(3, 1);
+board.moveDisc(3, 2);
+board.moveDisc(1, 2);
