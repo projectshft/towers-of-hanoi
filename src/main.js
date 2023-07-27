@@ -39,25 +39,28 @@ Board.prototype.displayBoard = function () {
 }
 
 Board.prototype.moveDisc = function (pegMoveFrom, pegMoveTo) {
-  if (!this.board[pegMoveFrom - 1]) {
+  var pegMoveFromIndex = pegMoveFrom - 1;
+  var pegMoveToIndex = pegMoveTo - 1;
+
+  if (!this.board[pegMoveFromIndex]) {
     return 'The peg you want to move a disc from doesn\'t exist! Board is still:';
-  } else if (!this.board[pegMoveTo - 1]) {
+  } else if (!this.board[pegMoveToIndex]) {
     return 'The peg you want to move a disc to doesn\'t exist! Board is still:';
-  } else if (this.board[pegMoveFrom - 1].length === 0) {
+  } else if (this.board[pegMoveFromIndex].length === 0) {
     return 'There aren\'t any discs on that peg! Board is still:';
-  } else if (this.board[pegMoveFrom - 1] === this.board[pegMoveTo - 1]) {
+  } else if (this.board[pegMoveFromIndex] === this.board[pegMoveToIndex]) {
     return 'You can\'t move a disc to and from the same peg! Board is still:';
-  } else if (this.board[pegMoveTo - 1].length === 0) {
-    var discToMove = this.board[pegMoveFrom - 1].pop();
-    this.board[pegMoveTo - 1].push(discToMove);
+  } else if (this.board[pegMoveToIndex].length === 0) {
+    var discToMove = this.board[pegMoveFromIndex].pop();
+    this.board[pegMoveToIndex].push(discToMove);
     this.displayBoard();
     return 'That move was successful. Board is now:'
   } else {
-    if (this.board[pegMoveFrom - 1].slice(-1) > this.board[pegMoveTo - 1].slice(-1)) { 
+    if (this.board[pegMoveFromIndex].slice(-1) > this.board[pegMoveToIndex].slice(-1)) { 
       return 'You cannot move a larger disc on top of a smaller one. Board is still:';
     } else {
-      var discToMove = this.board[pegMoveFrom - 1].pop();
-      this.board[pegMoveTo - 1].push(discToMove);
+      var discToMove = this.board[pegMoveFromIndex].pop();
+      this.board[pegMoveToIndex].push(discToMove);
 
       if (this.checkWinner()) {
         this.startNewGame();
