@@ -23,12 +23,19 @@ Board.prototype.startNewGame = function () {
 }
 
 Board.prototype.displayBoard = function () {
+  var gameDiv = document.querySelector('#game');
+
   this.board.map(function (peg) {
-    var currentPeg = '';
+    var pegDiv = document.createElement('div');
+    pegDiv.setAttribute('class', 'peg');
+
+    var currentPeg = '--- ';
     peg.map(function (disc) {
       currentPeg += disc + ' ';
     })
-    console.log('---', currentPeg);
+    
+    pegDiv.innerText = currentPeg;
+    gameDiv.appendChild(pegDiv);
   })
 }
 
@@ -91,38 +98,47 @@ function createNewBoard(pegs, discs) {
   return new Board(pegs, discs);
 }
 
+function displayHTML(boardName) {
+  var gameDiv = document.querySelector('#game');
+
+  var gameBoard = document.createTextNode(boardName.displayBoard());
+
+  gameDiv.appendChild(gameBoard);
+}
+
 var myBoard = createNewBoard(3, 5);
+// displayHTML(myBoard);
 // createNewBoard(5, 7);
 
 // Solution for 3 pegs/5 discs
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(1, 3);
-myBoard.moveDisc(2, 3);
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(3, 1);
-myBoard.moveDisc(3, 2);
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(1, 3);
-myBoard.moveDisc(2, 3);
-myBoard.moveDisc(2, 1);
-myBoard.moveDisc(3, 1);
-myBoard.moveDisc(2, 3);
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(1, 3);
-myBoard.moveDisc(2, 3);
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(3, 1);
-myBoard.moveDisc(3, 2);
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(3, 1);
-myBoard.moveDisc(2, 3);
-myBoard.moveDisc(2, 1);
-myBoard.moveDisc(3, 1);
-myBoard.moveDisc(3, 2);
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(1, 3);
-myBoard.moveDisc(2, 3);
-myBoard.moveDisc(1, 2);
-myBoard.moveDisc(3, 1);
-myBoard.moveDisc(3, 2);
-myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(1, 3);
+// myBoard.moveDisc(2, 3);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(3, 1);
+// myBoard.moveDisc(3, 2);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(1, 3);
+// myBoard.moveDisc(2, 3);
+// myBoard.moveDisc(2, 1);
+// myBoard.moveDisc(3, 1);
+// myBoard.moveDisc(2, 3);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(1, 3);
+// myBoard.moveDisc(2, 3);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(3, 1);
+// myBoard.moveDisc(3, 2);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(3, 1);
+// myBoard.moveDisc(2, 3);
+// myBoard.moveDisc(2, 1);
+// myBoard.moveDisc(3, 1);
+// myBoard.moveDisc(3, 2);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(1, 3);
+// myBoard.moveDisc(2, 3);
+// myBoard.moveDisc(1, 2);
+// myBoard.moveDisc(3, 1);
+// myBoard.moveDisc(3, 2);
+// myBoard.moveDisc(1, 2);
