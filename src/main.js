@@ -45,6 +45,8 @@ Board.prototype.moveDisc = function (pegMoveFrom, pegMoveTo) {
     return 'The peg you want to move a disc to doesn\'t exist! Board is still:';
   } else if (this.board[pegMoveFrom - 1].length === 0) {
     return 'There aren\'t any discs on that peg! Board is still:';
+  } else if (this.board[pegMoveFrom - 1] === this.board[pegMoveTo - 1]) {
+    return 'You can\'t move a disc to and from the same peg! Board is still:';
   } else if (this.board[pegMoveTo - 1].length === 0) {
     var discToMove = this.board[pegMoveFrom - 1].pop();
     this.board[pegMoveTo - 1].push(discToMove);
