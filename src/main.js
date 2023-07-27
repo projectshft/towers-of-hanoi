@@ -106,12 +106,17 @@ function closeMoveDiscInputForm() {
 function createNewBoard(e) {
   e.preventDefault();
   var pegs = document.querySelector('input[id=pegs]');
+  var pegsValue = pegs.value;
   var discs = document.querySelector('input[id=discs]');
+  var discsValue = discs.value;
 
   closeNewBoardInputForm();
   openMoveDiscInputForm();
   gameMessage.innerText = 'Starting new game...';
-  return myBoard = new Board(Number(pegs.value), Number(discs.value));
+  pegs.value = '';
+  discs.value = '';
+  
+  return myBoard = new Board(Number(pegsValue), Number(discsValue));
 }
 
 function submitMoveDisc(e) {
