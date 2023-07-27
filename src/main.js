@@ -22,7 +22,6 @@ Board.prototype.startNewGame = function () {
 }
 
 Board.prototype.displayBoard = function () {
-  var gameDiv = document.querySelector('#game');
   gameDiv.innerText = '';
 
   this.board.map(function (peg) {
@@ -87,6 +86,8 @@ Board.prototype.checkWinner = function () {
 
 function openNewBoardInputForm() {
   closeMoveDiscInputForm();
+  gameMessage.innerText = '';
+  gameDiv.innerText = '';
   document.querySelector('#new-board-input').style.display = 'grid';
 }
 
@@ -130,6 +131,7 @@ function resetBoard() {
   gameMessage.innerText = 'Starting new game...'
 }
 
+var gameDiv = document.querySelector('#game');
 var createNewBoardButton = document.querySelector('#create-new-board-button');
 var submitNewBoardButton = document.querySelector('#submit-new-board-input');
 var submitMoveDiscButton = document.querySelector('#submit-move-disc-input');
