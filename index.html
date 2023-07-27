@@ -4,11 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Towers of Hanoi</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="title">Towers of Hanoi</div>
     <div id="content">
-      <div id="title">Towers of Hanoi</div>
-      <div id="game"></div>
+      <div id="game-buttons">
+        <button id="create-new-board-button">Create New Board</button>
+        <button id="reset-board-button">Reset Board</button>
+      </div>
+      <div id="new-board-input">
+        <form action="#" id="new-board-input-form">
+          <div class="form-item">
+            <label for="pegs">Number of pegs (1-10):</label>
+            <input type="number" name="pegs" id="pegs" min="1" max="10" />
+          </div>
+          <div class="form-item">
+            <label for="discs">Number of discs (3-12):</label>
+            <input type="number" name="discs" id="discs" min="3" max="12" />
+          </div>
+        </form>
+        <button id="submit-new-board-input">Submit</button>
+      </div>
+      <div id="game-message"></div>
+      <div id="gameplay-container">
+        <div id="move-disc-input">
+          <form action="#" id="move-disc-input-form">
+            <div class="form-item">
+              <label for="peg-move-from">Move a disc from peg:</label>
+              <input
+                type="number"
+                name="peg-move-from"
+                id="peg-move-from"
+                min="1"
+              />
+            </div>
+            <div class="form-item">
+              <label for="peg-move-to">Move a disc to peg:</label>
+              <input
+                type="number"
+                name="peg-move-to"
+                id="peg-move-to"
+                min="1"
+              />
+            </div>
+          </form>
+          <button id="submit-move-disc-input">Submit</button>
+        </div>
+        <div id="game"></div>
+      </div>
     </div>
     <script src="src/main.js"></script>
   </body>

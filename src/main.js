@@ -17,13 +17,13 @@ Board.prototype.startNewGame = function () {
     this.board[0].push(i);
   }
 
-  console.log('Starting a new game...');
   this.displayBoard();
   return this.board.board;
 }
 
 Board.prototype.displayBoard = function () {
   var gameDiv = document.querySelector('#game');
+  gameDiv.innerText = '';
 
   this.board.map(function (peg) {
     var pegDiv = document.createElement('div');
@@ -41,38 +41,29 @@ Board.prototype.displayBoard = function () {
 
 Board.prototype.moveDisc = function (pegMoveFrom, pegMoveTo) {
   if (!this.board[pegMoveFrom - 1]) {
-    console.log('The peg you want to move a disc from doesn\'t exist! Board is still:');
-    this.displayBoard();
     return 'The peg you want to move a disc from doesn\'t exist! Board is still:';
   } else if (!this.board[pegMoveTo - 1]) {
-    console.log('The peg you want to move a disc to doesn\'t exist! Board is still:');
-    this.displayBoard();
     return 'The peg you want to move a disc to doesn\'t exist! Board is still:';
   } else if (this.board[pegMoveFrom - 1].length === 0) {
-    console.log('There aren\'t any discs on that peg! Board is still:');
-    this.displayBoard();
     return 'There aren\'t any discs on that peg! Board is still:';
   } else if (this.board[pegMoveTo - 1].length === 0) {
     var discToMove = this.board[pegMoveFrom - 1].pop();
     this.board[pegMoveTo - 1].push(discToMove);
-    console.log('That move was successful. Board is now:');
     this.displayBoard();
+    return 'That move was successful. Board is now:'
   } else {
     if (this.board[pegMoveFrom - 1].slice(-1) > this.board[pegMoveTo - 1].slice(-1)) { 
-      console.log('You cannot move a larger disc on top of a smaller one. Board is still:');
-      this.displayBoard();
       return 'You cannot move a larger disc on top of a smaller one. Board is still:';
     } else {
       var discToMove = this.board[pegMoveFrom - 1].pop();
       this.board[pegMoveTo - 1].push(discToMove);
 
       if (this.checkWinner()) {
-        console.log('You win! Here is the final board:');
-        this.displayBoard();
         this.startNewGame();
+        return 'You win! Starting new game...'
       } else {
-        console.log('That move was successful. Board is now:');
         this.displayBoard();
+        return 'That move was successful. Board is now:'
       }
     }
   }
@@ -94,21 +85,62 @@ Board.prototype.checkWinner = function () {
   return winner;
 }
 
-function createNewBoard(pegs, discs) {
-  return new Board(pegs, discs);
+function openNewBoardInputForm() {
+  closeMoveDiscInputForm();
+  document.querySelector('#new-board-input').style.display = 'grid';
 }
 
-function displayHTML(boardName) {
-  var gameDiv = document.querySelector('#game');
-
-  var gameBoard = document.createTextNode(boardName.displayBoard());
-
-  gameDiv.appendChild(gameBoard);
+function closeNewBoardInputForm() {
+  document.querySelector('#new-board-input').style.display = 'none';
 }
 
-var myBoard = createNewBoard(3, 5);
-// displayHTML(myBoard);
-// createNewBoard(5, 7);
+function openMoveDiscInputForm() {
+  document.querySelector('#move-disc-input').style.display = 'grid';
+}
+
+function closeMoveDiscInputForm() {
+  document.querySelector('#move-disc-input').style.display = 'none';
+}
+
+function createNewBoard(e) {
+  e.preventDefault();
+  var pegs = document.querySelector('input[id=pegs]');
+  var discs = document.querySelector('input[id=discs]');
+
+  closeNewBoardInputForm();
+  openMoveDiscInputForm();
+  gameMessage.innerText = 'Starting new game...';
+  return myBoard = new Board(Number(pegs.value), Number(discs.value));
+}
+
+function submitMoveDisc(e) {
+  e.preventDefault();
+  var pegMoveFrom = document.querySelector('input[id=peg-move-from]');
+  var pegMoveTo = document.querySelector('input[id=peg-move-to]');
+
+  var message = myBoard.moveDisc(pegMoveFrom.value, pegMoveTo.value);
+  gameMessage.innerText = message;
+
+  pegMoveFrom.value = '';
+  pegMoveTo.value = '';
+}
+
+function resetBoard() {
+  myBoard.startNewGame();
+  gameMessage.innerText = 'Starting new game...'
+}
+
+var createNewBoardButton = document.querySelector('#create-new-board-button');
+var submitNewBoardButton = document.querySelector('#submit-new-board-input');
+var submitMoveDiscButton = document.querySelector('#submit-move-disc-input');
+var gameMessage = document.querySelector('#game-message');
+var resetGameButton = document.querySelector('#reset-board-button');
+
+createNewBoardButton.addEventListener('click', openNewBoardInputForm);
+submitNewBoardButton.addEventListener('click', createNewBoard);
+submitMoveDiscButton.addEventListener('click', submitMoveDisc);
+resetGameButton.addEventListener('click', resetBoard);
+
 
 // Solution for 3 pegs/5 discs
 // myBoard.moveDisc(1, 2);
