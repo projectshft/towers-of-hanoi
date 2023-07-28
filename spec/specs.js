@@ -1,10 +1,14 @@
 describe('checkBoardSetup', function() {
-  beforeEach(function () {
+  // var gameDiv;
+
+  beforeEach(() => {
+    // gameDiv = document.createElement('div');
+    // gameDiv.id = 'game';
+
     pegs = 5;
     discs = 7;
 
     board = new Board(pegs, discs);
-    board.startNewGame();
   });
 
   it('should return a nested array with lengths of peg input and disc input', function () {
