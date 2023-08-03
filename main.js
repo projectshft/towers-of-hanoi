@@ -28,9 +28,10 @@ const boardState = {
       return `---  ${element} \n`;
     });
 
-    return returnBoard;
+    return returnBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " ");
   },
   logMove: function (fromPeg, toPeg) {
+    // Check if move is legal
     const prevBoard = this.getBoard();
 
     if (this.getTopDisc(toPeg) < this.getTopDisc(fromPeg)) {
@@ -38,22 +39,25 @@ const boardState = {
       return;
     }
 
+    // Update board state
     this.update(fromPeg, toPeg);
 
     const currentBoard = this.getBoard();
 
+    // Check win conditions
     if (this.checkWinner()) {
       console.log(
         `Congratulations, you won! \n` +
-          currentBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " ")
+          currentBoard
       );
       
-      console.log('Play again?');
+      // Reset board
       this.initializeGame();
+      console.log('Play again? \n' + this.getBoard());
     } else {
       console.log(
         `That move was successful, board is now: \n` +
-          currentBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " ")
+          currentBoard
       );
     }
   },
@@ -73,8 +77,9 @@ const boardState = {
   },
 };
 
+// Start game
 boardState.initializeGame();
-// log starting board
+console.log(`Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 and 3 and "toPeg" with a number between 1 and 3. \n\n` + boardState.getBoard());
 
 const moveDisc = function (fromPeg, toPeg) {
   fromPeg--;
@@ -85,7 +90,15 @@ const moveDisc = function (fromPeg, toPeg) {
   console.log(boardState.board); //testing
 };
 
-//moveDisc(1,2);
+moveDisc(1,2);
+moveDisc(1,3);
+moveDisc(2,1);
+moveDisc(3,2);
+moveDisc(1,2);
+moveDisc(1,3);
+moveDisc(2,1);
+moveDisc(2,3);
+moveDisc(1,3);
 
 // Extension Options
 // Add set board function with ability to set number of pegs and discs (minimum of 3 of each):
