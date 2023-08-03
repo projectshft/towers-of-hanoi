@@ -23,16 +23,41 @@ const boardState = {
   update: function (fromPeg, toPeg) {
     this.board[toPeg].push(this.board[fromPeg].pop());
   },
-  logMove: function () {
-    // must use map function to print the board
-    const currentBoard = this.board.map((element) => {
+  getBoard: function () {
+    const returnBoard = this.board.map((element) => {
       return `---  ${element} \n`;
     });
 
-    console.log(`That move was successful, board is now: \n` + currentBoard.toString().replaceAll('\n,', '\n').replaceAll(',', ' '));
+    return returnBoard;
+  },
+  logMove: function (fromPeg, toPeg) {
+    const prevBoard = this.getBoard();
+
+    if (this.getTopDisc(toPeg) < this.getTopDisc(fromPeg)) {
+      console.log(`You cannot move a larger disc on top of a smaller one, board is still: \n` + prevBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " "));
+      return;
+    }
+
+    this.update(fromPeg, toPeg);
+
+    const currentBoard = this.getBoard();
+
+    if (this.checkWinner()) {
+      console.log(
+        `Congratulations, you won! \n` +
+          currentBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " ")
+      );
+      
+      console.log('Play again?');
+      this.initializeGame();
+    } else {
+      console.log(
+        `That move was successful, board is now: \n` +
+          currentBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " ")
+      );
+    }
   },
   getTopDisc: function (peg) {
-    
     return this.board[peg][this.board[peg].length - 1];
   },
   checkWinner: function () {
@@ -41,32 +66,23 @@ const boardState = {
     // ---
     // ---
     // --- 3 2 1
+    if (this.board[2].length == 3) {
+      return true;
+    }
     return false;
   },
 };
 
 boardState.initializeGame();
+// log starting board
 
 const moveDisc = function (fromPeg, toPeg) {
-
   fromPeg--;
   toPeg--;
 
-  // Verify that move is legal
-  if (boardState.getTopDisc(toPeg) < boardState.getTopDisc(fromPeg)) {
-    
-    return `You cannot move a larger disc on top of a smaller one, board is still: ${boardState.board}`; // use logMove function
-  }
+  boardState.logMove(fromPeg, toPeg);
 
-  // Check winner
-  if (boardState.checkWinner()) {
-    return 'Congratulations! You won!';
-  }
-
-  // Update board state
-  boardState.update(fromPeg, toPeg);
   console.log(boardState.board); //testing
-  boardState.logMove();
 };
 
 //moveDisc(1,2);
