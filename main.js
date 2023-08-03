@@ -1,21 +1,4 @@
 const boardState = {
-  // will print current state of board
-  // for example, the starting state would be:
-  // --- 3 2 1
-  // ---
-  // ---
-
-  // After a move:
-  // That move was successful, board is now:
-  // --- 3 2
-  // --- 1
-  // ---
-
-  // Or:
-  // You cannot move a larger disc on top of a smaller one, board is still:
-  // --- 3 2
-  // --- 1
-  // ---
   board: [],
   initializeGame: function () {
     this.board = [[3, 2, 1], [], []];
@@ -65,11 +48,6 @@ const boardState = {
     return this.board[peg][this.board[peg].length - 1];
   },
   checkWinner: function () {
-    // Check to see if the state of the board is the original order (largest to smallest) on the last peg instead of the first:
-    // Winner! Play again? (board will be reset to original state)
-    // ---
-    // ---
-    // --- 3 2 1
     if (this.board[2].length == 3) {
       return true;
     }
@@ -86,8 +64,6 @@ const moveDisc = function (fromPeg, toPeg) {
   toPeg--;
 
   boardState.logMove(fromPeg, toPeg);
-
-  console.log(boardState.board); //testing
 };
 
 moveDisc(1,2);
