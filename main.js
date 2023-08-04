@@ -66,15 +66,15 @@ const moveDisc = function (fromPeg, toPeg) {
   boardState.logMove(fromPeg, toPeg);
 };
 
-moveDisc(1,2);
-moveDisc(1,3);
-moveDisc(2,1);
-moveDisc(3,2);
-moveDisc(1,2);
-moveDisc(1,3);
-moveDisc(2,1);
-moveDisc(2,3);
-moveDisc(1,3);
+// moveDisc(1,2);
+// moveDisc(1,3);
+// moveDisc(2,1);
+// moveDisc(3,2);
+// moveDisc(1,2);
+// moveDisc(1,3);
+// moveDisc(2,1);
+// moveDisc(2,3);
+// moveDisc(1,3);
 
 // Extension Options
 // Add set board function with ability to set number of pegs and discs (minimum of 3 of each):
