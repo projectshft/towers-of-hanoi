@@ -25,9 +25,25 @@ const BoardState = function () {
     // Check if move is legal
     const prevBoard = getBoard();
 
+    if (fromPeg < 0 || fromPeg > 2 || toPeg < 0 || toPeg > 2) {
+      console.log(
+        `Peg out of range. Pick a number between 1 and 3. Board is still: \n` +
+          prevBoard
+      );
+      return;
+    }
+
     if (getTopDisc(toPeg) < getTopDisc(fromPeg)) {
       console.log(
         `You cannot move a larger disc on top of a smaller one, board is still: \n` +
+          prevBoard
+      );
+      return;
+    }
+
+    if (isNaN(getTopDisc(fromPeg))) {
+      console.log(
+        `The peg you chose to move from is empty, board is still: \n` +
           prevBoard
       );
       return;
@@ -70,7 +86,7 @@ const boardState = BoardState();
 // Start game
 boardState.initializeGame();
 console.log(
-  `Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 and 3 and "toPeg" with a number between 1 and 3. \n\n` +
+  `Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 and 3 and "toPeg" with a number between 1 (top peg) and 3 (bottom peg). \n\n` +
     boardState.getBoard()
 );
 
@@ -81,21 +97,16 @@ const moveDisc = function (fromPeg, toPeg) {
   boardState.logMove(fromPeg, toPeg);
 };
 
-// moveDisc(1, 2);
 // moveDisc(1, 3);
-// moveDisc(2, 1);
-// moveDisc(3, 2);
-// moveDisc(1, 2);
-// moveDisc(1, 3);
-// moveDisc(2, 1);
-// moveDisc(2, 3);
-// moveDisc(1, 3);
+// moveDisc(1,2);
+// moveDisc(3,2);
+// moveDisc(1,3);
+// moveDisc(2,1);
+// moveDisc(2,3);
+// moveDisc(1,3);
 
 // Extension Options
 // Add set board function with ability to set number of pegs and discs (minimum of 3 of each):
-// const setUp = function () { };
+// const setUp = function (numPegs, numDiscs) { };
 
 // Create algorithm to play the game
-
-// Add error handling for pegs that are out of range...
-// Add error handling for moving a peg from an array with nothing to another peg
