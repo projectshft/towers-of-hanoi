@@ -1,63 +1,78 @@
-const boardState = {
-  board: [],
-  initializeGame: function () {
-    this.board = [[3, 2, 1], [], []];
-  },
-  update: function (fromPeg, toPeg) {
-    this.board[toPeg].push(this.board[fromPeg].pop());
-  },
-  getBoard: function () {
-    const returnBoard = this.board.map((element) => {
+// Refactor to Factory Function...
+
+const BoardState = function () {
+  let board = [];
+
+  const initializeGame = function () {
+    board = [[3, 2, 1], [], []];
+  };
+
+  const update = function (fromPeg, toPeg) {
+    board[toPeg].push(board[fromPeg].pop());
+  };
+
+  const getBoard = function () {
+    const returnBoard = board.map((element) => {
       return `---  ${element} \n`;
     });
 
-    return returnBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " ");
-  },
-  logMove: function (fromPeg, toPeg) {
-    // Check if move is legal
-    const prevBoard = this.getBoard();
+    return returnBoard.toString()
+    .replaceAll("\n,", "\n")
+    .replaceAll(",", " ");
+  };
 
-    if (this.getTopDisc(toPeg) < this.getTopDisc(fromPeg)) {
-      console.log(`You cannot move a larger disc on top of a smaller one, board is still: \n` + prevBoard.toString().replaceAll("\n,", "\n").replaceAll(",", " "));
+  const logMove = function (fromPeg, toPeg) {
+    // Check if move is legal
+    const prevBoard = getBoard();
+
+    if (getTopDisc(toPeg) < getTopDisc(fromPeg)) {
+      console.log(
+        `You cannot move a larger disc on top of a smaller one, board is still: \n` +
+          prevBoard
+      );
       return;
     }
 
     // Update board state
-    this.update(fromPeg, toPeg);
+    update(fromPeg, toPeg);
 
-    const currentBoard = this.getBoard();
+    const currentBoard = getBoard();
 
     // Check win conditions
-    if (this.checkWinner()) {
-      console.log(
-        `Congratulations, you won! \n` +
-          currentBoard
-      );
-      
+    if (checkWinner()) {
+      console.log(`Congratulations, you won! \n` + currentBoard);
+
       // Reset board
-      this.initializeGame();
-      console.log('Play again? \n' + this.getBoard());
+      initializeGame();
+      console.log("Play again? \n" + getBoard());
     } else {
-      console.log(
-        `That move was successful, board is now: \n` +
-          currentBoard
-      );
+      console.log(`That move was successful, board is now: \n` + currentBoard);
     }
-  },
-  getTopDisc: function (peg) {
-    return this.board[peg][this.board[peg].length - 1];
-  },
-  checkWinner: function () {
-    if (this.board[2].length == 3) {
+  };
+
+  const getTopDisc = function (peg) {
+    return board[peg][board[peg].length - 1];
+  };
+  
+  checkWinner = function () {
+    if (board[2].length == 3) {
       return true;
     }
     return false;
-  },
+  };
+
+  return { initializeGame, getBoard, logMove };
 };
+
+// Create instance of BoardState
+const boardState = BoardState();
 
 // Start game
 boardState.initializeGame();
-console.log(`Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 and 3 and "toPeg" with a number between 1 and 3. \n\n` + boardState.getBoard());
+console.log(
+  `Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 and 3 and "toPeg" with a number between 1 and 3. \n\n` +
+    boardState.getBoard()
+);
 
 const moveDisc = function (fromPeg, toPeg) {
   fromPeg--;
@@ -66,18 +81,21 @@ const moveDisc = function (fromPeg, toPeg) {
   boardState.logMove(fromPeg, toPeg);
 };
 
-// moveDisc(1,2);
-// moveDisc(1,3);
-// moveDisc(2,1);
-// moveDisc(3,2);
-// moveDisc(1,2);
-// moveDisc(1,3);
-// moveDisc(2,1);
-// moveDisc(2,3);
-// moveDisc(1,3);
+// moveDisc(1, 2);
+// moveDisc(1, 3);
+// moveDisc(2, 1);
+// moveDisc(3, 2);
+// moveDisc(1, 2);
+// moveDisc(1, 3);
+// moveDisc(2, 1);
+// moveDisc(2, 3);
+// moveDisc(1, 3);
 
 // Extension Options
 // Add set board function with ability to set number of pegs and discs (minimum of 3 of each):
 // const setUp = function () { };
 
 // Create algorithm to play the game
+
+// Add error handling for pegs that are out of range...
+// Add error handling for moving a peg from an array with nothing to another peg
