@@ -48,7 +48,7 @@ const BoardState = function () {
     // Check if move is legal
     const prevBoard = displayBoard();
 
-    if (fromPeg < 0 || fromPeg > discs - 1 || toPeg < 0 || toPeg > discs - 1) {
+    if (fromPeg < 0 || fromPeg > 2 || toPeg < 0 || toPeg > 2) {
       console.log(
         `Peg out of range. Pick a number between 1 and 3. Board is still: \n` +
           prevBoard
