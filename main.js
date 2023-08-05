@@ -1,5 +1,3 @@
-// Refactor to Factory Function...
-
 const BoardState = function () {
   let board = [];
 
@@ -142,10 +140,3 @@ const runAlgorithm = function () {
   solvePuzzle(boardState.getDiscs(), 1, 3, 2);
 };
 
-// moveDisc(1, 3);
-// moveDisc(1,2);
-// moveDisc(3,2);
-// moveDisc(1,3);
-// moveDisc(2,1);
-// moveDisc(2,3);
-// moveDisc(1,3);
