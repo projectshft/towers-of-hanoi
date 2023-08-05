@@ -1,6 +1,6 @@
 ## Towers of Hanoi
 
-This is a project I completed for my <a href="https://parsity.io/" target="_blank">Parsity</a> bootcamp curriculum.
+This is a project I completed for <a href="https://parsity.io/" target="_blank">Parsity's</a> bootcamp curriculum.
 
 ### How to Play:
 
