@@ -25,7 +25,7 @@ const BoardState = function () {
 
     // display board
     console.log(
-      `Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 and 3 and "toPeg" with a number between 1 (top peg) and 3 (bottom peg).\nTo increase the difficulty, use the "setDiscs(number)" function and replace "number" with the desired number of discs (at least 3, at most 7). \n\n` + displayBoard()
+      `Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 (top peg) and 3 (bottom peg) and "toPeg" with a number between 1 and 3.\nTo increase the difficulty, use the "setDiscs(number)" function and replace "number" with the desired number of discs (at least 3, at most 12). Note: Although you are allowed to add 12 discs, it would take you 2^12 - 1 (4,095) steps to complete. If you want to watch the computer solve the puzzle for you, type "runAlgorithm()". \n\n` + displayBoard()
     );
 
   };
@@ -79,11 +79,10 @@ const BoardState = function () {
 
     // Check win conditions
     if (checkWinner()) {
-      console.log(`Congratulations, you won! \n` + currentBoard);
+      console.log(`Congratulations, you won! \n` + currentBoard + '\n\nPlay again?');
 
       // Reset board
       initializeGame();
-      console.log("Play again? \n" + displayBoard());
     } else {
       console.log(`That move was successful, board is now: \n` + currentBoard);
     }
@@ -100,7 +99,11 @@ const BoardState = function () {
     return false;
   };
 
-  return { initializeGame, displayBoard, logMove };
+  getDiscs = function () {
+    return discs;
+  };
+
+  return { initializeGame, logMove, getDiscs }; 
 };
 
 // Create instance of BoardState
@@ -109,6 +112,7 @@ const boardState = BoardState();
 // Start game
 boardState.initializeGame();
 
+// Player functions
 const moveDisc = function (fromPeg, toPeg) {
   fromPeg--;
   toPeg--;
@@ -117,11 +121,25 @@ const moveDisc = function (fromPeg, toPeg) {
 };
 
 const setDiscs = function (number) {
-  if (number < 3 || number > 7) {
-    return "Disc number is out of range. Enter a number between 3 and 7.";
+  if (number < 3 || number > 12) {
+    return "Disc number is out of range. Enter a number between 3 and 12.";
   }
 
   boardState.initializeGame(number);
+};
+
+const solvePuzzle = function (currentDiscs, fromPeg, toPeg, auxPeg) {
+  if (currentDiscs == 0) {
+    return;
+  }
+
+  solvePuzzle(currentDiscs - 1, fromPeg, auxPeg, toPeg);
+  moveDisc(fromPeg, toPeg);
+  solvePuzzle(currentDiscs - 1, auxPeg, toPeg, fromPeg);
+};
+    
+const runAlgorithm = function () {
+  solvePuzzle(boardState.getDiscs(), 1, 3, 2);
 };
 
 // moveDisc(1, 3);
