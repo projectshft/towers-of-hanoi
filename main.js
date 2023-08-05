@@ -25,7 +25,7 @@ const BoardState = function () {
 
     // display board
     console.log(
-      `Objective: Move a stack of disks from one peg to another, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 (top peg) and 3 (bottom peg) and "toPeg" with a number between 1 and 3.\nTo increase the difficulty, use the "setDiscs(number)" function and replace "number" with the desired number of discs (at least 3, at most 12). Note: Although you are allowed to add 12 discs, it would take you 2^12 - 1 (4,095) steps to complete. If you want to watch the computer solve the puzzle for you, type "runAlgorithm()". \n\n` + displayBoard()
+      `Objective: Move a stack of disks from the top peg to the bottom peg, following the rules that only one disk can be moved at a time and no disk can be placed on top of a smaller disk.\nTo move a disk, type "moveDisc(fromPeg, toPeg)" and replace "fromPeg" with a number between 1 (top peg) and 3 (bottom peg) and "toPeg" with a number between 1 and 3.\nTo increase the difficulty, use the "setDiscs(number)" function and replace "number" with the desired number of discs (at least 3, at most 12). Note: Although you are allowed to add 12 discs, it would take you 2^12 - 1 (4,095) steps to complete. If you want to watch the computer solve the puzzle for you, type "runAlgorithm()". \n\n` + displayBoard()
     );
 
   };
