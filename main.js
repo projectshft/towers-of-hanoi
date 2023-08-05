@@ -11,7 +11,14 @@ const BoardState = function () {
 
   const customGame = function (number) {
     discs = number;
+    const newBoard = new Array(discs);
     // update board array
+    board = newBoard.fill(0).map((element) => {
+      let value = element + number;
+      number--;
+      return value;
+    });
+    console.log(board); // testing - works!
     // update board display
   };
 
@@ -85,7 +92,7 @@ const BoardState = function () {
     return false;
   };
 
-  return { initializeGame, displayBoard, logMove };
+  return { initializeGame, displayBoard, logMove, customGame };
 };
 
 // Create instance of BoardState
