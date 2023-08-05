@@ -149,9 +149,3 @@ const runAlgorithm = function () {
 // moveDisc(2,1);
 // moveDisc(2,3);
 // moveDisc(1,3);
-
-// Extension Options
-// Add set board function with ability to set number of pegs and discs (minimum of 3 of each):
-// const setUp = function (numPegs, numDiscs) { };
-
-// Create algorithm to play the game
