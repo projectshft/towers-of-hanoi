@@ -90,14 +90,14 @@ const BoardState = function () {
     return board[peg][board[peg].length - 1];
   };
   
-  checkWinner = function () {
+  const checkWinner = function () {
     if (board[2].length == discs) {
       return true;
     }
     return false;
   };
 
-  getDiscs = function () {
+  const getDiscs = function () {
     return discs;
   };
 
