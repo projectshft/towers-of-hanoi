@@ -4,4 +4,4 @@ This is a project I completed for <a href="https://parsity.io/" target="_blank">
 
 ### How to Play:
 
-- To get started, click here (link to index.html) and open your developer console on Google Chrome by entering Option + &#8984; + J (macOS) or Shift + CTRL + J (on Windows/Linux).
+- To get started, click [here](https://jordanccox.github.io/towers-of-hanoi/) and open your developer console on Google Chrome by entering Option + &#8984; + J (macOS) or Shift + CTRL + J (on Windows/Linux).
