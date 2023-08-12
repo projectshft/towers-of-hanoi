@@ -1,72 +1,61 @@
-// A board representing 3 pegs, and 5 discs on the first peg in ascending order.  This is a normal starting position for the game.
-  let board = [[5, 4, 3, 2, 1],
-[],
-[]]
+var Board = function (pegs, discs){
+   this.pegs = pegs
+   this.discs = discs
+  }
 
-var logBoard = function(){
-board.map(
-    function (peg){
-      var pegString = peg.toString();
-      var pegNoCommas = pegString.replaceAll(',', ' ')
-      console.log(`---${pegNoCommas}`)})}
-
-var startGame = function(){logBoard();}
-  
-startGame();
-
-var moveDisc = function (peg1, peg2) {
-  // debugger;
-  const sourcePeg = board[peg1-1]
-  const targetPeg = board[peg2-1]
-  if(sourcePeg[sourcePeg.length-1] > targetPeg[targetPeg.length-1])
-    {console.error('You cannot put a larger disc on top of a smaller one!');}
-  else {
-   board[peg2-1].push(board[peg1-1].pop());
-
-    logBoard();}
-    checkWinner();
+Board.prototype.makeBoard = function () {
+  let pegArray = []
+    for (let i = 0; i < this.pegs; i++) {
+      pegArray.push([]);
+    }
+    for (let i = this.discs; i > 0; i--) {
+      pegArray[0].push(i);
+      
+    }
+    this.pegArray = pegArray;
 }
 
-var checkWinner = function (){
-  if(board[2].length === 5)
+Board.prototype.checkWinner = function(){
   {
-    console.log('You win!')
+    if(this.pegArray[this.pegs-1].length === this.discs)
+    {
+      {alert('Congrats, you win! Click OK to start a new game')
+      startGame();
+      }
+      return true
+    }
+    else {return false}
   }
 }
-//look into substrings
-//look into passing arguments in board.join(' ')
-//look into "fetch" in
-var winGame = function(){
-  moveDisc(1, 3);
-  moveDisc(1, 2)
-  moveDisc(3, 2)
-  moveDisc(1, 3)
-  moveDisc(2, 1)
-  moveDisc(2, 3)
-  moveDisc(1, 3)
-  moveDisc(1, 2)
-  moveDisc(3, 2)
-  moveDisc(3, 1)
-  moveDisc(2, 1)
-  moveDisc(3, 2)
-  moveDisc(1, 3)
-  moveDisc(1, 2)
-  moveDisc(3, 2)
-  moveDisc(1, 3)
-  moveDisc(2, 1)
-  moveDisc(2, 3)
-  moveDisc(1, 3)
-  moveDisc(2, 1)
-  moveDisc(3, 2)
-  moveDisc(3, 1)
-  moveDisc(2, 1)
-  moveDisc(2, 3)
-  moveDisc(1, 3)
-  moveDisc(1, 2)
-  moveDisc(3, 2)
-  moveDisc(1, 3)
-  moveDisc(2, 1)
-  moveDisc(2, 3)
-  moveDisc(1, 3)
-}
 
+Board.prototype.logBoard = function(){
+  this.pegArray.map(
+      function (peg){
+        var pegString = peg.toString();
+        var pegNoCommas = pegString.replaceAll(',', ' ')
+        console.log(`---${pegNoCommas}`)})}
+  
+        
+Board.prototype.moveDisc = function (peg1, peg2){
+    const sourcePeg = this.pegArray[peg1-1]
+    const targetPeg = this.pegArray[peg2-1]
+    if(sourcePeg[sourcePeg.length-1] > targetPeg[targetPeg.length-1])
+      {console.error('You cannot put a larger disc on top of a smaller one!');}
+    else {
+     this.pegArray[peg2-1].push(this.pegArray[peg1-1].pop());
+  
+      this.logBoard();}
+      this.checkWinner();
+     
+  }
+
+var startGame = function(pegs, discs){
+  pegs = Number(prompt('How many pegs?'))
+  discs = Number(prompt ('How many discs?'))
+  var gameBoard = new Board (pegs, discs)
+  gameBoard.makeBoard();
+  gameBoard.logBoard();
+  while (gameBoard.checkWinner() === false)
+    {gameBoard.moveDisc(prompt('What peg do you want to move the disc from?'), prompt('And what peg are you moving it to?'))
+    }
+}
