@@ -1,14 +1,41 @@
 <html lang="en">
   <head>
-    <script src="main.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Towers of Hanoi</title>
   </head>
   <body>
-    <h1>Would you like to play a game...?</h1>
-    <button class="start_btn" id="playBtn" onclick="startGame()">
-      Click to Play
-    </button>
+    <div id="header">
+      <h1 id="heading">Would you like to play a game...?</h1>
+    </div>
+    <div id="top">
+      <button id="startBtn" onclick="startGame()">Click to Play</button>
+      <label id="message" hidden="true">Make a move!</label>
+    </div>
+    <div id="selections">
+      <label id="startInputLbl" hidden="true">Bay to move from: </label>
+      <select id="fromDrop" hidden="true" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <label id="destInputLbl" hidden="true">Bay to move to: </label>
+      <select id="destDrop" hidden="true" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </div>
+    <div id="gameboard">
+      <p id="bay1" hidden="true">Bay 1</p>
+      <p id="bay2" hidden="true">Bay 2</p>
+      <p id="bay3" hidden="true">Bay 3</p>
+    </div>
+    <div id="footer">
+      <button id="submitMoveBtn" onclick="move()" hidden="true">
+        Make Move
+      </button>
+    </div>
   </body>
+  <script src="main.js"></script>
 </html>
