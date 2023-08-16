@@ -58,7 +58,26 @@ function move(fromBoardIndex, toBoardIndex){
     bayStack = getCurrentBoardState()[toBoardIndex-1];
     destTopItem = bayStack[bayStack.length-1];
 
-    
+    switch(true){
+      case fromBoardIndex === toBoardIndex:
+        message.textContent = "You must move the disc to a different bay than the one it occupies.";
+        break;
+      case getCurrentBoardState()[fromBoardIndex-1].length === 0:
+        message.textContent = "There is no item to move from selected bay. Choose another";
+        break;
+      case itemToMove > destTopItem:
+        message.textContent = "You cannot move a larger disc on top of a smaller one.";
+        break;
+      
+      case checkWinner(currentBoardState):
+        alert("The game has been won!!!");
+        message.textContent = "The game has been won!!!";
+        startGame();
+        break;
+      default:
+  
+        return currentBoardState;
+    }
   }
 
   // function to map current board state
