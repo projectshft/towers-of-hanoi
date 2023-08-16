@@ -68,15 +68,32 @@ function move(fromBoardIndex, toBoardIndex){
       case itemToMove > destTopItem:
         message.textContent = "You cannot move a larger disc on top of a smaller one.";
         break;
-      
+      case bayStack.length === 0:
+        mover = getCurrentBoardState()[fromBoardIndex-1].pop();
+        getCurrentBoardState()[toBoardIndex-1].push(mover);
+        console.log("current board state: " + "\n" + mapBoard(getCurrentBoardState()));
+        message.textContent = "That move was successful, board is now: ";
+        gameBoardDisplay.innerHTML = mapBoard(getCurrentBoardState());
+        checkWinner(currentBoardState);
+        return currentBoardState;
       case checkWinner(currentBoardState):
         alert("The game has been won!!!");
         message.textContent = "The game has been won!!!";
         startGame();
         break;
       default:
-  
-        return currentBoardState;
+        mover = getCurrentBoardState()[fromBoardIndex-1].pop();
+        getCurrentBoardState()[toBoardIndex-1].push(mover);
+        message.textContent = "That move was successful, board is now: ";
+        gameBoardDisplay.innerHTML = mapBoard(getCurrentBoardState());
+        console.log("current board state: " + "\n" + mapBoard(getCurrentBoardState()));
+        switch(true){
+          case checkWinner(currentBoardState):
+            alert("The game has been won!!!");
+            message.textContent = "The game has been won!!!";
+            startGame();
+            break;
+        } 
     }
   }
 
