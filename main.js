@@ -1,7 +1,7 @@
 // Towers of Hanoit Prompt
 
 // A board representing 3 pegs, and 5 discs on the first peg in ascending order.  This is a normal starting position for the game.
-const beginBoard = [[5, 4, 3, 2, 1], [], []];
+var beginBoard = [[5, 4, 3, 2, 1], [], []];
 // var for current state of board to track where array contents are moved
 var currentBoardState = [[5, 4, 3, 2, 1], [], []];
 // winning pattern array to check
@@ -29,6 +29,9 @@ var message = document.getElementById("message");
 var gameBoardDisplay = document.getElementById("gameboard");
 
 // Game class
+function Game(beginBoard){
+  this.beginBoard = beginBoard;
+}
 function Game(beginBoard, currentBoardState) {
   this.beginBoard = beginBoard;
   this.currentBoardState = currentBoardState;
@@ -38,13 +41,13 @@ function getBeginBoard(){
     return this.beginBoard;
   }
 function setBeginBoard(board){
-    board = this.beginBoard;
+    board = beginBoard;
   }
 function getCurrentBoardState(){
     return this.currentBoardState;
   }
 function setCurrentBoard(board){
-    board = this.currentBoardState;
+    board = currentBoardState;
   }
 
   //function to move array items to different arrays
@@ -71,36 +74,23 @@ function move(fromBoardIndex, toBoardIndex){
       case bayStack.length === 0:
         mover = getCurrentBoardState()[fromBoardIndex-1].pop();
         getCurrentBoardState()[toBoardIndex-1].push(mover);
-        console.log("current board state: " + "\n" + mapBoard(getCurrentBoardState()));
         message.textContent = "That move was successful, board is now: ";
         gameBoardDisplay.innerHTML = mapBoard(getCurrentBoardState());
         checkWinner(currentBoardState);
         return currentBoardState;
-      case checkWinner(currentBoardState):
-        alert("The game has been won!!!");
-        message.textContent = "The game has been won!!!";
-        startGame();
-        break;
       default:
         mover = getCurrentBoardState()[fromBoardIndex-1].pop();
-        getCurrentBoardState()[toBoardIndex-1].push(mover);
-        message.textContent = "That move was successful, board is now: ";
+        setBeginBoard(getCurrentBoardState()[toBoardIndex-1].push(mover));
         gameBoardDisplay.innerHTML = mapBoard(getCurrentBoardState());
+        message.textContent = "That move was successful, board is now: ";
         console.log("current board state: " + "\n" + mapBoard(getCurrentBoardState()));
-        switch(true){
-          case checkWinner(currentBoardState):
-            alert("The game has been won!!!");
-            message.textContent = "The game has been won!!!";
-            startGame();
-            break;
-        } 
+        checkWinner(currentBoardState);
     }
   }
 
   // function to map current board state
 function mapBoard(currentBoard){
     var bay = 1;
-    // currentBoard = this.currentBoardState;s
     return currentBoard.map(function (boardItem){
       var line = `Bay ${bay++}: --- ${boardItem} <br/> \n`;
       line = line.split(",");
@@ -109,17 +99,30 @@ function mapBoard(currentBoard){
     });
   }
 
-  // function to check if a player has won the game
+  // function to check if the game has been won
 function checkWinner(boardState){
-    
+    var arraysToCheck = boardState.slice(1, boardState.length + 1);
+    var winString = winningPattern.toString();
+    var matches = false;
+
+    arraysToCheck.forEach(function (item){
+      item = item.toString();
+      if(item === winString){
+        matches = true;
+        message.textContent = "The game has been won!!!";
+        console.log("The game has been won!  Game board reset...");
+        alert("The game has been won!!!");
+        resetGame();
+      }
+    });
+    return matches;
   }
 
 // function to start a new game
 function startGame(){
   // new Game instance created and set with the beginning board state and current board state to track changes to the board throughout the game
   newGame = new Game(beginBoard, currentBoardState);
-  setCurrentBoard(beginBoard);
-  gameBoardDisplay.textContent = mapBoard(getCurrentBoardState());
+  gameBoardDisplay.textContent = mapBoard(beginBoard);
 
   // HTML elements to hide or display on start of game
   startBtn.hidden = true;
@@ -134,6 +137,28 @@ function startGame(){
   gameBoardDisplay.innerHTML = mapBoard(getCurrentBoardState());
 
   return newGame;
+}
+
+// function to reset game
+function resetGame(){
+  // new Game instance created and set with the beginning board state and current board state to track changes to the board throughout the game
+  currentBoardState = getBeginBoard();
+  gameBoardDisplay.textContent = mapBoard(getBeginBoard());
+  
+  // HTML elements to hide or display on start of game
+  startBtn.hidden = false;
+  moveMessage.hidden = true;
+  startInputLbl.hidden = true;
+  destInputLbl.hidden = true;
+  start.hidden = true;
+  start[0].selected = true;
+  destination.hidden = true;
+  destination[0].selected = true;
+  message.hidden = true;
+  message.textContent = "Current Board: ";
+  makeMoveBtn.hidden = true;
+  gameBoardDisplay.hidden = true;
+  gameBoardDisplay.innerHTML = mapBoard(getCurrentBoardState());
 }
 
 
