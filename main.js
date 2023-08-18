@@ -1,14 +1,14 @@
 class Game {
 board = [[5, 4, 3, 2, 1],[],[]];
 
-
+//using map  to create a starting board mathod within the game class/object
  startBoard() {this.board = this.board.map(function(towers){
     console.log(`--- ${towers.join('')}`);
     return towers
  });
 }
 
-//function that allows movement of discs between towers, with parameters regarding legal moves using 'if/else'
+//method that allows movement of discs between towers, with parameters regarding legal moves using 'if/else'
 moveDisc (fromTower, toTower){
       if (this.board[fromTower].length === 0){
         console.log("There is no disc on this tower to move. Pick a different move please");
@@ -36,11 +36,11 @@ checkIfWin () {
 //method to restart the game with origianl board layout
 restartGame (){
     this.board = [[5, 4, 3, 2, 1], [], []];
-    console.log("Good luck!");
+    console.log("Do it to it!");
     this.startBoard();
 }
 }
 
-//calling the game class above outside of the class scope (i.e. closure)
+//creating new const to utilze game class outside of class scope (i.e. closure)
 const game = new Game()
 game.startBoard()
