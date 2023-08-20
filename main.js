@@ -26,7 +26,7 @@ var startGame = function(){
   
   gameInit = gameInit.toLowerCase();
   if (gameInit === 'yes'){
-    // boards = JSON.parse(JSON.stringify(initState))
+    
     console.log("Awesome, lets get started. Make your first move!")
     gameBoard();
   };
@@ -112,5 +112,3 @@ if (confirm === 'no'){
 
 
 checkWinner();
-
-
