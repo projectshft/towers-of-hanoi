@@ -1,0 +1,26 @@
+html {
+  text-align: center;
+  align-items: center;
+}
+
+.towers-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20% 0px 20%;
+}
+
+.peg {
+  opacity: 75%;
+  transform: rotate(-90deg);
+  font-weight: bolder;
+  font-size: 2rem;
+}
+
+.peg:hover {
+  cursor: pointer;
+  opacity: 100%;
+}
+
+.peg:active {
+  opacity: 75%;
+}
