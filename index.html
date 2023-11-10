@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Towers of Hanoi</title>
+  </head>
+  <script src="main.js"></script>
+  <body>
+    <h1 style="text-align: center">Towers of Hanoi</h1>
+
+    <p style="text-align: center">
+      The goal of Towers of Hanoi is to move a set of discs of different sizes
+      from one peg to another while only allowing the player to take the topmost
+      disc off the peg and not putting a larger disc on top of a smaller one.
+      The game is won by putting the discs back in descending order (5 4 3 2 1)
+      on peg #2 or peg #3.
+    </p>
+
+    <h3 id="startingboard" style="text-align: center">
+      Peg #1: --- 5 4 3 2 1
+      <br />
+      <br />
+      Peg #2: ---
+      <br />
+      <br />
+      Peg #3: ---
+    </h3>
+
+    <h3 id="peg1" style="text-align: center"></h3>
+    <h3 id="peg2" style="text-align: center"></h3>
+    <h3 id="peg3" style="text-align: center"></h3>
+
+    <div id="gameboard" style="text-align: center"></div>
+
+    <h3 id="move" style="text-align: center">
+      Move disc from peg #
+      <input
+        type="number"
+        id="from"
+        name="frompeg"
+        maxlength="1"
+        min="1"
+        max="3"
+        style="width: 30px"
+      />
+      to peg #
+      <input
+        type="number"
+        id="to"
+        name="topeg"
+        maxlength="1"
+        min="1"
+        max="3"
+        style="width: 30px"
+      />
+      <br />
+      <br />
+      <button id="button" type="submit" value="submit">Move Disc</button>
+    </h3>
+  </body>
+</html>
