@@ -3,12 +3,6 @@ beforeEach(function () {
   player = new Game();
 });
 
-// afterEach(function () {
-//   player = new Game([[5, 4, 3, 2, 1], [], []]);
-// });
-// check if board is set to start position
-// check each row is
-
 //describe block is a block of tests
 describe("board property contains the correct array that was passed into it", function () {
   //our it block will be an individual test

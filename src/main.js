@@ -1,9 +1,5 @@
-// was having issue with setting up a originalBoardState property at the beginning so set the initialBoard variable as a placeholder in order to check a win condition for the 5 rings.... after getting to extension to update rows and discs added the wincondition property and used Object assign to make a copy of the original board so that my board property could be manipulated with moveDisc without affecting the winCondition property
-// plan was to add a changeBoard method that would loop through and assign based on numbers passed into it similar to how I reset the board in my checkWinner() function
+//  after getting to extension to update rows and discs added the wincondition property and used Object assign to make a copy of the original board so that my board property could be manipulated with moveDisc without affecting the winCondition property
 
-//set an object back to initial state if winning game
-
-// when game is instantiated want to assign the initial board to board object.assign(initialBoard, this.board)  can use this to later accept more pegs and discs
 var Game = function () {
   this.board = [[5, 4, 3, 2, 1], [], []];
   this.originalBoardState = [[5, 4, 3, 2, 1], [], []];
@@ -80,6 +76,8 @@ var Game = function () {
       // loop through and reset the game
       // forEach on the board array  take the peg and an index
       // if index == 0 this.board[index] = [5, 4, 3, 2, 1] else []
+
+      // was easier to just assign the board back to its original state
     });
     if (winner) {
       console.log("nice win, the game will now be reset");
@@ -95,53 +93,6 @@ var Game = function () {
     };
   };
 };
-// var player = new Game([[5, 4, 3, 2, 1], [], []]);
-//   return "---" + " " + row.join(" ");
-// });
-
-// // will show the display in the terminal without appearing as an array or string
-// display.forEach(function (row) {
-//   console.log(row);
-// });
-// var board = [[5, 4, 3, 2, 1], [], []];
-// var board = [[5, 4, 3, 2], [1], []];
-// var board = [[5, 4, 3, , ], [2], [1]];
-
-//moveDisc function  moveDisc(1,2)
-
-// var moveDisc = function (currentPeg, newPeg) {
-//   //subract 1 bc index starts at 0 not 1  ... the first element would be 0 due to 0 being the first index
-//   var currentPegPlacement = board[currentPeg - 1];
-//   var topDisc = board[currentPeg - 1].length - 1;
-
-//   var newPegPlacement = board[newPeg - 1];
-//   var newTopDisc = board[newPeg - 1].length - 1;
-
-//   // where we want to push the disc onto the peg if able
-//   // var newOne = board[newPeg - 1];
-//   // newOne.push(current);
-//   var discToMove = currentPegPlacement[topDisc];
-//   var topOfNewPeg = newPegPlacement[newTopDisc];
-
-//   if (topOfNewPeg === undefined || discToMove < topOfNewPeg) {
-//     //store the current pegs top disc in a var
-//     // console.log(discToMove);
-//     var savedDisc = currentPegPlacement.pop();
-//     newPegPlacement.push(savedDisc);
-//     // var discBeingMoved = discToMove.pop();
-//     // topOfNewPeg.push(discBeingMoved);
-//     console.log("That Move was successful, board is now:");
-//     console.log(board);
-//   } else {
-//     console.log(
-//       "You cannot move a larger disc on top of a smaller one, board is still:"
-//     );
-//     console.log(board);
-//   }
-// };
-
-// moveDisc(1, 2);
-// moveDisc(1, 3);
 
 // want to pop this number off the stack and push it to the new peg if it is smaller than the last item in the array on that peg
 
