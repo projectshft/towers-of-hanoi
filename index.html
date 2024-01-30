@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Towers of Hanoi</title>
+    <script src="main.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="container" id="title">Towers of Hanoi</header>
+    <section class="container" id="input">
+      <label for="text-box">Please pick a disc number to move:</label>
+      <input type="text" id="text-box-one" />
+      <br />
+      <label for="text-box">Please pick a destination tower:</label>
+      <input type="text" id="text-box-two" />
+      <p class="results"></p>
+    </section>
+    <section class="container" id="gameboard">
+      <div class="tower" id="tower-one">
+        <div class="disc" id="disc-one">1</div>
+        <div class="disc" id="disc-two">2</div>
+        <div class="disc" id="disc-three">3</div>
+        <div class="disc" id="disc-four">4</div>
+        <div class="disc" id="disc-five">5</div>
+      </div>
+      <div class="tower" id="tower-two"></div>
+      <div class="tower" id="tower-three"></div>
+    </section>
+  </body>
+</html>
