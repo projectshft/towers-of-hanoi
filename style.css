@@ -1,0 +1,94 @@
+body {
+  background-color: bisque;
+  color: black;
+  font-size: 22px;
+}
+
+header {
+  text-align: center;
+  color: brown;
+  font-size: 60px;
+}
+
+.container {
+  text-align: center;
+  display: flexbox;
+  padding: 42px;
+}
+
+label {
+  font-size: 48px;
+}
+
+input {
+  height: 42px;
+  width: 250px;
+  font-size: 40px;
+}
+
+.tower {
+  height: 300px;
+  width: 8px;
+  background-color: black;
+  position: absolute;
+  border-radius: 5px;
+  z-index: 0;
+}
+
+#tower-one {
+  margin-left: 200px;
+  z-index: 0;
+}
+
+#tower-two {
+  margin-left: 550px;
+  z-index: 0;
+}
+
+#tower-three {
+  margin-left: 900px;
+  z-index: 0;
+}
+
+.disc {
+  height: 50px;
+  position: absolute;
+  border-radius: 10px;
+  z-index: 2;
+}
+
+#disc-five {
+  width: 300px;
+  background-color: purple;
+  margin-top: 300px;
+  margin-left: -150px;
+}
+
+#disc-four {
+  width: 250px;
+  background-color: orange;
+  margin-top: 250px;
+  margin-left: -120px;
+}
+
+#disc-three {
+  width: 180px;
+  background-color: aqua;
+  margin-top: 200px;
+  margin-left: -80px;
+}
+
+#disc-two {
+  width: 120px;
+  background-color: red;
+  margin-top: 150px;
+  margin-left: -50px;
+}
+
+#disc-one {
+  width: 75px;
+  background-color: yellow;
+  margin-top: 100px;
+  margin-left: -30px;
+  z-index: 2;
+}
