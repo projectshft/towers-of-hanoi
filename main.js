@@ -13,10 +13,19 @@ const game = {
       return this.pegs;
     },
     isValidMove: function (startPeg, endPeg) {
-      if (startPeg < 0 || startPeg >= this.pegs.length || endPeg < 0 || endPeg >= this.pegs.length) {
-        console.error("Invalid Move");
+      if (startPeg < 0 || startPeg >= this.pegs.length) {
+        console.error('Invalid Start Peg Entry')
+        return; 
+      }
+      if (endPeg < 0 || endPeg >= this.pegs.length) {
+        console.error("Invalid End Peg Entry");
         return;
     }
+    //this part isn't working yet
+      // if (endPeg === [] || startPeg === []) {
+      //   console.error('No disc on selected peg')
+      //   return; 
+      // }
     },
     print: function () {
         console.log(JSON.stringify(this.pegs));
@@ -32,4 +41,4 @@ const game = {
 
 console.log(game.move(0, 2));
 
-console.log(game.isValidMove(1,3)); 
+console.log(game.isValidMove(1,2)); 
