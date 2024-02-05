@@ -21,11 +21,10 @@ const game = {
         console.error("Invalid End Peg Entry");
         return;
     }
-    //this part isn't working yet
-      // if (endPeg === [] || startPeg === []) {
-      //   console.error('No disc on selected peg')
-      //   return; 
-      // }
+     if (this.pegs[startPeg].length === 0) {
+       console.error('No disc on selected peg')
+       return; 
+     }
     },
     print: function () {
         console.log(JSON.stringify(this.pegs));
