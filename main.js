@@ -1,6 +1,6 @@
 const game = {
-    pegs: [[], [5, 4, 3, 2, 1], []],
-    
+    pegs: [[5, 4, 3, 2, 1], [], []],
+    startingBoard: [[5, 4, 3, 2, 1], [], []], 
     //This function was necessary to find the sum of the discs on the pegs, I did this so that you can play the game at scale
     sumOfDiscs: function (discs) {
       let sum = 0; 
@@ -54,18 +54,30 @@ const game = {
     }
     return true; 
     },
+    // the print function in your code simply logs the current state of the pegs array to the console in JSON format
     print: function () {
         console.log(JSON.stringify(this.pegs));
     },
-    reset: function () {
-        
+    reset: function () {  
+      if (this.isWon()) {
+          this.pegs = [...this.startingBoard]; 
+        }
     },
     play: function (startPeg, endPeg) {
-      
+      console.log(`Welcome, here is your board, make a move ${JSON.stringify(this.pegs)}`)
+      if (this.isValidMove(startPeg, endPeg)) {
+        this.move(startPeg, endPeg); 
+        this.print(); 
+        if (this.isWon()) {
+          console.log("Winner!")
+          this.reset(); 
+          console.log("board was reset")
+          this.play; 
+        }
+      else {
+          return this.pegs
+        }
+      }
     }
 };
-console.log(game.isWon()); 
-
-console.log(game.move(0, 2));
-
-console.log(game.isValidMove(0,1)); 
+console.log(game.play()); 
