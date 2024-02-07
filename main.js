@@ -14,15 +14,15 @@
 
 // A board representing 3 pegs, and 5 discs on the first peg in ascending order.  This is a normal starting position for the game.
 
-var startingBoard = [
+const startingBoard = [
   [5, 4, 3, 2, 1],
   [],
   []
 ];
 
-var printBoard = function() {
+const printBoard = function() {
   this.board.map(function(peg) {
-    var output = "";
+    let output = "";
     peg.forEach(function(disc) {
       output += ` ${disc} `;
     })
@@ -30,40 +30,57 @@ var printBoard = function() {
   })
 };
 
-var startBoard = function() {
+const startBoard = function() {
   this.board = startingBoard.map(function (item) {
     return item;
   });
   this.update();
 };
 
-var updateBoard = function() {
+const updatePegs = function() {
   this.peg1 = this.board[0];
   this.peg2 = this.board[1];
   this.peg3 = this.board[2]; 
 }
 
-// var moveDisc = function(source, destination) {
-//     var sourcePeg = this[source];
-//     var destinationPeg = this[destination];
-//     var disc = sourcePeg.pop();
-//     destinationPeg.push(disc);
-// };
+const moveDisc = function(source, destination) {
+    let sourcePeg = this[`peg${source}`];
+    let destinationPeg = this[`peg${destination}`];
 
-// var resetBoard = function() {};
+    if (sourcePeg.length === 0) {
+      console.log("Sorry. You can't move a disc that isn't there!")
+      return;
+    }
 
-// var checkWinner = function() {};
+    if (sourcePeg[sourcePeg.length - 1] > destinationPeg[destinationPeg.length - 1]) {
+      console.log("Sorry. You can't move a larger disc on top of a smaller disc.")
+      return;
+    }
 
-var boardState = {
+    this.moveCount += 1;
+
+    let disc = sourcePeg.pop();
+    destinationPeg.push(disc);
+};
+
+const resetBoard = function() {
+
+};
+
+// const checkWinner = function() {};
+
+let boardState = {
   board: [],
   peg1: [],
   peg2: [],
   peg3: [],
   moveCount: 0,
   start: startBoard,
-  update: updateBoard,
+  update: updatePegs,
   print: printBoard,
-  //move: moveDisc,
+  reset: resetBoard,
+  move: moveDisc,
+  //quit: quitGame,
 };
 
 debugger;
