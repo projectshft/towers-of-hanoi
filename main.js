@@ -1,16 +1,7 @@
 const game = {
     pegs: [[5, 4, 3, 2, 1], [], []],
     startingBoard: [[5, 4, 3, 2, 1], [], []], 
-    //This function was necessary to find the sum of the discs on the pegs, I did this so that you can play the game at scale
-    sumOfDiscs: function (discs) {
-      let sum = 0; 
-      for (let i = 0; i < this.pegs.length; i++) {
-        for (let j = 0; j < this.pegs[i].length; j++) {
-          sum += this.pegs[i][j]; 
-          }
-        }
-        return sum; 
-    },
+   
     //this function lets you know if you won the game by seeing if the sum of the discs in the function have moved to another peg besides peg 1
     isWon: function () { 
       return this.pegs[1].length === 5 || this.pegs[2].length === 5; 
@@ -65,20 +56,7 @@ const game = {
       
     },
     play: function (startPeg, endPeg) {
-      console.log(`Welcome, here is your board, make a move ${JSON.stringify(this.pegs)}`)
-      if (this.isValidMove(startPeg, endPeg)) {
-        this.move(startPeg, endPeg); 
-        this.print(); 
-        if (this.isWon()) {
-          console.log("Winner!")
-          this.reset(); 
-          console.log("board was reset")
-          this.play; 
-        }
-      else {
-          return this.pegs
-        }
-      }
+      console.log(`Welcome, here is your board: ${JSON.stringify(this.pegs)} make your move `)
     }
 };
 console.log(game.play()); 
