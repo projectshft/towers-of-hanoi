@@ -13,20 +13,22 @@ const game = {
     },
     //this function lets you know if you won the game by seeing if the sum of the discs in the function have moved to another peg besides peg 1
     isWon: function () { 
-    const sumOfPegs = this.sumOfDiscs(); 
-
-    if (this.sumOfDiscs(1) === sumOfPegs || this.sumOfDiscs(2) === sumOfPegs) {
-      console.log("You won the game!")
-    return true; 
-    } 
+      return this.pegs[1].length === 5 || this.pegs[2].length === 5; 
+      
     },
     //The move function moves the discs from the peg array you select first, to the peg array you select second
     move: function (startPeg, endPeg) {
-      const start = this.pegs[startPeg]; 
-      const end = this.pegs[endPeg]; 
-      const result = start.pop(); 
-      end.push(result); 
-      return this.pegs;
+      const start = startPeg - 1; 
+      const end = endPeg - 1; 
+      if (this.isValidMove(start, end)) {
+        this.pegs[end].push(this.pegs[start].pop());
+        this.print(); 
+      }
+      if (this.isWon()) {
+        console.log("you won!")
+        this.reset(); 
+
+      }
     },
 
     //This first part of isValidMove ensures that the pegs you selected to move are within the range of arrays to select from
@@ -59,9 +61,8 @@ const game = {
         console.log(JSON.stringify(this.pegs));
     },
     reset: function () {  
-      if (this.isWon()) {
-          this.pegs = [...this.startingBoard]; 
-        }
+          this.pegs = this.startingBoard; 
+      
     },
     play: function (startPeg, endPeg) {
       console.log(`Welcome, here is your board, make a move ${JSON.stringify(this.pegs)}`)
