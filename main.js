@@ -14,11 +14,9 @@
 // ---
 
 // A board representing 3 pegs, and 5 discs on the first peg in ascending order.  This is a normal starting position for the game.
-const startingBoard = [
-  [5, 4, 3, 2, 1],
-  [],
-  []
-];
+const startingBoard = function() {
+  return [[5, 4, 3, 2, 1],[],[]];
+};
 
 const printBoard = function() {
   this.board.map(function(peg) {
@@ -31,7 +29,7 @@ const printBoard = function() {
 };
 
 const startBoard = function() {
-  this.board = startingBoard.map(function (item) {
+  this.board = startingBoard().map(function (item) {
     return item;
   });
   this.update();
@@ -70,15 +68,17 @@ const moveDisc = function(source, destination) {
 };
 
 const resetBoard = function() { //Reset is not actually resetting the board
-  console.log("Would you like to play again?");
-  let answer = "y";
-  if (answer == "n") {
-    console.log("Thanks for playing!")
-    return;
-  } else {
-    // Revert the boardState.board property to the startingBoard value
-    boardState.start();
-  }
+  //console.log("Would you like to play again?");
+  // let answer = "y";
+  // if (answer == "n") {
+  //   console.log("Thanks for playing!")
+  //   return;
+  // } else {
+  //   // Revert the boardState.board property to the startingBoard value
+  //   boardState.start();
+  // }
+  console.log("Resetting board.")
+  boardState.start();
 };
 
 const checkWinner = function() {
@@ -86,8 +86,6 @@ const checkWinner = function() {
   // When all of the discs are not on 'peg1' and the discs are in their original order
   // let winningCondition = [5, 4, 3, 2, 1];
   
-  // Write a function that skips straight to a win.
-
   // Put the pegs in an array
   let pattern = /peg/;
   let pegs = Object.keys(boardState).filter(function(key) {
@@ -106,15 +104,26 @@ const checkWinner = function() {
         // console.log(isEqual); // Output: true
         this.winner = true;
         console.log("Congratulations! You have won this round.")
-        resetBoard();
+        boardState.reset();
       }
     })
   }
 
 };
 
+// A function that skips straight to a win. (Used for testing purposes.)
+const skip = function() {
+  boardState.start();
+  for (let i = 4; i >= 0; i--) {
+    boardState.peg1.pop();
+  }
+  for (let k = 5; k > 0; k--) {
+    boardState.peg3.push(k);
+  }
+}
+
 let boardState = {
-  board: [],
+  board: [], // Make an instance of the startingBoard and reference it with .board
   peg1: [],
   peg2: [],
   peg3: [],
