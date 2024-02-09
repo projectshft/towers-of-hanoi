@@ -3,8 +3,8 @@
 // To win Towers of Hanoi, you must successfully move all of the discs from one peg to another.
 // You may only move the topmost disc; and you may not move a larger disc onto a smaller one.
 
-// TODO: Make a checkWinner function that checks to see if the player has won the game.
-// TODO: When the player wins, announce the winner and reset for a new game.
+// TODO: Make an input() function.
+// TODO: Make a printInstructions() function.
 // TODO: Try to use array helper methods instead of for or while loops.
 // TODO: Make it interactive in a webpage.
 
@@ -12,6 +12,12 @@
 // --- 5 4 3 2 1
 // ---
 // ---
+
+const printInstructions = function() {
+  console.log("To win, you must successfully move all of the discs from one peg to another.");
+  console.log("You may only move the topmost disc; and you may not move a larger disc onto a smaller one.");
+  console.log("Good luck!");
+};
 
 // A board representing 3 pegs, and 5 discs on the first peg in ascending order.  This is a normal starting position for the game.
 const startingBoard = function() {
@@ -33,6 +39,8 @@ const startBoard = function() {
     return item;
   });
   this.update();
+  boardState.print();
+  boardState.check();
 };
 
 const updatePegs = function() {
@@ -49,13 +57,15 @@ const moveDisc = function(source, destination) {
 
     // What if I try to move a larger disc on top of a smaller one?
     if (sourcePeg.length === 0) {
-      console.log("Sorry. You can't move a disc that isn't there!")
+      console.log("Sorry. You can't move a disc that doesn't exist!")
+      boardState.print();
       return;
     }
 
     // What if I try to move a disc from a peg that is empty?
     if (sourcePeg[sourcePeg.length - 1] > destinationPeg[destinationPeg.length - 1]) {
       console.log("Sorry. You can't move a larger disc on top of a smaller disc.")
+      boardState.print();
       return;
     }
 
@@ -65,9 +75,11 @@ const moveDisc = function(source, destination) {
 
     let disc = sourcePeg.pop();
     destinationPeg.push(disc);
+    boardState.print();
+    boardState.check();
 };
 
-const resetBoard = function() { //Reset is not actually resetting the board
+const resetBoard = function() {
   //console.log("Would you like to play again?");
   // let answer = "y";
   // if (answer == "n") {
@@ -138,6 +150,11 @@ let boardState = {
   //quit: quitGame,
 };
 
-// Start the game with a welcome message.
+
+// Start the game.
+console.log("Welcome to Towers of Hanoi.")
+printInstructions();
+boardState.start();
+
 
 debugger;
