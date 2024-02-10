@@ -4,7 +4,6 @@
 // You may only move the topmost disc; and you may not move a larger disc onto a smaller one.
 
 // TODO: Make an input() function.
-// TODO: Make a printInstructions() function.
 // TODO: Try to use array helper methods instead of for or while loops.
 // TODO: Make it interactive in a webpage.
 
@@ -35,6 +34,7 @@ const printBoard = function() {
 };
 
 const startBoard = function() {
+  // Make a copy of the startingBoard so that it isn't mutated.
   this.board = startingBoard().map(function (item) {
     return item;
   });
@@ -44,8 +44,8 @@ const startBoard = function() {
 };
 
 const updatePegs = function() {
-  // Establishes references to the items in the board array
-  // Mutation of the peg means mutation of the board.
+  // Establishes references to the items in the board array.
+  // Mutation of the peg means mutation of the board property.
   this.peg1 = this.board[0];
   this.peg2 = this.board[1];
   this.peg3 = this.board[2]; 
@@ -70,6 +70,11 @@ const moveDisc = function(source, destination) {
     }
 
     // What if I try to move the disc to the same peg?
+    if (sourcePeg === destinationPeg) {
+      console.log("Nothing changed...")
+      boardState.print();
+      return;
+    }
 
     this.moveCount += 1;
 
@@ -89,7 +94,7 @@ const resetBoard = function() {
   //   // Revert the boardState.board property to the startingBoard value
   //   boardState.start();
   // }
-  console.log("Resetting board.")
+  console.log("Resetting game...")
   boardState.start();
 };
 
@@ -120,18 +125,17 @@ const checkWinner = function() {
       }
     })
   }
-
 };
 
 // A function that skips straight to a win. (Used for testing purposes.)
 const skip = function() {
-  boardState.start();
   for (let i = 4; i >= 0; i--) {
     boardState.peg1.pop();
   }
   for (let k = 5; k > 0; k--) {
     boardState.peg3.push(k);
   }
+  boardState.check();
 }
 
 let boardState = {
