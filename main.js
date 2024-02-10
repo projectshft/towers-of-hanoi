@@ -1,6 +1,8 @@
+
+
 const game = {
     pegs: [[5, 4, 3, 2, 1], [], []],
-    startingBoard: [[5, 4, 3, 2, 1], [], []], 
+    startingBoard: [[5, 4, 3, 2, 1], [], []],
    
     //this function lets you know if you won the game by seeing if the sum of the discs in the function have moved to another peg besides peg 1
     isWon: function () { 
@@ -9,8 +11,8 @@ const game = {
     },
     //The move function moves the discs from the peg array you select first, to the peg array you select second
     move: function (startPeg, endPeg) {
-      const start = startPeg - 1; 
-      const end = endPeg - 1; 
+      const start = startPeg -1; 
+      const end = endPeg -1; 
       if (this.isValidMove(start, end)) {
         this.pegs[end].push(this.pegs[start].pop());
         this.print(); 
@@ -33,7 +35,7 @@ const game = {
         return false;
     }
     //This part ensures that you are selecting a peg that had a disc on it
-     if (this.pegs[startPeg].length === 0) {
+     if (!this.pegs[startPeg].length) {
        console.error('No disc on selected peg')
        return false; 
      }
