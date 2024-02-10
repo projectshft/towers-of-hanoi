@@ -12,12 +12,6 @@
 // ---
 // ---
 
-const printInstructions = function() {
-  console.log("To win, you must successfully move all of the discs from one peg to another.");
-  console.log("You may only move the topmost disc; and you may not move a larger disc onto a smaller one.");
-  console.log("Good luck!");
-};
-
 // A board representing 3 pegs, and 5 discs on the first peg in ascending order.  This is a normal starting position for the game.
 const startingBoard = function() {
   return [[5, 4, 3, 2, 1],[],[]];
@@ -25,11 +19,12 @@ const startingBoard = function() {
 
 const printBoard = function() {
   this.board.map(function(peg) {
-    let output = "";
+    let output = "---";
     peg.forEach(function(disc) {
       output += ` ${disc} `;
     })
-    console.log("---" + output);
+    console.log(output);
+    logConsole(output);
   })
 };
 
@@ -38,7 +33,7 @@ const startBoard = function() {
   this.board = startingBoard().map(function (item) {
     return item;
   });
-  this.update();
+  boardState.update();
   boardState.print();
   boardState.check();
 };
@@ -80,21 +75,14 @@ const moveDisc = function(source, destination) {
 
     let disc = sourcePeg.pop();
     destinationPeg.push(disc);
+    clearConsole();
     boardState.print();
     boardState.check();
 };
 
 const resetBoard = function() {
-  //console.log("Would you like to play again?");
-  // let answer = "y";
-  // if (answer == "n") {
-  //   console.log("Thanks for playing!")
-  //   return;
-  // } else {
-  //   // Revert the boardState.board property to the startingBoard value
-  //   boardState.start();
-  // }
   console.log("Resetting game...")
+  clearConsole();
   boardState.start();
 };
 
@@ -138,6 +126,43 @@ const skip = function() {
   boardState.check();
 }
 
+const instructions = 
+  `To win, you must successfully move all of the discs from one peg to another.
+You may only move the topmost disc; and you may not move a larger disc onto a smaller one.
+To move a disk run the following command: 
+      
+    boardState.move(sourcePeg, destinationPeg)
+
+This example moves a disc from peg 1 to peg 2: 
+      
+    boardState.move(1,2)
+
+Good luck!`;
+
+const printInstructions = function() {
+  console.log(instructions);
+};
+
+const displayInstructions = function() {
+  let result = instructions;
+  let output = document.getElementById("instructions");
+  output.textContent = result;
+}
+
+const logConsole = function(message) {
+  // Create a new paragraph element
+  let paragraph = document.createElement('p');
+  // Set the text content to the provided message
+  paragraph.textContent = message;
+  // Append the paragraph to the console container
+  document.getElementById('console').appendChild(paragraph);
+}
+
+const clearConsole = function() {
+  let div = document.getElementById('console');
+  div.innerHTML = '';
+}
+
 let boardState = {
   board: [], // Make an instance of the startingBoard and reference it with .board
   peg1: [],
@@ -154,11 +179,7 @@ let boardState = {
   //quit: quitGame,
 };
 
-
-// Start the game.
-console.log("Welcome to Towers of Hanoi.")
+//Start the game.
+console.log("Welcome to Towers of Hanoi!")
 printInstructions();
 boardState.start();
-
-
-debugger;
