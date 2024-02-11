@@ -3,10 +3,6 @@
 // To win Towers of Hanoi, you must successfully move all of the discs from one peg to another.
 // You may only move the topmost disc; and you may not move a larger disc onto a smaller one.
 
-// TODO: Make an input() function.
-// TODO: Try to use array helper methods instead of for or while loops.
-// TODO: Make it interactive in a webpage.
-
 // example starting board
 // --- 5 4 3 2 1
 // ---
@@ -47,8 +43,8 @@ const updatePegs = function() {
 }
 
 const moveDisc = function(source, destination) {
-    
   clearStatus();
+  this.moveCount += 1;
   let sourcePeg = this[`peg${source}`];
   let destinationPeg = this[`peg${destination}`];
 
@@ -91,15 +87,12 @@ const moveDisc = function(source, destination) {
     return;
   }
 
-  
-
   let disc = sourcePeg.pop();
   destinationPeg.push(disc);
   clearConsole();
   boardState.print();
   clearMoves();
   displayMoves(this.moveCount);
-  this.moveCount += 1;
   boardState.check();
 };
 
@@ -133,7 +126,7 @@ const checkWinner = function() {
         // let isEqual = this.every((value, index) => value === array2[index]);
         // console.log(isEqual); // Output: true
         this.winner = true;
-        let message = "Congratulations! You have won this round.";
+        let message = "Congratulations! You have won this round. Would you like to play again?";
         displayStatus(message);
         console.log(message);
         //boardState.reset();
@@ -153,25 +146,26 @@ const skip = function() {
   boardState.check();
 }
 
-const instructions = 
-  `To win, you must successfully move all of the discs from one peg to another.
+
+const printInstructions = function() {
+  console.log(`To win, you must successfully move all of the discs from one peg to another.
 You may only move the topmost disc; and you may not move a larger disc onto a smaller one.
 To move a disk run the following command: 
       
-    boardState.move(sourcePeg, destinationPeg)
+  boardState.move(sourcePeg, destinationPeg)
 
 This example moves a disc from peg 1 to peg 2: 
       
-    boardState.move(1,2)
+  boardState.move(1,2)
 
-Good luck!`;
-
-const printInstructions = function() {
-  console.log(instructions);
+Good luck!`
+  );
 };
 
 const displayInstructions = function() {
-  let result = instructions;
+  let result = `To win, you must successfully move all of the discs from one peg to another.
+  You may only move the topmost disc; and you may not move a larger disc onto a smaller one.
+  Good luck!`
   let output = document.getElementById("instructions");
   output.textContent = result;
   hideButton("instButton");
@@ -205,10 +199,14 @@ const clearConsole = function() {
   div.innerHTML = '';
 }
 
-// Make two fields, a source peg and destination peg. Input text should then be sent to the moveDisc function
-
-
-// Make a button that sends the above field.
+// Send the selected peg values
+const sendSelection = function() {
+  let sourceElement = document.getElementById('sourcePeg');
+  let sourceValue = Number(sourceElement.value);
+  let destElement = document.getElementById('destPeg');
+  let destValue = Number(destElement.value);
+  boardState.move(sourceValue,destValue);
+}
 
 // Display score beneath the board.
 const displayMoves = function(message) {
