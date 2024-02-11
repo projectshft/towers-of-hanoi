@@ -47,42 +47,67 @@ const updatePegs = function() {
 }
 
 const moveDisc = function(source, destination) {
-    let sourcePeg = this[`peg${source}`];
-    let destinationPeg = this[`peg${destination}`];
+    
+  clearStatus();
+  let sourcePeg = this[`peg${source}`];
+  let destinationPeg = this[`peg${destination}`];
 
-    // What if I try to move a larger disc on top of a smaller one?
-    if (sourcePeg.length === 0) {
-      console.log("Sorry. You can't move a disc that doesn't exist!")
-      boardState.print();
-      return;
-    }
-
-    // What if I try to move a disc from a peg that is empty?
-    if (sourcePeg[sourcePeg.length - 1] > destinationPeg[destinationPeg.length - 1]) {
-      console.log("Sorry. You can't move a larger disc on top of a smaller disc.")
-      boardState.print();
-      return;
-    }
-
-    // What if I try to move the disc to the same peg?
-    if (sourcePeg === destinationPeg) {
-      console.log("Nothing changed...")
-      boardState.print();
-      return;
-    }
-
-    this.moveCount += 1;
-
-    let disc = sourcePeg.pop();
-    destinationPeg.push(disc);
+  // What if I try to move a disc from a peg that is empty?
+  if (sourcePeg.length === 0) {
+    let message = "Sorry. You can't move a disc that doesn't exist!";
+    console.log(message);
     clearConsole();
+    displayStatus(message);
     boardState.print();
-    boardState.check();
+    this.moveCount += 1;
+    clearMoves();
+    displayMoves(this.moveCount);
+    return;
+  }
+
+  // What if I try to move a larger disc on top of a smaller one?
+  if (sourcePeg[sourcePeg.length - 1] > destinationPeg[destinationPeg.length - 1]) {
+    let message = "Sorry. You can't move a larger disc on top of a smaller disc.";
+    console.log(message)
+    clearConsole();
+    displayStatus(message);
+    boardState.print();
+    this.moveCount += 1;
+    clearMoves();
+    displayMoves(this.moveCount);
+    return;
+  }
+
+  // What if I try to move the disc to the same peg?
+  if (sourcePeg === destinationPeg) {
+    let message = "Nothing changed...";
+    console.log(message);
+    clearConsole();
+    displayStatus(message);
+    boardState.print();
+    this.moveCount += 1;
+    clearMoves();
+    displayMoves(this.moveCount);
+    return;
+  }
+
+  
+
+  let disc = sourcePeg.pop();
+  destinationPeg.push(disc);
+  clearConsole();
+  boardState.print();
+  clearMoves();
+  displayMoves(this.moveCount);
+  this.moveCount += 1;
+  boardState.check();
 };
 
 const resetBoard = function() {
   console.log("Resetting game...")
+  clearStatus();
   clearConsole();
+  clearMoves();
   boardState.start();
 };
 
@@ -108,8 +133,10 @@ const checkWinner = function() {
         // let isEqual = this.every((value, index) => value === array2[index]);
         // console.log(isEqual); // Output: true
         this.winner = true;
-        console.log("Congratulations! You have won this round.")
-        boardState.reset();
+        let message = "Congratulations! You have won this round.";
+        displayStatus(message);
+        console.log(message);
+        //boardState.reset();
       }
     })
   }
@@ -147,6 +174,21 @@ const displayInstructions = function() {
   let result = instructions;
   let output = document.getElementById("instructions");
   output.textContent = result;
+  hideButton("instButton");
+}
+
+const displayStatus = function(message) {
+  // Create a new paragraph element
+  let paragraph = document.createElement('p');
+  // Set the text content to the provided message
+  paragraph.textContent = message;
+  // Append the paragraph to the console container
+  document.getElementById('status').appendChild(paragraph);
+}
+
+const clearStatus = function() {
+  let div = document.getElementById('status');
+  div.innerHTML = '';
 }
 
 const logConsole = function(message) {
@@ -163,8 +205,36 @@ const clearConsole = function() {
   div.innerHTML = '';
 }
 
+// Make two fields, a source peg and destination peg. Input text should then be sent to the moveDisc function
+
+
+// Make a button that sends the above field.
+
+// Display score beneath the board.
+const displayMoves = function(message) {
+  // Create a new paragraph element
+  let paragraph = document.createElement('p');
+  // Set the text content to the provided message
+  paragraph.textContent = "Total moves: " + message;
+  // Append the paragraph to the console container
+  document.getElementById('moves').appendChild(paragraph);
+}
+
+const clearMoves = function() {
+  let div = document.getElementById('moves');
+  div.innerHTML = '';
+}
+
+// Hide a button when clicked
+const hideButton = function(id) {
+  // Get the button element by its ID
+  let button = document.getElementById(id);
+  // Set the CSS display property to 'none' to hide the button
+  button.style.display = 'none';
+}
+
 let boardState = {
-  board: [], // Make an instance of the startingBoard and reference it with .board
+  board: [],
   peg1: [],
   peg2: [],
   peg3: [],
@@ -176,10 +246,10 @@ let boardState = {
   reset: resetBoard,
   move: moveDisc,
   check: checkWinner,
-  //quit: quitGame,
 };
 
 //Start the game.
 console.log("Welcome to Towers of Hanoi!")
 printInstructions();
 boardState.start();
+displayMoves(boardState.moveCount);
