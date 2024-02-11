@@ -104,6 +104,7 @@ const resetBoard = function() {
   clearMoves();
   hideButton('reset');
   hideButton('noReset');
+  boardState.moveCount = 0
   boardState.start();
 };
 
