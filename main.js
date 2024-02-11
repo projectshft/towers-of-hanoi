@@ -44,7 +44,7 @@ const updatePegs = function() {
 
 const moveDisc = function(source, destination) {
   clearStatus();
-  this.moveCount += 1;
+  
   let sourcePeg = this[`peg${source}`];
   let destinationPeg = this[`peg${destination}`];
 
@@ -92,6 +92,7 @@ const moveDisc = function(source, destination) {
   clearConsole();
   boardState.print();
   clearMoves();
+  this.moveCount += 1;
   displayMoves(this.moveCount);
   boardState.check();
 };
@@ -101,6 +102,8 @@ const resetBoard = function() {
   clearStatus();
   clearConsole();
   clearMoves();
+  hideButton('reset');
+  hideButton('noReset');
   boardState.start();
 };
 
@@ -128,8 +131,9 @@ const checkWinner = function() {
         this.winner = true;
         let message = "Congratulations! You have won this round. Would you like to play again?";
         displayStatus(message);
+        unhideButton('reset');
+        unhideButton('noReset')
         console.log(message);
-        //boardState.reset();
       }
     })
   }
@@ -231,6 +235,14 @@ const hideButton = function(id) {
   button.style.display = 'none';
 }
 
+// Unhide a button
+const unhideButton = function(id) {
+  // Get the button element by its ID
+  let button = document.getElementById(id);
+  // Set the CSS display property to 'none' to hide the button
+  button.style.display = 'inline';
+}
+
 let boardState = {
   board: [],
   peg1: [],
@@ -250,4 +262,4 @@ let boardState = {
 console.log("Welcome to Towers of Hanoi!")
 printInstructions();
 boardState.start();
-displayMoves(boardState.moveCount);
+//displayMoves(boardState.moveCount);
