@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Towers of Hanoi</title>
+  </head>
+  <body>
+    <h1>Towers of Hanoi</h1>
+    <p id="instructions"></p>
+    <button id="instButton" onclick="displayInstructions()">
+      Instructions
+    </button>
+    <label for="sourcePeg">Source peg:</label>
+    <select id="sourcePeg">
+      <option value="1">Peg 1</option>
+      <option value="2">Peg 2</option>
+      <option value="3">Peg 3</option>
+    </select>
+    <label for="destPeg">Destination peg:</label>
+    <select id="destPeg">
+      <option value="1">Peg 1</option>
+      <option value="2">Peg 2</option>
+      <option value="3">Peg 3</option>
+    </select>
+    <button onclick="sendSelection()">Submit</button>
+    <div id="status"></div>
+    <button id="reset" style="display: none" onclick="resetBoard()">yes</button>
+    <button id="noReset" style="display: none" onclick="resetBoard()">
+      no
+    </button>
+    <div id="console"></div>
+    <div id="moves"></div>
+    <script src=".\main.js"></script>
+  </body>
+</html>
