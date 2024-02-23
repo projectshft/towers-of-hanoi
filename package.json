@@ -1,0 +1,28 @@
+{
+  "name": "towers-of-hanoi",
+  "version": "1.0.0",
+  "description": "This project has been created by a student at Parsity, an online software engineering course. The work in this repository is wholly of the student based on a sample starter project that can be accessed by looking at the repository that this project forks.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "extends": ["wesbos"],
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": false,
+          "endOfLine": "auto",
+          "tabWidth": 4
+        }
+      ]
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-config-wesbos": "^4.0.1"
+  }
+}
