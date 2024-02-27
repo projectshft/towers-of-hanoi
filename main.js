@@ -18,7 +18,7 @@ const printBoard = (board) => {
 };
 
 const moveDisc = (currentPeg, targetPeg) => {
-  // Check if the source peg exists in the board
+  // Check if the source peg exists
   if (!board[currentPeg]) {
     console.error(`Error: The selected peg '${currentPeg}' does not exist.`);
     return;
@@ -26,7 +26,7 @@ const moveDisc = (currentPeg, targetPeg) => {
   // Get the top disc from the source peg i.e. last element
   const disc = board[currentPeg].pop();
 
-  // Check if the target peg exists in the board
+  // Check if the target peg exists
   if (!board[targetPeg]) {
     console.error(`Error: The selected peg '${targetPeg}' does not exist.`);
     // Put the disc back on the source peg
@@ -40,7 +40,7 @@ const moveDisc = (currentPeg, targetPeg) => {
     console.log(`Success! You moved disc ${disc} from ${currentPeg} to ${targetPeg}. The board is now: `);
     printBoard(board);
   } else {
-    // Invalid move: Put the disc back on the previous peg
+    // In the case of an invalid move, the disc goes back on the previous peg
     board[currentPeg].push(disc);
     console.log(`Invalid move: You cannot place disc ${disc} on top of a smaller one. The board is still: `);
     printBoard(board);
@@ -63,6 +63,7 @@ const checkWinner = () => {
 
 
 // Steps to win:
+moveDisc('peg1', 'pegasus');
 moveDisc('peg1', 'peg2');
 moveDisc('peg1', 'peg3');
 moveDisc('peg2', 'peg3');
