@@ -1,0 +1,37 @@
+{
+  "devDependencies": {
+    "jasmine": "^4.4.0"
+  },
+  "scripts": {
+    "test": "jasmine"
+  },
+  "name": "eval-1-tower-of-hanoi-2",
+  "description": "This project has been created by a student at Parsity, an online software engineering course. The work in this repository is wholly of the student based on a sample starter project that can be accessed by looking at the repository that this project forks.",
+  "version": "1.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "balanced-match": "^1.0.2",
+    "brace-expansion": "^1.1.11",
+    "concat-map": "^0.0.1",
+    "express": "^4.18.2",
+    "fs.realpath": "^1.0.0",
+    "glob": "^7.2.3",
+    "inflight": "^1.0.6",
+    "inherits": "^2.0.4",
+    "jasmine-core": "^4.4.0",
+    "minimatch": "^3.1.2",
+    "once": "^1.4.0",
+    "path-is-absolute": "^1.0.1",
+    "wrappy": "^1.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cchow33/towers-of-hanoi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cchow33/towers-of-hanoi/issues"
+  },
+  "homepage": "https://github.com/cchow33/towers-of-hanoi#readme"
+}
