@@ -1,0 +1,52 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Towers if Hanoi</title>
+  </head>
+  <body>
+    <h1 id="game-title">Towers of Hanoi</h1>
+    <div id="game">
+      <div id="game-board"></div>
+    </div>
+    <div id="game-settings">
+      <h3>Game Options</h3>
+      <button id="reset-btn">Reset board</button>
+      <button id="check-winner-btn">Check winner</button>
+      <button id="game-instructions">Game instructions</button>
+    </div>
+
+    <dialog id="instructions-dialog">
+      <form method="dialog">
+        <h1>Towers of Hanoi</h1>
+        <p>A simple game with a long history.</p>
+        <p>
+          The goal of Towers of Hanoi is to move a set of disk of different
+          sizes from one peg to another.
+        </p>
+        <ul>
+          <li>Hover over an item to see it outlined.</li>
+          <li>
+            Select the first peg to move from by clicking it (It will be
+            highlighted in green after clicking).
+          </li>
+          <li>Click another peg to move the disk onto it.</li>
+          <li>
+            If you change your mind click on the highlighted peg again to
+            deselect it.
+          </li>
+          <li>
+            Winner is detected automatically but you can click the check "winner
+            winner" to check yourself.
+          </li>
+        </ul>
+        <button id="instructions-close">Let's Play!</button>
+      </form>
+    </dialog>
+    <p>A parsity project by Thanh Nguyen</p>
+
+    <script src="src/GameBoard.js "></script>
+    <script src="src/Game.js"></script>
+  </body>
+</html>
