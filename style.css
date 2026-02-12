@@ -1,0 +1,16 @@
+body {
+  font-family: 'Cascadia Code', monospace;
+}
+
+.peg {
+  border: 2px solid #444;
+  height: 250px;
+  padding-bottom: 10px;
+  width: 30%;
+}
+
+.disk {
+  border-radius: 4px;
+  height: 20px;
+  margin: 2px 0;
+}
