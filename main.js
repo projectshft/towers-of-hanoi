@@ -1,15 +1,16 @@
 console.info('Towers of Hanoi');
 const initialBoard = [[5, 4, 3, 2, 1], [], []];
+const totalPegs = initialBoard.length;
 const totalDiscs = initialBoard[0].length;
-let currentBoard = structuredClone(initialBoard);
+let currentBoard;
 
 function moveDisc(from, to) {
     if (!Number.isInteger(from) || !Number.isInteger(to)) {
         printBoard('✘ Pegs must be integers, board is still:');
         return;
     }
-    if (from < 1 || from > currentBoard.length || to < 1 || to > currentBoard.length) {
-        printBoard('✘ Pegs must be between 1 & 3, board is still:');
+    if (from < 1 || from > totalPegs || to < 1 || to > totalPegs) {
+        printBoard(`✘ Pegs must be between 1 & ${totalPegs}, board is still:`);
         return;
     }
     if (from === to) {
@@ -31,7 +32,7 @@ function moveDisc(from, to) {
     checkWinner();
 }
 
-function printBoard(message = 'New game, board is now:') {
+function printBoard(message) {
     const boardString = currentBoard.map(peg => `--- ${peg.join(' ')}`).join('\n');
     console.log(`${message}\n\n${boardString}`);
 }
@@ -40,8 +41,12 @@ function checkWinner() {
     const isWinner = currentBoard.slice(1).some(peg => peg.length === totalDiscs);
     if (!isWinner) return;
     console.info('🥳 GAME OVER - You Win!');
-    currentBoard = structuredClone(initialBoard);
-    printBoard();
+    newBoard();
 }
 
-printBoard();
+function newBoard() {
+    currentBoard = structuredClone(initialBoard);
+    printBoard('New game, board is now:');
+}
+
+newBoard();
