@@ -1,0 +1,46 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+header {
+    text-align: center;
+    border-block-end: 1px solid;
+
+    p {
+        margin-block: 1rem;
+    }
+}
+
+ul {
+    list-style-position: inside;
+}
+
+code {
+    background-color: light-dark(grey, lightgrey);
+    color: canvas;
+    border-radius: 4px;
+    padding-inline: 0.5ch;
+}
+
+pre {
+    border: 1px solid;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    padding: 1rem;
+}
+
+span {
+    font-style: italic;
+    opacity: 0.65;
+}
